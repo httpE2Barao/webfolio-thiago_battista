@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
 export const Header = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
   };
 
   const handleResize = () => {
-    if (window.innerWidth < 768) {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
       setName("TB");
     } else {
       setName("Thiago Battista");
@@ -19,11 +19,13 @@ export const Header = () => {
   };
 
   // Add event listener for window resize
-  useState(() => {
-    window.addEventListener("resize", handleResize);
-    handleResize();
-    return () => window.removeEventListener("resize", handleResize);
-  });
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+      handleResize();
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
 
   return (
     <>
