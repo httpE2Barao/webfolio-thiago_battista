@@ -4,7 +4,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 
 export const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [name, setName] = useState("Thiago Battista");
+  const [name, setName] = useState("TB");
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -33,7 +33,7 @@ export const Header = () => {
         <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
           {/* Título e Subtítulo Rotacionados */}
           <div className="flex flex-row gap-7 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
-            <h1 className="text-3xl font-bold tracking-widest cursor-pointer text-foreground dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
+            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-foreground dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
               {name}
             </h1>
             <p className="uppercase text-foreground dark:text-dark-foreground whitespace-nowrap cursor-not-allowed max-md:text-sm">
@@ -42,7 +42,7 @@ export const Header = () => {
           </div>
           {/* Botão do Menu */}
           <button
-            className="mx-3 text-foreground dark:text-dark-foreground flex items-center justify-center bg-backgroundHeader focus:outline-none md:ml-10 md:mt-auto md:mb-11"
+            className="mx-5 text-foreground dark:text-dark-foreground flex items-center justify-center bg-backgroundHeader focus:outline-none md:ml-10 md:mt-auto md:mb-11"
             onClick={toggleNav}
             aria-label="Toggle navigation menu"
           >
@@ -57,19 +57,19 @@ export const Header = () => {
             href="#about"
             className="text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
           >
-            About
+            Sobre
           </a>
           <a
             href="#projects"
             className="text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
           >
-            Projects
+            Projetos
           </a>
           <a
             href="#contact"
             className="text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
           >
-            Contact
+            Contatos
           </a>
         </nav>
       )}

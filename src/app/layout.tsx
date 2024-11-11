@@ -31,6 +31,7 @@ export default function RootLayout({
       >
         {children}
       </body>
+      <link rel="stylesheet" href="https://use.typekit.net/bry3pwr.css"></link>
     </html>
   );
 }
