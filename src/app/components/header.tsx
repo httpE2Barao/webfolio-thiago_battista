@@ -55,19 +55,19 @@ export const Header = () => {
         <nav className="fixed top-30 left-0 h-32 z-40 w-full max-md:rounded-b-3xl md:left-40 md:h-40 md:bottom-0 md:w-[calc(100vw-10rem)] p-4 flex items-center gap-10 justify-evenly bg-backgroundHeader shadow-lg">
           <a
             href="#about"
-            className="text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
+            className="text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
           >
             About
           </a>
           <a
             href="#projects"
-            className="text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
+            className="text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
           >
             Projects
           </a>
           <a
             href="#contact"
-            className="text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
+            className="text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4"
           >
             Contact
           </a>
