@@ -23,7 +23,7 @@ export const Header = () => {
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  });
 
   return (
     <>
@@ -40,7 +40,7 @@ export const Header = () => {
           </div>
           {/* Botão do Menu */}
           <button
-            className="text-foreground dark:text-dark-foreground w-10 h-10 flex items-center justify-center bg-backgroundHeader rounded-full focus:outline-none max-md:ml-6 md:mt-auto md:mb-11"
+            className="text-foreground dark:text-dark-foreground w-10 h-10 flex items-center justify-center bg-backgroundHeader focus:outline-none max-md:ml-6 md:mt-auto md:mb-11"
             onClick={toggleNav}
             aria-label="Toggle navigation menu"
           >
