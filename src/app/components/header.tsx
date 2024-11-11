@@ -30,9 +30,9 @@ export const Header = () => {
   return (
     <>
       <header className="sticky top-0 md:fixed md:top-0 md:left-0 md:h-full md:w-44 z-50 bg-backgroundHeader">
-        <div className="flex flex-row items-center md:flex-col p-4 md:h-full">
+        <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
           {/* Título e Subtítulo Rotacionados */}
-          <div className="flex flex-row justify-center gap-7 items-center w-full md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
+          <div className="flex flex-row gap-7 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
             <h1 className="text-3xl font-bold tracking-widest cursor-pointer text-foreground dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
               {name}
             </h1>
