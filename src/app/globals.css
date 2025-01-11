@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+@import "swiper/css/effect-fade";
+
 :root {
   --background: #ffffff;
   --background-header: #000000;
@@ -19,4 +24,15 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Disalina', Arial, Helvetica, sans-serif;
+}
+
+/* Regras adicionais para personalização */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #0056b3;
 }

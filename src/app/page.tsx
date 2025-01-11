@@ -1,7 +1,10 @@
-import { Header } from "./components/header";
+"use client";
+import AlbumComponent from "@/components/AlbumSwiper";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <Header />
+    <div>
+      <AlbumComponent />
+    </div>
   );
 }
