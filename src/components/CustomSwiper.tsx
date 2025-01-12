@@ -10,30 +10,31 @@ import { Projeto, Projetos } from "@/data/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
+import { Autoplay, EffectFade, Keyboard, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import data from "@/data/projetos.js";
 import { shuffleArray } from "@/lib/shuffleArray";
 
-// Tipos para os slides gerados a partir do modo random ou shuffle
+// Tipos para os slides gerados
 type RandomizedAlbum = {
-  categoria: string;
+  albumName: string;
   foto: Projeto;
 };
 
 type ProjetoComAlbum = Projeto & {
-  album: string;
+  albumName: string;
 };
 
 // Props do componente
 type CustomSwiperProps = {
   mode: "random" | "shuffle";
-  photos?: Projeto[];      // Caso seja usado para exibir um álbum (passado via props)
-  initialSlide?: number;   // Slide inicial (por exemplo, foto clicada no grid)
-  modal?: boolean;         // Se true, renderiza com estilo de modal
-  onClose?: () => void;    // Função para fechar o modal
-  albumName?: string;      // Nome do álbum (se aplicável)
+  photos?: Projeto[]; // Caso seja usado para exibir um álbum (passado via props)
+  initialSlide?: number; // Slide inicial (por exemplo, foto clicada no grid)
+  modal?: boolean; // Se true, renderiza com estilo de modal
+  onClose?: () => void; // Função para fechar o modal
+  albumName?: string; // Nome do álbum (se aplicável)
+  hidePagination?: boolean;
 };
 
 export default function CustomSwiper({
@@ -43,6 +44,7 @@ export default function CustomSwiper({
   modal = false,
   onClose,
   albumName = "",
+  hidePagination = false,
 }: CustomSwiperProps) {
   const router = useRouter();
   const [slides, setSlides] = useState<RandomizedAlbum[] | ProjetoComAlbum[]>([]);
@@ -50,40 +52,45 @@ export default function CustomSwiper({
 
   useEffect(() => {
     if (photos) {
-      // Se a lista de fotos for passada, cria slides a partir dela
-      const slidesFromPhotos: ProjetoComAlbum[] = photos.map((projeto) => ({
+      // Cria slides a partir das fotos passadas via props
+      const slidesFromPhotos: ProjetoComAlbum[] = photos.map((projeto, index) => ({
         ...projeto,
-        album: albumName,
+        albumName,
+        id: `${albumName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
       }));
       setSlides(slidesFromPhotos);
       if (slidesFromPhotos.length > 0) {
         setCurrentAlbum(albumName);
       }
     } else {
-      // Lógica original: busca dados a partir do módulo de dados
+      // Lógica original: busca dados do módulo de dados
       const projetos: Projetos = data.projetos;
       if (mode === "random") {
         // Seleciona uma foto aleatória de cada álbum
         const randomized: RandomizedAlbum[] = Object.entries(projetos).map(
-          ([categoria, fotos]) => ({
-            categoria,
+          ([albumName, fotos]) => ({
+            albumName,
             foto: fotos[Math.floor(Math.random() * fotos.length)],
           })
         );
         setSlides(randomized);
         if (randomized.length > 0) {
-          setCurrentAlbum(randomized[0].categoria);
+          setCurrentAlbum(randomized[0].albumName);
         }
       } else if (mode === "shuffle") {
         // Embaralha todas as fotos de todos os álbuns
         const allProjects: ProjetoComAlbum[] = Object.entries(projetos).flatMap(
-          ([album, projetos]) =>
-            projetos.map((projeto) => ({ ...projeto, album }))
+          ([albumName, projetos]) =>
+            projetos.map((projeto, index) => ({
+              ...projeto,
+              albumName,
+              id: `${albumName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
+            }))
         );
         const shuffled = shuffleArray(allProjects);
         setSlides(shuffled);
         if (shuffled.length > 0) {
-          setCurrentAlbum(shuffled[0].album);
+          setCurrentAlbum(shuffled[0].albumName);
         }
       }
     }
@@ -92,22 +99,20 @@ export default function CustomSwiper({
   const handleSlideChange = (swiper: SwiperType) => {
     const activeIndex = swiper.realIndex;
     const activeSlide = slides[activeIndex];
-  
-    // Verifica se activeSlide está definido
+
     if (!activeSlide) return;
-  
+
     if (photos) {
-      // Se as fotos foram passadas, o álbum permanece o mesmo
       setCurrentAlbum(albumName);
     } else {
-      if (mode === "random" && "categoria" in activeSlide) {
-        setCurrentAlbum(activeSlide.categoria);
-      } else if (mode === "shuffle" && "album" in activeSlide) {
-        setCurrentAlbum(activeSlide.album);
+      if (mode === "random" && "albumName" in activeSlide) {
+        setCurrentAlbum(activeSlide.albumName);
+      } else if (mode === "shuffle" && "albumName" in activeSlide) {
+        setCurrentAlbum(activeSlide.albumName);
       }
     }
   };
-  
+
   // Define as classes do contêiner de acordo com o modo modal
   const containerClasses = modal
     ? "fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
@@ -115,19 +120,9 @@ export default function CustomSwiper({
 
   return (
     <div className={containerClasses}>
-      {modal && onClose && (
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-white text-3xl z-60"
-          aria-label="Fechar"
-        >
-          &times;
-        </button>
-      )}
-
       {/* No modo não-modal e para o mode "shuffle", exibe o nome do álbum */}
       {mode === "shuffle" && !modal && (
-        <div className="absolute top-5 w-full text-center z-10">
+        <div className="absolute bottom-5 w-full text-center z-10">
           <h1 className="text-5xl font-light text-white px-4 py-2 rounded-md">
             {currentAlbum}
           </h1>
@@ -135,36 +130,36 @@ export default function CustomSwiper({
       )}
 
       <Swiper
-        modules={[Navigation, Pagination, Autoplay, EffectFade]}
+        modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
         effect={mode === "shuffle" ? "fade" : undefined}
         spaceBetween={0}
         slidesPerView={1}
         navigation
-        pagination={{ clickable: true }}
+        pagination={!hidePagination ? { clickable: true } : undefined}
+        keyboard={{ enabled: true }}
         autoplay={{ delay: 5000, disableOnInteraction: true }}
         fadeEffect={{ crossFade: true }}
-        loop={true}
+        loop={slides.length > 1}
         initialSlide={initialSlide}
         className="w-full h-full"
         onSlideChange={handleSlideChange}
       >
         {slides.map((slide, index) => {
-          // Se não foram passadas fotos (lógica original) e no modo "random"
           if (!photos && mode === "random") {
-            const { categoria, foto } = slide as RandomizedAlbum;
+            const { albumName, foto } = slide as RandomizedAlbum;
+            const key = `${slide.albumName}-${index}`; // Garante chaves únicas
             return (
               <SwiperSlide
-                key={categoria}
+                key={key}
                 onClick={() => {
-                  if (!modal)
-                    router.push(`/albuns/${encodeURIComponent(categoria)}`);
+                  if (!modal) router.push(`/albuns/${encodeURIComponent(albumName)}`);
                 }}
                 className="cursor-pointer relative"
               >
                 <div className="relative w-full h-full overflow-hidden rounded-md">
                   <Image
                     src={foto.imagem}
-                    alt={categoria}
+                    alt={albumName}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
@@ -172,48 +167,46 @@ export default function CustomSwiper({
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                     <h2 className="text-white text-responsive font-semibold capitalize">
-                      {categoria}
+                      {albumName}
                     </h2>
                   </div>
                 </div>
               </SwiperSlide>
             );
           } else {
-            // Para mode "shuffle" ou quando as fotos são passadas (usado no modal)
-            const projeto = slide as ProjetoComAlbum;return (
+            const projeto = slide as ProjetoComAlbum;
+            return (
               <SwiperSlide
-                key={projeto.id + index}
-                className={`relative flex items-center justify-center`}
+                key={projeto.id}
+                className="relative flex items-center justify-center"
               >
                 <div
                   className={
                     modal
-                      ? "relative w-[90vw] h-[90vh] max-w-[1200px] flex items-center justify-center m-auto"
+                      ? "relative w-[90vw] h-full max-w-[1200px] flex items-center justify-center m-auto"
                       : "relative w-full h-full overflow-hidden rounded-md"
                   }
                 >
                   <Image
                     src={projeto.imagem}
                     alt={projeto.titulo}
-                    fill // Usa o atributo "fill" para ajuste dinâmico no modal
+                    fill
                     sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
                     className={modal ? "object-contain" : "object-cover"}
                     priority
                   />
                 </div>
-
-                {/* Botão de fechar */}
                 {modal && (
                   <button
                     onClick={onClose}
-                    className="absolute top-4 right-4 bg-white text-black rounded-full p-4 text-2xl z-60 shadow-lg hover:bg-gray-100"
+                    className="absolute top-6 right-6 bg-white text-black rounded-full px-4 py-1 text-5xl z-60 shadow-lg hover:bg-gray-100"
                     aria-label="Fechar"
                   >
                     &times;
                   </button>
                 )}
               </SwiperSlide>
-            );            
+            );
           }
         })}
       </Swiper>

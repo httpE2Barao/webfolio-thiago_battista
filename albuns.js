@@ -8,6 +8,14 @@ const baseDir = path.join(process.cwd(), "public/images");
 const outputDir = path.join(process.cwd(), "src/data");
 const outputFile = path.join(outputDir, "projetos.js");
 
+// Mapa de categorias e tags
+const categoryTagMap = {
+    Emicida: ["shows"],
+    "Agora é que são elas": ["teatro"],
+    Risorama: ["stand-up"],
+    // Adicione outras categorias aqui
+};
+
 console.log("Base de Imagens:", baseDir);
 console.log("Diretório de Saída:", outputDir);
 console.log("Arquivo de Saída:", outputFile);
@@ -40,11 +48,15 @@ try {
         const folderPath = path.join(baseDir, folder);
         const files = fs.readdirSync(folderPath).filter((file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file));
 
+        const tags = categoryTagMap[folder] || []; // Obtém as tags do mapa ou vazio se não houver
+
         const projetos = files.map((file, index) => ({
             id: `${folder}-projeto${index + 1}`,
             titulo: `Projeto ${index + 1} (${folder})`,
             descricao: `Descrição breve do Projeto ${index + 1} na pasta ${folder}.`,
             imagem: `/images/${folder}/${file}`,
+            categoria: folder,
+            tags, // Adiciona as tags associadas
         }));
 
         allProjects[folder] = projetos;
@@ -52,10 +64,10 @@ try {
 
     // Gera o conteúdo do arquivo JavaScript
     const content = `
-module.exports = {
-    projetos: ${JSON.stringify(allProjects, null, 2)}
-};
-`;
+        module.exports = {
+            projetos: ${JSON.stringify(allProjects, null, 2)}
+        };
+    `;
 
     // Escreve o arquivo `projetos.js`
     fs.writeFileSync(outputFile, content);

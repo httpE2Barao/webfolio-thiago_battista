@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { FiArrowLeft, FiMenu, FiX } from "react-icons/fi";
 
 export function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [name, setName] = useState("TB");
+  const [showBackButton, setShowBackButton] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
@@ -19,19 +21,27 @@ export function Header() {
     function handleResize() {
       if (window.innerWidth < 768) {
         setName("TB");
+        setShowBackButton(false); // Remove o botão em dispositivos móveis
       } else {
         setName("Thiago Battista");
+        setShowBackButton(pathname !== "/");
       }
     }
 
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+      // Fecha o menu apenas se o clique for fora do menu e do botão de voltar
+      if (
+        navRef.current &&
+        !navRef.current.contains(event.target as Node) &&
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
         closeNav();
       }
     }
@@ -52,10 +62,21 @@ export function Header() {
     { label: "Contatos", path: "/contatos" },
   ];
 
+  const getBackLink = () => {
+    if (pathname.startsWith("/albuns/")) {
+      return "/albuns"; // Voltar para a lista geral de álbuns
+    }
+    return "/"; // Voltar para a Home
+  };
+
   return (
     <>
-      <header className="sticky top-0 md:fixed md:top-0 md:left-0 md:h-full md:w-44 z-50 bg-backgroundHeader">
+      <header
+        ref={headerRef}
+        className="sticky top-0 md:fixed md:top-0 md:left-0 md:h-full md:w-44 z-50 bg-backgroundHeader"
+      >
         <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
+          {/* Nome e descrição */}
           <div className="flex flex-row gap-7 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
             <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-foreground dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
               <Link href="/" onClick={closeNav}>
@@ -69,11 +90,22 @@ export function Header() {
 
           {/* Botão Menu */}
           <button
-            className="mx-5 text-foreground dark:text-dark-foreground flex items-center justify-center bg-backgroundHeader focus:outline-none md:ml-10 md:mt-auto md:mb-11"
-            onClick={toggleNav}
+            className="mx-5 text-foreground dark:text-dark-foreground flex flex-col gap-5 items-center justify-center bg-backgroundHeader focus:outline-none md:ml-10 md:mt-auto md:mb-11"
             aria-label="Toggle navigation menu"
           >
-            {isNavOpen ? <FiX size={50} /> : <FiMenu size={50} />}
+            {/* Botão de voltar */}
+            {showBackButton && (
+              <Link
+                href={getBackLink()}
+                className="hidden md:block text-foreground dark:text-dark-foreground hover:opacity-80"
+                aria-label="Voltar"
+              >
+                <FiArrowLeft size={50} />
+              </Link>
+            )}
+            <div onClick={toggleNav}>
+              {isNavOpen ? <FiX size={50} /> : <FiMenu size={50} />}
+            </div>
           </button>
         </div>
       </header>
