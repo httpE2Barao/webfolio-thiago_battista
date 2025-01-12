@@ -13,6 +13,7 @@ const categoryTagMap = {
     Emicida: ["shows"],
     "Agora é que são elas": ["teatro"],
     Risorama: ["stand-up"],
+    "Samba do meu rap": ["shows"],
     // Adicione outras categorias aqui
 };
 

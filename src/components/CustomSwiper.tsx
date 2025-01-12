@@ -17,23 +17,24 @@ import data from "@/data/projetos.js";
 import { shuffleArray } from "@/lib/shuffleArray";
 
 // Tipos para os slides gerados
-type RandomizedAlbum = {
-  albumName: string;
+// Altere para refletir o uso de tags em vez de álbuns
+type RandomizedTag = {
+  tagName: string;
   foto: Projeto;
 };
 
-type ProjetoComAlbum = Projeto & {
-  albumName: string;
+type ProjetoComTag = Projeto & {
+  tagName: string;
 };
 
-// Props do componente
+// Modifique as props para refletir a exibição por tags
 type CustomSwiperProps = {
   mode: "random" | "shuffle";
-  photos?: Projeto[]; // Caso seja usado para exibir um álbum (passado via props)
+  photos?: Projeto[]; // Caso seja usado para exibir fotos filtradas por tag (passado via props)
   initialSlide?: number; // Slide inicial (por exemplo, foto clicada no grid)
   modal?: boolean; // Se true, renderiza com estilo de modal
   onClose?: () => void; // Função para fechar o modal
-  albumName?: string; // Nome do álbum (se aplicável)
+  tagName?: string; // Nome da tag (se aplicável)
   hidePagination?: boolean;
 };
 
@@ -43,58 +44,58 @@ export default function CustomSwiper({
   initialSlide = 0,
   modal = false,
   onClose,
-  albumName = "",
+  tagName = "",
   hidePagination = false,
 }: CustomSwiperProps) {
   const router = useRouter();
-  const [slides, setSlides] = useState<RandomizedAlbum[] | ProjetoComAlbum[]>([]);
-  const [currentAlbum, setCurrentAlbum] = useState<string>("");
+  const [slides, setSlides] = useState<RandomizedTag[] | ProjetoComTag[]>([]);
+  const [currentTag, setCurrentTag] = useState<string>("");
 
   useEffect(() => {
     if (photos) {
       // Cria slides a partir das fotos passadas via props
-      const slidesFromPhotos: ProjetoComAlbum[] = photos.map((projeto, index) => ({
+      const slidesFromPhotos: ProjetoComTag[] = photos.map((projeto, index) => ({
         ...projeto,
-        albumName,
-        id: `${albumName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
+        tagName,
+        id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
       }));
       setSlides(slidesFromPhotos);
       if (slidesFromPhotos.length > 0) {
-        setCurrentAlbum(albumName);
+        setCurrentTag(tagName);
       }
     } else {
       // Lógica original: busca dados do módulo de dados
       const projetos: Projetos = data.projetos;
       if (mode === "random") {
-        // Seleciona uma foto aleatória de cada álbum
-        const randomized: RandomizedAlbum[] = Object.entries(projetos).map(
-          ([albumName, fotos]) => ({
-            albumName,
+        // Seleciona uma foto aleatória de cada tag
+        const randomized: RandomizedTag[] = Object.entries(projetos).map(
+          ([tagName, fotos]) => ({
+            tagName,
             foto: fotos[Math.floor(Math.random() * fotos.length)],
           })
         );
         setSlides(randomized);
         if (randomized.length > 0) {
-          setCurrentAlbum(randomized[0].albumName);
+          setCurrentTag(randomized[0].tagName);
         }
       } else if (mode === "shuffle") {
-        // Embaralha todas as fotos de todos os álbuns
-        const allProjects: ProjetoComAlbum[] = Object.entries(projetos).flatMap(
-          ([albumName, projetos]) =>
+        // Embaralha todas as fotos de todas as tags
+        const allProjects: ProjetoComTag[] = Object.entries(projetos).flatMap(
+          ([tagName, projetos]) =>
             projetos.map((projeto, index) => ({
               ...projeto,
-              albumName,
-              id: `${albumName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
+              tagName,
+              id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
             }))
         );
         const shuffled = shuffleArray(allProjects);
         setSlides(shuffled);
         if (shuffled.length > 0) {
-          setCurrentAlbum(shuffled[0].albumName);
+          setCurrentTag(shuffled[0].tagName);
         }
       }
     }
-  }, [mode, photos, albumName]);
+  }, [mode, photos, tagName]);
 
   const handleSlideChange = (swiper: SwiperType) => {
     const activeIndex = swiper.realIndex;
@@ -103,28 +104,27 @@ export default function CustomSwiper({
     if (!activeSlide) return;
 
     if (photos) {
-      setCurrentAlbum(albumName);
+      setCurrentTag(tagName);
     } else {
-      if (mode === "random" && "albumName" in activeSlide) {
-        setCurrentAlbum(activeSlide.albumName);
-      } else if (mode === "shuffle" && "albumName" in activeSlide) {
-        setCurrentAlbum(activeSlide.albumName);
+      if (mode === "random" && "tagName" in activeSlide) {
+        setCurrentTag(activeSlide.tagName);
+      } else if (mode === "shuffle" && "tagName" in activeSlide) {
+        setCurrentTag(activeSlide.tagName);
       }
     }
   };
 
-  // Define as classes do contêiner de acordo com o modo modal
   const containerClasses = modal
     ? "fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
     : `relative w-full ${mode === "shuffle" ? "h-[50vh]" : "h-[calc(100vh-35px)]"}`;
 
   return (
     <div className={containerClasses}>
-      {/* No modo não-modal e para o mode "shuffle", exibe o nome do álbum */}
+      {/* No modo não-modal e para o mode "shuffle", exibe o nome da tag */}
       {mode === "shuffle" && !modal && (
         <div className="absolute bottom-5 w-full text-center z-10">
           <h1 className="text-5xl font-light text-white px-4 py-2 rounded-md">
-            {currentAlbum}
+            {currentTag}
           </h1>
         </div>
       )}
@@ -146,20 +146,20 @@ export default function CustomSwiper({
       >
         {slides.map((slide, index) => {
           if (!photos && mode === "random") {
-            const { albumName, foto } = slide as RandomizedAlbum;
-            const key = `${slide.albumName}-${index}`; // Garante chaves únicas
+            const { tagName, foto } = slide as RandomizedTag;
+            const key = `${slide.tagName}-${index}`; // Garante chaves únicas
             return (
               <SwiperSlide
                 key={key}
                 onClick={() => {
-                  if (!modal) router.push(`/albuns/${encodeURIComponent(albumName)}`);
+                  if (!modal) router.push(`/albuns/${encodeURIComponent(tagName)}`);
                 }}
                 className="cursor-pointer relative"
               >
                 <div className="relative w-full h-full overflow-hidden rounded-md">
                   <Image
                     src={foto.imagem}
-                    alt={albumName}
+                    alt={tagName}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover"
@@ -167,14 +167,14 @@ export default function CustomSwiper({
                   />
                   <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                     <h2 className="text-white text-responsive font-semibold capitalize">
-                      {albumName}
+                      {tagName}
                     </h2>
                   </div>
                 </div>
               </SwiperSlide>
             );
           } else {
-            const projeto = slide as ProjetoComAlbum;
+            const projeto = slide as ProjetoComTag;
             return (
               <SwiperSlide
                 key={projeto.id}
