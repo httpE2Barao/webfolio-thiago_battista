@@ -1,10 +1,10 @@
 "use client";
-import AlbumComponent from "@/components/AlbumSwiper";
+import CustomSwiper from "@/components/CustomSwiper";
 
 export default function HomePage() {
   return (
     <div>
-      <AlbumComponent />
+      <CustomSwiper mode="random"/>
     </div>
   );
 }
