@@ -81,13 +81,13 @@ export function Header() {
       {isNavOpen && (
         <nav
           ref={navRef}
-          className="fixed top-30 left-0 h-32 z-40 w-full max-md:rounded-b-3xl md:left-40 md:h-40 md:bottom-0 md:w-[calc(100vw-10rem)] p-4 flex items-center gap-10 justify-evenly bg-backgroundHeader shadow-lg"
+          className="fixed top-30 left-0 h-32 z-40 w-full max-md:rounded-b-3xl md:left-40 md:h-40 md:bottom-0 md:w-[calc(100vw-10rem)] p-4 flex items-center bg-backgroundHeader shadow-lg"
         >
-          <ul className="flex gap-10">
+          <ul className="flex flex-col md:flex-row w-full md:justify-evenly md:w-full gap-10 items-center">
             {navItems.map(({ label, path }) => {
               const isActive = pathname === path;
               return (
-                <li key={path}>
+                <li key={path} className="w-full text-center">
                   <Link
                     href={path}
                     onClick={closeNav}

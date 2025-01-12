@@ -1,6 +1,6 @@
-import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
-const config: Config = {
+const config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,6 +15,14 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        ".text-responsive": {
+          "@apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-semibold capitalize text-white": {},
+        },
+      });
+    }),
+  ],
 };
 export default config;

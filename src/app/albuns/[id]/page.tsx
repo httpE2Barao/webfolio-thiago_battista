@@ -1,10 +1,8 @@
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
-import type { Projeto, Projetos } from '../../../data/types';
+import { notFound } from "next/navigation";
+import data from "../../../data/projetos.js";
+import type { Projetos } from "../../../data/types";
 
-// Importando o módulo usando a sintaxe ESModule
-import data from '../../../data/projetos.js';
-
+// Extrai os projetos
 const { projetos } = data as { projetos: Projetos };
 
 interface Params {
@@ -15,42 +13,21 @@ interface PageProps {
   params: Promise<Params>;
 }
 
-export default async function ProjetoDetalhe({
-  params,
-}: PageProps): Promise<JSX.Element> {
-  // Resolve os valores da promise de params
+import { AlbumCompletoClient } from "./AlbumCompleto";
+
+export default async function AlbumCompleto({ params }: PageProps): Promise<JSX.Element> {
   const resolvedParams = await params;
 
   if (!resolvedParams.id) {
     notFound();
   }
 
-  // Decodifica e normaliza o ID
   const decodedId = decodeURIComponent(resolvedParams.id);
-
-  // Busca o álbum pelo ID decodificado
   const album = projetos[decodedId];
 
   if (!album || album.length === 0) {
     notFound();
   }
 
-  return (
-    <div className="p-6">
-      <h1 className="text-4xl font-bold mb-8 text-center capitalize">{decodedId}</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {album.map((projeto: Projeto) => (
-          <div key={projeto.id} className="relative w-full h-80 xl:h-96">
-            <Image
-              src={projeto.imagem}
-              alt={projeto.titulo}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-              className="object-cover rounded-lg"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return <AlbumCompletoClient album={album} albumName={decodedId} />;
 }
