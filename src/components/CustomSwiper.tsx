@@ -53,33 +53,31 @@ export default function CustomSwiper({
 
   useEffect(() => {
     if (photos) {
-      // Cria slides a partir das fotos passadas via props
       const slidesFromPhotos: ProjetoComTag[] = photos.map((projeto, index) => ({
         ...projeto,
         tagName,
         id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
       }));
+      console.log("Generated slides from photos:", slidesFromPhotos);
       setSlides(slidesFromPhotos);
       if (slidesFromPhotos.length > 0) {
         setCurrentTag(tagName);
       }
     } else {
-      // Lógica original: busca dados do módulo de dados
       const projetos: Projetos = data.projetos;
       if (mode === "random") {
-        // Seleciona uma foto aleatória de cada tag
         const randomized: RandomizedTag[] = Object.entries(projetos).map(
           ([tagName, fotos]) => ({
             tagName,
             foto: fotos[Math.floor(Math.random() * fotos.length)],
           })
         );
+        console.log("Generated randomized slides:", randomized);
         setSlides(randomized);
         if (randomized.length > 0) {
           setCurrentTag(randomized[0].tagName);
         }
       } else if (mode === "shuffle") {
-        // Embaralha todas as fotos de todas as tags
         const allProjects: ProjetoComTag[] = Object.entries(projetos).flatMap(
           ([tagName, projetos]) =>
             projetos.map((projeto, index) => ({
@@ -88,6 +86,7 @@ export default function CustomSwiper({
               id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
             }))
         );
+        console.log("Generated shuffled slides:", allProjects);
         const shuffled = shuffleArray(allProjects);
         setSlides(shuffled);
         if (shuffled.length > 0) {
@@ -96,6 +95,7 @@ export default function CustomSwiper({
       }
     }
   }, [mode, photos, tagName]);
+  
 
   const handleSlideChange = (swiper: SwiperType) => {
     const activeIndex = swiper.realIndex;
@@ -147,7 +147,14 @@ export default function CustomSwiper({
         {slides.map((slide, index) => {
           if (!photos && mode === "random") {
             const { tagName, foto } = slide as RandomizedTag;
-            const key = `${slide.tagName}-${index}`; // Garante chaves únicas
+
+            // Ensure `foto` and `foto.imagem` exist before rendering
+            if (!foto || !foto.imagem) {
+              console.log(`Invalid slide data at index ${index}:`, slide);
+              return null; // Skip rendering this slide
+            }
+
+            const key = `${slide.tagName}-${index}`;
             return (
               <SwiperSlide
                 key={key}
@@ -175,6 +182,13 @@ export default function CustomSwiper({
             );
           } else {
             const projeto = slide as ProjetoComTag;
+
+            // Ensure `projeto` and `projeto.imagem` exist before rendering
+            if (!projeto || !projeto.imagem) {
+              console.error(`Invalid project data at index ${index}:`, slide);
+              return null; // Skip rendering this slide
+            }
+
             return (
               <SwiperSlide
                 key={projeto.id}
