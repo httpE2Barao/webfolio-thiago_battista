@@ -10,11 +10,13 @@ const outputFile = path.join(outputDir, "projetos.js");
 
 // Mapa de categorias e tags
 const categoryTagMap = {
-    Emicida: ["shows"],
     "Agora é que são elas": ["teatro"],
+    "Dow Raiz": ["shows"],
+    Emicida: ["shows"],
+    "Leci Brandão": ["shows"],
     Risorama: ["stand-up"],
-    "Samba do meu rap": ["shows"],
-    // Adicione outras categorias aqui
+    "Samba do meu rap": ["shows", "Janine Matias"],
+    "Samba de Axê": ["shows", "Janine Matias"],
 };
 
 console.log("Base de Imagens:", baseDir);
@@ -47,7 +49,7 @@ try {
     // Processa cada subpasta
     subFolders.forEach((folder) => {
         const folderPath = path.join(baseDir, folder);
-        const files = fs.readdirSync(folderPath).filter((file) => /\.(jpg|jpeg|png|webp|gif)$/i.test(file));
+        const files = fs.readdirSync(folderPath).filter((file) => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file));
 
         const tags = categoryTagMap[folder] || []; // Obtém as tags do mapa ou vazio se não houver
 

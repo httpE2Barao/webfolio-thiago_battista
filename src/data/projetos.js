@@ -203,9 +203,478 @@
       ]
     }
   ],
-  "Dow Raiz": [],
-  "Emicida": [],
-  "Leci Brandão": [],
+  "Dow Raiz": [
+    {
+      "id": "Dow Raiz-projeto1",
+      "titulo": "Projeto 1 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 1 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8567.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto2",
+      "titulo": "Projeto 2 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 2 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8616.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto3",
+      "titulo": "Projeto 3 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 3 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8639.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto4",
+      "titulo": "Projeto 4 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 4 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8680.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto5",
+      "titulo": "Projeto 5 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 5 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8696.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto6",
+      "titulo": "Projeto 6 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 6 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8702.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto7",
+      "titulo": "Projeto 7 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 7 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8712.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    },
+    {
+      "id": "Dow Raiz-projeto8",
+      "titulo": "Projeto 8 (Dow Raiz)",
+      "descricao": "Descrição breve do Projeto 8 na pasta Dow Raiz.",
+      "imagem": "/images/Dow Raiz/DSCF8745.avif",
+      "categoria": "Dow Raiz",
+      "tags": []
+    }
+  ],
+  "Emicida": [
+    {
+      "id": "Emicida-projeto1",
+      "titulo": "Projeto 1 (Emicida)",
+      "descricao": "Descrição breve do Projeto 1 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4199-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto2",
+      "titulo": "Projeto 2 (Emicida)",
+      "descricao": "Descrição breve do Projeto 2 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4200-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto3",
+      "titulo": "Projeto 3 (Emicida)",
+      "descricao": "Descrição breve do Projeto 3 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4220-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto4",
+      "titulo": "Projeto 4 (Emicida)",
+      "descricao": "Descrição breve do Projeto 4 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4226-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto5",
+      "titulo": "Projeto 5 (Emicida)",
+      "descricao": "Descrição breve do Projeto 5 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4227-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto6",
+      "titulo": "Projeto 6 (Emicida)",
+      "descricao": "Descrição breve do Projeto 6 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4228-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto7",
+      "titulo": "Projeto 7 (Emicida)",
+      "descricao": "Descrição breve do Projeto 7 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4243-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto8",
+      "titulo": "Projeto 8 (Emicida)",
+      "descricao": "Descrição breve do Projeto 8 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4244-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto9",
+      "titulo": "Projeto 9 (Emicida)",
+      "descricao": "Descrição breve do Projeto 9 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4249-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto10",
+      "titulo": "Projeto 10 (Emicida)",
+      "descricao": "Descrição breve do Projeto 10 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4252-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto11",
+      "titulo": "Projeto 11 (Emicida)",
+      "descricao": "Descrição breve do Projeto 11 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4263-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto12",
+      "titulo": "Projeto 12 (Emicida)",
+      "descricao": "Descrição breve do Projeto 12 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4267-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto13",
+      "titulo": "Projeto 13 (Emicida)",
+      "descricao": "Descrição breve do Projeto 13 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4284-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto14",
+      "titulo": "Projeto 14 (Emicida)",
+      "descricao": "Descrição breve do Projeto 14 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4288-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto15",
+      "titulo": "Projeto 15 (Emicida)",
+      "descricao": "Descrição breve do Projeto 15 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4307-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto16",
+      "titulo": "Projeto 16 (Emicida)",
+      "descricao": "Descrição breve do Projeto 16 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4322-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto17",
+      "titulo": "Projeto 17 (Emicida)",
+      "descricao": "Descrição breve do Projeto 17 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4323-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto18",
+      "titulo": "Projeto 18 (Emicida)",
+      "descricao": "Descrição breve do Projeto 18 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4324-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto19",
+      "titulo": "Projeto 19 (Emicida)",
+      "descricao": "Descrição breve do Projeto 19 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4332-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto20",
+      "titulo": "Projeto 20 (Emicida)",
+      "descricao": "Descrição breve do Projeto 20 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4333-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto21",
+      "titulo": "Projeto 21 (Emicida)",
+      "descricao": "Descrição breve do Projeto 21 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4335-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto22",
+      "titulo": "Projeto 22 (Emicida)",
+      "descricao": "Descrição breve do Projeto 22 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4336-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto23",
+      "titulo": "Projeto 23 (Emicida)",
+      "descricao": "Descrição breve do Projeto 23 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4337-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto24",
+      "titulo": "Projeto 24 (Emicida)",
+      "descricao": "Descrição breve do Projeto 24 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4338-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    },
+    {
+      "id": "Emicida-projeto25",
+      "titulo": "Projeto 25 (Emicida)",
+      "descricao": "Descrição breve do Projeto 25 na pasta Emicida.",
+      "imagem": "/images/Emicida/DSCF4346-Aprimorado-NR.avif",
+      "categoria": "Emicida",
+      "tags": [
+        "shows"
+      ]
+    }
+  ],
+  "Leci Brandão": [
+    {
+      "id": "Leci Brandão-projeto1",
+      "titulo": "Projeto 1 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 1 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9039.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto2",
+      "titulo": "Projeto 2 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 2 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9051.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto3",
+      "titulo": "Projeto 3 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 3 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9209.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto4",
+      "titulo": "Projeto 4 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 4 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9213.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto5",
+      "titulo": "Projeto 5 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 5 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9239.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto6",
+      "titulo": "Projeto 6 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 6 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9368.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto7",
+      "titulo": "Projeto 7 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 7 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9386.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto8",
+      "titulo": "Projeto 8 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 8 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9394.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto9",
+      "titulo": "Projeto 9 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 9 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9403.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto10",
+      "titulo": "Projeto 10 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 10 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9408.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto11",
+      "titulo": "Projeto 11 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 11 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9409.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto12",
+      "titulo": "Projeto 12 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 12 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9410.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto13",
+      "titulo": "Projeto 13 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 13 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9412.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto14",
+      "titulo": "Projeto 14 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 14 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9434.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto15",
+      "titulo": "Projeto 15 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 15 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9435.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto16",
+      "titulo": "Projeto 16 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 16 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9444.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto17",
+      "titulo": "Projeto 17 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 17 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9471.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto18",
+      "titulo": "Projeto 18 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 18 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9545.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    },
+    {
+      "id": "Leci Brandão-projeto19",
+      "titulo": "Projeto 19 (Leci Brandão)",
+      "descricao": "Descrição breve do Projeto 19 na pasta Leci Brandão.",
+      "imagem": "/images/Leci Brandão/DSCF9590.avif",
+      "categoria": "Leci Brandão",
+      "tags": []
+    }
+  ],
   "Risorama": [
     {
       "id": "Risorama-projeto1",
