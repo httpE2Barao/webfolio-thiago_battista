@@ -131,7 +131,7 @@ export default function CustomSwiper({
 
       <Swiper
         modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
-        effect="shuffle"
+        effect={mode === "shuffle" ? "fade" : undefined}
         spaceBetween={0}
         slidesPerView={1}
         navigation
