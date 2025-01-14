@@ -119,7 +119,7 @@ export default function CustomSwiper({
 
   const containerClasses = modal
     ? "fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
-    : `relative w-full ${mode === "fotos" || mode === "tags" ? "h-[25vh]" : mode === "albuns" ? "h-[50vh]" : "h-[calc(100vh-35px)]"}`;
+    : `relative w-full ${mode === "fotos" || mode === "tags" ? "h-[25vh]" : mode === "albuns" && "h-[calc(100vh-35px)]"}`;
 
   return (
     <div className={containerClasses}>
