@@ -90,7 +90,7 @@ export function Header() {
 
           {/* Botão Menu */}
           <button
-            className="mx-5 text-foreground dark:text-dark-foreground flex flex-col gap-5 items-center justify-center bg-backgroundHeader focus:outline-none md:ml-10 md:mt-auto md:mb-11"
+            className="mx-5 text-foreground dark:text-dark-foreground flex flex-col gap-5 items-center justify-center bg-backgroundHeader focus:outline-none md:ml-12 md:mt-auto md:mb-11"
             aria-label="Toggle navigation menu"
           >
             {/* Botão de voltar */}

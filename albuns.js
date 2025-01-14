@@ -15,8 +15,8 @@ const categoryTagMap = {
     Emicida: ["shows"],
     "Leci Brandão": ["shows"],
     Risorama: ["stand-up"],
-    "Samba do meu rap": ["shows", "Janine Matias"],
-    "Samba de Axê": ["shows", "Janine Matias"],
+    "Samba do meu rap": ["shows"],
+    "Sambas de Axé": ["shows"],
 };
 
 console.log("Base de Imagens:", baseDir);
@@ -51,11 +51,11 @@ try {
         const folderPath = path.join(baseDir, folder);
         const files = fs.readdirSync(folderPath).filter((file) => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file));
 
-        const tags = categoryTagMap[folder] || []; // Obtém as tags do mapa ou vazio se não houver
+        const tags = categoryTagMap[folder] || ["outros"]; // Obtém as tags do mapa ou "outros" se não houver
 
         const projetos = files.map((file, index) => ({
             id: `${folder}-projeto${index + 1}`,
-            titulo: `Projeto ${index + 1} (${folder})`,
+            titulo: `${folder}`,
             descricao: `Descrição breve do Projeto ${index + 1} na pasta ${folder}.`,
             imagem: `/images/${folder}/${file}`,
             categoria: folder,

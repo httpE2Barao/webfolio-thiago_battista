@@ -1,7 +1,7 @@
 "use client";
 import { Projeto } from "@/data/types";
 import Image from "next/image";
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import CustomSwiper from "../../../components/CustomSwiper";
 
 export function AlbumCompletoClient({
@@ -19,13 +19,17 @@ export function AlbumCompletoClient({
     setModalOpen(true);
   };
 
-  React.useEffect(() => {
-    const maxListeners = 20;
-    require('events').EventEmitter.defaultMaxListeners = maxListeners;
+  useEffect(() => {
+    const maxListeners = 10;
+    import("events").then((events) => {
+      if (events && events.default && events.default.EventEmitter) {
+        events.default.EventEmitter.defaultMaxListeners = maxListeners;
+      }
+    });
   }, []);
 
   return (
-    <div className="p-6 relative">
+    <div className="lg:p-6 relative">
       <h1 className="text-responsive font-bold mb-8 text-center capitalize">
         {albumName}
       </h1>
@@ -51,7 +55,6 @@ export function AlbumCompletoClient({
       {modalOpen && (
         <CustomSwiper
           mode="fotos"
-          photos={album}
           tagName={albumName} // Changed `albumName` to `tagName`
           initialSlide={initialIndex}
           modal

@@ -3,8 +3,10 @@ export interface Projeto {
   titulo: string;
   descricao: string;
   imagem: string;
-}
+  categoria?: string;
+    tags?: string[];
+  }
 
-export interface Projetos {
-  [categoria: string]: Projeto[];
+  export interface Projetos {
+  [key: string]: Projeto[];
 }

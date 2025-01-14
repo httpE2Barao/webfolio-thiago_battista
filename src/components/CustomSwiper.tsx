@@ -29,13 +29,15 @@ type ProjetoComTag = Projeto & {
 
 // Modifique as props para refletir a exibição por tags
 type CustomSwiperProps = {
-  mode: "albuns" | "fotos";
+  mode: "albuns" | "fotos" | "tags";
   photos?: Projeto[]; // Caso seja usado para exibir fotos filtradas por tag (passado via props)
   initialSlide?: number; // Slide inicial (por exemplo, foto clicada no grid)
   modal?: boolean; // Se true, renderiza com estilo de modal
   onClose?: () => void; // Função para fechar o modal
   tagName?: string; // Nome da tag (se aplicável)
   hidePagination?: boolean;
+  titleField?: string;
+  onClick?: (album: Projeto) => void; // Função para abrir o álbum completo
 };
 
 export default function CustomSwiper({
@@ -46,23 +48,21 @@ export default function CustomSwiper({
   onClose,
   tagName = "",
   hidePagination = false,
+  onClick,
 }: CustomSwiperProps) {
   const router = useRouter();
   const [slides, setSlides] = useState<RandomizedTag[] | ProjetoComTag[]>([]);
-  const [currentTag, setCurrentTag] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     if (photos) {
-      const slidesFromPhotos: ProjetoComTag[] = photos.map((projeto, index) => ({
+      const slidesFromPhotos: ProjetoComTag[] = shuffleArray(photos).map((projeto, index) => ({
         ...projeto,
         tagName,
         id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
       }));
       console.log("Generated slides from photos:", slidesFromPhotos);
       setSlides(slidesFromPhotos);
-      if (slidesFromPhotos.length > 0) {
-        setCurrentTag(tagName);
-      }
     } else {
       const projetos: Projetos = data.projetos;
       if (mode === "albuns") {
@@ -71,13 +71,10 @@ export default function CustomSwiper({
             tagName,
             foto: fotos[Math.floor(Math.random() * fotos.length)],
           }))
-        );
+        ).slice(0, 20); // Limitar a 20 fotos
         console.log("Generated randomized slides:", randomized);
         setSlides(randomized);
-        if (randomized.length > 0) {
-          setCurrentTag(randomized[0].tagName);
-        }
-      } else if (mode === "fotos") {
+      } else if (mode === "fotos" || mode === "tags") {
         const allProjects: ProjetoComTag[] = Object.entries(projetos).flatMap(
           ([tagName, projetos]) =>
             projetos.map((projeto, index) => ({
@@ -86,16 +83,22 @@ export default function CustomSwiper({
               id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
             }))
         );
-        console.log("Generated shuffled slides:", allProjects);
-        const shuffled = shuffleArray(allProjects);
+        const shuffled = shuffleArray(allProjects).slice(0, 20); // Limitar a 20 fotos
         setSlides(shuffled);
-        if (shuffled.length > 0) {
-          setCurrentTag(shuffled[0].tagName);
-        }
       }
     }
   }, [mode, photos, tagName]);
-  
+
+  useEffect(() => {
+    if (modal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modal]);
 
   const handleSlideChange = (swiper: SwiperType) => {
     const activeIndex = swiper.realIndex;
@@ -104,34 +107,25 @@ export default function CustomSwiper({
     if (!activeSlide) return;
 
     if (photos) {
-      setCurrentTag(tagName);
+      // No need to set currentTag here
     } else {
       if (mode === "albuns" && "tagName" in activeSlide) {
-        setCurrentTag(activeSlide.tagName);
-      } else if (mode === "fotos" && "tagName" in activeSlide) {
-        setCurrentTag(activeSlide.tagName);
+        // No need to set currentTag here
+      } else if ((mode === "fotos" || mode === "tags") && "tagName" in activeSlide) {
+        // No need to set currentTag here
       }
     }
   };
 
   const containerClasses = modal
     ? "fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
-    : `relative w-full ${mode === "fotos" ? "h-[50vh]" : "h-[calc(100vh-35px)]"}`;
+    : `relative w-full ${mode === "fotos" || mode === "tags" ? "h-[25vh]" : mode === "albuns" ? "h-[50vh]" : "h-[calc(100vh-35px)]"}`;
 
   return (
     <div className={containerClasses}>
-      {/* No modo não-modal e para o mode "fotos", exibe o nome da tag */}
-      {mode === "fotos" && !modal && (
-        <div className="absolute bottom-5 w-full text-center z-10">
-          <h1 className="text-5xl font-light text-white px-4 py-2 rounded-md">
-            {currentTag}
-          </h1>
-        </div>
-      )}
-
       <Swiper
         modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
-        effect={mode === "fotos" ? "fade" : undefined}
+        effect={mode === "fotos" || mode === "tags" ? "fade" : undefined}
         spaceBetween={0}
         slidesPerView={1}
         navigation
@@ -202,6 +196,11 @@ export default function CustomSwiper({
                       : "relative w-full h-full overflow-hidden rounded-md"
                   }
                 >
+                  {loading && modal && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                      <div className="loader"></div>
+                    </div>
+                  )}
                   <Image
                     src={projeto.imagem}
                     alt={projeto.titulo}
@@ -209,8 +208,15 @@ export default function CustomSwiper({
                     sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
                     className={modal ? "object-contain" : "object-cover"}
                     priority
+                    onLoadingComplete={() => setLoading(false)}
+                    onLoad={() => setLoading(false)}
                     onClick={(e) => e.stopPropagation()} 
                   />
+                  <div className="absolute bottom-5 w-full text-center z-10">
+                    <h2 className="text-2xl font-light text-white px-4 py-2 rounded-md">
+                      {projeto.titulo}
+                    </h2>
+                  </div>
                 </div>
                 {modal && (
                   <button
