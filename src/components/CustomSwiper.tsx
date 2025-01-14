@@ -66,11 +66,11 @@ export default function CustomSwiper({
     } else {
       const projetos: Projetos = data.projetos;
       if (mode === "random") {
-        const randomized: RandomizedTag[] = Object.entries(projetos).map(
-          ([tagName, fotos]) => ({
+        const randomized: RandomizedTag[] = shuffleArray(
+          Object.entries(projetos).map(([tagName, fotos]) => ({
             tagName,
             foto: fotos[Math.floor(Math.random() * fotos.length)],
-          })
+          }))
         );
         console.log("Generated randomized slides:", randomized);
         setSlides(randomized);
@@ -131,7 +131,7 @@ export default function CustomSwiper({
 
       <Swiper
         modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
-        effect={mode === "shuffle" ? "fade" : undefined}
+        effect="shuffle"
         spaceBetween={0}
         slidesPerView={1}
         navigation
@@ -193,6 +193,7 @@ export default function CustomSwiper({
               <SwiperSlide
                 key={projeto.id}
                 className="relative flex items-center justify-center"
+                onClick={modal ? onClose : undefined}
               >
                 <div
                   className={
@@ -208,6 +209,7 @@ export default function CustomSwiper({
                     sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
                     className={modal ? "object-contain" : "object-cover"}
                     priority
+                    onClick={(e) => e.stopPropagation()} 
                   />
                 </div>
                 {modal && (
