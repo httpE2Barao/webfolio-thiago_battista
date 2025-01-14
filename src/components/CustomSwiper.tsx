@@ -29,7 +29,7 @@ type ProjetoComTag = Projeto & {
 
 // Modifique as props para refletir a exibição por tags
 type CustomSwiperProps = {
-  mode: "random" | "shuffle";
+  mode: "albuns" | "fotos";
   photos?: Projeto[]; // Caso seja usado para exibir fotos filtradas por tag (passado via props)
   initialSlide?: number; // Slide inicial (por exemplo, foto clicada no grid)
   modal?: boolean; // Se true, renderiza com estilo de modal
@@ -65,7 +65,7 @@ export default function CustomSwiper({
       }
     } else {
       const projetos: Projetos = data.projetos;
-      if (mode === "random") {
+      if (mode === "albuns") {
         const randomized: RandomizedTag[] = shuffleArray(
           Object.entries(projetos).map(([tagName, fotos]) => ({
             tagName,
@@ -77,7 +77,7 @@ export default function CustomSwiper({
         if (randomized.length > 0) {
           setCurrentTag(randomized[0].tagName);
         }
-      } else if (mode === "shuffle") {
+      } else if (mode === "fotos") {
         const allProjects: ProjetoComTag[] = Object.entries(projetos).flatMap(
           ([tagName, projetos]) =>
             projetos.map((projeto, index) => ({
@@ -106,9 +106,9 @@ export default function CustomSwiper({
     if (photos) {
       setCurrentTag(tagName);
     } else {
-      if (mode === "random" && "tagName" in activeSlide) {
+      if (mode === "albuns" && "tagName" in activeSlide) {
         setCurrentTag(activeSlide.tagName);
-      } else if (mode === "shuffle" && "tagName" in activeSlide) {
+      } else if (mode === "fotos" && "tagName" in activeSlide) {
         setCurrentTag(activeSlide.tagName);
       }
     }
@@ -116,12 +116,12 @@ export default function CustomSwiper({
 
   const containerClasses = modal
     ? "fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
-    : `relative w-full ${mode === "shuffle" ? "h-[50vh]" : "h-[calc(100vh-35px)]"}`;
+    : `relative w-full ${mode === "fotos" ? "h-[50vh]" : "h-[calc(100vh-35px)]"}`;
 
   return (
     <div className={containerClasses}>
-      {/* No modo não-modal e para o mode "shuffle", exibe o nome da tag */}
-      {mode === "shuffle" && !modal && (
+      {/* No modo não-modal e para o mode "fotos", exibe o nome da tag */}
+      {mode === "fotos" && !modal && (
         <div className="absolute bottom-5 w-full text-center z-10">
           <h1 className="text-5xl font-light text-white px-4 py-2 rounded-md">
             {currentTag}
@@ -131,7 +131,7 @@ export default function CustomSwiper({
 
       <Swiper
         modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
-        effect={mode === "shuffle" ? "fade" : undefined}
+        effect={mode === "fotos" ? "fade" : undefined}
         spaceBetween={0}
         slidesPerView={1}
         navigation
@@ -145,7 +145,7 @@ export default function CustomSwiper({
         onSlideChange={handleSlideChange}
       >
         {slides.map((slide, index) => {
-          if (!photos && mode === "random") {
+          if (!photos && mode === "albuns") {
             const { tagName, foto } = slide as RandomizedTag;
 
             // Ensure `foto` and `foto.imagem` exist before rendering

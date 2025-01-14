@@ -4,7 +4,7 @@ import CustomSwiper from "@/components/CustomSwiper";
 export default function HomePage() {
   return (
     <div>
-      <CustomSwiper mode="random"/>
+      <CustomSwiper mode="albuns"/>
     </div>
   );
 }

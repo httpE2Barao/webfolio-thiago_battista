@@ -12,7 +12,7 @@ export default function AlbunsPage() {
 
   return (
     <div>
-      <CustomSwiper mode="shuffle" hidePagination={true} />
+      <CustomSwiper mode="fotos" hidePagination={true} />
     </div>
   );
 }
