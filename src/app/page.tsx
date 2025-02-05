@@ -3,8 +3,11 @@ import CustomSwiper from "@/components/CustomSwiper";
 
 export default function HomePage() {
   return (
-    <div>
-      <CustomSwiper mode="albuns"/>
+    <div className="h-screen">
+      <CustomSwiper 
+        mode="albuns"
+        hidePagination={false}
+      />
     </div>
   );
 }

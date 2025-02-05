@@ -729,295 +729,295 @@
       ]
     }
   ],
-  "Risorama": [
+  "risorama": [
     {
-      "id": "Risorama-projeto1",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 1 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4445.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto1",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 1 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4445.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto2",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 2 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4517.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto2",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 2 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4517.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto3",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 3 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4650.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto3",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 3 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4650.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto4",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 4 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4656.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto4",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 4 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4656.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto5",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 5 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4657.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto5",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 5 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4657.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto6",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 6 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4663.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto6",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 6 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4663.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto7",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 7 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4676.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto7",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 7 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4676.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto8",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 8 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4685.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto8",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 8 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4685.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto9",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 9 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4697.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto9",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 9 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4697.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto10",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 10 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4699.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto10",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 10 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4699.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto11",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 11 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4702.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto11",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 11 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4702.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto12",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 12 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4712.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto12",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 12 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4712.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto13",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 13 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4716.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto13",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 13 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4716.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto14",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 14 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4762.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto14",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 14 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4762.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto15",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 15 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4763.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto15",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 15 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4763.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto16",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 16 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4778.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto16",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 16 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4778.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto17",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 17 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4804.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto17",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 17 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4804.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto18",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 18 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4807.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto18",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 18 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4807.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto19",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 19 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4808.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto19",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 19 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4808.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto20",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 20 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4915.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto20",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 20 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4915.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto21",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 21 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4919.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto21",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 21 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4919.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto22",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 22 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4944.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto22",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 22 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4944.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto23",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 23 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4950.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto23",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 23 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4950.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto24",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 24 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4952.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto24",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 24 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4952.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto25",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 25 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4954.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto25",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 25 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4954.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto26",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 26 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4959.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto26",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 26 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4959.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto27",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 27 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4964.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto27",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 27 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4964.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto28",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 28 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF4982.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto28",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 28 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF4982.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     },
     {
-      "id": "Risorama-projeto29",
-      "titulo": "Risorama",
-      "descricao": "Descrição breve do Projeto 29 na pasta Risorama.",
-      "imagem": "/images/Risorama/DSCF5000.jpg",
-      "categoria": "Risorama",
+      "id": "risorama-projeto29",
+      "titulo": "risorama",
+      "descricao": "Descrição breve do Projeto 29 na pasta risorama.",
+      "imagem": "/images/risorama/DSCF5000.jpg",
+      "categoria": "risorama",
       "tags": [
-        "stand-up"
+        "outros"
       ]
     }
   ],

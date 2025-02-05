@@ -5,12 +5,13 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/lazy";
 
 import { Projeto, Projetos } from "@/data/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Autoplay, EffectFade, Keyboard, Navigation, Pagination } from "swiper/modules";
+import { useEffect, useState, useMemo } from "react";
+import { Autoplay, EffectFade, Keyboard, Navigation, Pagination, Lazy } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import data from "@/data/projetos.js";
@@ -37,7 +38,9 @@ type CustomSwiperProps = {
   tagName?: string; // Nome da tag (se aplicável)
   hidePagination?: boolean;
   titleField?: string;
-  onClick?: (album: Projeto) => void; // Função para abrir o álbum completo
+  onSlideClick?: (projeto: Projeto, index: number) => void;
+  fullSize?: boolean;
+  priority?: boolean; // Nova prop para controlar prioridade de carregamento
 };
 
 export default function CustomSwiper({
@@ -48,32 +51,63 @@ export default function CustomSwiper({
   onClose,
   tagName = "",
   hidePagination = false,
-  onClick,
+  onSlideClick,
+  fullSize = false,
+  priority = false,
 }: CustomSwiperProps) {
   const router = useRouter();
   const [slides, setSlides] = useState<RandomizedTag[] | ProjetoComTag[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [activeIndex, setActiveIndex] = useState(initialSlide);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    console.log('CustomSwiper Props:', {
+      mode,
+      photos,
+      tagName,
+      modal
+    });
+
     if (photos) {
-      const slidesFromPhotos: ProjetoComTag[] = shuffleArray(photos).map((projeto, index) => ({
+      console.log('Photos recebidas:', photos);
+      const slidesFromPhotos: ProjetoComTag[] = photos.map((projeto, index) => ({
         ...projeto,
-        tagName,
-        id: `${tagName}-${index}-${projeto.titulo}`, // Gera uma chave única para cada projeto
+        tagName: projeto.categoria || tagName,
+        id: `${tagName}-${index}-${projeto.titulo}`,
       }));
-      console.log("Generated slides from photos:", slidesFromPhotos);
+      console.log('Slides gerados de photos:', slidesFromPhotos);
       setSlides(slidesFromPhotos);
     } else {
       const projetos: Projetos = data.projetos;
       if (mode === "albuns") {
+        console.log("Modo álbuns - Projetos recebidos:", projetos);
         const randomized: RandomizedTag[] = shuffleArray(
-          Object.entries(projetos).map(([tagName, fotos]) => ({
-            tagName,
-            foto: fotos[Math.floor(Math.random() * fotos.length)],
-          }))
-        ).slice(0, 20); // Limitar a 20 fotos
-        console.log("Generated randomized slides:", randomized);
+          Object.entries(projetos).map(([albumName, fotos]) => {
+            console.log(`Processando álbum: ${albumName}, fotos:`, fotos);
+            if (fotos && fotos.length > 0) {
+              const selectedPhoto = fotos[0];
+              return {
+                tagName: albumName,
+                foto: selectedPhoto,
+              };
+            }
+            return null;
+          })
+        )
+        .filter((item): item is RandomizedTag => item !== null)
+        .slice(0, 20);
+
+        console.log("Slides randomizados gerados:", randomized);
         setSlides(randomized);
+      } else if (mode === "fotos" && tagName) {
+        const albumPhotos = projetos[tagName] || [];
+        const slidesFromAlbum: ProjetoComTag[] = albumPhotos.map((projeto, index) => ({
+          ...projeto,
+          tagName,
+          id: `${tagName}-${index}-${projeto.titulo}`,
+        }));
+        setSlides(slidesFromAlbum);
       } else if (mode === "fotos" || mode === "tags") {
         const allProjects: ProjetoComTag[] = Object.entries(projetos).flatMap(
           ([tagName, projetos]) =>
@@ -100,6 +134,35 @@ export default function CustomSwiper({
     };
   }, [modal]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        rootMargin: '50px',
+      }
+    );
+
+    const element = document.getElementById(`swiper-container-${tagName}`);
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, [tagName]);
+
+  const visibleSlides = useMemo(() => {
+    if (!slides.length) return [];
+    const start = Math.max(0, activeIndex - 1);
+    const end = Math.min(slides.length, activeIndex + 2);
+    return slides.slice(start, end);
+  }, [slides, activeIndex]);
+
   const handleSlideChange = (swiper: SwiperType) => {
     const activeIndex = swiper.realIndex;
     const activeSlide = slides[activeIndex];
@@ -117,121 +180,187 @@ export default function CustomSwiper({
     }
   };
 
+  const handleClick = (tagName: string) => {
+    console.log('handleClick chamado com tagName:', tagName);
+    if (!modal) {
+      const url = `/albuns/${encodeURIComponent(tagName)}`;
+      console.log('Navegando para:', url);
+      router.push(url);
+    }
+  };
+
   const containerClasses = modal
     ? "fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center"
-    : `relative w-full ${mode === "fotos" || mode === "tags" ? "h-[25vh]" : mode === "albuns" && "h-[calc(100vh-35px)]"}`;
+    : `relative w-full h-full transition-all duration-300 ease-in-out ${
+        fullSize 
+          ? "h-full" 
+          : !photos 
+            ? "h-[calc(100vh-35px)]" 
+            : "group-hover:!h-[35vh] !h-[25vh]"
+      }`;
 
   return (
-    <div className={containerClasses}>
-      <Swiper
-        modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
-        effect={mode === "fotos" || mode === "tags" ? "fade" : undefined}
-        spaceBetween={0}
-        slidesPerView={1}
-        navigation
-        pagination={!hidePagination ? { clickable: true } : undefined}
-        keyboard={{ enabled: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: true }}
-        fadeEffect={{ crossFade: true }}
-        loop={slides.length > 1}
-        initialSlide={initialSlide}
-        className="w-full h-full"
-        onSlideChange={handleSlideChange}
-      >
-        {slides.map((slide, index) => {
-          if (!photos && mode === "albuns") {
-            const { tagName, foto } = slide as RandomizedTag;
-
-            // Ensure `foto` and `foto.imagem` exist before rendering
-            if (!foto || !foto.imagem) {
-              console.log(`Invalid slide data at index ${index}:`, slide);
-              return null; // Skip rendering this slide
-            }
-
-            const key = `${slide.tagName}-${index}`;
-            return (
-              <SwiperSlide
-                key={key}
-                onClick={() => {
-                  if (!modal) router.push(`/albuns/${encodeURIComponent(tagName)}`);
-                }}
-                className="cursor-pointer relative"
-              >
-                <div className="relative w-full h-full overflow-hidden rounded-md">
-                  <Image
-                    src={foto.imagem}
-                    alt={tagName}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                    <h2 className="text-white text-responsive font-semibold capitalize">
-                      {tagName}
-                    </h2>
-                  </div>
-                </div>
-              </SwiperSlide>
-            );
-          } else {
-            const projeto = slide as ProjetoComTag;
-
-            // Ensure `projeto` and `projeto.imagem` exist before rendering
-            if (!projeto || !projeto.imagem) {
-              console.error(`Invalid project data at index ${index}:`, slide);
-              return null; // Skip rendering this slide
-            }
-
-            return (
-              <SwiperSlide
-                key={projeto.id}
-                className="relative flex items-center justify-center"
-                onClick={modal ? onClose : undefined}
-              >
-                <div
-                  className={
-                    modal
-                      ? "relative w-[90vw] h-full max-w-[1200px] flex items-center justify-center m-auto"
-                      : "relative w-full h-full overflow-hidden rounded-md"
-                  }
+    <div id={`swiper-container-${tagName}`} className={containerClasses}>
+      {loading && slides.length === 0 ? (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="text-xl">Carregando...</div>
+        </div>
+      ) : slides.length === 0 ? (
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="text-xl">Nenhuma foto encontrada</div>
+        </div>
+      ) : (
+        <Swiper
+          modules={[Navigation, Autoplay, EffectFade, Keyboard, Lazy, ...(hidePagination ? [] : [Pagination])]}
+          effect={mode === "fotos" || mode === "tags" ? "fade" : undefined}
+          spaceBetween={0}
+          slidesPerView={1}
+          navigation
+          pagination={!hidePagination ? { clickable: true } : undefined}
+          keyboard={{ enabled: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: true }}
+          fadeEffect={{ crossFade: true }}
+          loop={slides.length > 1}
+          initialSlide={initialSlide}
+          className={`w-full h-full ${fullSize ? 'swiper-fullsize' : ''}`}
+          onSlideChange={(swiper) => {
+            setActiveIndex(swiper.activeIndex);
+            handleSlideChange(swiper);
+          }}
+          lazy={{
+            enabled: true,
+            loadPrevNext: true,
+            loadPrevNextAmount: 2
+          }}
+        >
+          {(isVisible || priority ? slides : visibleSlides).map((slide, index) => {
+            if (photos && mode === "albuns") {
+              const projeto = slide as ProjetoComTag;
+              
+              return (
+                <SwiperSlide
+                  key={projeto.id}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Clique em slide com photos:', projeto);
+                    if (!modal && projeto.categoria) {
+                      const url = `/albuns/${encodeURIComponent(projeto.categoria)}`;
+                      console.log('Navegando para:', url);
+                      router.push(url);
+                    }
+                  }}
+                  className="cursor-pointer relative"
                 >
-                  {loading && modal && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                      <div className="loader"></div>
-                    </div>
-                  )}
-                  <Image
-                    src={projeto.imagem}
-                    alt={projeto.titulo}
-                    fill
-                    sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
-                    className={modal ? "object-contain" : "object-cover"}
-                    priority
-                    onLoadingComplete={() => setLoading(false)}
-                    onLoad={() => setLoading(false)}
-                    onClick={(e) => e.stopPropagation()} 
-                  />
-                  <div className="absolute bottom-5 w-full text-center z-10">
-                    <h2 className="text-2xl font-light text-white px-4 py-2 rounded-md">
-                      {projeto.titulo}
-                    </h2>
+                  <div className="relative w-full h-full overflow-hidden rounded-md group">
+                    <div className="swiper-lazy-preloader"></div>
+                    <Image
+                      src={projeto.imagem}
+                      alt={projeto.titulo}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                      priority={priority && index === 0}
+                      loading={priority ? "eager" : "lazy"}
+                      quality={75}
+                    />
                   </div>
-                </div>
-                {modal && (
-                  <button
-                    onClick={onClose}
-                    className="absolute top-6 right-6 bg-white text-black rounded-full px-4 py-1 text-5xl z-60 shadow-lg hover:bg-gray-100"
-                    aria-label="Fechar"
+                </SwiperSlide>
+              );
+            } else if (!photos && mode === "albuns") {
+              const { tagName, foto } = slide as RandomizedTag;
+
+              if (!foto || !foto.imagem) {
+                console.log(`Invalid slide data at index ${index}:`, slide);
+                return null;
+              }
+
+              const key = `${tagName}-${index}`;
+              return (
+                <SwiperSlide
+                  key={key}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log('Slide clicado - tagName:', tagName);
+                    handleClick(tagName);
+                  }}
+                  className="cursor-pointer relative"
+                >
+                  <div className="relative w-full h-full overflow-hidden rounded-md group">
+                    <div className="swiper-lazy-preloader"></div>
+                    <Image
+                      src={foto.imagem}
+                      alt={tagName}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover"
+                      priority={priority && index === 0}
+                      loading={priority ? "eager" : "lazy"}
+                      quality={75}
+                    />
+                  </div>
+                </SwiperSlide>
+              );
+            } else {
+              const projeto = slide as ProjetoComTag;
+
+              if (!projeto || !projeto.imagem) {
+                console.error(`Invalid project data at index ${index}:`, slide);
+                return null;
+              }
+
+              return (
+                <SwiperSlide
+                  key={projeto.id}
+                  className="relative flex items-center justify-center cursor-pointer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (onSlideClick) {
+                      onSlideClick(projeto, index);
+                    }
+                  }}
+                >
+                  <div
+                    className={
+                      modal
+                        ? "relative w-[90vw] h-full max-w-[1200px] flex items-center justify-center m-auto"
+                        : fullSize
+                          ? "relative w-full h-full flex items-center justify-center"
+                          : "relative w-full h-full overflow-hidden rounded-md"
+                    }
                   >
-                    &times;
-                  </button>
-                )}
-              </SwiperSlide>
-            );
-          }
-        })}
-      </Swiper>
+                    {loading && modal && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="loader"></div>
+                      </div>
+                    )}
+                    <div className="swiper-lazy-preloader"></div>
+                    <Image
+                      src={projeto.imagem}
+                      alt={projeto.titulo}
+                      fill
+                      sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
+                      className={`${modal || fullSize ? "object-contain" : "object-cover"}`}
+                      priority={priority && index === 0}
+                      loading={priority ? "eager" : "lazy"}
+                      quality={75}
+                    />
+                  </div>
+                  {modal && (
+                    <button
+                      onClick={onClose}
+                      className="absolute top-6 right-6 bg-white text-black rounded-full px-4 py-1 text-5xl z-60 shadow-lg hover:bg-gray-100"
+                      aria-label="Fechar"
+                    >
+                      &times;
+                    </button>
+                  )}
+                </SwiperSlide>
+              );
+            }
+          })}
+        </Swiper>
+      )}
     </div>
   );
 }
