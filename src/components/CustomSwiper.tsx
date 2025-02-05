@@ -5,13 +5,12 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/lazy";
 
 import { Projeto, Projetos } from "@/data/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useMemo } from "react";
-import { Autoplay, EffectFade, Keyboard, Navigation, Pagination, Lazy } from "swiper/modules";
+import { Autoplay, EffectFade, Keyboard, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import data from "@/data/projetos.js";
@@ -57,7 +56,7 @@ export default function CustomSwiper({
 }: CustomSwiperProps) {
   const router = useRouter();
   const [slides, setSlides] = useState<RandomizedTag[] | ProjetoComTag[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading] = useState<boolean>(true);
   const [activeIndex, setActiveIndex] = useState(initialSlide);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -211,7 +210,7 @@ export default function CustomSwiper({
         </div>
       ) : (
         <Swiper
-          modules={[Navigation, Autoplay, EffectFade, Keyboard, Lazy, ...(hidePagination ? [] : [Pagination])]}
+          modules={[Navigation, Autoplay, EffectFade, Keyboard, ...(hidePagination ? [] : [Pagination])]}
           effect={mode === "fotos" || mode === "tags" ? "fade" : undefined}
           spaceBetween={0}
           slidesPerView={1}
@@ -226,11 +225,6 @@ export default function CustomSwiper({
           onSlideChange={(swiper) => {
             setActiveIndex(swiper.activeIndex);
             handleSlideChange(swiper);
-          }}
-          lazy={{
-            enabled: true,
-            loadPrevNext: true,
-            loadPrevNextAmount: 2
           }}
         >
           {(isVisible || priority ? slides : visibleSlides).map((slide, index) => {
@@ -261,7 +255,7 @@ export default function CustomSwiper({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                       priority={priority && index === 0}
-                      loading={priority ? "eager" : "lazy"}
+                      loading="lazy"
                       quality={75}
                     />
                   </div>
@@ -295,7 +289,7 @@ export default function CustomSwiper({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                       priority={priority && index === 0}
-                      loading={priority ? "eager" : "lazy"}
+                      loading="lazy"
                       quality={75}
                     />
                   </div>
@@ -342,7 +336,7 @@ export default function CustomSwiper({
                       sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
                       className={`${modal || fullSize ? "object-contain" : "object-cover"}`}
                       priority={priority && index === 0}
-                      loading={priority ? "eager" : "lazy"}
+                      loading="lazy"
                       quality={75}
                     />
                   </div>

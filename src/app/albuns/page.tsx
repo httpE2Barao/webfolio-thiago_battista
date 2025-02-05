@@ -4,7 +4,6 @@ import CustomSwiper from "@/components/CustomSwiper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import rawData from "@/data/projetos.js";
 import { Projeto, Projetos } from "@/data/types";
-import { useRouter } from "next/navigation";
 import { useMemo } from 'react';
 
 const data: { projetos: Projetos } = rawData;
@@ -37,9 +36,6 @@ import "swiper/css/pagination";
 export const dynamic = "force-dynamic";
 
 export default function AlbunsPage() {
-  const router = useRouter();
-  
-  // Memoize o resultado do agrupamento para evitar recálculos desnecessários
   const projetosPorTag = useMemo(() => agruparProjetosPorTag(projetosData), []);
 
   // Componente para renderizar cada grupo de tag
