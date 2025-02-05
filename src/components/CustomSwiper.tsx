@@ -40,6 +40,7 @@ type CustomSwiperProps = {
   onSlideClick?: (projeto: Projeto, index: number) => void;
   fullSize?: boolean;
   priority?: boolean; // Nova prop para controlar prioridade de carregamento
+  onSlideChange?: (projeto: Projeto) => void;
 };
 
 export default function CustomSwiper({
@@ -53,6 +54,7 @@ export default function CustomSwiper({
   onSlideClick,
   fullSize = false,
   priority = false,
+  onSlideChange,
 }: CustomSwiperProps) {
   const router = useRouter();
   const [slides, setSlides] = useState<RandomizedTag[] | ProjetoComTag[]>([]);
@@ -168,13 +170,11 @@ export default function CustomSwiper({
 
     if (!activeSlide) return;
 
-    if (photos) {
-      // No need to set currentTag here
-    } else {
-      if (mode === "albuns" && "tagName" in activeSlide) {
-        // No need to set currentTag here
-      } else if ((mode === "fotos" || mode === "tags") && "tagName" in activeSlide) {
-        // No need to set currentTag here
+    if (onSlideChange) {
+      if ("foto" in activeSlide) {
+        onSlideChange(activeSlide.foto);
+      } else {
+        onSlideChange(activeSlide);
       }
     }
   };
@@ -255,7 +255,6 @@ export default function CustomSwiper({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                       priority={priority && index === 0}
-                      loading="lazy"
                       quality={75}
                     />
                   </div>
@@ -289,7 +288,6 @@ export default function CustomSwiper({
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover"
                       priority={priority && index === 0}
-                      loading="lazy"
                       quality={75}
                     />
                   </div>
@@ -336,7 +334,6 @@ export default function CustomSwiper({
                       sizes={modal ? "80vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"}
                       className={`${modal || fullSize ? "object-contain" : "object-cover"}`}
                       priority={priority && index === 0}
-                      loading="lazy"
                       quality={75}
                     />
                   </div>
