@@ -113,9 +113,9 @@ export function Header() {
       {isNavOpen && (
         <nav
           ref={navRef}
-          className="fixed top-30 left-0 h-32 z-40 w-full max-md:rounded-b-3xl md:left-40 md:h-40 md:bottom-0 md:w-[calc(100vw-10rem)] p-4 flex items-center bg-backgroundHeader shadow-lg"
+          className="fixed top-0 left-0 h-screen z-40 w-full bg-backgroundHeader md:h-40 md:left-40 md:bottom-0 md:top-auto md:w-[calc(100vw-10rem)] p-4 flex items-center shadow-lg"
         >
-          <ul className="flex flex-col md:flex-row w-full md:justify-evenly md:w-full gap-10 items-center">
+          <ul className="flex flex-col md:flex-row w-full md:justify-evenly gap-16 md:gap-10 items-center max-md:mt-32">
             {navItems.map(({ label, path }) => {
               const isActive = pathname === path;
               return (
@@ -123,7 +123,7 @@ export function Header() {
                   <Link
                     href={path}
                     onClick={closeNav}
-                    className={`text-lg md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4 ${
+                    className={`text-2xl md:text-2xl text-foreground dark:text-dark-foreground hover:underline hover:underline-offset-4 ${
                       isActive ? "underline underline-offset-4 font-bold" : ""
                     }`}
                   >

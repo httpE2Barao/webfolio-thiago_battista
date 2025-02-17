@@ -1,7 +1,30 @@
-/* .header {
+.header {
+  height: 5rem;
+}
 
-} */
+@media (min-width: 768px) {
+  .header {
+    height: 100vh;
+  }
+}
 
-/* .h-title {
+.swiper-container {
+  height: calc(100vh - 5rem);
+}
 
-} */
+/* Override fullsize styles for album page */
+.swiper-container {
+  height: calc(100vh - 35px) !important;
+}
+
+@media (min-width: 768px) {
+  .swiper-container {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper-container {
+    height: calc(100vh - 35px) !important;
+  }
+}

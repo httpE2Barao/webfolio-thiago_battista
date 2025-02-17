@@ -5,6 +5,7 @@ import TituloResponsivo from "@/components/TituloResponsivo";
 import rawData from "@/data/projetos.js";
 import { Projeto, Projetos } from "@/data/types";
 import { useMemo } from 'react';
+import { useRouter } from 'next/navigation';
 
 const data: { projetos: Projetos } = rawData;
 const projetosData: Projetos = data.projetos;
@@ -37,34 +38,36 @@ export const dynamic = "force-dynamic";
 
 export default function AlbunsPage() {
   const projetosPorTag = useMemo(() => agruparProjetosPorTag(projetosData), []);
+  const router = useRouter();
 
-  // Componente para renderizar cada grupo de tag
   const TagGroup = ({ tag, projetos }: { tag: string; projetos: Projeto[] }) => (
-    <div className="mb-8 group relative">
-      <div className="transition-all duration-300 ease-in-out group-hover:h-[35vh] h-[25vh] relative">
-        <CustomSwiper 
-          mode="albuns"
-          photos={projetos}
-          tagName={tag}
-          hidePagination={false}
-          priority={true} // Prioriza o carregamento das primeiras imagens
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none bg-black bg-opacity-20">
-          <TituloResponsivo className="text-white text-6xl font-semibold px-4 py-2 rounded-md opacity-100 transition-opacity duration-300 group-hover:opacity-0">
+    <div className="mb-3 last:mb-0 group relative rounded-lg overflow-hidden">
+      <div className="transition-transform duration-300 ease-in-out h-[400px] md:h-[500px] lg:h-[600px] relative flex items-center justify-center">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <CustomSwiper 
+            mode="albuns"
+            photos={projetos}
+            tagName={tag}
+            hidePagination={false}
+            priority={true}
+            onSlideClick={(projeto) => {
+              if (projeto.categoria) {
+                router.push(`/albuns/${encodeURIComponent(projeto.categoria)}`);
+              }
+            }}
+          />
+        </div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none bg-gradient-to-t from-black/50 to-transparent">
+          <TituloResponsivo className="text-white text-3xl md:text-5xl lg:text-6xl font-semibold px-4 py-2 rounded-md opacity-100 transition-all duration-300 group-hover:opacity-0 group-hover:transform group-hover:translate-y-4">
             {tag}
           </TituloResponsivo>
-          {projetos[0]?.categoria && (
-            <TituloResponsivo className="text-white text-4xl font-light px-4 py-2 rounded-md opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-              {projetos[0].categoria}
-            </TituloResponsivo>
-          )}
         </div>
       </div>
     </div>
   );
 
   return (
-    <div className="space-y-12 py-8">
+    <div className="space-y-6 md:space-y-8 py-4">
       {Object.entries(projetosPorTag).map(([tag, projetos]) => (
         <TagGroup key={tag} tag={tag} projetos={projetos} />
       ))}
