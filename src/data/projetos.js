@@ -1,2030 +1,3125 @@
-
-        module.exports = {
-            projetos: {
+// Este arquivo é gerado automaticamente - não edite manualmente
+export const projetos = {
   "Agora é que são elas": [
     {
-      "id": "Agora é que são elas-projeto1",
+      "id": "Agora é que são elas-DSCF3741",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 1 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3741.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto2",
+      "id": "Agora é que são elas-DSCF3745",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 2 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3745.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto3",
+      "id": "Agora é que são elas-DSCF3765",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 3 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3765.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto4",
+      "id": "Agora é que são elas-DSCF3770",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 4 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3770.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto5",
+      "id": "Agora é que são elas-DSCF3781",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 5 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
+      "imagem": "/images/Agora é que são elas/DSCF3781.jpg",
+      "categoria": "teatro",
+      "subcategoria": "comédia"
+    },
+    {
+      "id": "Agora é que são elas-DSCF3790",
+      "titulo": "Agora é que são elas",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3790.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto6",
+      "id": "Agora é que são elas-DSCF3821",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 6 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
+      "imagem": "/images/Agora é que são elas/DSCF3821.jpg",
+      "categoria": "teatro",
+      "subcategoria": "comédia"
+    },
+    {
+      "id": "Agora é que são elas-DSCF3867",
+      "titulo": "Agora é que são elas",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3867.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto7",
+      "id": "Agora é que são elas-DSCF3892",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 7 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3892.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto8",
+      "id": "Agora é que são elas-DSCF3921",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 8 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3921.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto9",
+      "id": "Agora é que são elas-DSCF3922",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 9 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3922.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto10",
+      "id": "Agora é que são elas-DSCF3943",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 10 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3943.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto11",
+      "id": "Agora é que são elas-DSCF3971",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 11 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF3971.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto12",
+      "id": "Agora é que são elas-DSCF4066",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 12 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4066.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto13",
+      "id": "Agora é que são elas-DSCF4097",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 13 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4097.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto14",
+      "id": "Agora é que são elas-DSCF4102",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 14 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4102.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto15",
+      "id": "Agora é que são elas-DSCF4129",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 15 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4129.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto16",
+      "id": "Agora é que são elas-DSCF4134",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 16 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4134.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto17",
+      "id": "Agora é que são elas-DSCF4135",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 17 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4135.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto18",
+      "id": "Agora é que são elas-DSCF4146",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 18 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4146.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto19",
+      "id": "Agora é que são elas-DSCF4151",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 19 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4151.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
     },
     {
-      "id": "Agora é que são elas-projeto20",
+      "id": "Agora é que são elas-DSCF4166",
       "titulo": "Agora é que são elas",
-      "descricao": "Descrição breve do Projeto 20 na pasta Agora é que são elas.",
+      "descricao": "Peça teatral Agora é que são elas",
       "imagem": "/images/Agora é que são elas/DSCF4166.jpg",
-      "categoria": "Agora é que são elas",
-      "tags": [
-        "teatro"
-      ]
+      "categoria": "teatro",
+      "subcategoria": "comédia"
+    }
+  ],
+  "Bonitinha Mais Ordinaria": [
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6097",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6097.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6661",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6661.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6662",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6662.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6663",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6663.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6671",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6671.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6674",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6674.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6704",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6704.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6736",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6736.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6738",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6738.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6769",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6769.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6783",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6783.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6804",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6804.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6806",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6806.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6829",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6829.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6830",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6830.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6849",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6849.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6851",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6851.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6871",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6871.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6874",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6874.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6881",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6881.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6898",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6898.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6899",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6899.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6930",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6930.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6934",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6934.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6938",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6938.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6942",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6942.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6943",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6943.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6946",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6946.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6970",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6970.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6978",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6978.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6980",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6980.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF6995",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF6995.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7006",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7006.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7017",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7017.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7046",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7046.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7102",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7102.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7103",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7103.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7106",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7106.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7108",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7108.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7116",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7116.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7119",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7119.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7131",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7131.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7150",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7150.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7153",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7153.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7155",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7155.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7158",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7158.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7167",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7167.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7174",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7174.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7180",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7180.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7181",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7181.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7187",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7187.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7195",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7195.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7200",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7200.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7203",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7203.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7207",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7207.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7213",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7213.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7222",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7222.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7237",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7237.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7264",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7264.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7275",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7275.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7288",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7288.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7292",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7292.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7293",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7293.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7295",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7295.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7310",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7310.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7314",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7314.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7316",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7316.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7317",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7317.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7318",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7318.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7344-2",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7344-2.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7344",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7344.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7345",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7345.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7346",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7346.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7347",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7347.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7354",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7354.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7356",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7356.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7364",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7364.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7366",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7366.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
+    },
+    {
+      "id": "Bonitinha Mais Ordinaria-DSCF7370",
+      "titulo": "Bonitinha Mais Ordinaria",
+      "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+      "imagem": "/images/Bonitinha Mais Ordinaria/DSCF7370.jpg",
+      "categoria": "teatro",
+      "subcategoria": "drama"
     }
   ],
   "Dow Raiz": [
     {
-      "id": "Dow Raiz-projeto1",
+      "id": "Dow Raiz-DSCF8567",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 1 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8567.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto2",
+      "id": "Dow Raiz-DSCF8616",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 2 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8616.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto3",
+      "id": "Dow Raiz-DSCF8639",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 3 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8639.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto4",
+      "id": "Dow Raiz-DSCF8680",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 4 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8680.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto5",
+      "id": "Dow Raiz-DSCF8696",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 5 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8696.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto6",
+      "id": "Dow Raiz-DSCF8702",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 6 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8702.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto7",
+      "id": "Dow Raiz-DSCF8712",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 7 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8712.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
     },
     {
-      "id": "Dow Raiz-projeto8",
+      "id": "Dow Raiz-DSCF8745",
       "titulo": "Dow Raiz",
-      "descricao": "Descrição breve do Projeto 8 na pasta Dow Raiz.",
+      "descricao": "Show fotográfico Dow Raiz",
       "imagem": "/images/Dow Raiz/DSCF8745.avif",
-      "categoria": "Dow Raiz",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rock"
+    }
+  ],
+  "Duelo_Amaz_nico": [
+    {
+      "id": "Duelo_Amaz_nico-DSCF0168",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0168.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0175",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0175.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0216",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0216.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0576",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0576.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0609",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0609.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0611",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0611.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0639",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0639.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0648",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0648.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0757",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0757.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0802",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0802.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0837",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0837.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0839",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0839.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0884",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0884.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0895",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0895.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0934",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0934.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0936",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0936.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0944",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0944.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0945",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0945.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0952",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0952.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0954",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0954.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF0965",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF0965.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1192",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1192.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1199",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1199.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1254",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1254.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1385",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1385.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1388",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1388.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1505",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1505.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1515",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1515.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1621",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1621.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1958",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1958.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF1964",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF1964.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2000",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2000.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2025",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2025.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2062",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2062.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2158",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2158.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2159",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2159.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2160",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2160.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2161",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2161.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2162",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2162.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2163",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2163.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2164",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2164.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2467",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2467.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2497",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2497.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2559",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2559.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2571",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2571.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2578",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2578.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2581",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2581.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2594",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2594.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2619",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2619.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2691",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2691.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2747",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2747.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2750",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2750.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2902",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2902.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2934",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2934.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2942",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2942.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
+    },
+    {
+      "id": "Duelo_Amaz_nico-DSCF2949",
+      "titulo": "Duelo_Amaz_nico",
+      "descricao": "Projeto Duelo_Amaz_nico",
+      "imagem": "/images/Duelo_Amaz_nico/DSCF2949.jpg",
+      "categoria": "outros",
+      "subcategoria": "geral"
     }
   ],
   "Emicida": [
     {
-      "id": "Emicida-projeto1",
+      "id": "Emicida-DSCF4199-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 1 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4199-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4199-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto2",
+      "id": "Emicida-DSCF4200-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 2 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4200-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4200-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto3",
+      "id": "Emicida-DSCF4220-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 3 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4220-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4220-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto4",
+      "id": "Emicida-DSCF4226-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 4 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4226-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4226-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto5",
+      "id": "Emicida-DSCF4227-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 5 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4227-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4227-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto6",
+      "id": "Emicida-DSCF4228-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 6 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4228-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4228-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto7",
+      "id": "Emicida-DSCF4243-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 7 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4243-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4243-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto8",
+      "id": "Emicida-DSCF4244-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 8 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4244-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4244-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto9",
+      "id": "Emicida-DSCF4249-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 9 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4249-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4249-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto10",
+      "id": "Emicida-DSCF4252-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 10 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4252-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4252-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto11",
+      "id": "Emicida-DSCF4263-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 11 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4263-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4263-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto12",
+      "id": "Emicida-DSCF4267-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 12 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4267-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4267-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto13",
+      "id": "Emicida-DSCF4284-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 13 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4284-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4284-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto14",
+      "id": "Emicida-DSCF4288-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 14 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4288-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4288-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto15",
+      "id": "Emicida-DSCF4307-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 15 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4307-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4307-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto16",
+      "id": "Emicida-DSCF4322-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 16 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4322-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4322-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto17",
+      "id": "Emicida-DSCF4323-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 17 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4323-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4323-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto18",
+      "id": "Emicida-DSCF4324-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 18 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4324-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4324-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto19",
+      "id": "Emicida-DSCF4332-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 19 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4332-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4332-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto20",
+      "id": "Emicida-DSCF4333-2",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 20 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4333-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4333-2.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto21",
+      "id": "Emicida-DSCF4333-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 21 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4335-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4333-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto22",
+      "id": "Emicida-DSCF4333",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 22 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4336-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4333.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto23",
+      "id": "Emicida-DSCF4335-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 23 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4337-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4335-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto24",
+      "id": "Emicida-DSCF4336-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 24 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4338-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4336-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Emicida-projeto25",
+      "id": "Emicida-DSCF4337-Aprimorado-NR",
       "titulo": "Emicida",
-      "descricao": "Descrição breve do Projeto 25 na pasta Emicida.",
-      "imagem": "/images/Emicida/DSCF4346-Aprimorado-NR.avif",
-      "categoria": "Emicida",
-      "tags": [
-        "shows"
-      ]
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4337-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Emicida-DSCF4338-Aprimorado-NR",
+      "titulo": "Emicida",
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4338-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Emicida-DSCF4346-2",
+      "titulo": "Emicida",
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4346-2.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Emicida-DSCF4346-Aprimorado-NR",
+      "titulo": "Emicida",
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4346-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Emicida-DSCF4346",
+      "titulo": "Emicida",
+      "descricao": "Show fotográfico Emicida",
+      "imagem": "/images/Emicida/DSCF4346.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     }
   ],
   "Leci Brandão": [
     {
-      "id": "Leci Brandão-projeto1",
+      "id": "Leci Brandão-DSCF9039",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 1 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9039.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto2",
+      "id": "Leci Brandão-DSCF9051",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 2 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9051.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto3",
+      "id": "Leci Brandão-DSCF9209",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 3 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9209.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto4",
+      "id": "Leci Brandão-DSCF9213",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 4 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9213.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto5",
+      "id": "Leci Brandão-DSCF9239",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 5 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9239.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto6",
+      "id": "Leci Brandão-DSCF9368",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 6 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9368.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto7",
+      "id": "Leci Brandão-DSCF9386",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 7 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9386.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto8",
+      "id": "Leci Brandão-DSCF9394",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 8 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9394.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto9",
+      "id": "Leci Brandão-DSCF9403",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 9 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9403.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto10",
+      "id": "Leci Brandão-DSCF9408",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 10 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9408.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto11",
+      "id": "Leci Brandão-DSCF9409",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 11 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9409.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto12",
+      "id": "Leci Brandão-DSCF9410",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 12 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9410.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto13",
+      "id": "Leci Brandão-DSCF9412",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 13 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9412.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto14",
+      "id": "Leci Brandão-DSCF9434",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 14 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9434.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto15",
+      "id": "Leci Brandão-DSCF9435",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 15 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9435.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto16",
+      "id": "Leci Brandão-DSCF9444",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 16 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9444.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto17",
+      "id": "Leci Brandão-DSCF9471",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 17 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9471.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto18",
+      "id": "Leci Brandão-DSCF9545",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 18 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9545.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     },
     {
-      "id": "Leci Brandão-projeto19",
+      "id": "Leci Brandão-DSCF9590",
       "titulo": "Leci Brandão",
-      "descricao": "Descrição breve do Projeto 19 na pasta Leci Brandão.",
+      "descricao": "Show fotográfico Leci Brandão",
       "imagem": "/images/Leci Brandão/DSCF9590.avif",
-      "categoria": "Leci Brandão",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "samba"
     }
   ],
-  "risorama": [
+  "Risorama": [
     {
-      "id": "risorama-projeto1",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 1 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4445.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4445",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4445.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto2",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 2 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4517.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4506",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4506.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto3",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 3 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4650.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4517",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4517.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto4",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 4 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4656.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4650",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4650.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto5",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 5 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4657.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4656",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4656.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto6",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 6 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4663.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4657",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4657.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto7",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 7 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4676.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4663",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4663.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto8",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 8 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4685.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4676",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4676.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto9",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 9 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4697.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4685",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4685.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto10",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 10 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4699.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4697",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4697.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto11",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 11 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4702.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4699",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4699.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto12",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 12 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4712.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4702",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4702.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto13",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 13 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4716.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4712",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4712.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto14",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 14 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4762.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4716",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4716.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto15",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 15 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4763.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4762",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4762.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto16",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 16 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4778.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4763",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4763.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto17",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 17 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4804.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4764",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4764.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto18",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 18 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4807.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4778",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4778.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto19",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 19 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4808.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4780",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4780.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto20",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 20 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4915.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4804",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4804.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto21",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 21 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4919.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4807",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4807.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto22",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 22 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4944.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4808",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4808.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto23",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 23 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4950.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4868",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4868.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto24",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 24 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4952.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4903",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4903.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto25",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 25 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4954.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4915",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4915.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto26",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 26 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4959.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4919",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4919.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto27",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 27 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4964.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4944",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4944.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto28",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 28 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF4982.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4950",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4950.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     },
     {
-      "id": "risorama-projeto29",
-      "titulo": "risorama",
-      "descricao": "Descrição breve do Projeto 29 na pasta risorama.",
-      "imagem": "/images/risorama/DSCF5000.jpg",
-      "categoria": "risorama",
-      "tags": [
-        "outros"
-      ]
+      "id": "Risorama-DSCF4952",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4952.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
+    },
+    {
+      "id": "Risorama-DSCF4954",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4954.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
+    },
+    {
+      "id": "Risorama-DSCF4959",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4959.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
+    },
+    {
+      "id": "Risorama-DSCF4964",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4964.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
+    },
+    {
+      "id": "Risorama-DSCF4982",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4982.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
+    },
+    {
+      "id": "Risorama-DSCF4983",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF4983.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
+    },
+    {
+      "id": "Risorama-DSCF5000",
+      "titulo": "Risorama",
+      "descricao": "Peça teatral Risorama",
+      "imagem": "/images/Risorama/DSCF5000.jpg",
+      "categoria": "teatro",
+      "subcategoria": "humor"
     }
   ],
   "Samba do meu rap": [
     {
-      "id": "Samba do meu rap-projeto1",
+      "id": "Samba do meu rap-DSCF0397-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 1 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0397-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0406-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0406-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto2",
+      "id": "Samba do meu rap-DSCF0411-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 2 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0411-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto3",
+      "id": "Samba do meu rap-DSCF0415-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 3 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0415-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto4",
+      "id": "Samba do meu rap-DSCF0419-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 4 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0419-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0422-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0422-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto5",
+      "id": "Samba do meu rap-DSCF0425-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 5 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0425-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto6",
+      "id": "Samba do meu rap-DSCF0426-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 6 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0426-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto7",
+      "id": "Samba do meu rap-DSCF0436-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 7 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0436-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0442-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0442-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0451-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0451-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto8",
+      "id": "Samba do meu rap-DSCF0457-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 8 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0457-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0469-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0469-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto9",
+      "id": "Samba do meu rap-DSCF0470-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 9 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0470-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0477-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0477-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0489-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0489-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0490-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0490-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0491-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0491-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0502-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0502-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0506-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0506-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0509-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0509-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0510-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0510-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0515-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0515-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0516-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0516-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0519-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0519-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0523-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0523-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0525-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0525-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0528-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0528-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0535-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0535-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0540-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0540-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0543-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0543-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0549-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0549-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0550-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0550-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0551-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0551-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0557-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0557-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0565-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0565-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0566-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0566-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0572-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0572-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0575-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0575-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0585-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0585-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto10",
+      "id": "Samba do meu rap-DSCF0586-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 10 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0586-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0588-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0588-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0593-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0593-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto11",
+      "id": "Samba do meu rap-DSCF0593",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 11 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0593.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0601-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0601-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto12",
+      "id": "Samba do meu rap-DSCF0606-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 12 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0606-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto13",
+      "id": "Samba do meu rap-DSCF0607-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 13 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0607-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0608-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0608-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto14",
+      "id": "Samba do meu rap-DSCF0608",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 14 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0608.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0609-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0609-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto15",
+      "id": "Samba do meu rap-DSCF0611-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 15 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0611-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto16",
+      "id": "Samba do meu rap-DSCF0622-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 16 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0622-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto17",
+      "id": "Samba do meu rap-DSCF0624-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 17 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0624-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto18",
+      "id": "Samba do meu rap-DSCF0627-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 18 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0627-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto19",
+      "id": "Samba do meu rap-DSCF0630-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 19 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0630-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto20",
+      "id": "Samba do meu rap-DSCF0635-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 20 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0635-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto21",
+      "id": "Samba do meu rap-DSCF0648-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 21 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0648-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto22",
+      "id": "Samba do meu rap-DSCF0651-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 22 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0651-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto23",
+      "id": "Samba do meu rap-DSCF0659-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 23 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0659-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto24",
+      "id": "Samba do meu rap-DSCF0670-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 24 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0670-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto25",
+      "id": "Samba do meu rap-DSCF0672-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 25 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0672-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto26",
+      "id": "Samba do meu rap-DSCF0690-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 26 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0690-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0696-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0696-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0700-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0700-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
     },
     {
-      "id": "Samba do meu rap-projeto27",
+      "id": "Samba do meu rap-DSCF0701-Aprimorado-NR",
       "titulo": "Samba do meu rap",
-      "descricao": "Descrição breve do Projeto 27 na pasta Samba do meu rap.",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0701-Aprimorado-NR.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0710-Aprimorado-NR",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
       "imagem": "/images/Samba do meu rap/DSCF0710-Aprimorado-NR.jpg",
-      "categoria": "Samba do meu rap",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "rap"
+    },
+    {
+      "id": "Samba do meu rap-DSCF0710",
+      "titulo": "Samba do meu rap",
+      "descricao": "Show fotográfico Samba do meu rap",
+      "imagem": "/images/Samba do meu rap/DSCF0710.jpg",
+      "categoria": "shows",
+      "subcategoria": "rap"
     }
   ],
   "Sambas de Axé": [
     {
-      "id": "Sambas de Axé-projeto1",
+      "id": "Sambas de Axé-DSCF8433-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 1 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8433-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto2",
+      "id": "Sambas de Axé-DSCF8439-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 2 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8439-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto3",
+      "id": "Sambas de Axé-DSCF8444-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 3 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8444-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto4",
+      "id": "Sambas de Axé-DSCF8454-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 4 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8454-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto5",
+      "id": "Sambas de Axé-DSCF8455-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 5 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8455-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto6",
+      "id": "Sambas de Axé-DSCF8460-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 6 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8460-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto7",
+      "id": "Sambas de Axé-DSCF8514-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 7 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8514-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto8",
+      "id": "Sambas de Axé-DSCF8522-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 8 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8522-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto9",
+      "id": "Sambas de Axé-DSCF8560-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 9 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8560-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto10",
+      "id": "Sambas de Axé-DSCF8648-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 10 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8648-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto11",
+      "id": "Sambas de Axé-DSCF8659-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 11 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8659-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto12",
+      "id": "Sambas de Axé-DSCF8661-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 12 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8661-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto13",
+      "id": "Sambas de Axé-DSCF8665-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 13 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8665-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto14",
+      "id": "Sambas de Axé-DSCF8689-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 14 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8689-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto15",
+      "id": "Sambas de Axé-DSCF8691-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 15 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8691-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto16",
+      "id": "Sambas de Axé-DSCF8694-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 16 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8694-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto17",
+      "id": "Sambas de Axé-DSCF8697-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 17 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8697-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto18",
+      "id": "Sambas de Axé-DSCF8704-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 18 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8704-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto19",
+      "id": "Sambas de Axé-DSCF8709-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 19 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8709-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto20",
+      "id": "Sambas de Axé-DSCF8714-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 20 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8714-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto21",
+      "id": "Sambas de Axé-DSCF8719-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 21 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8719-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto22",
+      "id": "Sambas de Axé-DSCF8721-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 22 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8721-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto23",
+      "id": "Sambas de Axé-DSCF8725-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 23 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8725-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto24",
+      "id": "Sambas de Axé-DSCF8730-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 24 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8730-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto25",
+      "id": "Sambas de Axé-DSCF8734-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 25 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8734-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto26",
+      "id": "Sambas de Axé-DSCF8739-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 26 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8739-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto27",
+      "id": "Sambas de Axé-DSCF8743-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 27 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8743-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto28",
+      "id": "Sambas de Axé-DSCF8754-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 28 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8754-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto29",
+      "id": "Sambas de Axé-DSCF8758-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 29 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8758-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto30",
+      "id": "Sambas de Axé-DSCF8765-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 30 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8765-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto31",
+      "id": "Sambas de Axé-DSCF8768-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 31 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8768-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto32",
+      "id": "Sambas de Axé-DSCF8770-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 32 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8770-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto33",
+      "id": "Sambas de Axé-DSCF8772-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 33 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8772-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto34",
+      "id": "Sambas de Axé-DSCF8780-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 34 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8780-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto35",
+      "id": "Sambas de Axé-DSCF8784-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 35 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8784-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto36",
+      "id": "Sambas de Axé-DSCF8786-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 36 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8786-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto37",
+      "id": "Sambas de Axé-DSCF8788-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 37 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8788-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto38",
+      "id": "Sambas de Axé-DSCF8795-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 38 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8795-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto39",
+      "id": "Sambas de Axé-DSCF8914-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 39 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8914-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto40",
+      "id": "Sambas de Axé-DSCF8921-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 40 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8921-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto41",
+      "id": "Sambas de Axé-DSCF8923-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 41 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8923-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto42",
+      "id": "Sambas de Axé-DSCF8926-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 42 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8926-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto43",
+      "id": "Sambas de Axé-DSCF8933-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 43 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8933-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto44",
+      "id": "Sambas de Axé-DSCF8935-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 44 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF8935-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto45",
+      "id": "Sambas de Axé-DSCF9000-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 45 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9000-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto46",
+      "id": "Sambas de Axé-DSCF9022-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 46 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9022-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto47",
+      "id": "Sambas de Axé-DSCF9094-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 47 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9094-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto48",
+      "id": "Sambas de Axé-DSCF9096-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 48 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9096-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto49",
+      "id": "Sambas de Axé-DSCF9103-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 49 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9103-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto50",
+      "id": "Sambas de Axé-DSCF9152-Aprimorado-NR-1",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 50 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9152-Aprimorado-NR-1.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto51",
+      "id": "Sambas de Axé-DSCF9168-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 51 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9168-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto52",
+      "id": "Sambas de Axé-DSCF9169-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 52 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9169-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto53",
+      "id": "Sambas de Axé-DSCF9172-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 53 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9172-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto54",
+      "id": "Sambas de Axé-DSCF9174-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 54 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9174-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto55",
+      "id": "Sambas de Axé-DSCF9193-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 55 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9193-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto56",
+      "id": "Sambas de Axé-DSCF9196-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 56 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9196-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto57",
+      "id": "Sambas de Axé-DSCF9198-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 57 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9198-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto58",
+      "id": "Sambas de Axé-DSCF9210-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 58 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9210-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto59",
+      "id": "Sambas de Axé-DSCF9212-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 59 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9212-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto60",
+      "id": "Sambas de Axé-DSCF9213-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 60 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9213-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto61",
+      "id": "Sambas de Axé-DSCF9214-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 61 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9214-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto62",
+      "id": "Sambas de Axé-DSCF9215-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 62 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9215-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto63",
+      "id": "Sambas de Axé-DSCF9219-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 63 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9219-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto64",
+      "id": "Sambas de Axé-DSCF9236-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 64 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9236-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto65",
+      "id": "Sambas de Axé-DSCF9242-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 65 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9242-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto66",
+      "id": "Sambas de Axé-DSCF9249-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 66 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9249-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto67",
+      "id": "Sambas de Axé-DSCF9250-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 67 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9250-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto68",
+      "id": "Sambas de Axé-DSCF9252-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 68 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9252-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto69",
+      "id": "Sambas de Axé-DSCF9258-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 69 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9258-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto70",
+      "id": "Sambas de Axé-DSCF9266-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 70 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9266-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto71",
+      "id": "Sambas de Axé-DSCF9417-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 71 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9417-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto72",
+      "id": "Sambas de Axé-DSCF9435-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 72 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9435-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     },
     {
-      "id": "Sambas de Axé-projeto73",
+      "id": "Sambas de Axé-DSCF9583-Aprimorado-NR",
       "titulo": "Sambas de Axé",
-      "descricao": "Descrição breve do Projeto 73 na pasta Sambas de Axé.",
+      "descricao": "Show fotográfico Sambas de Axé",
       "imagem": "/images/Sambas de Axé/DSCF9583-Aprimorado-NR.jpg",
-      "categoria": "Sambas de Axé",
-      "tags": [
-        "shows"
-      ]
+      "categoria": "shows",
+      "subcategoria": "axé"
     }
   ]
-}
-        };
-    
+};

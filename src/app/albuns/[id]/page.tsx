@@ -1,33 +1,34 @@
 import { notFound } from "next/navigation";
-import data from "../../../data/projetos.js";
-import type { Projetos } from "../../../data/types";
-
-// Extrai os projetos
-const { projetos } = data as { projetos: Projetos };
-
-interface Params {
-  id: string;
-}
-
-interface PageProps {
-  params: Promise<Params>;
-}
-
+import { projetos } from "@/data/projetos";
+import type { Projetos, PageProps } from "@/types/types";
 import { AlbumCompletoClient } from "./AlbumCompleto";
+import { Metadata } from "next";
 
-export default async function AlbumCompleto({ params }: PageProps): Promise<JSX.Element> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
+  const albumName = decodeURIComponent(resolvedParams.id);
+  const albumData = (projetos as Projetos)[albumName];
 
-  if (!resolvedParams.id) {
+  if (!albumData) {
+    return {
+      title: "Álbum não encontrado",
+    };
+  }
+
+  return {
+    title: `${albumName} - Thiago Battista`,
+    description: albumData[0]?.descricao || "Álbum de fotos",
+  };
+}
+
+export default async function AlbumCompleto({ params }: PageProps) {
+  const resolvedParams = await params;
+  const albumName = decodeURIComponent(resolvedParams.id);
+  const album = (projetos as Projetos)[albumName];
+
+  if (!album) {
     notFound();
   }
 
-  const decodedId = decodeURIComponent(resolvedParams.id);
-  const album = projetos[decodedId];
-
-  if (!album || album.length === 0) {
-    notFound();
-  }
-
-  return <AlbumCompletoClient album={album} albumName={decodedId} />;
+  return <AlbumCompletoClient album={album} albumName={albumName} />;
 }

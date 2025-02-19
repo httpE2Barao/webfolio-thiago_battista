@@ -1,8 +1,9 @@
 "use client";
-import { Projeto } from "@/data/types";
+import { Projeto } from "@/types/types";
 import Image from "next/image";
 import { useState } from "react";
-import CustomSwiper from "../../../components/CustomSwiper";
+import CustomSwiper from "@/components/CustomSwiper";
+import TituloResponsivo from "@/components/TituloResponsivo";
 
 export function AlbumCompletoClient({
   album,
@@ -20,11 +21,18 @@ export function AlbumCompletoClient({
   };
 
   return (
-    <div className="lg:p-6 relative">
-      <h1 className="text-responsive font-bold mb-8 text-center capitalize">
+    <div className="lg:p-4 relative flex flex-col h-screen">
+      <TituloResponsivo className="mb-2 text-center flex-none">
         {albumName.replace(/-/g, ' ')}
-      </h1>
-      <div className="h-[calc(100vh-200px)] mb-8">
+      </TituloResponsivo>
+      
+      {album[0]?.descricao && (
+        <p className="text-lg text-center mb-2 max-w-3xl mx-auto flex-none">
+          {album[0].descricao}
+        </p>
+      )}
+
+      {/* <div className="flex-1">
         <CustomSwiper 
           mode="fotos"
           photos={album}
@@ -33,21 +41,22 @@ export function AlbumCompletoClient({
           onSlideClick={(_, index) => handlePhotoClick(index)}
           fullSize
         />
-      </div>
+      </div> */}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 mt-2 flex-none">
         {album.map((projeto, index) => (
           <div
             key={projeto.id}
-            className="relative w-full h-80 xl:h-96 cursor-pointer group overflow-hidden"
+            className="relative w-full h-64 xl:h-80 cursor-pointer group overflow-hidden"
             onClick={() => handlePhotoClick(index)}
           >
             <Image
               src={projeto.imagem}
               alt={projeto.titulo}
               fill
+              priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-              className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-110"
+              className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         ))}
@@ -61,8 +70,11 @@ export function AlbumCompletoClient({
           initialSlide={initialIndex}
           modal
           onClose={() => setModalOpen(false)}
+          fullSize
         />
       )}
     </div>
   );
 }
+
+export default AlbumCompletoClient;

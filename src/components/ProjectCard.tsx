@@ -1,12 +1,13 @@
 import Image from "next/image";
-import type { Projeto } from "../data/types";
+import type { Projeto } from "@/types/types";
 
 interface ProjectCardProps {
   projeto: Projeto;
+  onClick?: () => void;
+  className?: string;
 }
 
-export function ProjectCard({ projeto }: ProjectCardProps) {
-  // Verifica se a imagem é mais provável de ser vertical ou horizontal
+export function ProjectCard({ projeto, onClick, className = "" }: ProjectCardProps) {
   const aspectRatio =
     projeto.imagem.includes("vertical") || projeto.imagem.includes("portrait")
       ? "2 / 3"
@@ -14,17 +15,17 @@ export function ProjectCard({ projeto }: ProjectCardProps) {
 
   return (
     <div
-      className="relative overflow-hidden rounded-md"
-      style={{
-        aspectRatio: aspectRatio, // Define a proporção
-      }}
+      className={`relative overflow-hidden rounded-md cursor-pointer ${className}`}
+      style={{ aspectRatio }}
+      onClick={onClick}
     >
       <Image
         src={projeto.imagem}
         alt={projeto.titulo}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
-        className="object-cover"
+        className="object-cover transition-transform duration-300 hover:scale-105"
+        priority
       />
     </div>
   );

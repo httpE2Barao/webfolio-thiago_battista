@@ -1,13 +1,20 @@
+import { ReactNode } from "react";
+
 interface TituloResponsivoProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
+  Tag?: keyof JSX.IntrinsicElements;
 }
 
-export default function TituloResponsivo({ children, className = "" }: TituloResponsivoProps) {
+export default function TituloResponsivo({ 
+  children, 
+  className = "", 
+  Tag = "h1" 
+}: TituloResponsivoProps) {
+  const Component = Tag;
   return (
-    <h2 className={className}>
+    <Component className={`text-responsive ${className}`}>
       {children}
-    </h2>
+    </Component>
   );
 }
-  
