@@ -10,13 +10,17 @@ const categories = {
     'Agora é que são elas': 'comédia',
     'Risorama': 'humor',
     'Bonitinha Mais Ordinaria': 'drama',
+    'Duelo Amazônico': 'musical',
   },
   gastronomia: {},
   fineart: {},
   revistas: {},
   publicitario: {},
   moda: {},
-  newface: {}
+  newface: {},
+  cinema: {
+    'Cest Cher': 'bastidores',
+  },
 };
 
 module.exports = categories;

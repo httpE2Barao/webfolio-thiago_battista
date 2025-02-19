@@ -7,7 +7,7 @@ import { Projeto, Projetos } from "@/types/types";
 import { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
-const projetosData = projetos as Projetos;
+const projetosData = projetos as unknown as Projetos;
 
 // Atualizado: Função auxiliar para agrupar álbuns por categoria
 function agruparProjetosPorCategoria(projetos: Projetos): Record<string, Projeto[]> {

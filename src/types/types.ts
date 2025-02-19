@@ -18,9 +18,10 @@ export type Projetos = {
     id: string;
     titulo: string;
     descricao: string;
-    imagem: string;       
+    tags: string[];
+    imagem: string; 
     categoria: string;
-    subcategoria: string;
+    subcategoria: string; // Certifique-se de que "subcategoria" seja uma string
   }[];
 };
 

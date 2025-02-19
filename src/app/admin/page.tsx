@@ -1,8 +1,9 @@
 "use client"
 
 import { useState } from 'react';
+import categories from '@/config/categories';
 
-const VALID_PASSWORD =  process.env.NEXT_PUBLIC_VALID_PASSWORD;
+const VALID_PASSWORD = process.env.NEXT_PUBLIC_VALID_PASSWORD;
 
 export default function ConteudistaPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -14,7 +15,11 @@ export default function ConteudistaPage() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [files, setFiles] = useState<FileList | null>(null);
 
-  const tags = ['Fineart', 'Shows', 'Revistas', 'Gastronomia', 'Publicitário', 'Teatro', 'Moda', 'New Face'];
+  // Gera dinamicamente as tags a partir das chaves de categories.
+  // Você pode ajustar a formatação (por exemplo, capitalizar a primeira letra)
+  const tags = Object.keys(categories).map(tag =>
+    tag.charAt(0).toUpperCase() + tag.slice(1)
+  );
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();

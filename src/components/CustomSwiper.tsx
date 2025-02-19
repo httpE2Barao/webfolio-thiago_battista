@@ -103,7 +103,7 @@ export default function CustomSwiper({
     
     // Considerando que 'data' possui a estrutura:
     // { [albumName: string]: { id, titulo, descricao, imagem, categoria, subcategoria }[] }
-    const projetosData = data as Projetos;
+    const projetosData = data as unknown as Projetos;
 
     if (mode === "albuns") {
       const randomized = shuffleArray(

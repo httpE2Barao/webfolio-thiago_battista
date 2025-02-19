@@ -62,7 +62,7 @@ async function regenerateProjetos(): Promise<void> {
     }
     console.warn(`Categoria não encontrada para a pasta: ${folderName}. Usando categoria padrão.`);
     return { main: 'outros', sub: 'geral' };
-  };
+  };  
 
   const descriptions: { [key: string]: string } = {
     shows: 'Show fotográfico',
@@ -98,8 +98,8 @@ async function regenerateProjetos(): Promise<void> {
       titulo: folder,
       descricao: getDescription(folder, main),
       tags: [],
-      // Aqui você pode optar por gerar vários objetos (um por imagem) ou agrupar todas as imagens em um único objeto.
-      // Neste exemplo, cada objeto possui somente uma imagem. Se preferir agrupar, use:
+      // Cada objeto possui somente uma imagem neste exemplo;
+      // caso prefira agrupar todas as imagens em um único objeto, use:
       // imagens: files.map(f => `/images/${folder}/${f}`)
       imagens: [`/images/${folder}/${file}`],
       categoria: main,
@@ -121,8 +121,44 @@ export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 }
 
 /**
+ * Atualiza o arquivo de categorias (src/config/categories.js) com base nas tags enviadas.
+ * Para cada tag enviada que corresponda a uma chave existente (case-insensitive),
+ * adiciona ou atualiza o mapeamento do álbum.
+ */
+async function updateCategories(albumName: string, tags: string[]): Promise<void> {
+  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+
+  // Lê o arquivo atual de categorias usando require.
+  // Atenção: em ambiente de produção, alterações em arquivos de configuração podem não ser recarregadas automaticamente.
+  let categoriesData: Record<string, Record<string, string>>;
+  try {
+    categoriesData = require(configPath);
+  } catch (e) {
+    console.error("Erro ao ler o arquivo de categorias:", e);
+    categoriesData = {};
+  }
+
+  // Atualiza as categorias: para cada tag enviada, verifica se a chave existe e adiciona o novo álbum.
+  tags.forEach(tag => {
+    // Procura por uma chave que corresponda (case-insensitive)
+    const key = Object.keys(categoriesData).find(
+      k => k.toLowerCase() === tag.toLowerCase()
+    );
+    if (key) {
+      // Adiciona o álbum à categoria, mapeando albumName para o valor desejado (aqui, usamos o próprio tag)
+      categoriesData[key][albumName] = tag;
+    }
+  });
+
+  const content = `module.exports = ${JSON.stringify(categoriesData, null, 2)};`;
+  await fs.writeFile(configPath, content, 'utf8');
+  console.log(`Arquivo de categorias atualizado: ${configPath}`);
+}
+
+/**
  * Endpoint POST para upload de álbum.
- * Após salvar as imagens e metadata, regenera o arquivo de projetos.
+ * Após salvar as imagens e metadata, regenera o arquivo de projetos
+ * e atualiza o arquivo de categorias.
  */
 export async function POST(request: Request): Promise<NextResponse> {
   try {
@@ -159,6 +195,9 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // Regenera o arquivo projetos.js após o upload
     await regenerateProjetos();
+
+    // Atualiza o arquivo de categorias com as tags enviadas
+    await updateCategories(albumName, tags);
 
     return NextResponse.json({ message: 'Álbum enviado com sucesso!' }, { status: 200 });
   } catch (error: any) {

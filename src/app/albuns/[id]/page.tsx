@@ -7,7 +7,7 @@ import { Metadata } from "next";
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const albumName = decodeURIComponent(resolvedParams.id);
-  const albumData = (projetos as Projetos)[albumName];
+  const albumData = (projetos as unknown as Projetos)[albumName];
 
   if (!albumData) {
     return {
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function AlbumCompleto({ params }: PageProps) {
   const resolvedParams = await params;
   const albumName = decodeURIComponent(resolvedParams.id);
-  const album = (projetos as Projetos)[albumName];
+  const album = (projetos as unknown as Projetos)[albumName];
 
   if (!album) {
     notFound();

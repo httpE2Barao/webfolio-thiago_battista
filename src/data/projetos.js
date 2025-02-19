@@ -812,6 +812,216 @@ export const projetos = {
       "subcategoria": "drama"
     }
   ],
+  "Cest Cher": [
+    {
+      "id": "Cest Cher-DSCF0626-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0626-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF0666-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0666-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF0713-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0713-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF0727-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0727-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF0796-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0796-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF0843-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0843-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF0883-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF0883-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1425-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1425-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1485-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1485-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1582-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1582-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1616-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1616-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1633-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1633-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1653",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1653.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1679-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1679-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1684-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1684-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1709-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1709-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF1752-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF1752-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF5896-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF5896-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF5957-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF5957-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF5976-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF5976-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF5978-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF5978-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF5997-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF5997-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF6001-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF6001-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF6078-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF6078-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF6122-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF6122-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    },
+    {
+      "id": "Cest Cher-DSCF6140-Aprimorado-NR",
+      "titulo": "Cest Cher",
+      "descricao": "Projeto Cest Cher",
+      "imagem": "/images/Cest Cher/DSCF6140-Aprimorado-NR.jpg",
+      "categoria": "cinema",
+      "subcategoria": "bastidores"
+    }
+  ],
   "Dow Raiz": [
     {
       "id": "Dow Raiz-DSCF8567",
@@ -878,454 +1088,454 @@ export const projetos = {
       "subcategoria": "rock"
     }
   ],
-  "Duelo_Amaz_nico": [
+  "Duelo Amazônico": [
     {
-      "id": "Duelo_Amaz_nico-DSCF0168",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0168.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0168",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0168.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0175",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0175.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0175",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0175.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0216",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0216.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0216",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0216.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0576",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0576.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0576",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0576.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0609",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0609.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0609",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0609.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0611",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0611.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0611",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0611.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0639",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0639.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0639",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0639.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0648",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0648.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0648",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0648.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0757",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0757.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0757",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0757.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0802",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0802.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0802",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0802.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0837",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0837.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0837",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0837.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0839",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0839.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0839",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0839.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0884",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0884.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0884",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0884.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0895",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0895.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0895",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0895.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0934",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0934.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0934",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0934.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0936",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0936.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0936",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0936.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0944",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0944.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0944",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0944.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0945",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0945.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0945",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0945.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0952",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0952.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0952",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0952.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0954",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0954.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0954",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0954.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF0965",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF0965.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF0965",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF0965.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1192",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1192.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1192",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1192.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1199",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1199.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1199",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1199.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1254",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1254.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1254",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1254.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1385",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1385.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1385",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1385.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1388",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1388.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1388",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1388.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1505",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1505.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1505",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1505.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1515",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1515.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1515",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1515.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1621",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1621.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1621",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1621.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1958",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1958.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1958",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1958.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF1964",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF1964.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF1964",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF1964.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2000",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2000.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2000",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2000.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2025",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2025.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2025",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2025.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2062",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2062.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2062",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2062.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2158",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2158.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2158",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2158.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2159",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2159.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2159",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2159.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2160",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2160.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2160",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2160.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2161",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2161.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2161",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2161.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2162",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2162.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2162",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2162.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2163",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2163.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2163",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2163.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2164",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2164.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2164",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2164.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2467",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2467.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2467",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2467.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2497",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2497.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2497",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2497.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2559",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2559.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2559",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2559.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2571",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2571.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2571",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2571.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2578",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2578.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2578",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2578.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2581",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2581.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2581",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2581.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2594",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2594.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2594",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2594.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2619",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2619.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2619",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2619.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2691",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2691.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2691",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2691.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2747",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2747.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2747",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2747.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2750",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2750.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2750",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2750.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2902",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2902.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2902",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2902.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2934",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2934.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2934",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2934.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2942",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2942.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2942",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2942.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     },
     {
-      "id": "Duelo_Amaz_nico-DSCF2949",
-      "titulo": "Duelo_Amaz_nico",
-      "descricao": "Projeto Duelo_Amaz_nico",
-      "imagem": "/images/Duelo_Amaz_nico/DSCF2949.jpg",
-      "categoria": "outros",
-      "subcategoria": "geral"
+      "id": "Duelo Amazônico-DSCF2949",
+      "titulo": "Duelo Amazônico",
+      "descricao": "Peça teatral Duelo Amazônico",
+      "imagem": "/images/Duelo Amazônico/DSCF2949.jpg",
+      "categoria": "teatro",
+      "subcategoria": "musical"
     }
   ],
   "Emicida": [
