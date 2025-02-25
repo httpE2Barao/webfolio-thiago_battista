@@ -8,21 +8,23 @@ function getAlbunsByCategory(categoria: string): Projeto[] {
   const normalizedCategoria = categoria.toLowerCase().trim();
 
   return Object.entries(projetosData)
-    .filter(([albumName, projetos]) => 
-      projetos.some(projeto => 
-        projeto.categoria?.toLowerCase() === normalizedCategoria ||
-        projeto.subcategoria?.toLowerCase() === normalizedCategoria
-      )
+    .filter(([albumName, album]) =>
+      album.categoria?.toLowerCase() === normalizedCategoria ||
+      album.subcategoria?.toLowerCase() === normalizedCategoria
     )
-    .flatMap(([albumName, projetos]) => 
-      projetos.map(projeto => ({
-        ...projeto,
+    .flatMap(([albumName, album]) =>
+      album.imagens.map(imagem => ({
+        id: imagem.id,
+        imagem: imagem.imagem,
         albumName,
-        // Ensure each photo has the album title as its titulo if not already set
-        titulo: projeto.titulo || albumName
+        // Se o título não estiver definido na foto, usa o nome do álbum
+        titulo: album.titulo || albumName,
+        descricao: album.descricao,
+        categoria: album.categoria,
+        subcategoria: album.subcategoria
       }))
     )
-    .filter(projeto => 
+    .filter(projeto =>
       projeto.categoria?.toLowerCase() === normalizedCategoria ||
       projeto.subcategoria?.toLowerCase() === normalizedCategoria
     );

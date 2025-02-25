@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { projetos } from "@/data/projetos";
-import type { Projetos, PageProps } from "@/types/types";
+import type { Projetos, Album, PageProps } from "@/types/types";
 import { AlbumCompletoClient } from "./AlbumCompleto";
 import { Metadata } from "next";
 
@@ -16,15 +16,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${albumName} - Thiago Battista`,
-    description: albumData[0]?.descricao || "Álbum de fotos",
+    title: `${albumData.titulo} - Thiago Battista`,
+    description: albumData.descricao || "Álbum de fotos",
   };
 }
 
 export default async function AlbumCompleto({ params }: PageProps) {
   const resolvedParams = await params;
   const albumName = decodeURIComponent(resolvedParams.id);
-  const album = (projetos as unknown as Projetos)[albumName];
+  const album = (projetos as unknown as Projetos)[albumName] as Album | undefined;
 
   if (!album) {
     notFound();

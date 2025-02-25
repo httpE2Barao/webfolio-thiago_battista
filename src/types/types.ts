@@ -3,12 +3,19 @@ export interface Projeto {
   titulo: string;
   descricao?: string;
   imagem: string;
-  imagens?: string[];
   categoria?: string;
   subcategoria?: string;
   tags?: string[];
   albumName?: string;
   tagName?: string;
+}
+
+export interface Album {
+  titulo: string;
+  descricao: string;
+  categoria: string;
+  subcategoria: string;
+  imagens: { id: string; imagem: string }[];
 }
 
 export type ProjetoArray = Projeto[];
@@ -19,12 +26,11 @@ export type Projetos = {
     titulo: string;
     descricao: string;
     tags: string[];
-    imagem: string; 
+    imagens: { id: string; imagem: string }[]; 
     categoria: string;
-    subcategoria: string; // Certifique-se de que "subcategoria" seja uma string
-  }[];
+    subcategoria: string;
+  };
 };
-
 
 export interface PageParams {
   id: string;

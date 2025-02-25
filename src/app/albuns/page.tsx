@@ -4,29 +4,47 @@ import CustomSwiper from "@/components/CustomSwiper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { projetos } from "@/data/projetos.js";
 import { Projeto, Projetos } from "@/types/types";
-import { useMemo } from 'react';
-import { useRouter } from 'next/navigation';
+import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 
 const projetosData = projetos as unknown as Projetos;
-
-// Atualizado: Função auxiliar para agrupar álbuns por categoria
+/**
+ * Agrupa os álbuns (agora objetos) por categoria.
+ * Cada entrada do objeto 'projetosData' é um álbum contendo:
+ * {
+ *   id: string;
+ *   titulo: string;
+ *   descricao: string;
+ *   tags: string[];
+ *   imagens: { id: string; imagem: string }[];
+ *   categoria: string;
+ *   subcategoria: string;
+ * }
+ */
 function agruparProjetosPorCategoria(projetos: Projetos): Record<string, Projeto[]> {
   const projetosPorCategoria: Record<string, Projeto[]> = {};
 
   Object.entries(projetos).forEach(([albumName, albumData]) => {
-    if (Array.isArray(albumData) && albumData.length > 0) {
-      const mainCategory = albumData[0].categoria || 'outros';
-      if (!projetosPorCategoria[mainCategory]) {
-        projetosPorCategoria[mainCategory] = [];
-      }
-      projetosPorCategoria[mainCategory].push({
-        ...albumData[0],
-        albumName,
-        id: albumName,
-        titulo: albumName,
-        imagem: albumData[0].imagem
-      });
+    // Se não houver imagens, ignoramos
+    if (!albumData.imagens || albumData.imagens.length === 0) {
+      return;
     }
+
+    const mainCategory = albumData.categoria || "outros";
+    if (!projetosPorCategoria[mainCategory]) {
+      projetosPorCategoria[mainCategory] = [];
+    }
+
+    // Criamos um objeto 'Projeto' com as informações necessárias
+    projetosPorCategoria[mainCategory].push({
+      id: albumName, // Usamos o nome do álbum como ID
+      titulo: albumName, // Se preferir, use albumData.titulo
+      descricao: albumData.descricao,
+      imagem: albumData.imagens[0].imagem, // Imagem principal (a primeira do array)
+      categoria: albumData.categoria,
+      subcategoria: albumData.subcategoria,
+      albumName, // guarda o nome do álbum original
+    });
   });
 
   return projetosPorCategoria;
@@ -35,15 +53,24 @@ function agruparProjetosPorCategoria(projetos: Projetos): Record<string, Projeto
 export const dynamic = "force-dynamic";
 
 export default function AlbunsPage() {
-  const projetosPorCategoria = useMemo(() => agruparProjetosPorCategoria(projetosData), []);
+  const projetosPorCategoria = useMemo(
+    () => agruparProjetosPorCategoria(projetosData),
+    []
+  );
   const router = useRouter();
 
-  const CategoriaGroup = ({ categoria, projetos }: { categoria: string; projetos: Projeto[] }) => {
+  const CategoriaGroup = ({
+    categoria,
+    projetos,
+  }: {
+    categoria: string;
+    projetos: Projeto[];
+  }) => {
     return (
       <div className="mb-3 last:mb-0 group relative rounded-lg overflow-hidden">
         <div className="transition-transform duration-300 ease-in-out h-[400px] md:h-[500px] lg:h-[600px] relative flex items-center justify-center">
           <div className="absolute inset-0 flex items-center justify-center">
-            <CustomSwiper 
+            <CustomSwiper
               mode="albuns"
               photos={projetos}
               tagName={categoria}
