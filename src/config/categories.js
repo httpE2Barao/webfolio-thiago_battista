@@ -13,17 +13,11 @@ const categories = {
     "Duelo Amazônico": "musical"
   },
   "gastronomia": {},
-  "fineart": {
-    "Testando novamente ": "Fineart"
-  },
+  "fineart": {},
   "revistas": {},
   "publicitario": {},
-  "moda": {
-    "Testando novamente ": "Moda"
-  },
-  "newface": {
-    "Elias Barão": "Newface"
-  },
+  "moda": {},
+  "newface": {},
   "cinema": {
     "Cest Cher": "bastidores"
   }
