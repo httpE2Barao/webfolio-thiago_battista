@@ -197,9 +197,19 @@ async function commitAndPushChanges(): Promise<void> {
     const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
     await execAsync(`git remote set-url origin ${remoteUrl}`);
 
+    // 1) Atualiza o repositório local com as mudanças remotas
+    //    (para evitar "Updates were rejected because the remote contains work that you do not have locally")
+    await execAsync(`git pull --rebase origin HEAD`);
+
+    // 2) Adiciona as mudanças locais
     await execAsync(`git add .`);
+
+    // 3) Cria o commit
     await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
+
+    // 4) Finalmente, faz o push
     await execAsync(`git push origin HEAD`);
+
     console.log("Commit e push realizados com sucesso.");
   } catch (error: any) {
     console.error("Erro ao executar git push:", error.message);
