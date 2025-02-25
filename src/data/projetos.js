@@ -1,10 +1,12 @@
 // Este arquivo é gerado automaticamente - não edite manualmente
 export const projetos = {
   "Agora é que são elas": {
+    "id": "Agora é que são elas",
     "titulo": "Agora é que são elas",
     "descricao": "Peça teatral Agora é que são elas",
     "categoria": "teatro",
     "subcategoria": "comédia",
+    "tags": [],
     "imagens": [
       {
         "id": "Agora é que são elas-DSCF3741",
@@ -97,10 +99,12 @@ export const projetos = {
     ]
   },
   "Bonitinha Mais Ordinaria": {
+    "id": "Bonitinha Mais Ordinaria",
     "titulo": "Bonitinha Mais Ordinaria",
     "descricao": "Peça teatral Bonitinha Mais Ordinaria",
     "categoria": "teatro",
     "subcategoria": "drama",
+    "tags": [],
     "imagens": [
       {
         "id": "Bonitinha Mais Ordinaria-DSCF6097",
@@ -421,10 +425,12 @@ export const projetos = {
     ]
   },
   "Cest Cher": {
+    "id": "Cest Cher",
     "titulo": "Cest Cher",
     "descricao": "Projeto Cest Cher",
     "categoria": "cinema",
     "subcategoria": "bastidores",
+    "tags": [],
     "imagens": [
       {
         "id": "Cest Cher-DSCF0626-Aprimorado-NR",
@@ -533,10 +539,12 @@ export const projetos = {
     ]
   },
   "Dow Raiz": {
+    "id": "Dow Raiz",
     "titulo": "Dow Raiz",
     "descricao": "Show fotográfico Dow Raiz",
     "categoria": "shows",
     "subcategoria": "rock",
+    "tags": [],
     "imagens": [
       {
         "id": "Dow Raiz-DSCF8567",
@@ -573,10 +581,12 @@ export const projetos = {
     ]
   },
   "Duelo Amazônico": {
+    "id": "Duelo Amazônico",
     "titulo": "Duelo Amazônico",
     "descricao": "Peça teatral Duelo Amazônico",
     "categoria": "teatro",
     "subcategoria": "musical",
+    "tags": [],
     "imagens": [
       {
         "id": "Duelo Amazônico-DSCF0168",
@@ -805,10 +815,12 @@ export const projetos = {
     ]
   },
   "Emicida": {
+    "id": "Emicida",
     "titulo": "Emicida",
     "descricao": "Show fotográfico Emicida",
     "categoria": "shows",
     "subcategoria": "rap",
+    "tags": [],
     "imagens": [
       {
         "id": "Emicida-DSCF4199-Aprimorado-NR",
@@ -929,10 +941,12 @@ export const projetos = {
     ]
   },
   "Leci Brandão": {
+    "id": "Leci Brandão",
     "titulo": "Leci Brandão",
     "descricao": "Show fotográfico Leci Brandão",
     "categoria": "shows",
     "subcategoria": "samba",
+    "tags": [],
     "imagens": [
       {
         "id": "Leci Brandão-DSCF9039",
@@ -1013,10 +1027,12 @@ export const projetos = {
     ]
   },
   "Risorama": {
+    "id": "Risorama",
     "titulo": "Risorama",
     "descricao": "Peça teatral Risorama",
     "categoria": "teatro",
     "subcategoria": "humor",
+    "tags": [],
     "imagens": [
       {
         "id": "Risorama-DSCF4445",
@@ -1161,10 +1177,12 @@ export const projetos = {
     ]
   },
   "Samba do meu rap": {
+    "id": "Samba do meu rap",
     "titulo": "Samba do meu rap",
     "descricao": "Show fotográfico Samba do meu rap",
     "categoria": "shows",
     "subcategoria": "rap",
+    "tags": [],
     "imagens": [
       {
         "id": "Samba do meu rap-DSCF0397-Aprimorado-NR",
@@ -1437,10 +1455,12 @@ export const projetos = {
     ]
   },
   "Sambas de Axé": {
+    "id": "Sambas de Axé",
     "titulo": "Sambas de Axé",
     "descricao": "Show fotográfico Sambas de Axé",
     "categoria": "shows",
     "subcategoria": "axé",
+    "tags": [],
     "imagens": [
       {
         "id": "Sambas de Axé-DSCF8433-Aprimorado-NR",
@@ -1733,6 +1753,20 @@ export const projetos = {
       {
         "id": "Sambas de Axé-DSCF9583-Aprimorado-NR",
         "imagem": "/images/Sambas de Axé/DSCF9583-Aprimorado-NR.jpg"
+      }
+    ]
+  },
+  "Testando": {
+    "id": "Testando",
+    "titulo": "Testando",
+    "descricao": "Ensaio New Face Testando",
+    "categoria": "newface",
+    "subcategoria": "Newface",
+    "tags": [],
+    "imagens": [
+      {
+        "id": "Testando-10",
+        "imagem": "/images/Testando/10.jpg"
       }
     ]
   }

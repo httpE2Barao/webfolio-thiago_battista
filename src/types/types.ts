@@ -10,6 +10,7 @@ export interface Projeto {
   tagName?: string;
 }
 
+// Ajuste aqui: se você quiser objetos com { id, imagem } em cada item do array
 export interface Album {
   titulo: string;
   descricao: string;
@@ -46,11 +47,12 @@ export interface PageProps {
   searchParams?: Promise<SearchParams>;
 }
 
+// Aqui estava o problema: "imagens: string[];"
 export interface AlbumData {
   id: string;
   titulo: string;
   descricao: string;
-  imagens: string[];
+  imagens: { id: string; imagem: string }[]; 
   tags: string[];
 }
 
