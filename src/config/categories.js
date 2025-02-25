@@ -21,7 +21,9 @@ const categories = {
   "moda": {
     "Testando novamente ": "Moda"
   },
-  "newface": {},
+  "newface": {
+    "Elias Barão": "Newface"
+  },
   "cinema": {
     "Cest Cher": "bastidores"
   }
