@@ -58,7 +58,6 @@ async function regenerateProjetos(): Promise<void> {
 
   // Função para identificar a categoria principal e subcategoria com base no nome da pasta
   const getProjectCategory = (folderName: string): { main: string; sub: string } => {
-    // Aqui garantimos que cada valor seja tratado como Record<string, string>
     for (const [mainCategory, subcategories] of Object.entries(categories) as [string, Record<string, string>][]) {
       if (folderName in subcategories) {
         return {
@@ -110,7 +109,8 @@ async function regenerateProjetos(): Promise<void> {
       titulo: folder,
       descricao,
       tags: [],
-      // Aqui, cada objeto possui somente uma imagem; se preferir, agrupe todas as imagens em um único objeto
+      // Cada objeto possui somente uma imagem; se preferir agrupar todas as imagens, use:
+      // imagens: files.map(f => `/images/${folder}/${f}`)
       imagens: [`/images/${folder}/${file}`],
       categoria: main,
       subcategoria: sub,
@@ -136,21 +136,22 @@ export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
  */
 async function updateCategories(albumName: string, tags: string[]): Promise<void> {
   const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+  let categoriesData: Record<string, Record<string, string>> = {};
 
-  let categoriesData: Record<string, Record<string, string>>;
   try {
+    // Limpa o cache do require para garantir que lemos o arquivo atualizado
+    delete require.cache[require.resolve(configPath)];
     categoriesData = require(configPath);
   } catch (e) {
     console.error("Erro ao ler o arquivo de categorias:", e);
     categoriesData = {};
   }
 
+  // Para cada tag, se a chave não existir (case-insensitive), cria-a; senão, apenas atualiza
   tags.forEach(tag => {
-    // Procura por uma chave que corresponda (case-insensitive)
     let key = Object.keys(categoriesData).find(
       k => k.toLowerCase() === tag.toLowerCase()
     );
-    // Se não encontrar, cria uma nova chave com o nome do tag
     if (!key) {
       key = tag;
       categoriesData[key] = {};
@@ -159,28 +160,39 @@ async function updateCategories(albumName: string, tags: string[]): Promise<void
     categoriesData[key][albumName] = tag;
   });
 
-  const content = `module.exports = ${JSON.stringify(categoriesData, null, 2)};`;
+  const content = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
   await fs.writeFile(configPath, content, 'utf8');
   console.log(`Arquivo de categorias atualizado: ${configPath}`);
 }
 
 /**
- * Executa os comandos Git para fazer commit e push das alterações.
+ * Executa os comandos Git para fazer commit e push das alterações, utilizando variáveis de ambiente para autenticação.
  */
 async function commitAndPushChanges(): Promise<void> {
   try {
-    // Configure as informações do usuário; idealmente use variáveis de ambiente
-    await execAsync(`git config user.name "NextJS Bot"`);
-    await execAsync(`git config user.email "bot@example.com"`);
+    const gitUser = process.env.GIT_USER;
+    const gitEmail = process.env.GIT_EMAIL;
+    const gitToken = process.env.GIT_TOKEN;
+    const gitRemoteHost = process.env.GIT_REMOTE_HOST; // Ex: "github.com/usuario/repo.git"
 
-    // Adiciona as mudanças, cria o commit e faz o push
+    if (!gitUser || !gitEmail || !gitToken || !gitRemoteHost) {
+      console.error("Variáveis de ambiente para autenticação Git não estão configuradas.");
+      return;
+    }
+
+    await execAsync(`git config user.name "${gitUser}"`);
+    await execAsync(`git config user.email "${gitEmail}"`);
+
+    // Atualiza a URL do remote origin para incluir o token
+    const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
+    await execAsync(`git remote set-url origin ${remoteUrl}`);
+
     await execAsync(`git add .`);
     await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
-    await execAsync(`git push`);
+    await execAsync(`git push origin HEAD`);
     console.log("Commit e push realizados com sucesso.");
   } catch (error: any) {
     console.error("Erro ao executar git push:", error.message);
-    // Opcional: lançar o erro ou apenas logar e continuar
   }
 }
 
