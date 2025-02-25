@@ -1,6 +1,6 @@
 const categories = {
-  "Revistas": {
-    "Elias": "Revistas"
+  "Moda": {
+    "Upload teste": "Moda"
   }
 };
 

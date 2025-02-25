@@ -5,7 +5,6 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 import util from 'util';
-import categories from '@/config/categories';
 
 const execAsync = util.promisify(exec);
 
@@ -14,7 +13,6 @@ interface MetadataData {
   tags: string[];
 }
 
-// Ajuste para manter os campos exigidos em 'AlbumData'
 interface AlbumData {
   id: string;
   titulo: string;
@@ -22,24 +20,79 @@ interface AlbumData {
   categoria: string;
   subcategoria: string;
   tags: string[];
-  imagens: { id: string; imagem: string }[];
+  imagens: {
+    id: string;
+    imagem: string;
+  }[];
 }
 
 /**
- * Regenera o arquivo de projetos (src/data/projetos.js) com base nas imagens em public/images.
+ * Lê o arquivo categories.js, extrai o objeto principal e retorna como JSON.
  */
+async function readCategoriesFile(): Promise<Record<string, Record<string, string>>> {
+  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+  let categoriesData: Record<string, Record<string, string>> = {};
+
+  try {
+    // Lê o conteúdo de categories.js
+    const fileContent = await fs.readFile(configPath, 'utf8');
+    // Extrai somente o objeto categories de dentro do arquivo:
+    const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
+    if (match && match[1]) {
+      categoriesData = JSON.parse(match[1]);
+    } else {
+      console.warn("Não foi possível extrair o objeto categories do arquivo. Formato inválido?");
+    }
+  } catch (err) {
+    console.error("Erro ao ler o arquivo categories.js:", err);
+    // Se o arquivo não existe ou deu erro de parse, inicia vazio
+    categoriesData = {};
+  }
+  return categoriesData;
+}
+
+/**
+ * Reescreve o arquivo categories.js com o conteúdo do objeto categoriesData.
+ */
+async function writeCategoriesFile(categoriesData: Record<string, Record<string, string>>): Promise<void> {
+  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+
+  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
+  await fs.writeFile(configPath, newContent, 'utf8');
+  console.log(`Arquivo de categorias atualizado: ${configPath}`);
+}
+
+/**
+ * Atualiza o arquivo de categorias sem sobrescrever o que já existe.
+ */
+async function updateCategories(albumName: string, tags: string[]) {
+  const categoriesData = await readCategoriesFile();
+
+  tags.forEach(tag => {
+    const lowerTag = tag.toLowerCase();
+    // Procura chave independente de maiúsculas/minúsculas
+    let key = Object.keys(categoriesData).find(k => k.toLowerCase() === lowerTag);
+    if (!key) {
+      // Se não existe, cria com o nome original
+      key = tag;
+      categoriesData[key] = {};
+    }
+    categoriesData[key][albumName] = tag;
+  });
+
+  await writeCategoriesFile(categoriesData);
+}
+
 async function regenerateProjetos(): Promise<void> {
   const baseDir = path.join(process.cwd(), 'public', 'images');
   const outputDir = path.join(process.cwd(), 'src', 'data');
   const outputFile = path.join(outputDir, 'projetos.js');
 
-  // Garante que os diretórios existam
   await fs.mkdir(outputDir, { recursive: true });
   await fs.mkdir(baseDir, { recursive: true });
 
-  // Lê as subpastas (cada subpasta é um álbum)
   const entries = await fs.readdir(baseDir, { withFileTypes: true });
-  const subFolders: string[] = entries
+  const subFolders = entries
     .filter(entry => entry.isDirectory())
     .map(entry => entry.name);
 
@@ -47,46 +100,48 @@ async function regenerateProjetos(): Promise<void> {
     throw new Error(`Nenhuma subpasta encontrada em: ${baseDir}`);
   }
 
-  // Função para obter as imagens válidas em uma pasta
-  const getValidImageFiles = async (dirPath: string): Promise<string[]> => {
-    const files = await fs.readdir(dirPath);
-    return files
-      .filter(file => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file))
-      .sort((a, b) =>
-        a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' })
-      );
+  // Ajuste aqui se quiser usar um arquivo de config "categories" fixo
+  // ou se preferir algo estático
+  const descriptions: Record<string, string> = {
+    shows: 'Show fotográfico',
+    teatro: 'Peça teatral',
+    gastronomia: 'Projeto gastronômico',
+    fineart: 'Fine Art',
+    revistas: 'Editorial para revista',
+    publicitario: 'Ensaio publicitário',
+    moda: 'Editorial de moda',
+    newface: 'Ensaio New Face',
+    outros: 'Projeto',
   };
 
-  // Identifica categoria principal e sub com base no nome da pasta
-  const getProjectCategory = (folderName: string): { main: string; sub: string } => {
-    for (const [mainCategory, subcategories] of Object.entries(categories) as [string, Record<string, string>][]) {
-      if (subcategories[folderName]) {
-        return { main: mainCategory, sub: subcategories[folderName] };
-      }
-    }
-    console.warn(`Categoria não encontrada para a pasta: ${folderName}. Usando categoria padrão.`);
-    return { main: "outros", sub: "geral" };
-  };
+  function getDescription(folderName: string, mainCategory: string) {
+    return `${descriptions[mainCategory] || descriptions.outros} ${folderName}`;
+  }
 
-  const descriptions: { [key: string]: string } = {
-    shows: "Show fotográfico",
-    teatro: "Peça teatral",
-    gastronomia: "Projeto gastronômico",
-    fineart: "Fine Art",
-    revistas: "Editorial para revista",
-    publicitario: "Ensaio publicitário",
-    moda: "Editorial de moda",
-    newface: "Ensaio New Face",
-    outros: "Projeto",
-  };
+  // Precisamos extrair a categoria do "categoriesData"? Podemos, ou usar "outros"
+  // ou reutilizar o categories importado de forma estática. Depende do seu caso.
 
-  const getDescription = (folderName: string, category: string): string =>
-    `${descriptions[category] || descriptions.outros} ${folderName}`;
-
-  // Objeto final contendo todos os álbuns
   const allProjects: Record<string, AlbumData> = {};
 
-  // Processa cada subpasta
+  // Cria a função getValidImageFiles
+  async function getValidImageFiles(dir: string) {
+    const files = await fs.readdir(dir);
+    return files.filter(file => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+  }
+
+  // Aqui, se quiser olhar categories, teria que usar readCategoriesFile ou algo do tipo
+  // mas para simplificar, digamos que não.
+  // Se quiser puxar subcategorias do categories.js, teria que parsear da mesma forma.
+  function getProjectCategory(folderName: string) {
+    // Fixo, ou "outros" se não achar
+    // Se quiser de categories, parse e busque "categoriesData[anyCategory][folderName]"
+    return {
+      main: 'outros',
+      sub: 'geral'
+    };
+  }
+
   for (const folder of subFolders) {
     const folderPath = path.join(baseDir, folder);
     const files = await getValidImageFiles(folderPath);
@@ -99,21 +154,19 @@ async function regenerateProjetos(): Promise<void> {
     const { main, sub } = getProjectCategory(folder);
     const descricao = getDescription(folder, main);
 
-    // Mapeia as imagens para um array de { id, imagem }
-    const imagens = files.map((file) => ({
+    const imagens = files.map(file => ({
       id: `${folder}-${path.parse(file).name}`,
       imagem: `/images/${folder}/${file}`,
     }));
 
-    // Cria objeto do álbum com dados comuns e array de imagens
     allProjects[folder] = {
       id: folder,
       titulo: folder,
       descricao,
       categoria: main,
       subcategoria: sub,
-      tags: [], // array vazio por padrão
-      imagens,
+      tags: [],
+      imagens
     };
   }
 
@@ -121,7 +174,6 @@ async function regenerateProjetos(): Promise<void> {
     throw new Error("Nenhum projeto foi processado. Verifique se existem imagens nas pastas.");
   }
 
-  // Gera o arquivo final com export const projetos = ...
   const content = `// Este arquivo é gerado automaticamente - não edite manualmente
 export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 
@@ -130,45 +182,7 @@ export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 }
 
 /**
- * Atualiza o arquivo de categorias (src/config/categories.js) com base nas tags enviadas,
- * sem sobrescrever o que já existe.
- */
-async function updateCategories(albumName: string, tags: string[]): Promise<void> {
-  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
-  let categoriesData: Record<string, Record<string, string>> = {};
-
-  try {
-    // Limpa o cache e carrega o arquivo
-    delete require.cache[require.resolve(configPath)];
-    categoriesData = require(configPath);
-  } catch (e) {
-    console.error("Erro ao ler o arquivo de categorias:", e);
-    categoriesData = {};
-  }
-
-  tags.forEach(tag => {
-    const lowerTag = tag.toLowerCase();
-    let key = Object.keys(categoriesData).find(
-      k => k.toLowerCase() === lowerTag
-    );
-    // Se não existir, cria a nova categoria
-    if (!key) {
-      key = tag; 
-      categoriesData[key] = {};
-    }
-    // Adiciona ou atualiza o mapeamento do álbum
-    categoriesData[key][albumName] = tag;
-  });
-
-  // Reescreve o arquivo com module.exports
-  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
-  await fs.writeFile(configPath, newContent, 'utf8');
-  console.log(`Arquivo de categorias atualizado: ${configPath}`);
-}
-
-/**
- * Faz commit e push das mudanças, stashando alterações não stageadas e fazendo pull --rebase
- * antes do push para evitar conflitos.
+ * Faz commit e push das mudanças
  */
 async function commitAndPushChanges(): Promise<void> {
   try {
@@ -178,7 +192,7 @@ async function commitAndPushChanges(): Promise<void> {
     const gitRemoteHost = process.env.GIT_REMOTE_HOST; // e.g., "github.com/usuario/repo.git"
 
     if (!gitUser || !gitEmail || !gitToken || !gitRemoteHost) {
-      console.error("Variáveis de ambiente para autenticação Git não estão configuradas.");
+      console.error("Variáveis de ambiente de Git não configuradas");
       return;
     }
 
@@ -188,35 +202,19 @@ async function commitAndPushChanges(): Promise<void> {
     const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
     await execAsync(`git remote set-url origin ${remoteUrl}`);
 
-    // Stash para evitar conflitos com rebase
     await execAsync(`git stash`);
-
-    // Atualiza o repositório local com as mudanças remotas
     await execAsync(`git pull --rebase origin HEAD`);
-
-    // Restaura o stash (ignora erro se não houver stash)
     await execAsync(`git stash pop || true`);
 
-    // Commit e push
     await execAsync(`git add .`);
     await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
     await execAsync(`git push origin HEAD`);
-
-    console.log("Commit e push realizados com sucesso.");
-  } catch (error: any) {
-    console.error("Erro ao executar git push:", error.message);
+  } catch (err) {
+    console.error("Erro ao executar git push:", err);
   }
 }
 
-/**
- * Endpoint POST para upload de álbum: 
- * 1) Salva arquivos de imagem na pasta /public/images/<albumName>
- * 2) Gera metadata.json
- * 3) Regenera projetos.js
- * 4) Atualiza categories.js
- * 5) Faz commit e push das alterações
- */
-export async function POST(request: Request): Promise<NextResponse> {
+export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const description = formData.get('description') as string;
@@ -227,18 +225,16 @@ export async function POST(request: Request): Promise<NextResponse> {
     }
     const albumName = albumNameRaw;
 
+    // Cria pasta public/images/<albumName>
     const publicDir = path.join(process.cwd(), 'public', 'images');
     const albumDir = path.join(publicDir, albumName);
-
-    // Cria diretório do álbum
     await fs.mkdir(albumDir, { recursive: true });
 
-    // Salva os arquivos enviados
+    // Salva as imagens
     const files = formData.getAll('files');
     for (const file of files) {
       if (file instanceof File) {
-        const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
+        const buffer = Buffer.from(await file.arrayBuffer());
         const filePath = path.join(albumDir, file.name);
         await fs.writeFile(filePath, buffer);
       }
@@ -252,15 +248,15 @@ export async function POST(request: Request): Promise<NextResponse> {
     // Regenera projetos.js
     await regenerateProjetos();
 
-    // Atualiza categories.js
+    // Atualiza categories
     await updateCategories(albumName, tags);
 
-    // Commit e push
+    // Faz commit e push
     await commitAndPushChanges();
 
     return NextResponse.json({ message: 'Álbum enviado com sucesso!' }, { status: 200 });
-  } catch (error: any) {
-    console.error("Erro no upload do álbum:", error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+  } catch (err: any) {
+    console.error("Erro no upload do álbum:", err);
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }

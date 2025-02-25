@@ -3,9 +3,9 @@ export const projetos = {
   "Agora é que são elas": {
     "id": "Agora é que são elas",
     "titulo": "Agora é que são elas",
-    "descricao": "Peça teatral Agora é que são elas",
-    "categoria": "teatro",
-    "subcategoria": "comédia",
+    "descricao": "Projeto Agora é que são elas",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -101,9 +101,9 @@ export const projetos = {
   "Bonitinha Mais Ordinaria": {
     "id": "Bonitinha Mais Ordinaria",
     "titulo": "Bonitinha Mais Ordinaria",
-    "descricao": "Peça teatral Bonitinha Mais Ordinaria",
-    "categoria": "teatro",
-    "subcategoria": "drama",
+    "descricao": "Projeto Bonitinha Mais Ordinaria",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -428,8 +428,8 @@ export const projetos = {
     "id": "Cest Cher",
     "titulo": "Cest Cher",
     "descricao": "Projeto Cest Cher",
-    "categoria": "cinema",
-    "subcategoria": "bastidores",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -541,9 +541,9 @@ export const projetos = {
   "Dow Raiz": {
     "id": "Dow Raiz",
     "titulo": "Dow Raiz",
-    "descricao": "Show fotográfico Dow Raiz",
-    "categoria": "shows",
-    "subcategoria": "rock",
+    "descricao": "Projeto Dow Raiz",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -583,9 +583,9 @@ export const projetos = {
   "Duelo Amazônico": {
     "id": "Duelo Amazônico",
     "titulo": "Duelo Amazônico",
-    "descricao": "Peça teatral Duelo Amazônico",
-    "categoria": "teatro",
-    "subcategoria": "musical",
+    "descricao": "Projeto Duelo Amazônico",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -817,9 +817,9 @@ export const projetos = {
   "Emicida": {
     "id": "Emicida",
     "titulo": "Emicida",
-    "descricao": "Show fotográfico Emicida",
-    "categoria": "shows",
-    "subcategoria": "rap",
+    "descricao": "Projeto Emicida",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -943,9 +943,9 @@ export const projetos = {
   "Leci Brandão": {
     "id": "Leci Brandão",
     "titulo": "Leci Brandão",
-    "descricao": "Show fotográfico Leci Brandão",
-    "categoria": "shows",
-    "subcategoria": "samba",
+    "descricao": "Projeto Leci Brandão",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -1029,9 +1029,9 @@ export const projetos = {
   "Risorama": {
     "id": "Risorama",
     "titulo": "Risorama",
-    "descricao": "Peça teatral Risorama",
-    "categoria": "teatro",
-    "subcategoria": "humor",
+    "descricao": "Projeto Risorama",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -1179,9 +1179,9 @@ export const projetos = {
   "Samba do meu rap": {
     "id": "Samba do meu rap",
     "titulo": "Samba do meu rap",
-    "descricao": "Show fotográfico Samba do meu rap",
-    "categoria": "shows",
-    "subcategoria": "rap",
+    "descricao": "Projeto Samba do meu rap",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -1457,9 +1457,9 @@ export const projetos = {
   "Sambas de Axé": {
     "id": "Sambas de Axé",
     "titulo": "Sambas de Axé",
-    "descricao": "Show fotográfico Sambas de Axé",
-    "categoria": "shows",
-    "subcategoria": "axé",
+    "descricao": "Projeto Sambas de Axé",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
@@ -1756,17 +1756,17 @@ export const projetos = {
       }
     ]
   },
-  "Testando": {
-    "id": "Testando",
-    "titulo": "Testando",
-    "descricao": "Ensaio New Face Testando",
-    "categoria": "newface",
-    "subcategoria": "Newface",
+  "Upload teste": {
+    "id": "Upload teste",
+    "titulo": "Upload teste",
+    "descricao": "Projeto Upload teste",
+    "categoria": "outros",
+    "subcategoria": "geral",
     "tags": [],
     "imagens": [
       {
-        "id": "Testando-10",
-        "imagem": "/images/Testando/10.jpg"
+        "id": "Upload teste-neon-judy-alvarez-2560x1080-20180",
+        "imagem": "/images/Upload teste/neon-judy-alvarez-2560x1080-20180.jpg"
       }
     ]
   }
