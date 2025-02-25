@@ -203,19 +203,21 @@ async function commitAndPushChanges(): Promise<void> {
     const gitUser = process.env.GIT_USER;
     const gitEmail = process.env.GIT_EMAIL;
     const gitToken = process.env.GIT_TOKEN;
-    const gitRemoteHost = process.env.GIT_REMOTE_HOST; // e.g., "github.com/usuario/repo.git"
+    const gitRemoteHost = process.env.GIT_REMOTE_HOST; // Ex: "github.com/usuario/repo.git"
 
     if (!gitUser || !gitEmail || !gitToken || !gitRemoteHost) {
-      console.error("Variáveis de ambiente de Git não configuradas");
+      console.error("Variáveis de ambiente para autenticação Git não estão configuradas.");
       return;
     }
 
     await execAsync(`git config user.name "${gitUser}"`);
     await execAsync(`git config user.email "${gitEmail}"`);
 
+    // Constrói a URL sem aspas extras
     const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
     await execAsync(`git remote set-url origin ${remoteUrl}`);
 
+    // Stash para evitar conflitos
     await execAsync(`git stash`);
     await execAsync(`git pull --rebase origin HEAD`);
     await execAsync(`git stash pop || true`);
@@ -223,8 +225,10 @@ async function commitAndPushChanges(): Promise<void> {
     await execAsync(`git add .`);
     await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
     await execAsync(`git push origin HEAD`);
-  } catch (err) {
-    console.error("Erro ao executar git push:", err);
+
+    console.log("Commit e push realizados com sucesso.");
+  } catch (error: any) {
+    console.error("Erro ao executar git push:", error.message);
   }
 }
 

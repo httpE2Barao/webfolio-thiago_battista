@@ -78,12 +78,12 @@ export function Header() {
         <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
           {/* Nome e descrição */}
           <div className="flex flex-row gap-7 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
-            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-foreground dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
+            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-white dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
               <Link href="/" onClick={closeNav}>
                 {name}
               </Link>
             </h1>
-            <p className="uppercase text-foreground dark:text-dark-foreground whitespace-nowrap cursor-not-allowed max-md:text-sm">
+            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-not-allowed max-md:text-sm">
               Artista digital &amp; <br /> Produtor cultural
             </p>
           </div>

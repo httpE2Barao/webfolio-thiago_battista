@@ -1,12 +1,10 @@
 // Este arquivo é gerado automaticamente - não edite manualmente
 export const projetos = {
   "Agora é que são elas": {
-    "id": "Agora é que são elas",
     "titulo": "Agora é que são elas",
-    "descricao": "Projeto Agora é que são elas",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Agora é que são elas",
+    "categoria": "teatro",
+    "subcategoria": "comédia",
     "imagens": [
       {
         "id": "Agora é que são elas-DSCF3741",
@@ -99,12 +97,10 @@ export const projetos = {
     ]
   },
   "Bonitinha Mais Ordinaria": {
-    "id": "Bonitinha Mais Ordinaria",
     "titulo": "Bonitinha Mais Ordinaria",
-    "descricao": "Projeto Bonitinha Mais Ordinaria",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+    "categoria": "teatro",
+    "subcategoria": "drama",
     "imagens": [
       {
         "id": "Bonitinha Mais Ordinaria-DSCF6097",
@@ -425,12 +421,10 @@ export const projetos = {
     ]
   },
   "Cest Cher": {
-    "id": "Cest Cher",
     "titulo": "Cest Cher",
     "descricao": "Projeto Cest Cher",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "categoria": "cinema",
+    "subcategoria": "bastidores",
     "imagens": [
       {
         "id": "Cest Cher-DSCF0626-Aprimorado-NR",
@@ -539,12 +533,10 @@ export const projetos = {
     ]
   },
   "Dow Raiz": {
-    "id": "Dow Raiz",
     "titulo": "Dow Raiz",
-    "descricao": "Projeto Dow Raiz",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Dow Raiz",
+    "categoria": "shows",
+    "subcategoria": "rock",
     "imagens": [
       {
         "id": "Dow Raiz-DSCF8567",
@@ -581,12 +573,10 @@ export const projetos = {
     ]
   },
   "Duelo Amazônico": {
-    "id": "Duelo Amazônico",
     "titulo": "Duelo Amazônico",
-    "descricao": "Projeto Duelo Amazônico",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Duelo Amazônico",
+    "categoria": "teatro",
+    "subcategoria": "musical",
     "imagens": [
       {
         "id": "Duelo Amazônico-DSCF0168",
@@ -815,12 +805,10 @@ export const projetos = {
     ]
   },
   "Emicida": {
-    "id": "Emicida",
     "titulo": "Emicida",
-    "descricao": "Projeto Emicida",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Emicida",
+    "categoria": "shows",
+    "subcategoria": "rap",
     "imagens": [
       {
         "id": "Emicida-DSCF4199-Aprimorado-NR",
@@ -941,12 +929,10 @@ export const projetos = {
     ]
   },
   "Leci Brandão": {
-    "id": "Leci Brandão",
     "titulo": "Leci Brandão",
-    "descricao": "Projeto Leci Brandão",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Leci Brandão",
+    "categoria": "shows",
+    "subcategoria": "samba",
     "imagens": [
       {
         "id": "Leci Brandão-DSCF9039",
@@ -1027,100 +1013,22 @@ export const projetos = {
     ]
   },
   "Risorama": {
-    "id": "Risorama",
     "titulo": "Risorama",
-    "descricao": "Projeto Risorama",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Risorama",
+    "categoria": "teatro",
+    "subcategoria": "humor",
     "imagens": [
-      {
-        "id": "Risorama-DSCF4445",
-        "imagem": "/images/Risorama/DSCF4445.jpg"
-      },
       {
         "id": "Risorama-DSCF4506",
         "imagem": "/images/Risorama/DSCF4506.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4517",
-        "imagem": "/images/Risorama/DSCF4517.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4650",
-        "imagem": "/images/Risorama/DSCF4650.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4656",
-        "imagem": "/images/Risorama/DSCF4656.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4657",
-        "imagem": "/images/Risorama/DSCF4657.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4663",
-        "imagem": "/images/Risorama/DSCF4663.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4676",
-        "imagem": "/images/Risorama/DSCF4676.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4685",
-        "imagem": "/images/Risorama/DSCF4685.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4697",
-        "imagem": "/images/Risorama/DSCF4697.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4699",
-        "imagem": "/images/Risorama/DSCF4699.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4702",
-        "imagem": "/images/Risorama/DSCF4702.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4712",
-        "imagem": "/images/Risorama/DSCF4712.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4716",
-        "imagem": "/images/Risorama/DSCF4716.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4762",
-        "imagem": "/images/Risorama/DSCF4762.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4763",
-        "imagem": "/images/Risorama/DSCF4763.jpg"
       },
       {
         "id": "Risorama-DSCF4764",
         "imagem": "/images/Risorama/DSCF4764.jpg"
       },
       {
-        "id": "Risorama-DSCF4778",
-        "imagem": "/images/Risorama/DSCF4778.jpg"
-      },
-      {
         "id": "Risorama-DSCF4780",
         "imagem": "/images/Risorama/DSCF4780.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4804",
-        "imagem": "/images/Risorama/DSCF4804.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4807",
-        "imagem": "/images/Risorama/DSCF4807.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4808",
-        "imagem": "/images/Risorama/DSCF4808.jpg"
       },
       {
         "id": "Risorama-DSCF4868",
@@ -1131,58 +1039,16 @@ export const projetos = {
         "imagem": "/images/Risorama/DSCF4903.jpg"
       },
       {
-        "id": "Risorama-DSCF4915",
-        "imagem": "/images/Risorama/DSCF4915.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4919",
-        "imagem": "/images/Risorama/DSCF4919.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4944",
-        "imagem": "/images/Risorama/DSCF4944.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4950",
-        "imagem": "/images/Risorama/DSCF4950.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4952",
-        "imagem": "/images/Risorama/DSCF4952.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4954",
-        "imagem": "/images/Risorama/DSCF4954.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4959",
-        "imagem": "/images/Risorama/DSCF4959.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4964",
-        "imagem": "/images/Risorama/DSCF4964.jpg"
-      },
-      {
-        "id": "Risorama-DSCF4982",
-        "imagem": "/images/Risorama/DSCF4982.jpg"
-      },
-      {
         "id": "Risorama-DSCF4983",
         "imagem": "/images/Risorama/DSCF4983.jpg"
-      },
-      {
-        "id": "Risorama-DSCF5000",
-        "imagem": "/images/Risorama/DSCF5000.jpg"
       }
     ]
   },
   "Samba do meu rap": {
-    "id": "Samba do meu rap",
     "titulo": "Samba do meu rap",
-    "descricao": "Projeto Samba do meu rap",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Samba do meu rap",
+    "categoria": "shows",
+    "subcategoria": "rap",
     "imagens": [
       {
         "id": "Samba do meu rap-DSCF0397-Aprimorado-NR",
@@ -1455,12 +1321,10 @@ export const projetos = {
     ]
   },
   "Sambas de Axé": {
-    "id": "Sambas de Axé",
     "titulo": "Sambas de Axé",
-    "descricao": "Projeto Sambas de Axé",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Sambas de Axé",
+    "categoria": "shows",
+    "subcategoria": "axé",
     "imagens": [
       {
         "id": "Sambas de Axé-DSCF8433-Aprimorado-NR",
@@ -1753,20 +1617,6 @@ export const projetos = {
       {
         "id": "Sambas de Axé-DSCF9583-Aprimorado-NR",
         "imagem": "/images/Sambas de Axé/DSCF9583-Aprimorado-NR.jpg"
-      }
-    ]
-  },
-  "Testando ": {
-    "id": "Testando ",
-    "titulo": "Testando ",
-    "descricao": "Projeto Testando ",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
-    "imagens": [
-      {
-        "id": "Testando -lilo-stitch-2025-2560x1080-20079",
-        "imagem": "/images/Testando /lilo-stitch-2025-2560x1080-20079.jpg"
       }
     ]
   }

@@ -13,9 +13,7 @@ const categories = {
     "Duelo Amazônico": "musical"
   },
   "gastronomia": {},
-  "fineart": {
-    "Testando ": "Fineart"
-  },
+  "fineart": {},
   "revistas": {},
   "publicitario": {},
   "moda": {},
