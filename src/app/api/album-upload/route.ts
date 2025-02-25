@@ -1,7 +1,13 @@
+// app/api/album-upload/route.ts
+
 import { NextResponse } from 'next/server';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { exec } from 'child_process';
+import util from 'util';
 import categories from '@/config/categories';
+
+const execAsync = util.promisify(exec);
 
 interface MetadataData {
   description: string;
@@ -52,17 +58,21 @@ async function regenerateProjetos(): Promise<void> {
 
   // Função para identificar a categoria principal e subcategoria com base no nome da pasta
   const getProjectCategory = (folderName: string): { main: string; sub: string } => {
-    for (const [mainCategory, subcategories] of Object.entries(categories)) {
-      if (subcategories.hasOwnProperty(folderName)) {
+    // Aqui garantimos que cada valor seja tratado como Record<string, string>
+    for (const [mainCategory, subcategories] of Object.entries(categories) as [string, Record<string, string>][]) {
+      if (folderName in subcategories) {
         return {
           main: mainCategory,
-          sub: subcategories as string,
+          sub: subcategories[folderName],
         };
       }
     }
     console.warn(`Categoria não encontrada para a pasta: ${folderName}. Usando categoria padrão.`);
-    return { main: 'outros', sub: 'geral' };
-  };  
+    return {
+      main: "outros",
+      sub: "geral",
+    };
+  };
 
   const descriptions: { [key: string]: string } = {
     shows: 'Show fotográfico',
@@ -92,15 +102,15 @@ async function regenerateProjetos(): Promise<void> {
     }
 
     const { main, sub } = getProjectCategory(folder);
+    const descricao = getDescription(folder, main);
+
     // Mapeia cada imagem para um objeto do álbum
     const projetos: AlbumData[] = files.map((file) => ({
       id: `${folder}-${path.parse(file).name}`,
       titulo: folder,
-      descricao: getDescription(folder, main),
+      descricao,
       tags: [],
-      // Cada objeto possui somente uma imagem neste exemplo;
-      // caso prefira agrupar todas as imagens em um único objeto, use:
-      // imagens: files.map(f => `/images/${folder}/${f}`)
+      // Aqui, cada objeto possui somente uma imagem; se preferir, agrupe todas as imagens em um único objeto
       imagens: [`/images/${folder}/${file}`],
       categoria: main,
       subcategoria: sub,
@@ -122,14 +132,11 @@ export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 
 /**
  * Atualiza o arquivo de categorias (src/config/categories.js) com base nas tags enviadas.
- * Para cada tag enviada que corresponda a uma chave existente (case-insensitive),
- * adiciona ou atualiza o mapeamento do álbum.
+ * Apenas adiciona os novos itens sem excluir os existentes.
  */
 async function updateCategories(albumName: string, tags: string[]): Promise<void> {
   const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
 
-  // Lê o arquivo atual de categorias usando require.
-  // Atenção: em ambiente de produção, alterações em arquivos de configuração podem não ser recarregadas automaticamente.
   let categoriesData: Record<string, Record<string, string>>;
   try {
     categoriesData = require(configPath);
@@ -138,16 +145,18 @@ async function updateCategories(albumName: string, tags: string[]): Promise<void
     categoriesData = {};
   }
 
-  // Atualiza as categorias: para cada tag enviada, verifica se a chave existe e adiciona o novo álbum.
   tags.forEach(tag => {
     // Procura por uma chave que corresponda (case-insensitive)
-    const key = Object.keys(categoriesData).find(
+    let key = Object.keys(categoriesData).find(
       k => k.toLowerCase() === tag.toLowerCase()
     );
-    if (key) {
-      // Adiciona o álbum à categoria, mapeando albumName para o valor desejado (aqui, usamos o próprio tag)
-      categoriesData[key][albumName] = tag;
+    // Se não encontrar, cria uma nova chave com o nome do tag
+    if (!key) {
+      key = tag;
+      categoriesData[key] = {};
     }
+    // Adiciona ou atualiza o mapeamento para o álbum
+    categoriesData[key][albumName] = tag;
   });
 
   const content = `module.exports = ${JSON.stringify(categoriesData, null, 2)};`;
@@ -156,9 +165,29 @@ async function updateCategories(albumName: string, tags: string[]): Promise<void
 }
 
 /**
+ * Executa os comandos Git para fazer commit e push das alterações.
+ */
+async function commitAndPushChanges(): Promise<void> {
+  try {
+    // Configure as informações do usuário; idealmente use variáveis de ambiente
+    await execAsync(`git config user.name "NextJS Bot"`);
+    await execAsync(`git config user.email "bot@example.com"`);
+
+    // Adiciona as mudanças, cria o commit e faz o push
+    await execAsync(`git add .`);
+    await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
+    await execAsync(`git push`);
+    console.log("Commit e push realizados com sucesso.");
+  } catch (error: any) {
+    console.error("Erro ao executar git push:", error.message);
+    // Opcional: lançar o erro ou apenas logar e continuar
+  }
+}
+
+/**
  * Endpoint POST para upload de álbum.
- * Após salvar as imagens e metadata, regenera o arquivo de projetos
- * e atualiza o arquivo de categorias.
+ * Após salvar as imagens e metadata, regenera o arquivo de projetos,
+ * atualiza as categorias e executa o commit/push.
  */
 export async function POST(request: Request): Promise<NextResponse> {
   try {
@@ -198,6 +227,9 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     // Atualiza o arquivo de categorias com as tags enviadas
     await updateCategories(albumName, tags);
+
+    // Executa o commit e push das alterações
+    await commitAndPushChanges();
 
     return NextResponse.json({ message: 'Álbum enviado com sucesso!' }, { status: 200 });
   } catch (error: any) {
