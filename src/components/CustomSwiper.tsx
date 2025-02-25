@@ -2,7 +2,7 @@
 
 import React, { Suspense, useCallback, useMemo, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade } from "swiper/modules";
+import { Navigation, EffectFade, Keyboard } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css/bundle";
 
@@ -71,7 +71,7 @@ const SwiperImage = React.memo(
       }
       className={`${modal || fullSize ? "object-contain !p-4" : "object-cover"}`}
       priority={priority && index === 0}
-      quality={90}
+      quality={modal ? 100 : 80}
       loading={index < 3 ? "eager" : "lazy"}
     />
   )
@@ -98,7 +98,7 @@ export default function CustomSwiper({
   const [currentTitle, setCurrentTitle] = useState("");
   const isHomePage = pathname === "/";
 
-  // Atualizado para trabalhar com a nova estrutura de Projetos (álbuns como objeto com "imagens")
+  // Atualizado para trabalhar com a nova estrutura de Projetos (álbuns com "imagens")
   const loadSlides = useCallback(() => {
     if (photos) {
       setSlides(
@@ -117,11 +117,9 @@ export default function CustomSwiper({
       const randomized = shuffleArray(
         Object.entries(projetosData)
           .map(([albumName, album]) => {
-            // Verifica se o álbum possui imagens
             if (!album || !album.imagens || album.imagens.length === 0) return null;
             return {
               tagName: albumName,
-              // Objeto RandomizedTag com a propriedade "foto" extraída do primeiro item de "imagens"
               foto: {
                 id: album.imagens[0].id,
                 titulo: album.titulo,
@@ -200,7 +198,6 @@ export default function CustomSwiper({
   const handleClick = useCallback(
     (project: ProjetoComTag | RandomizedTag, index: number) => {
       if (modal) return;
-
       if (isRandomizedTag(project)) {
         onSlideClick
           ? onSlideClick(project.foto, index)
@@ -215,31 +212,34 @@ export default function CustomSwiper({
     [modal, onSlideClick, router]
   );
 
+  // Container para o modal ocupa 100vh
   const containerClasses = useMemo(
     () =>
       modal
-        ? "fixed inset-0 z-[9999] bg-black bg-opacity-95 flex items-center justify-center"
+        ? "fixed inset-0 z-[9999] bg-black bg-opacity-95 flex items-center justify-center h-[100vh] w-full"
         : "relative w-full h-[calc(100vh-35px)]",
     [modal]
   );
 
-  // Configurações otimizadas: removemos as props não reconhecidas pelo DOM
   const swiperConfig = useMemo(() => {
-    const baseConfig = {
-      modules: [Navigation, EffectFade],
-      effect: mode === "fotos" || mode === "tags" ? "fade" : undefined,
+    const config: any = {
+      modules: [Navigation, EffectFade, Keyboard],
+      // Força o efeito fade para evitar empilhamento de slides
+      effect: "fade",
+      fadeEffect: { crossFade: true },
       spaceBetween: 0,
       slidesPerView: 1,
       navigation: true,
       pagination: !hidePagination,
       loop: slides.length > 1,
       initialSlide,
+      keyboard: { enabled: true, onlyInViewport: false },
       className: `swiper-container ${
         fullSize ? "swiper-fullsize" : ""
       } ${modal ? "modal" : ""} ${mode === "albuns" ? "swiper-container-albuns" : ""}`,
       onSlideChange: handleSlideChange,
     };
-    return baseConfig;
+    return config;
   }, [
     mode,
     hidePagination,
@@ -286,7 +286,7 @@ export default function CustomSwiper({
               <div
                 className={
                   modal
-                    ? "relative w-[90vw] h-full max-w-[1200px] flex items-center justify-center m-auto"
+                    ? "relative w-full h-full flex items-center justify-center"
                     : fullSize
                     ? "relative w-full h-full flex items-center justify-center bg-black/5"
                     : "relative w-full h-full overflow-hidden rounded-md"
@@ -313,19 +313,15 @@ export default function CustomSwiper({
           ))}
         </Swiper>
 
-        {mode === "albuns" &&
-          !photos &&
-          !modal &&
-          currentTitle &&
-          isHomePage && (
-            <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-              <div className="max-w-[90%] md:max-w-3xl mx-auto">
-                <TituloResponsivo className="text-white text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold px-4 py-2 rounded-md text-center capitalize break-words">
-                  {currentTitle.replace(/-/g, " ")}
-                </TituloResponsivo>
-              </div>
+        {mode === "albuns" && !photos && !modal && currentTitle && isHomePage && (
+          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+            <div className="max-w-[90%] md:max-w-3xl mx-auto">
+              <TituloResponsivo className="text-white text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold px-4 py-2 rounded-md text-center capitalize break-words">
+                {currentTitle.replace(/-/g, " ")}
+              </TituloResponsivo>
             </div>
-          )}
+          </div>
+        )}
 
         {modal && (
           <button

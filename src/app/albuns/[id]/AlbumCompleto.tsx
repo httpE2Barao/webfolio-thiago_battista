@@ -44,7 +44,7 @@ export function AlbumCompletoClient({
               alt={album.titulo}
               fill
               priority
-              quality={60}
+              quality={40}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
             />
