@@ -7,8 +7,8 @@ const outputDir = path.join(process.cwd(), "src/data");
 const outputFile = path.join(outputDir, "projetos.js");
 
 try {
-  // Garante que os diretórios existem
-  [outputDir, baseDir].forEach(dir => {
+  // Garante que os diretórios existam
+  [outputDir, baseDir].forEach((dir) => {
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
@@ -16,30 +16,37 @@ try {
 
   const isDirectory = (source) => fs.lstatSync(source).isDirectory();
   const getValidImageFiles = (dirPath) =>
-    fs.readdirSync(dirPath)
-      .filter(file => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file))
-      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+    fs
+      .readdirSync(dirPath)
+      .filter((file) => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file))
+      .sort((a, b) =>
+        a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
+      );
 
-  const subFolders = fs.readdirSync(baseDir)
-    .filter(name => isDirectory(path.join(baseDir, name)));
+  const subFolders = fs
+    .readdirSync(baseDir)
+    .filter((name) => isDirectory(path.join(baseDir, name)));
 
   if (subFolders.length === 0) {
     throw new Error(`Nenhuma subpasta encontrada em: ${baseDir}`);
   }
 
+  // Função para identificar a categoria principal e subcategoria com base no nome da pasta
   const getProjectCategory = (folderName) => {
     for (const [mainCategory, subcategories] of Object.entries(categories)) {
       if (subcategories[folderName]) {
         return {
           main: mainCategory,
-          sub: subcategories[folderName]
+          sub: subcategories[folderName],
         };
       }
     }
-    console.warn(`Categoria não encontrada para a pasta: ${folderName}. Usando categoria padrão.`);
+    console.warn(
+      `Categoria não encontrada para a pasta: ${folderName}. Usando categoria padrão.`
+    );
     return {
       main: "outros",
-      sub: "geral"
+      sub: "geral",
     };
   };
 
@@ -52,15 +59,16 @@ try {
     publicitario: "Ensaio publicitário",
     moda: "Editorial de moda",
     newface: "Ensaio New Face",
-    outros: "Projeto"
+    outros: "Projeto",
   };
 
+  // Se desejar que a descrição siga um padrão específico (por exemplo, "Projeto <album>"), ajuste aqui:
   const getDescription = (folderName, category) =>
     `${descriptions[category] || descriptions.outros} ${folderName}`;
 
   const allProjects = {};
 
-  // Processa cada subpasta
+  // Processa cada subpasta e gera um objeto único para cada álbum
   subFolders.forEach((folder) => {
     const folderPath = path.join(baseDir, folder);
     const files = getValidImageFiles(folderPath);
@@ -73,19 +81,19 @@ try {
     const { main, sub } = getProjectCategory(folder);
     const descricao = getDescription(folder, main);
 
-    // Cria um array com os dados específicos de cada imagem
+    // Mapeia as imagens para um array de objetos (cada um com id e imagem)
     const imagens = files.map((file) => ({
       id: `${folder}-${path.parse(file).name}`,
-      imagem: `/images/${folder}/${file}`
+      imagem: `/images/${folder}/${file}`,
     }));
 
-    // Agrupa os dados comuns e as imagens em um único objeto para o projeto
+    // Cria o objeto do álbum com os dados comuns e o array de imagens
     allProjects[folder] = {
       titulo: folder,
       descricao,
       categoria: main,
       subcategoria: sub,
-      imagens
+      imagens,
     };
   });
 
@@ -96,7 +104,7 @@ try {
   const content = `// Este arquivo é gerado automaticamente - não edite manualmente
 export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 
-  fs.writeFileSync(outputFile, content, 'utf8');
+  fs.writeFileSync(outputFile, content, "utf8");
   console.log(`Arquivo gerado com sucesso: ${outputFile}`);
 } catch (error) {
   console.error("Erro ao gerar o arquivo:", error.message);

@@ -139,29 +139,39 @@ async function updateCategories(albumName: string, tags: string[]): Promise<void
   let categoriesData: Record<string, Record<string, string>> = {};
 
   try {
-    // Limpa o cache do require para garantir que lemos o arquivo atualizado
-    delete require.cache[require.resolve(configPath)];
-    categoriesData = require(configPath);
+    // Lê o conteúdo inteiro do arquivo
+    const fileContent = await fs.readFile(configPath, 'utf8');
+    // Extrai o objeto JSON contido no arquivo usando uma expressão regular
+    const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
+    if (match && match[1]) {
+      categoriesData = JSON.parse(match[1]);
+    } else {
+      throw new Error("Formato do arquivo categories.js inválido.");
+    }
   } catch (e) {
     console.error("Erro ao ler o arquivo de categorias:", e);
+    // Se ocorrer erro, inicia com um objeto vazio (ou mantenha um padrão mínimo, se desejar)
     categoriesData = {};
   }
 
-  // Para cada tag, se a chave não existir (case-insensitive), cria-a; senão, apenas atualiza
+  // Para cada tag enviada, verifica se a chave já existe (comparação case-insensitive)
   tags.forEach(tag => {
     let key = Object.keys(categoriesData).find(
       k => k.toLowerCase() === tag.toLowerCase()
     );
+    // Se a chave não existir, cria-a
     if (!key) {
       key = tag;
       categoriesData[key] = {};
     }
-    // Adiciona ou atualiza o mapeamento para o álbum
+    // Adiciona ou atualiza o mapeamento para o álbum na respectiva categoria
     categoriesData[key][albumName] = tag;
   });
 
-  const content = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
-  await fs.writeFile(configPath, content, 'utf8');
+  // Prepara o conteúdo a ser escrito, seguindo o mesmo padrão do arquivo original
+  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
+
+  await fs.writeFile(configPath, newContent, 'utf8');
   console.log(`Arquivo de categorias atualizado: ${configPath}`);
 }
 
