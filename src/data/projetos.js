@@ -1755,19 +1755,5 @@ export const projetos = {
         "imagem": "/images/Sambas de Axé/DSCF9583-Aprimorado-NR.jpg"
       }
     ]
-  },
-  "Upload teste": {
-    "id": "Upload teste",
-    "titulo": "Upload teste",
-    "descricao": "Projeto Upload teste",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
-    "imagens": [
-      {
-        "id": "Upload teste-neon-judy-alvarez-2560x1080-20180",
-        "imagem": "/images/Upload teste/neon-judy-alvarez-2560x1080-20180.jpg"
-      }
-    ]
   }
 };

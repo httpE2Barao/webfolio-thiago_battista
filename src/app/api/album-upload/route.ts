@@ -54,33 +54,47 @@ async function readCategoriesFile(): Promise<Record<string, Record<string, strin
 /**
  * Reescreve o arquivo categories.js com o conteúdo do objeto categoriesData.
  */
-async function writeCategoriesFile(categoriesData: Record<string, Record<string, string>>): Promise<void> {
+async function updateCategories(albumName: string, tags: string[]): Promise<void> {
   const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+  let categoriesData: Record<string, Record<string, string>> = {};
 
-  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
-  await fs.writeFile(configPath, newContent, 'utf8');
-  console.log(`Arquivo de categorias atualizado: ${configPath}`);
-}
+  try {
+    // Lê o conteúdo inteiro do arquivo
+    const fileContent = await fs.readFile(configPath, 'utf8');
+    // Extrai o objeto JavaScript contido no arquivo usando regex
+    const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
+    if (match && match[1]) {
+      // Avalia o trecho extraído para obter o objeto (use new Function para evitar usar eval diretamente)
+      categoriesData = new Function("return " + match[1])();
+    } else {
+      throw new Error("Formato do arquivo categories.js inválido.");
+    }
+  } catch (e) {
+    console.error("Erro ao ler o arquivo de categorias:", e);
+    // Se ocorrer erro, inicia com um objeto vazio (ou mantenha um padrão mínimo, se desejar)
+    categoriesData = {};
+  }
 
-/**
- * Atualiza o arquivo de categorias sem sobrescrever o que já existe.
- */
-async function updateCategories(albumName: string, tags: string[]) {
-  const categoriesData = await readCategoriesFile();
-
+  // Para cada tag enviada, converte para lowercase para comparação
   tags.forEach(tag => {
     const lowerTag = tag.toLowerCase();
-    // Procura chave independente de maiúsculas/minúsculas
-    let key = Object.keys(categoriesData).find(k => k.toLowerCase() === lowerTag);
+    let key = Object.keys(categoriesData).find(
+      k => k.toLowerCase() === lowerTag
+    );
+    // Se a chave não existir, cria-a mantendo o valor original
     if (!key) {
-      // Se não existe, cria com o nome original
       key = tag;
       categoriesData[key] = {};
     }
+    // Adiciona ou atualiza o mapeamento para o álbum na respectiva categoria
     categoriesData[key][albumName] = tag;
   });
 
-  await writeCategoriesFile(categoriesData);
+  // Prepara o conteúdo a ser escrito, mantendo o padrão original
+  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
+
+  await fs.writeFile(configPath, newContent, 'utf8');
+  console.log(`Arquivo de categorias atualizado: ${configPath}`);
 }
 
 async function regenerateProjetos(): Promise<void> {
