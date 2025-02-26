@@ -20,28 +20,23 @@ interface AlbumData {
   categoria: string;
   subcategoria: string;
   tags: string[];
-  imagens: { id: string; imagem: string }[];
+  imagens: string[]; // Apenas caminhos, sem id para cada imagem
 }
 
 /**
  * Regenera o arquivo de projetos (src/data/projetos.js) com base nas imagens em public/images.
- * Gera um objeto único para cada álbum, contendo título, descrição, categoria, subcategoria, tags e um array de imagens.
+ * Cada álbum é gerado como um objeto único com informações comuns e um array de caminhos de imagens.
  */
 async function regenerateProjetos(): Promise<void> {
   const baseDir = path.join(process.cwd(), 'public', 'images');
   const outputDir = path.join(process.cwd(), 'src', 'data');
   const outputFile = path.join(outputDir, 'projetos.js');
 
-  // Garante que os diretórios existam
   await fs.mkdir(outputDir, { recursive: true });
   await fs.mkdir(baseDir, { recursive: true });
 
-  // Lê as subpastas da pasta base
   const entries = await fs.readdir(baseDir, { withFileTypes: true });
-  const subFolders = entries
-    .filter(entry => entry.isDirectory())
-    .map(entry => entry.name);
-
+  const subFolders = entries.filter(entry => entry.isDirectory()).map(entry => entry.name);
   if (subFolders.length === 0) {
     throw new Error(`Nenhuma subpasta encontrada em: ${baseDir}`);
   }
@@ -58,42 +53,33 @@ async function regenerateProjetos(): Promise<void> {
     outros: 'Projeto',
   };
 
+  // Para simplificar, usamos "outros" e "geral" como categoria padrão
+  const getProjectCategory = (folderName: string): { main: string; sub: string } => {
+    return { main: 'outros', sub: 'geral' };
+  };
+
   const getDescription = (folderName: string, mainCategory: string): string =>
     `${descriptions[mainCategory] || descriptions.outros} ${folderName}`;
 
-  // Nesse exemplo, se não houver lógica para determinar categoria, usamos "outros"
-  function getProjectCategory(folderName: string): { main: string; sub: string } {
-    // Você pode implementar lógica para usar o arquivo de categorias, se necessário.
-    return { main: 'outros', sub: 'geral' };
-  }
-
   const allProjects: Record<string, AlbumData> = {};
 
-  // Função para obter os arquivos de imagem válidos em uma pasta
   async function getValidImageFiles(dir: string): Promise<string[]> {
     const files = await fs.readdir(dir);
     return files.filter(file => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file))
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
   }
 
-  // Processa cada subpasta e gera um objeto único para cada álbum
   for (const folder of subFolders) {
     const folderPath = path.join(baseDir, folder);
     const files = await getValidImageFiles(folderPath);
-
     if (files.length === 0) {
       console.warn(`Nenhuma imagem encontrada na pasta: ${folder}`);
       continue;
     }
-
     const { main, sub } = getProjectCategory(folder);
     const descricao = getDescription(folder, main);
-
-    const imagens = files.map(file => ({
-      id: `${folder}-${path.parse(file).name}`,
-      imagem: `/images/${folder}/${file}`,
-    }));
-
+    // Armazena apenas os caminhos das imagens
+    const imagens = files.map(file => `/images/${folder}/${file}`);
     allProjects[folder] = {
       id: folder,
       titulo: folder,
@@ -117,7 +103,8 @@ export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 }
 
 /**
- * Lê o arquivo categories.js e retorna o objeto de categorias.
+ * Lê o arquivo categories.js e extrai o objeto de categorias.
+ * Usa fs.readFile e uma expressão regular para extrair o objeto sem cache.
  */
 async function readCategoriesFile(): Promise<Record<string, Record<string, string>>> {
   const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
@@ -126,7 +113,6 @@ async function readCategoriesFile(): Promise<Record<string, Record<string, strin
     const fileContent = await fs.readFile(configPath, 'utf8');
     const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
     if (match && match[1]) {
-      // Usa new Function para avaliar o objeto
       categoriesData = new Function("return " + match[1])();
     } else {
       throw new Error("Formato do arquivo categories.js inválido.");
@@ -153,8 +139,8 @@ async function writeCategoriesFile(categoriesData: Record<string, Record<string,
  */
 async function updateCategories(albumName: string, tags: string[]): Promise<void> {
   const categoriesData = await readCategoriesFile();
-
   tags.forEach(tag => {
+    // Padroniza a comparação para lowercase
     const lowerTag = tag.toLowerCase();
     let key = Object.keys(categoriesData).find(k => k.toLowerCase() === lowerTag);
     if (!key) {
@@ -163,13 +149,12 @@ async function updateCategories(albumName: string, tags: string[]): Promise<void
     }
     categoriesData[key][albumName] = tag;
   });
-
   await writeCategoriesFile(categoriesData);
 }
 
 /**
  * Executa os comandos Git para fazer commit e push das alterações.
- * Se o remote "origin" não existir, ele será adicionado.
+ * Se o remote "origin" não existir, ele é adicionado.
  */
 async function commitAndPushChanges(): Promise<void> {
   try {
@@ -177,6 +162,7 @@ async function commitAndPushChanges(): Promise<void> {
     const gitEmail = process.env.GIT_EMAIL;
     const gitToken = process.env.GIT_TOKEN;
     const gitRemoteHost = process.env.GIT_REMOTE_HOST; // Ex: "github.com/usuario/repo.git"
+    const branch = process.env.BRANCH || "main"; // Branch padrão: "main"
 
     if (!gitUser || !gitEmail || !gitToken || !gitRemoteHost) {
       console.error("Variáveis de ambiente para autenticação Git não estão configuradas.");
@@ -187,7 +173,6 @@ async function commitAndPushChanges(): Promise<void> {
     await execAsync(`git config user.email "${gitEmail}"`);
 
     const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
-    // Tenta atualizar o remote "origin". Se não existir, adiciona.
     try {
       await execAsync(`git remote set-url origin ${remoteUrl}`);
     } catch (e) {
@@ -195,21 +180,39 @@ async function commitAndPushChanges(): Promise<void> {
       await execAsync(`git remote add origin ${remoteUrl}`);
     }
 
-    await execAsync(`git stash`);
-    await execAsync(`git pull --rebase origin HEAD`);
-    await execAsync(`git stash pop || true`);
+    // Stashea alterações não stageadas para evitar conflitos
+    try {
+      await execAsync(`git stash`);
+    } catch (error) {
+      const stashError = error as Error;
+      console.warn("Erro ao stashear alterações (talvez não haja alterações):", stashError.message);
+    }
+
+    await execAsync(`git pull --rebase origin ${branch}`);
+
+    try {
+      await execAsync(`git stash pop`);
+    } catch (error) {
+      const popError = error as Error;
+      console.warn("Nenhum stash para restaurar:", popError.message);
+    }
+
     await execAsync(`git add .`);
     await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
-    await execAsync(`git push origin HEAD`);
+    
+    // Push com refspec completo para evitar erro de destino não qualificado
+    await execAsync(`git push origin HEAD:refs/heads/${branch}`);
+
     console.log("Commit e push realizados com sucesso.");
-  } catch (error: any) {
-    console.error("Erro ao executar git push:", error.message);
+  } catch (error) {
+    const pushError = error as Error;
+    console.error("Erro ao executar git push:", pushError.message);
   }
 }
 
 /**
  * Endpoint POST para upload de álbum.
- * Salva imagens e metadata, regenera projetos.js, atualiza categories.js e faz commit/push.
+ * Salva as imagens e metadata, regenera projetos.js, atualiza categories.js e executa commit/push.
  */
 export async function POST(request: Request): Promise<NextResponse> {
   try {
