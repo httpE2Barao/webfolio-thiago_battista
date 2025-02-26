@@ -1,12 +1,10 @@
 // Este arquivo é gerado automaticamente - não edite manualmente
 export const projetos = {
   "Agora é que são elas": {
-    "id": "Agora é que são elas",
     "titulo": "Agora é que são elas",
-    "descricao": "Projeto Agora é que são elas",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Agora é que são elas",
+    "categoria": "teatro",
+    "subcategoria": "comédia",
     "imagens": [
       {
         "id": "Agora é que são elas-DSCF3741",
@@ -99,12 +97,10 @@ export const projetos = {
     ]
   },
   "Bonitinha Mais Ordinaria": {
-    "id": "Bonitinha Mais Ordinaria",
     "titulo": "Bonitinha Mais Ordinaria",
-    "descricao": "Projeto Bonitinha Mais Ordinaria",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Bonitinha Mais Ordinaria",
+    "categoria": "teatro",
+    "subcategoria": "drama",
     "imagens": [
       {
         "id": "Bonitinha Mais Ordinaria-DSCF6097",
@@ -425,12 +421,10 @@ export const projetos = {
     ]
   },
   "Cest Cher": {
-    "id": "Cest Cher",
     "titulo": "Cest Cher",
     "descricao": "Projeto Cest Cher",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "categoria": "cinema",
+    "subcategoria": "bastidores",
     "imagens": [
       {
         "id": "Cest Cher-DSCF0626-Aprimorado-NR",
@@ -539,12 +533,10 @@ export const projetos = {
     ]
   },
   "Dow Raiz": {
-    "id": "Dow Raiz",
     "titulo": "Dow Raiz",
-    "descricao": "Projeto Dow Raiz",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Dow Raiz",
+    "categoria": "shows",
+    "subcategoria": "rock",
     "imagens": [
       {
         "id": "Dow Raiz-DSCF8567",
@@ -581,12 +573,10 @@ export const projetos = {
     ]
   },
   "Duelo Amazônico": {
-    "id": "Duelo Amazônico",
     "titulo": "Duelo Amazônico",
-    "descricao": "Projeto Duelo Amazônico",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Duelo Amazônico",
+    "categoria": "teatro",
+    "subcategoria": "musical",
     "imagens": [
       {
         "id": "Duelo Amazônico-DSCF0168",
@@ -815,12 +805,10 @@ export const projetos = {
     ]
   },
   "Emicida": {
-    "id": "Emicida",
     "titulo": "Emicida",
-    "descricao": "Projeto Emicida",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Emicida",
+    "categoria": "shows",
+    "subcategoria": "rap",
     "imagens": [
       {
         "id": "Emicida-DSCF4199-Aprimorado-NR",
@@ -941,12 +929,10 @@ export const projetos = {
     ]
   },
   "Leci Brandão": {
-    "id": "Leci Brandão",
     "titulo": "Leci Brandão",
-    "descricao": "Projeto Leci Brandão",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Leci Brandão",
+    "categoria": "shows",
+    "subcategoria": "samba",
     "imagens": [
       {
         "id": "Leci Brandão-DSCF9039",
@@ -1027,12 +1013,10 @@ export const projetos = {
     ]
   },
   "Little teste": {
-    "id": "Little teste",
     "titulo": "Little teste",
-    "descricao": "Projeto Little teste",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Ensaio New Face Little teste",
+    "categoria": "newface",
+    "subcategoria": "Newface",
     "imagens": [
       {
         "id": "Little teste-huawei-dark-2560x1080-20057",
@@ -1049,12 +1033,10 @@ export const projetos = {
     ]
   },
   "Risorama": {
-    "id": "Risorama",
     "titulo": "Risorama",
-    "descricao": "Projeto Risorama",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Peça teatral Risorama",
+    "categoria": "teatro",
+    "subcategoria": "humor",
     "imagens": [
       {
         "id": "Risorama-DSCF4506",
@@ -1083,12 +1065,10 @@ export const projetos = {
     ]
   },
   "Samba do meu rap": {
-    "id": "Samba do meu rap",
     "titulo": "Samba do meu rap",
-    "descricao": "Projeto Samba do meu rap",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Samba do meu rap",
+    "categoria": "shows",
+    "subcategoria": "rap",
     "imagens": [
       {
         "id": "Samba do meu rap-DSCF0397-Aprimorado-NR",
@@ -1361,12 +1341,10 @@ export const projetos = {
     ]
   },
   "Sambas de Axé": {
-    "id": "Sambas de Axé",
     "titulo": "Sambas de Axé",
-    "descricao": "Projeto Sambas de Axé",
-    "categoria": "outros",
-    "subcategoria": "geral",
-    "tags": [],
+    "descricao": "Show fotográfico Sambas de Axé",
+    "categoria": "shows",
+    "subcategoria": "axé",
     "imagens": [
       {
         "id": "Sambas de Axé-DSCF8433-Aprimorado-NR",
