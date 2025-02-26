@@ -17,7 +17,9 @@ const categories = {
   "revistas": {},
   "publicitario": {},
   "moda": {},
-  "newface": {},
+  "newface": {
+    "Little teste": "Newface"
+  },
   "cinema": {
     "Cest Cher": "bastidores"
   }

@@ -20,91 +20,23 @@ interface AlbumData {
   categoria: string;
   subcategoria: string;
   tags: string[];
-  imagens: {
-    id: string;
-    imagem: string;
-  }[];
+  imagens: { id: string; imagem: string }[];
 }
 
 /**
- * Lê o arquivo categories.js, extrai o objeto principal e retorna como JSON.
+ * Regenera o arquivo de projetos (src/data/projetos.js) com base nas imagens em public/images.
+ * Gera um objeto único para cada álbum, contendo título, descrição, categoria, subcategoria, tags e um array de imagens.
  */
-async function readCategoriesFile(): Promise<Record<string, Record<string, string>>> {
-  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
-  let categoriesData: Record<string, Record<string, string>> = {};
-
-  try {
-    // Lê o conteúdo de categories.js
-    const fileContent = await fs.readFile(configPath, 'utf8');
-    // Extrai somente o objeto categories de dentro do arquivo:
-    const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
-    if (match && match[1]) {
-      categoriesData = JSON.parse(match[1]);
-    } else {
-      console.warn("Não foi possível extrair o objeto categories do arquivo. Formato inválido?");
-    }
-  } catch (err) {
-    console.error("Erro ao ler o arquivo categories.js:", err);
-    // Se o arquivo não existe ou deu erro de parse, inicia vazio
-    categoriesData = {};
-  }
-  return categoriesData;
-}
-
-/**
- * Reescreve o arquivo categories.js com o conteúdo do objeto categoriesData.
- */
-async function updateCategories(albumName: string, tags: string[]): Promise<void> {
-  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
-  let categoriesData: Record<string, Record<string, string>> = {};
-
-  try {
-    // Lê o conteúdo inteiro do arquivo
-    const fileContent = await fs.readFile(configPath, 'utf8');
-    // Extrai o objeto JavaScript contido no arquivo usando regex
-    const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
-    if (match && match[1]) {
-      // Avalia o trecho extraído para obter o objeto (use new Function para evitar usar eval diretamente)
-      categoriesData = new Function("return " + match[1])();
-    } else {
-      throw new Error("Formato do arquivo categories.js inválido.");
-    }
-  } catch (e) {
-    console.error("Erro ao ler o arquivo de categorias:", e);
-    // Se ocorrer erro, inicia com um objeto vazio (ou mantenha um padrão mínimo, se desejar)
-    categoriesData = {};
-  }
-
-  // Para cada tag enviada, converte para lowercase para comparação
-  tags.forEach(tag => {
-    const lowerTag = tag.toLowerCase();
-    let key = Object.keys(categoriesData).find(
-      k => k.toLowerCase() === lowerTag
-    );
-    // Se a chave não existir, cria-a mantendo o valor original
-    if (!key) {
-      key = tag;
-      categoriesData[key] = {};
-    }
-    // Adiciona ou atualiza o mapeamento para o álbum na respectiva categoria
-    categoriesData[key][albumName] = tag;
-  });
-
-  // Prepara o conteúdo a ser escrito, mantendo o padrão original
-  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
-
-  await fs.writeFile(configPath, newContent, 'utf8');
-  console.log(`Arquivo de categorias atualizado: ${configPath}`);
-}
-
 async function regenerateProjetos(): Promise<void> {
   const baseDir = path.join(process.cwd(), 'public', 'images');
   const outputDir = path.join(process.cwd(), 'src', 'data');
   const outputFile = path.join(outputDir, 'projetos.js');
 
+  // Garante que os diretórios existam
   await fs.mkdir(outputDir, { recursive: true });
   await fs.mkdir(baseDir, { recursive: true });
 
+  // Lê as subpastas da pasta base
   const entries = await fs.readdir(baseDir, { withFileTypes: true });
   const subFolders = entries
     .filter(entry => entry.isDirectory())
@@ -114,8 +46,6 @@ async function regenerateProjetos(): Promise<void> {
     throw new Error(`Nenhuma subpasta encontrada em: ${baseDir}`);
   }
 
-  // Ajuste aqui se quiser usar um arquivo de config "categories" fixo
-  // ou se preferir algo estático
   const descriptions: Record<string, string> = {
     shows: 'Show fotográfico',
     teatro: 'Peça teatral',
@@ -128,34 +58,25 @@ async function regenerateProjetos(): Promise<void> {
     outros: 'Projeto',
   };
 
-  function getDescription(folderName: string, mainCategory: string) {
-    return `${descriptions[mainCategory] || descriptions.outros} ${folderName}`;
-  }
+  const getDescription = (folderName: string, mainCategory: string): string =>
+    `${descriptions[mainCategory] || descriptions.outros} ${folderName}`;
 
-  // Precisamos extrair a categoria do "categoriesData"? Podemos, ou usar "outros"
-  // ou reutilizar o categories importado de forma estática. Depende do seu caso.
+  // Nesse exemplo, se não houver lógica para determinar categoria, usamos "outros"
+  function getProjectCategory(folderName: string): { main: string; sub: string } {
+    // Você pode implementar lógica para usar o arquivo de categorias, se necessário.
+    return { main: 'outros', sub: 'geral' };
+  }
 
   const allProjects: Record<string, AlbumData> = {};
 
-  // Cria a função getValidImageFiles
-  async function getValidImageFiles(dir: string) {
+  // Função para obter os arquivos de imagem válidos em uma pasta
+  async function getValidImageFiles(dir: string): Promise<string[]> {
     const files = await fs.readdir(dir);
     return files.filter(file => /\.(jpg|jpeg|png|webp|gif|avif)$/i.test(file))
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
   }
 
-  // Aqui, se quiser olhar categories, teria que usar readCategoriesFile ou algo do tipo
-  // mas para simplificar, digamos que não.
-  // Se quiser puxar subcategorias do categories.js, teria que parsear da mesma forma.
-  function getProjectCategory(folderName: string) {
-    // Fixo, ou "outros" se não achar
-    // Se quiser de categories, parse e busque "categoriesData[anyCategory][folderName]"
-    return {
-      main: 'outros',
-      sub: 'geral'
-    };
-  }
-
+  // Processa cada subpasta e gera um objeto único para cada álbum
   for (const folder of subFolders) {
     const folderPath = path.join(baseDir, folder);
     const files = await getValidImageFiles(folderPath);
@@ -180,7 +101,7 @@ async function regenerateProjetos(): Promise<void> {
       categoria: main,
       subcategoria: sub,
       tags: [],
-      imagens
+      imagens,
     };
   }
 
@@ -196,7 +117,59 @@ export const projetos = ${JSON.stringify(allProjects, null, 2)};`;
 }
 
 /**
- * Faz commit e push das mudanças
+ * Lê o arquivo categories.js e retorna o objeto de categorias.
+ */
+async function readCategoriesFile(): Promise<Record<string, Record<string, string>>> {
+  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+  let categoriesData: Record<string, Record<string, string>> = {};
+  try {
+    const fileContent = await fs.readFile(configPath, 'utf8');
+    const match = fileContent.match(/const\s+categories\s*=\s*({[\s\S]*?});\s*module\.exports\s*=\s*categories;?/);
+    if (match && match[1]) {
+      // Usa new Function para avaliar o objeto
+      categoriesData = new Function("return " + match[1])();
+    } else {
+      throw new Error("Formato do arquivo categories.js inválido.");
+    }
+  } catch (err) {
+    console.error("Erro ao ler o arquivo de categorias:", err);
+    categoriesData = {};
+  }
+  return categoriesData;
+}
+
+/**
+ * Reescreve o arquivo categories.js com o objeto atualizado.
+ */
+async function writeCategoriesFile(categoriesData: Record<string, Record<string, string>>): Promise<void> {
+  const configPath = path.join(process.cwd(), 'src', 'config', 'categories.js');
+  const newContent = `const categories = ${JSON.stringify(categoriesData, null, 2)};\n\nmodule.exports = categories;`;
+  await fs.writeFile(configPath, newContent, 'utf8');
+  console.log(`Arquivo de categorias atualizado: ${configPath}`);
+}
+
+/**
+ * Atualiza o arquivo de categorias com base nas tags enviadas, adicionando novos itens sem remover os existentes.
+ */
+async function updateCategories(albumName: string, tags: string[]): Promise<void> {
+  const categoriesData = await readCategoriesFile();
+
+  tags.forEach(tag => {
+    const lowerTag = tag.toLowerCase();
+    let key = Object.keys(categoriesData).find(k => k.toLowerCase() === lowerTag);
+    if (!key) {
+      key = tag;
+      categoriesData[key] = {};
+    }
+    categoriesData[key][albumName] = tag;
+  });
+
+  await writeCategoriesFile(categoriesData);
+}
+
+/**
+ * Executa os comandos Git para fazer commit e push das alterações.
+ * Se o remote "origin" não existir, ele será adicionado.
  */
 async function commitAndPushChanges(): Promise<void> {
   try {
@@ -213,26 +186,32 @@ async function commitAndPushChanges(): Promise<void> {
     await execAsync(`git config user.name "${gitUser}"`);
     await execAsync(`git config user.email "${gitEmail}"`);
 
-    // Constrói a URL sem aspas extras
     const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
-    await execAsync(`git remote set-url origin ${remoteUrl}`);
+    // Tenta atualizar o remote "origin". Se não existir, adiciona.
+    try {
+      await execAsync(`git remote set-url origin ${remoteUrl}`);
+    } catch (e) {
+      console.warn("Remote 'origin' não encontrado. Adicionando remote 'origin'.");
+      await execAsync(`git remote add origin ${remoteUrl}`);
+    }
 
-    // Stash para evitar conflitos
     await execAsync(`git stash`);
     await execAsync(`git pull --rebase origin HEAD`);
     await execAsync(`git stash pop || true`);
-
     await execAsync(`git add .`);
     await execAsync(`git commit -m "Auto-commit: atualizando projetos e categorias"`);
     await execAsync(`git push origin HEAD`);
-
     console.log("Commit e push realizados com sucesso.");
   } catch (error: any) {
     console.error("Erro ao executar git push:", error.message);
   }
 }
 
-export async function POST(request: Request) {
+/**
+ * Endpoint POST para upload de álbum.
+ * Salva imagens e metadata, regenera projetos.js, atualiza categories.js e faz commit/push.
+ */
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const formData = await request.formData();
     const description = formData.get('description') as string;
@@ -243,12 +222,10 @@ export async function POST(request: Request) {
     }
     const albumName = albumNameRaw;
 
-    // Cria pasta public/images/<albumName>
     const publicDir = path.join(process.cwd(), 'public', 'images');
     const albumDir = path.join(publicDir, albumName);
     await fs.mkdir(albumDir, { recursive: true });
 
-    // Salva as imagens
     const files = formData.getAll('files');
     for (const file of files) {
       if (file instanceof File) {
@@ -258,23 +235,17 @@ export async function POST(request: Request) {
       }
     }
 
-    // Cria metadata.json
     const metadata: MetadataData = { description, tags };
     const metadataPath = path.join(albumDir, 'metadata.json');
     await fs.writeFile(metadataPath, JSON.stringify(metadata, null, 2), 'utf8');
 
-    // Regenera projetos.js
     await regenerateProjetos();
-
-    // Atualiza categories
     await updateCategories(albumName, tags);
-
-    // Faz commit e push
     await commitAndPushChanges();
 
     return NextResponse.json({ message: 'Álbum enviado com sucesso!' }, { status: 200 });
   } catch (err: any) {
-    console.error("Erro no upload do álbum:", err);
+    console.error("Erro no upload do álbum:", err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
