@@ -7,6 +7,10 @@ export const projetos = {
     "subcategoria": "comédia",
     "imagens": [
       {
+        "id": "Agora é que são elas-0DSCF3892",
+        "imagem": "/images/Agora é que são elas/0DSCF3892.jpg"
+      },
+      {
         "id": "Agora é que são elas-DSCF3741",
         "imagem": "/images/Agora é que são elas/DSCF3741.jpg"
       },
@@ -37,10 +41,6 @@ export const projetos = {
       {
         "id": "Agora é que são elas-DSCF3867",
         "imagem": "/images/Agora é que são elas/DSCF3867.jpg"
-      },
-      {
-        "id": "Agora é que são elas-DSCF3892",
-        "imagem": "/images/Agora é que são elas/DSCF3892.jpg"
       },
       {
         "id": "Agora é que são elas-DSCF3921",
@@ -427,12 +427,12 @@ export const projetos = {
     "subcategoria": "bastidores",
     "imagens": [
       {
-        "id": "Cest Cher-DSCF0626-Aprimorado-NR",
-        "imagem": "/images/Cest Cher/DSCF0626-Aprimorado-NR.jpg"
+        "id": "Cest Cher-0DSCF0666-Aprimorado-NR",
+        "imagem": "/images/Cest Cher/0DSCF0666-Aprimorado-NR.jpg"
       },
       {
-        "id": "Cest Cher-DSCF0666-Aprimorado-NR",
-        "imagem": "/images/Cest Cher/DSCF0666-Aprimorado-NR.jpg"
+        "id": "Cest Cher-DSCF0626-Aprimorado-NR",
+        "imagem": "/images/Cest Cher/DSCF0626-Aprimorado-NR.jpg"
       },
       {
         "id": "Cest Cher-DSCF0713-Aprimorado-NR",
@@ -579,6 +579,10 @@ export const projetos = {
     "subcategoria": "musical",
     "imagens": [
       {
+        "id": "Duelo Amazônico-0DSCF2000",
+        "imagem": "/images/Duelo Amazônico/0DSCF2000.jpg"
+      },
+      {
         "id": "Duelo Amazônico-DSCF0168",
         "imagem": "/images/Duelo Amazônico/DSCF0168.jpg"
       },
@@ -703,10 +707,6 @@ export const projetos = {
         "imagem": "/images/Duelo Amazônico/DSCF1964.jpg"
       },
       {
-        "id": "Duelo Amazônico-DSCF2000",
-        "imagem": "/images/Duelo Amazônico/DSCF2000.jpg"
-      },
-      {
         "id": "Duelo Amazônico-DSCF2025",
         "imagem": "/images/Duelo Amazônico/DSCF2025.jpg"
       },
@@ -811,6 +811,10 @@ export const projetos = {
     "subcategoria": "rap",
     "imagens": [
       {
+        "id": "Emicida-0DSCF4332-Aprimorado-NR",
+        "imagem": "/images/Emicida/0DSCF4332-Aprimorado-NR.jpg"
+      },
+      {
         "id": "Emicida-DSCF4199-Aprimorado-NR",
         "imagem": "/images/Emicida/DSCF4199-Aprimorado-NR.jpg"
       },
@@ -883,20 +887,8 @@ export const projetos = {
         "imagem": "/images/Emicida/DSCF4324-Aprimorado-NR.jpg"
       },
       {
-        "id": "Emicida-DSCF4332-Aprimorado-NR",
-        "imagem": "/images/Emicida/DSCF4332-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Emicida-DSCF4333-2",
-        "imagem": "/images/Emicida/DSCF4333-2.jpg"
-      },
-      {
         "id": "Emicida-DSCF4333-Aprimorado-NR",
         "imagem": "/images/Emicida/DSCF4333-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Emicida-DSCF4333",
-        "imagem": "/images/Emicida/DSCF4333.jpg"
       },
       {
         "id": "Emicida-DSCF4335-Aprimorado-NR",
@@ -915,16 +907,8 @@ export const projetos = {
         "imagem": "/images/Emicida/DSCF4338-Aprimorado-NR.jpg"
       },
       {
-        "id": "Emicida-DSCF4346-2",
-        "imagem": "/images/Emicida/DSCF4346-2.jpg"
-      },
-      {
         "id": "Emicida-DSCF4346-Aprimorado-NR",
         "imagem": "/images/Emicida/DSCF4346-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Emicida-DSCF4346",
-        "imagem": "/images/Emicida/DSCF4346.jpg"
       }
     ]
   },
@@ -1012,26 +996,6 @@ export const projetos = {
       }
     ]
   },
-  "Little teste": {
-    "titulo": "Little teste",
-    "descricao": "Ensaio New Face Little teste",
-    "categoria": "newface",
-    "subcategoria": "Newface",
-    "imagens": [
-      {
-        "id": "Little teste-huawei-dark-2560x1080-20057",
-        "imagem": "/images/Little teste/huawei-dark-2560x1080-20057.jpg"
-      },
-      {
-        "id": "Little teste-jinx-pink-aesthetic-2560x1080-20141",
-        "imagem": "/images/Little teste/jinx-pink-aesthetic-2560x1080-20141.jpg"
-      },
-      {
-        "id": "Little teste-lilo-stitch-2025-2560x1080-20079",
-        "imagem": "/images/Little teste/lilo-stitch-2025-2560x1080-20079.jpg"
-      }
-    ]
-  },
   "Risorama": {
     "titulo": "Risorama",
     "descricao": "Peça teatral Risorama",
@@ -1039,8 +1003,52 @@ export const projetos = {
     "subcategoria": "humor",
     "imagens": [
       {
+        "id": "Risorama-0DSCF4903",
+        "imagem": "/images/Risorama/0DSCF4903.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4445",
+        "imagem": "/images/Risorama/DSCF4445.jpg"
+      },
+      {
         "id": "Risorama-DSCF4506",
         "imagem": "/images/Risorama/DSCF4506.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4517",
+        "imagem": "/images/Risorama/DSCF4517.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4650",
+        "imagem": "/images/Risorama/DSCF4650.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4663",
+        "imagem": "/images/Risorama/DSCF4663.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4676",
+        "imagem": "/images/Risorama/DSCF4676.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4697",
+        "imagem": "/images/Risorama/DSCF4697.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4699",
+        "imagem": "/images/Risorama/DSCF4699.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4702",
+        "imagem": "/images/Risorama/DSCF4702.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4762",
+        "imagem": "/images/Risorama/DSCF4762.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4763",
+        "imagem": "/images/Risorama/DSCF4763.jpg"
       },
       {
         "id": "Risorama-DSCF4764",
@@ -1051,16 +1059,32 @@ export const projetos = {
         "imagem": "/images/Risorama/DSCF4780.jpg"
       },
       {
+        "id": "Risorama-DSCF4808",
+        "imagem": "/images/Risorama/DSCF4808.jpg"
+      },
+      {
         "id": "Risorama-DSCF4868",
         "imagem": "/images/Risorama/DSCF4868.jpg"
       },
       {
-        "id": "Risorama-DSCF4903",
-        "imagem": "/images/Risorama/DSCF4903.jpg"
+        "id": "Risorama-DSCF4915",
+        "imagem": "/images/Risorama/DSCF4915.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4919",
+        "imagem": "/images/Risorama/DSCF4919.jpg"
+      },
+      {
+        "id": "Risorama-DSCF4954",
+        "imagem": "/images/Risorama/DSCF4954.jpg"
       },
       {
         "id": "Risorama-DSCF4983",
         "imagem": "/images/Risorama/DSCF4983.jpg"
+      },
+      {
+        "id": "Risorama-DSCF5000",
+        "imagem": "/images/Risorama/DSCF5000.jpg"
       }
     ]
   },
@@ -1070,6 +1094,10 @@ export const projetos = {
     "categoria": "shows",
     "subcategoria": "rap",
     "imagens": [
+      {
+        "id": "Samba do meu rap-0DSCF0426-Aprimorado-NR",
+        "imagem": "/images/Samba do meu rap/0DSCF0426-Aprimorado-NR.jpg"
+      },
       {
         "id": "Samba do meu rap-DSCF0397-Aprimorado-NR",
         "imagem": "/images/Samba do meu rap/DSCF0397-Aprimorado-NR.jpg"
@@ -1097,10 +1125,6 @@ export const projetos = {
       {
         "id": "Samba do meu rap-DSCF0425-Aprimorado-NR",
         "imagem": "/images/Samba do meu rap/DSCF0425-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Samba do meu rap-DSCF0426-Aprimorado-NR",
-        "imagem": "/images/Samba do meu rap/DSCF0426-Aprimorado-NR.jpg"
       },
       {
         "id": "Samba do meu rap-DSCF0436-Aprimorado-NR",
@@ -1243,10 +1267,6 @@ export const projetos = {
         "imagem": "/images/Samba do meu rap/DSCF0593-Aprimorado-NR.jpg"
       },
       {
-        "id": "Samba do meu rap-DSCF0593",
-        "imagem": "/images/Samba do meu rap/DSCF0593.jpg"
-      },
-      {
         "id": "Samba do meu rap-DSCF0601-Aprimorado-NR",
         "imagem": "/images/Samba do meu rap/DSCF0601-Aprimorado-NR.jpg"
       },
@@ -1261,10 +1281,6 @@ export const projetos = {
       {
         "id": "Samba do meu rap-DSCF0608-Aprimorado-NR",
         "imagem": "/images/Samba do meu rap/DSCF0608-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Samba do meu rap-DSCF0608",
-        "imagem": "/images/Samba do meu rap/DSCF0608.jpg"
       },
       {
         "id": "Samba do meu rap-DSCF0609-Aprimorado-NR",
@@ -1333,10 +1349,6 @@ export const projetos = {
       {
         "id": "Samba do meu rap-DSCF0710-Aprimorado-NR",
         "imagem": "/images/Samba do meu rap/DSCF0710-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Samba do meu rap-DSCF0710",
-        "imagem": "/images/Samba do meu rap/DSCF0710.jpg"
       }
     ]
   },
@@ -1346,6 +1358,10 @@ export const projetos = {
     "categoria": "shows",
     "subcategoria": "axé",
     "imagens": [
+      {
+        "id": "Sambas de Axé-0DSCF9022-Aprimorado-NR",
+        "imagem": "/images/Sambas de Axé/0DSCF9022-Aprimorado-NR.jpg"
+      },
       {
         "id": "Sambas de Axé-DSCF8433-Aprimorado-NR",
         "imagem": "/images/Sambas de Axé/DSCF8433-Aprimorado-NR.jpg"
@@ -1525,10 +1541,6 @@ export const projetos = {
       {
         "id": "Sambas de Axé-DSCF9000-Aprimorado-NR",
         "imagem": "/images/Sambas de Axé/DSCF9000-Aprimorado-NR.jpg"
-      },
-      {
-        "id": "Sambas de Axé-DSCF9022-Aprimorado-NR",
-        "imagem": "/images/Sambas de Axé/DSCF9022-Aprimorado-NR.jpg"
       },
       {
         "id": "Sambas de Axé-DSCF9094-Aprimorado-NR",
