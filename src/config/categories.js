@@ -4,7 +4,7 @@ const categories = {
     "Emicida": "rap",
     "Leci Brandão": "samba",
     "Samba do meu rap": "rap",
-    "Sambas de Axé": "axé"
+    "Sambas de Axé": "samba, axé"
   },
   "teatro": {
     "Agora é que são elas": "comédia",
@@ -17,9 +17,7 @@ const categories = {
   "revistas": {},
   "publicitario": {},
   "moda": {},
-  "newface": {
-    "Little teste": "Newface"
-  },
+  "newface": {},
   "cinema": {
     "Cest Cher": "bastidores"
   }
