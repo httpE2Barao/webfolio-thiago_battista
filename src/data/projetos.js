@@ -1356,7 +1356,7 @@ export const projetos = {
     "titulo": "Sambas de Axé",
     "descricao": "Show fotográfico Sambas de Axé",
     "categoria": "shows",
-    "subcategoria": "axé",
+    "subcategoria": "samba, axé",
     "imagens": [
       {
         "id": "Sambas de Axé-0DSCF9022-Aprimorado-NR",

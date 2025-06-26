@@ -1,102 +1,66 @@
-"use client";
+// src/app/albuns/page.tsx
 
-import CustomSwiper from "@/components/CustomSwiper";
-import TituloResponsivo from "@/components/TituloResponsivo";
-import { projetos } from "@/data/projetos.js";
-import { Projeto, Projetos } from "@/types/types";
-import { useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { sql } from '@vercel/postgres';
+import { Projeto } from '@/types/types'; 
+import AlbunsClient from './AlbunsClient';
 
-const projetosData = projetos as unknown as Projetos;
-/**
- * Agrupa os álbuns (agora objetos) por categoria.
- * Cada entrada do objeto 'projetosData' é um álbum contendo:
- * {
- *   id: string;
- *   titulo: string;
- *   descricao: string;
- *   tags: string[];
- *   imagens: { id: string; imagem: string }[];
- *   categoria: string;
- *   subcategoria: string;
- * }
- */
-function agruparProjetosPorCategoria(projetos: Projetos): Record<string, Projeto[]> {
+// Definindo a estrutura do que vem do banco de dados
+interface AlbumDoBanco {
+  id: string;
+  titulo: string;
+  descricao: string;
+  categoria: string;
+  subcategoria: string;
+  imagens: string[]; // Vem como um array de URLs
+}
+
+// Esta função de agrupamento agora roda no servidor!
+function agruparAlbunsPorCategoria(albuns: AlbumDoBanco[]): Record<string, Projeto[]> {
   const projetosPorCategoria: Record<string, Projeto[]> = {};
 
-  Object.entries(projetos).forEach(([albumName, albumData]) => {
-    // Se não houver imagens, ignoramos
-    if (!albumData.imagens || albumData.imagens.length === 0) {
+  albuns.forEach((album) => {
+    // Se não houver imagens, ignoramos o álbum
+    if (!album.imagens || album.imagens.length === 0) {
       return;
     }
 
-    const mainCategory = albumData.categoria || "outros";
+    const mainCategory = album.categoria || "outros";
     if (!projetosPorCategoria[mainCategory]) {
       projetosPorCategoria[mainCategory] = [];
     }
-
-    // Criamos um objeto 'Projeto' com as informações necessárias
+    
+    // Criamos um objeto 'Projeto' para o componente cliente
     projetosPorCategoria[mainCategory].push({
-      id: albumName, // Usamos o nome do álbum como ID
-      titulo: albumName, // Se preferir, use albumData.titulo
-      descricao: albumData.descricao,
-      imagem: albumData.imagens[0].imagem, // Imagem principal (a primeira do array)
-      categoria: albumData.categoria,
-      subcategoria: albumData.subcategoria,
-      albumName, // guarda o nome do álbum original
+      id: album.id,
+      titulo: album.titulo,
+      descricao: album.descricao,
+      imagem: album.imagens[0], // A imagem de capa é a primeira da lista
+      categoria: album.categoria,
+      subcategoria: album.subcategoria,
+      albumName: album.id,
     });
   });
 
   return projetosPorCategoria;
 }
 
-export const dynamic = "force-dynamic";
 
-export default function AlbunsPage() {
-  const projetosPorCategoria = useMemo(
-    () => agruparProjetosPorCategoria(projetosData),
-    []
-  );
-  const router = useRouter();
+// Este é o Componente de Servidor. Ele é async!
+export default async function AlbunsPage() {
+  
+  // 1. Busca todos os álbuns do banco de dados
+  const { rows: albuns } = await sql<AlbumDoBanco>`
+    SELECT id, titulo, descricao, categoria, subcategoria, imagens 
+    FROM albums 
+    ORDER BY created_at DESC;
+  `;
 
-  const CategoriaGroup = ({
-    categoria,
-    projetos,
-  }: {
-    categoria: string;
-    projetos: Projeto[];
-  }) => {
-    return (
-      <div className="mb-3 last:mb-0 group relative rounded-lg overflow-hidden">
-        <div className="transition-transform duration-300 ease-in-out h-[400px] md:h-[500px] lg:h-[600px] relative flex items-center justify-center">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <CustomSwiper
-              mode="albuns"
-              photos={projetos}
-              tagName={categoria}
-              hidePagination={false}
-              onSlideClick={() => {
-                router.push(`/albuns/categoria/${encodeURIComponent(categoria)}`);
-              }}
-            />
-          </div>
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none bg-gradient-to-t from-black/50 to-transparent">
-            <TituloResponsivo className="text-white text-3xl md:text-5xl lg:text-6xl font-semibold px-4 py-2 rounded-md opacity-100 transition-all duration-300 group-hover:opacity-0 group-hover:transform group-hover:translate-y-4">
-              {categoria}
-            </TituloResponsivo>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  // 2. Processa e agrupa os dados no servidor
+  const projetosPorCategoria = agruparAlbunsPorCategoria(albuns);
 
-  return (
-    <div className="space-y-0 md:space-y-8 py-4">
-      {Object.entries(projetosPorCategoria)
-        .filter(([_, projetos]) => projetos.length > 0)
-        .map(([categoria, projetos]) => (
-          <CategoriaGroup key={categoria} categoria={categoria} projetos={projetos} />
-        ))}
-    </div>
-  );
+  // 3. Renderiza o Componente de Cliente, passando os dados prontos como props
+  return <AlbunsClient projetosPorCategoria={projetosPorCategoria} />;
 }
+
+// Opcional: Garante que a página sempre busque os dados mais recentes
+export const revalidate = 0;
