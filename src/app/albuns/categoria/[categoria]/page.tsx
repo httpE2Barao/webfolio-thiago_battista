@@ -1,50 +1,56 @@
-import { Projeto, PageProps } from "@/types/types";
-import { projetos as projetosData } from "@/data/projetos";
-import { AlbumCategoryClient } from './AlbumCategoryClient';
+// src/app/albuns/categoria/[categoria]/page.tsx
+
+import { sql } from '@/lib/db';
+import { Projeto, PageProps } from "@/types/types"; // Voltamos a usar o PageProps global
+import AlbumCategoryClient from './AlbumCategoryClient';
 import { Metadata } from "next";
 
-// Helper to get all albums of a category with their complete photo sets
-function getAlbunsByCategory(categoria: string): Projeto[] {
+// Helper para buscar todos os álbuns de uma categoria específica
+async function getAlbunsByCategory(categoria: string): Promise<Projeto[]> {
   const normalizedCategoria = categoria.toLowerCase().trim();
 
-  return Object.entries(projetosData)
-    .filter(([albumName, album]) =>
-      album.categoria?.toLowerCase() === normalizedCategoria ||
-      album.subcategoria?.toLowerCase() === normalizedCategoria
-    )
-    .flatMap(([albumName, album]) =>
-      album.imagens.map(imagem => ({
-        id: imagem.id,
-        imagem: imagem.imagem,
-        albumName,
-        // Se o título não estiver definido na foto, usa o nome do álbum
-        titulo: album.titulo || albumName,
-        descricao: album.descricao,
-        categoria: album.categoria,
-        subcategoria: album.subcategoria
-      }))
-    )
-    .filter(projeto =>
-      projeto.categoria?.toLowerCase() === normalizedCategoria ||
-      projeto.subcategoria?.toLowerCase() === normalizedCategoria
-    );
+  const { rows: albums } = await sql`
+    SELECT id, titulo, descricao, categoria, subcategoria, imagens 
+    FROM albums 
+    WHERE lower(categoria) = ${normalizedCategoria};
+  `;
+
+  if (albums.length === 0) {
+    return [];
+  }
+
+  const allPhotos = albums.flatMap(album => {
+    const imagensArray = typeof album.imagens === 'string' ? JSON.parse(album.imagens) : album.imagens || [];
+    
+    return imagensArray.map((imagem: { id: string, imagem: string }) => ({
+      id: imagem.id,
+      imagem: imagem.imagem,
+      albumName: album.titulo,
+      titulo: album.titulo || album.id,
+      descricao: album.descricao,
+      categoria: album.categoria,
+      subcategoria: album.subcategoria,
+    }));
+  });
+
+  return allPhotos;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  // Directly use params because it’s a synchronous object
-  const resolvedParams = await params;
-  const categoria = decodeURIComponent(resolvedParams.categoria || '');
+// Gera os metadados dinamicamente usando o PageProps corrigido
+export async function generateMetadata({ params }: PageProps<{ categoria: string }>): Promise<Metadata> {
+  const categoria = decodeURIComponent(params.categoria || '');
+  const formattedCategoria = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+
   return {
-    title: `${categoria} - Thiago Battista`,
-    description: `Álbuns da categoria ${categoria}`,
+    title: `${formattedCategoria} - Thiago Battista`,
+    description: `Álbuns da categoria ${formattedCategoria}`,
   };
 }
 
-export default async function CategoriaPage({ params }: PageProps) {
-  // Await params to get the resolved value
-  const resolvedParams = await params;
-  const categoria = decodeURIComponent(resolvedParams.categoria || '');
-  const albums = getAlbunsByCategory(categoria);
+// A página Server Component usando o PageProps corrigido
+export default async function CategoriaPage({ params }: PageProps<{ categoria: string }>) {
+  const categoria = decodeURIComponent(params.categoria || '');
+  const albums = await getAlbunsByCategory(categoria);
 
   return <AlbumCategoryClient albums={albums} categoria={categoria} />;
 }

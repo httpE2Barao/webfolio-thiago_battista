@@ -20,8 +20,11 @@ export function AlbumCompletoClient({
     setModalOpen(true);
   };
 
+  // Garante que o array de imagens existe e não está vazio
+  const imagensValidas = album?.imagens?.filter(img => img && img.imagem) || [];
+
   return (
-    <div className="lg:p-4 relative flex flex-col h-screen">
+    <div className="lg:p-4 relative flex flex-col min-h-screen">
       <TituloResponsivo className="mb-2 text-center flex-none">
         {albumName.replace(/-/g, " ")}
       </TituloResponsivo>
@@ -32,10 +35,14 @@ export function AlbumCompletoClient({
         </p>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 mt-2 flex-none">
-        {album.imagens.map((imagem, index) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 mt-2 flex-grow">
+        {/* MUDANÇAS AQUI:
+        1. Usamos 'imagensValidas' para evitar erros de 'src' vazio.
+        2. Adicionamos a prop 'key' usando o 'imagem.id', que é único.
+      */}
+        {imagensValidas.map((imagem, index) => (
           <div
-            key={imagem.id}
+            key={imagem.id} // <-- CORREÇÃO 1: Adicionada a key única
             className="relative w-full h-64 xl:h-80 cursor-pointer group overflow-hidden"
             onClick={() => handlePhotoClick(index)}
           >
@@ -43,9 +50,9 @@ export function AlbumCompletoClient({
               src={imagem.imagem}
               alt={album.titulo}
               fill
-              priority
-              quality={40}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+              priority={index < 8} // Otimiza o carregamento das primeiras imagens
+              quality={75}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
             />
           </div>
@@ -55,7 +62,7 @@ export function AlbumCompletoClient({
       {modalOpen && (
         <CustomSwiper
           mode="fotos"
-          photos={album.imagens.map((img) => ({
+          photos={imagensValidas.map((img) => ({
             ...img,
             titulo: album.titulo,
             descricao: album.descricao,

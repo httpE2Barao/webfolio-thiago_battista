@@ -5,13 +5,12 @@ export interface Projeto {
   imagem: string;
   categoria?: string;
   subcategoria?: string;
-  tags?: string[];
-  albumName?: string;
-  tagName?: string;
+  albumName?: string; // Usado para navegação
 }
 
 // Ajuste aqui: se você quiser objetos com { id, imagem } em cada item do array
 export interface Album {
+  id: string;
   titulo: string;
   descricao: string;
   categoria: string;
@@ -27,7 +26,7 @@ export type Projetos = {
     titulo: string;
     descricao: string;
     tags: string[];
-    imagens: { id: string; imagem: string }[]; 
+    imagens: { id: string; imagem: string }[];
     categoria: string;
     subcategoria: string;
   };
@@ -42,9 +41,9 @@ export interface SearchParams {
   [key: string]: string | string[] | undefined;
 }
 
-export interface PageProps {
-  params: Promise<PageParams>;
-  searchParams?: Promise<SearchParams>;
+export interface PageProps<T = {}> {
+  params: T;
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 // Aqui estava o problema: "imagens: string[];"
@@ -52,7 +51,7 @@ export interface AlbumData {
   id: string;
   titulo: string;
   descricao: string;
-  imagens: { id: string; imagem: string }[]; 
+  imagens: { id: string; imagem: string }[];
   tags: string[];
 }
 

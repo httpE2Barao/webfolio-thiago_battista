@@ -7,14 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-projects": "ts-node albuns.js"
+    "db:seed": "node src/lib/seed.js"
   },
   "dependencies": {
     "@tanstack/react-virtual": "^3.13.0",
-    "@vercel/blob": "^1.1.1",
     "@vercel/postgres": "^0.10.0",
     "build": "^0.1.4",
-    "next": "^15.1.4",
+    "cloudinary": "^2.7.0",
+    "dotenv": "^16.6.1",
+    "next": "^15.3.4",
     "npm": "^11.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

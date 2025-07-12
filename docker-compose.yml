@@ -1,0 +1,40 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Serviço do Banco de Dados PostgreSQL
+  db:
+    image: postgres:16-alpine
+    container_name: portfolio-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432" # Expõe a porta do DB para o seu computador (host)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persiste os dados do banco
+  
+  # Serviço da Aplicação Next.js
+  web:
+    build: . # Constrói a imagem a partir do Dockerfile na pasta atual
+    container_name: portfolio-web
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app # Mapeia o código local para dentro do contêiner para live-reloading
+      - /app/node_modules # Evita que a node_modules local sobrescreva a do contêiner
+      - /app/.next # Evita que a pasta .next local sobrescreva a do contêiner
+    depends_on:
+      - db # Garante que o serviço do banco de dados inicie antes da aplicação
+    environment:
+      # URL de conexão para a aplicação DENTRO do Docker
+      POSTGRES_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
+      # Garante que o Next.js recarregue ao detectar mudanças de arquivos
+      WATCHPACK_POLLING: "true"
+
+volumes:
+  postgres_data: # Define o volume para persistência dos dados

@@ -12,6 +12,13 @@ export interface GenerateMetadataProps {
   searchParams?: SearchParams;
 }
 
+// src/types/next.d.ts
+
+// As definições de PageProps e SearchParams foram movidas para types.ts
+// para evitar conflitos de tipo durante o build.
+
+// Este arquivo agora apenas declara os módulos de imagem.
+
 declare module '*.jpg' {
   const content: string;
   export default content;

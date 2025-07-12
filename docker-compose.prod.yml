@@ -1,0 +1,36 @@
+# docker-compose.prod.yml
+
+services:
+  # O serviço do banco de dados continua o mesmo
+  db:
+    image: postgres:16-alpine
+    container_name: portfolio-db-prod
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+  
+  # Serviço da Aplicação em modo de PRODUÇÃO
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod # Usa o nosso novo Dockerfile
+    container_name: portfolio-web-prod
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      # A URL para se conectar ao banco DENTRO da rede Docker
+      POSTGRES_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
+      # Define o ambiente como produção para o Next.js
+      NODE_ENV: production
+
+volumes:
+  postgres_data_prod:

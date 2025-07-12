@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body,
+body > div:first-child,
+div#__next,
+div#__next > div {
+  height: 100%;
+}
+
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
@@ -29,13 +37,21 @@ body {
 /* Regras adicionais para personalização */
 .swiper-button-next,
 .swiper-button-prev {
+  /* Força a visibilidade */
+  opacity: 0.7 !important; 
+  
+  /* Garante que fiquem acima de qualquer sobreposição */
+  z-index: 20 !important; 
+
   color: white !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.2s ease, color 0.2s ease;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  color: #0056b3;
+  opacity: 1 !important;
+  color: #dddddd !important;
 }
 
 .swiper-container-albuns {
@@ -46,7 +62,7 @@ body {
 
 .swiper-container-albuns .swiper-slide {
   transform: scale(1);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
   position: relative;
   overflow: hidden;
@@ -61,7 +77,7 @@ body {
   height: 100%;
   object-fit: cover;
   border-radius: 8px;
-  transition: transform 0.3s ease-out;
+  transition: transform 0.5s ease-out;
   max-height: none;
   position: absolute;
   inset: 0;
@@ -77,22 +93,29 @@ body {
 }
 
 .loader {
-  border: 16px solid #f3f3f3; /* Light grey */
-  border-top: 16px solid #3498db; /* Blue */
+  border: 8px solid #f3f3f3;
+  /* Light grey */
+  border-top: 8px solid #3498db;
+  /* Blue */
   border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-top: -60px;
-  margin-left: -60px;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
+  margin-top: -30px;
+  margin-left: -30px;
+  width: 60px;
+  height: 60px;
+  animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .swiper-fullsize {
@@ -124,4 +147,44 @@ body {
 .swiper-fullsize.modal {
   position: fixed !important;
   height: 100vh !important;
+}
+
+/* NOVA REGRA: Torna os botões de navegação sempre visíveis 
+  no carrossel da página inicial que tem a classe '.swiper-homepage'
+*/
+.swiper-homepage .swiper-button-next,
+.swiper-homepage .swiper-button-prev {
+  opacity: 0.7 !important;
+}
+
+.swiper-homepage .swiper-button-next:hover,
+.swiper-homepage .swiper-button-prev:hover {
+  opacity: 1 !important;
+}
+
+/* Adiciona uma sombra sutil ao título para melhor legibilidade */
+.text-shadow-lg {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* 1. Adiciona uma transição suave para o efeito de zoom na imagem */
+.album-card .swiper-slide img {
+  transition: transform 0.5s ease-in-out;
+}
+
+/* 2. Aplica o zoom na IMAGEM dentro do slide quando o mouse está sobre o card */
+.album-card:hover .swiper-slide img {
+  transform: scale(1.05);
+}
+
+/* --- LÓGICA DOS TÍTULOS (permanece a mesma) --- */
+
+/* Esconde o título da categoria quando o mouse está sobre o card */
+.album-card:hover .title-container-categoria {
+  opacity: 0;
+}
+
+/* Mostra o título do álbum quando o mouse está sobre o card */
+.album-card:hover .title-container-album {
+  opacity: 1;
 }

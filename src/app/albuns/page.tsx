@@ -1,66 +1,59 @@
 // src/app/albuns/page.tsx
 
-import { sql } from '@vercel/postgres';
-import { Projeto } from '@/types/types'; 
+import { sql } from '@/lib/db';
+import type { Projeto, Album } from '@/types/types';
 import AlbunsClient from './AlbunsClient';
 
-// Definindo a estrutura do que vem do banco de dados
-interface AlbumDoBanco {
+interface AlbumDoBanco extends Album {
   id: string;
-  titulo: string;
-  descricao: string;
-  categoria: string;
-  subcategoria: string;
-  imagens: string[]; // Vem como um array de URLs
 }
 
-// Esta função de agrupamento agora roda no servidor!
 function agruparAlbunsPorCategoria(albuns: AlbumDoBanco[]): Record<string, Projeto[]> {
   const projetosPorCategoria: Record<string, Projeto[]> = {};
 
   albuns.forEach((album) => {
-    // Se não houver imagens, ignoramos o álbum
     if (!album.imagens || album.imagens.length === 0) {
       return;
     }
 
-    const mainCategory = album.categoria || "outros";
+    const mainCategory = (album.categoria || "outros").trim().toLowerCase();
     if (!projetosPorCategoria[mainCategory]) {
       projetosPorCategoria[mainCategory] = [];
     }
     
-    // Criamos um objeto 'Projeto' para o componente cliente
     projetosPorCategoria[mainCategory].push({
       id: album.id,
       titulo: album.titulo,
       descricao: album.descricao,
-      imagem: album.imagens[0], // A imagem de capa é a primeira da lista
+      imagem: album.imagens[0].imagem,
       categoria: album.categoria,
       subcategoria: album.subcategoria,
-      albumName: album.id,
+      albumName: album.titulo,
     });
   });
 
   return projetosPorCategoria;
 }
 
-
-// Este é o Componente de Servidor. Ele é async!
 export default async function AlbunsPage() {
-  
-  // 1. Busca todos os álbuns do banco de dados
-  const { rows: albuns } = await sql<AlbumDoBanco>`
-    SELECT id, titulo, descricao, categoria, subcategoria, imagens 
-    FROM albums 
-    ORDER BY created_at DESC;
+  const { rows } = await sql`
+    SELECT id, titulo, descricao, categoria, subcategoria, imagens
+    FROM albums ORDER BY titulo ASC;
   `;
 
-  // 2. Processa e agrupa os dados no servidor
-  const projetosPorCategoria = agruparAlbunsPorCategoria(albuns);
+  // CORREÇÃO: Usamos o spread operator `...row` para copiar todas as propriedades.
+  const albunsCompletos: AlbumDoBanco[] = rows.map(row => ({
+    ...row,
+    imagens: typeof row.imagens === 'string' ? JSON.parse(row.imagens) : (row.imagens || []),
+  })) as AlbumDoBanco[];
 
-  // 3. Renderiza o Componente de Cliente, passando os dados prontos como props
-  return <AlbunsClient projetosPorCategoria={projetosPorCategoria} />;
+  const projetosPorCategoria = agruparAlbunsPorCategoria(albunsCompletos);
+
+  return (
+    <div className="p-4 md:p-8">
+      <AlbunsClient projetosPorCategoria={projetosPorCategoria} />
+    </div>
+  );
 }
 
-// Opcional: Garante que a página sempre busque os dados mais recentes
 export const revalidate = 0;
