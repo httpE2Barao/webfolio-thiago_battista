@@ -8,7 +8,7 @@ function getAlbunsByCategory(categoria: string): Projeto[] {
   const normalizedCategoria = categoria.toLowerCase().trim();
 
   return Object.entries(projetosData)
-    .filter(([albumName, album]) =>
+    .filter(([, album]) =>
       album.categoria?.toLowerCase() === normalizedCategoria ||
       album.subcategoria?.toLowerCase() === normalizedCategoria
     )

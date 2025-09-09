@@ -76,7 +76,7 @@ export function AlbumCategoryClient({ albums, categoria }: AlbumCategoryClientPr
         {formattedCategoria}
       </TituloResponsivo>
       {Object.entries(albumsByTitle)
-        .filter(([_, photos]) => photos.length > 0)
+        .filter(([, photos]) => photos.length > 0)
         .map(([titulo, albumPhotos]) => (
           <AlbumGroup key={titulo} titulo={titulo} albumPhotos={albumPhotos} />
         ))}

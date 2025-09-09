@@ -54,7 +54,7 @@ async function regenerateProjetos(): Promise<void> {
   };
 
   // Para simplificar, usamos "outros" e "geral" como categoria padrão
-  const getProjectCategory = (folderName: string): { main: string; sub: string } => {
+  const getProjectCategory = (_folderName: string): { main: string; sub: string } => {
     return { main: 'outros', sub: 'geral' };
   };
 
@@ -175,7 +175,7 @@ async function commitAndPushChanges(): Promise<void> {
     const remoteUrl = `https://${gitUser}:${gitToken}@${gitRemoteHost}`;
     try {
       await execAsync(`git remote set-url origin ${remoteUrl}`);
-    } catch (e) {
+    } catch (_e) {
       console.warn("Remote 'origin' não encontrado. Adicionando remote 'origin'.");
       await execAsync(`git remote add origin ${remoteUrl}`);
     }
@@ -247,8 +247,8 @@ export async function POST(request: Request): Promise<NextResponse> {
     await commitAndPushChanges();
 
     return NextResponse.json({ message: 'Álbum enviado com sucesso!' }, { status: 200 });
-  } catch (err: any) {
-    console.error("Erro no upload do álbum:", err.message);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (err: unknown) {
+    console.error("Erro no upload do álbum:", err instanceof Error ? err.message : 'Unknown error');
+    return NextResponse.json({ error: err instanceof Error ? err.message : 'Unknown error' }, { status: 500 });
   }
 }

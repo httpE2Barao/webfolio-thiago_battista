@@ -11,7 +11,7 @@ import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 
-import { projetos as data } from "@/data/projetos";
+import { projetos as data, loadProjetosFromDB } from "@/data/projetos-db";
 import { shuffleArray } from "@/lib/shuffleArray";
 
 // Importação dinâmica do componente TituloResponsivo
@@ -35,11 +35,12 @@ type CustomSwiperProps = {
   onSlideChange?: (projeto: Projeto) => void;
 };
 
-const isRandomizedTag = (item: any): item is RandomizedTag =>
+const isRandomizedTag = (item: unknown): item is RandomizedTag =>
   item !== null &&
   typeof item === "object" &&
   "tagName" in item &&
   "foto" in item &&
+  item.foto !== null &&
   typeof item.foto === "object" &&
   "id" in item.foto;
 
@@ -168,9 +169,19 @@ export default function CustomSwiper({
   }, [mode, photos, tagName]);
 
   useEffect(() => {
-    setIsLoading(true);
-    loadSlides();
-    setIsLoading(false);
+    const initializeData = async () => {
+      setIsLoading(true);
+      
+      // Carrega dados do banco de dados se estiver vazio
+      if (Object.keys(data).length === 0) {
+        await loadProjetosFromDB();
+      }
+      
+      loadSlides();
+      setIsLoading(false);
+    };
+
+    initializeData();
 
     return () => {
       setSlides([]);
@@ -199,14 +210,17 @@ export default function CustomSwiper({
     (project: ProjetoComTag | RandomizedTag, index: number) => {
       if (modal) return;
       if (isRandomizedTag(project)) {
-        onSlideClick
-          ? onSlideClick(project.foto, index)
-          : router.push(`/albuns/${encodeURIComponent(project.tagName)}`);
+        if (onSlideClick) {
+          onSlideClick(project.foto, index);
+        } else {
+          router.push(`/albuns/${encodeURIComponent(project.tagName)}`);
+        }
       } else {
-        onSlideClick
-          ? onSlideClick(project, index)
-          : project.categoria &&
-            router.push(`/albuns/${encodeURIComponent(project.categoria)}`);
+        if (onSlideClick) {
+          onSlideClick(project, index);
+        } else if (project.categoria) {
+          router.push(`/albuns/${encodeURIComponent(project.categoria)}`);
+        }
       }
     },
     [modal, onSlideClick, router]
@@ -222,7 +236,7 @@ export default function CustomSwiper({
   );
 
   const swiperConfig = useMemo(() => {
-    const config: any = {
+    const config: Record<string, unknown> = {
       modules: [Navigation, EffectFade, Keyboard],
       // Força o efeito fade para evitar empilhamento de slides
       effect: "fade",

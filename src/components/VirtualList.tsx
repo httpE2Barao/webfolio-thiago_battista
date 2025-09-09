@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 
 // Virtual list implementation for efficient rendering
@@ -10,7 +10,7 @@ export function VirtualList({
   parentHeight = '100%',
   estimateSize = 400 
 }: {
-  items: any[];
+  items: unknown[];
   renderItem: (index: number) => React.ReactNode;
   parentHeight?: string | number;
   estimateSize?: number;

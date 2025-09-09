@@ -1,4 +1,3 @@
-import { Metadata } from "next";
 
 export type SearchParams = { [key: string]: string | string[] | undefined };
 
