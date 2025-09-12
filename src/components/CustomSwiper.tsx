@@ -1,8 +1,8 @@
 "use client";
 
-import React, { Suspense, useCallback, useMemo, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useMemo, useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, Keyboard } from "swiper/modules";
+import { Navigation, Keyboard, Zoom } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css/bundle";
 
@@ -10,7 +10,6 @@ import type { Projeto, Projetos, RandomizedTag, ProjetoComTag } from "@/types/ty
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
-
 import { projetos as data, loadProjetosFromDB } from "@/data/projetos-db";
 import { shuffleArray } from "@/lib/shuffleArray";
 
@@ -33,6 +32,7 @@ type CustomSwiperProps = {
   fullSize?: boolean;
   priority?: boolean;
   onSlideChange?: (projeto: Projeto) => void;
+  onAlbumChange?: (albumName: string, category: string) => void;
 };
 
 const isRandomizedTag = (item: unknown): item is RandomizedTag =>
@@ -71,6 +71,9 @@ const SwiperImage = React.memo(
           : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       }
       className={`${modal || fullSize ? "object-contain !p-4" : "object-cover"}`}
+      style={{
+        aspectRatio: modal || fullSize ? 'auto' : '4/3',
+      }}
       priority={priority && index === 0}
       quality={modal ? 100 : 80}
       loading={index < 3 ? "eager" : "lazy"}
@@ -91,6 +94,7 @@ export default function CustomSwiper({
   fullSize = false,
   priority = false,
   onSlideChange,
+  onAlbumChange,
 }: CustomSwiperProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -138,15 +142,15 @@ export default function CustomSwiper({
       const album = projetosData[tagName];
       const albumPhotos = album && album.imagens
         ? album.imagens.map((item, index) => ({
-            id: `${tagName}-${index}`,
-            titulo: album.titulo,
-            descricao: album.descricao,
-            imagem: item.imagem,
-            categoria: album.categoria,
-            subcategoria: album.subcategoria,
-            albumName: tagName,
-            tagName: tagName,
-          }))
+          id: `${tagName}-${index}`,
+          titulo: album.titulo,
+          descricao: album.descricao,
+          imagem: item.imagem,
+          categoria: album.categoria,
+          subcategoria: album.subcategoria,
+          albumName: tagName,
+          tagName: tagName,
+        }))
         : [];
       setSlides(albumPhotos);
     } else if (mode === "fotos" || mode === "tags") {
@@ -171,12 +175,12 @@ export default function CustomSwiper({
   useEffect(() => {
     const initializeData = async () => {
       setIsLoading(true);
-      
+
       // Carrega dados do banco de dados se estiver vazio
       if (Object.keys(data).length === 0) {
         await loadProjetosFromDB();
       }
-      
+
       loadSlides();
       setIsLoading(false);
     };
@@ -189,6 +193,23 @@ export default function CustomSwiper({
     };
   }, [loadSlides]);
 
+  // Adicionar evento de tecla ESC para fechar modal
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && modal && onClose) {
+        onClose();
+      }
+    };
+
+    if (modal) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [modal, onClose]);
+
   const handleSlideChange = useCallback(
     (swiper: SwiperType) => {
       const currentIndex = swiper.realIndex;
@@ -198,12 +219,16 @@ export default function CustomSwiper({
       if (isRandomizedTag(activeSlide)) {
         setCurrentTitle(activeSlide.tagName);
         onSlideChange?.(activeSlide.foto);
+        // Pass album name and category to parent component
+        onAlbumChange?.(activeSlide.tagName, activeSlide.foto.categoria || "");
       } else {
         setCurrentTitle(activeSlide.tagName || activeSlide.categoria || "");
         onSlideChange?.(activeSlide);
+        // Pass album name and category to parent component
+        onAlbumChange?.(activeSlide.albumName || activeSlide.tagName || "", activeSlide.categoria || "");
       }
     },
-    [slides, onSlideChange]
+    [slides, onSlideChange, onAlbumChange]
   );
 
   const handleClick = useCallback(
@@ -230,17 +255,16 @@ export default function CustomSwiper({
   const containerClasses = useMemo(
     () =>
       modal
-        ? "fixed inset-0 z-[9999] bg-black bg-opacity-95 flex items-center justify-center h-[100vh] w-full"
+        ? "fixed inset-0 z-[9999] flex items-center justify-center h-[100vh] w-full backdrop-blur-sm"
         : "relative w-full h-[calc(100vh-35px)]",
     [modal]
   );
 
   const swiperConfig = useMemo(() => {
     const config: Record<string, unknown> = {
-      modules: [Navigation, EffectFade, Keyboard],
-      // Força o efeito fade para evitar empilhamento de slides
-      effect: "fade",
-      fadeEffect: { crossFade: true },
+      modules: [Navigation, Keyboard, Zoom],
+      // Usar slide effect em vez de fade para melhor navegação
+      effect: "slide",
       spaceBetween: 0,
       slidesPerView: 1,
       navigation: true,
@@ -248,9 +272,14 @@ export default function CustomSwiper({
       loop: slides.length > 1,
       initialSlide,
       keyboard: { enabled: true, onlyInViewport: false },
-      className: `swiper-container ${
-        fullSize ? "swiper-fullsize" : ""
-      } ${modal ? "modal" : ""} ${mode === "albuns" ? "swiper-container-albuns" : ""}`,
+      zoom: {
+        maxRatio: 3,
+        minRatio: 1,
+        toggle: true,
+        containerClass: 'swiper-zoom-container',
+      },
+      className: `swiper-container ${fullSize ? "swiper-fullsize" : ""
+        } ${modal ? "modal" : ""} ${mode === "albuns" ? "swiper-container-albuns" : ""}`,
       onSlideChange: handleSlideChange,
     };
     return config;
@@ -275,13 +304,14 @@ export default function CustomSwiper({
   if (slides.length === 0) {
     return (
       <div className={containerClasses}>
-        <div className="text-xl text-white">Nenhuma foto encontrada</div>
+        <div className="text-xl" style={{ color: 'var(--foreground)' }}>Nenhuma foto encontrada</div>
       </div>
     );
   }
 
   return (
-    <div id={`swiper-container-${tagName}`} className={containerClasses}>
+    <div id={`swiper-container-${tagName}`} className={containerClasses}
+      style={modal ? { backgroundColor: 'var(--overlay-strong)' } : {}}>
       <Suspense fallback={<div className="loader" />}>
         <Swiper {...swiperConfig}>
           {slides.map((slide, index) => (
@@ -295,52 +325,48 @@ export default function CustomSwiper({
                 e.preventDefault();
                 handleClick(slide, index);
               }}
-              className={`relative ${!modal && "cursor-pointer"}`}
+              className={`relative ${modal ? "cursor-zoom-in" : "cursor-pointer"}`}
             >
-              <div
-                className={
-                  modal
-                    ? "relative w-full h-full flex items-center justify-center"
-                    : fullSize
-                    ? "relative w-full h-full flex items-center justify-center bg-black/5"
-                    : "relative w-full h-full overflow-hidden rounded-md"
-                }
-              >
-                <SwiperImage
-                  src={
-                    isRandomizedTag(slide)
-                      ? slide.foto.imagem
-                      : slide.imagem
+              <div className="swiper-zoom-container">
+                <div
+                  className={
+                    modal
+                      ? "relative w-full h-full flex items-center justify-center"
+                      : fullSize
+                        ? "relative w-full h-full flex items-center justify-center"
+                        : "relative w-full h-full overflow-hidden rounded-md"
                   }
-                  alt={
-                    isRandomizedTag(slide)
-                      ? slide.tagName
-                      : slide.titulo
-                  }
-                  modal={modal}
-                  fullSize={fullSize}
-                  priority={priority}
-                  index={index}
-                />
+                >
+                  <SwiperImage
+                    src={
+                      isRandomizedTag(slide)
+                        ? slide.foto.imagem
+                        : slide.imagem
+                    }
+                    alt={
+                      isRandomizedTag(slide)
+                        ? slide.tagName
+                        : slide.titulo
+                    }
+                    modal={modal}
+                    fullSize={fullSize}
+                    priority={priority}
+                    index={index}
+                  />
+                </div>
               </div>
             </SwiperSlide>
           ))}
         </Swiper>
 
-        {mode === "albuns" && !photos && !modal && currentTitle && isHomePage && (
-          <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-            <div className="max-w-[90%] md:max-w-3xl mx-auto">
-              <TituloResponsivo className="text-white text-4xl sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl font-bold px-4 py-2 rounded-md text-center capitalize break-words">
-                {currentTitle.replace(/-/g, " ")}
-              </TituloResponsivo>
-            </div>
-          </div>
-        )}
-
         {modal && (
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white rounded-full w-10 h-10 flex items-center justify-center text-2xl z-[10000] transition-colors"
+            className="absolute top-4 right-4 rounded-full w-10 h-10 flex items-center justify-center text-2xl z-[10000] transition-colors"
+            style={{
+              backgroundColor: 'var(--overlay)',
+              color: 'var(--foreground)'
+            }}
             aria-label="Fechar"
           >
             ✕

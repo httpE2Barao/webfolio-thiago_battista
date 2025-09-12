@@ -1,9 +1,9 @@
 "use client"
-import Image from "next/image";
 import { useState } from "react";
 import CustomSwiper from "@/components/CustomSwiper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { Album } from "@/types/types";
+import { OptimizedImage, useImagePreloader } from "@/components/OptimizedImage";
 
 export function AlbumCompletoClient({
   album,
@@ -14,6 +14,10 @@ export function AlbumCompletoClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [initialIndex, setInitialIndex] = useState(0);
+  
+  // Preload images for better performance
+  const imageUrls = album.imagens.map(img => img.imagem);
+  useImagePreloader(imageUrls);
 
   const handlePhotoClick = (index: number) => {
     setInitialIndex(index);
@@ -39,14 +43,11 @@ export function AlbumCompletoClient({
             className="relative w-full h-64 xl:h-80 cursor-pointer group overflow-hidden"
             onClick={() => handlePhotoClick(index)}
           >
-            <Image
+            <OptimizedImage
               src={imagem.imagem}
               alt={album.titulo}
-              fill
-              priority
-              quality={40}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-              className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+              className="object-cover object-center rounded-lg transition-transform duration-300 group-hover:scale-105 w-full h-full"
+              priority={index < 4} // Priority for first 4 images
             />
           </div>
         ))}

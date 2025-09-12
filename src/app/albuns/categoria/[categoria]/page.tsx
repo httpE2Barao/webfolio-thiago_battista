@@ -1,11 +1,12 @@
 import { Projeto, PageProps } from "@/types/types";
-import { projetos as projetosData } from "@/data/projetos";
+import { getCachedProjetos } from "@/lib/cache";
 import { AlbumCategoryClient } from './AlbumCategoryClient';
 import { Metadata } from "next";
 
 // Helper to get all albums of a category with their complete photo sets
-function getAlbunsByCategory(categoria: string): Projeto[] {
+async function getAlbunsByCategory(categoria: string): Promise<Projeto[]> {
   const normalizedCategoria = categoria.toLowerCase().trim();
+  const projetosData = await getCachedProjetos();
 
   return Object.entries(projetosData)
     .filter(([, album]) =>
@@ -17,7 +18,6 @@ function getAlbunsByCategory(categoria: string): Projeto[] {
         id: imagem.id,
         imagem: imagem.imagem,
         albumName,
-        // Se o título não estiver definido na foto, usa o nome do álbum
         titulo: album.titulo || albumName,
         descricao: album.descricao,
         categoria: album.categoria,
@@ -44,7 +44,7 @@ export default async function CategoriaPage({ params }: PageProps) {
   // Await params to get the resolved value
   const resolvedParams = await params;
   const categoria = decodeURIComponent(resolvedParams.categoria || '');
-  const albums = getAlbunsByCategory(categoria);
+  const albums = await getAlbunsByCategory(categoria);
 
   return <AlbumCategoryClient albums={albums} categoria={categoria} />;
 }

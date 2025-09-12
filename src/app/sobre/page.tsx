@@ -4,7 +4,7 @@ import ResponsiveText from "@/components/ResponsiveText";
 import TituloResponsivo from "@/components/TituloResponsivo";
 
 const Highlight = ({ children }: { children: React.ReactNode }) => {
-  return <span className="text-red-500">{children}</span>;
+  return <span style={{ color: 'var(--accent)' }}>{children}</span>;
 };
 
 export const dynamic = "force-dynamic";

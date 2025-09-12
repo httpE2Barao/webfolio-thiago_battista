@@ -18,6 +18,27 @@ const nextConfig: NextConfig = {
   eslint: {
       ignoreDuringBuilds: true,
     },
+  webpack: (config, { isServer }) => {
+    // Fix for Swiper vendor chunks issue
+    if (!isServer) {
+      config.optimization = {
+        ...config.optimization,
+        splitChunks: {
+          ...config.optimization?.splitChunks,
+          chunks: 'all',
+          cacheGroups: {
+            swiper: {
+              test: /[\\/]node_modules[\\/]swiper[\\/]/,
+              name: 'swiper',
+              chunks: 'all',
+              priority: 20,
+            },
+          },
+        },
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

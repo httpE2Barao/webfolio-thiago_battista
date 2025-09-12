@@ -1,113 +1,47 @@
-import CustomSwiper from "@/components/CustomSwiper";
+import CategoriaGroup from "@/components/CategoriaGroup";
 import TituloResponsivo from "@/components/TituloResponsivo";
-import { Projeto, Projetos } from "@/types/types";
-
-async function getProjetosData(): Promise<Projetos> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/projetos`, {
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch projetos');
-    }
-    
-    return await response.json();
-  } catch (error) {
-    console.error('Error fetching projetos:', error);
-    return {};
-  }
-}
-/**
- * Agrupa os álbuns (agora objetos) por categoria.
- * Cada entrada do objeto 'projetosData' é um álbum contendo:
- * {
- *   id: string;
- *   titulo: string;
- *   descricao: string;
- *   tags: string[];
- *   imagens: { id: string; imagem: string }[];
- *   categoria: string;
- *   subcategoria: string;
- * }
- */
-function agruparProjetosPorCategoria(projetos: Projetos): Record<string, Projeto[]> {
-  const projetosPorCategoria: Record<string, Projeto[]> = {};
-
-  Object.entries(projetos).forEach(([albumName, albumData]) => {
-    // Se não houver imagens, ignoramos
-    if (!albumData.imagens || albumData.imagens.length === 0) {
-      return;
-    }
-
-    const mainCategory = albumData.categoria || "outros";
-    if (!projetosPorCategoria[mainCategory]) {
-      projetosPorCategoria[mainCategory] = [];
-    }
-
-    // Criamos um objeto 'Projeto' com as informações necessárias
-    projetosPorCategoria[mainCategory].push({
-      id: albumName, // Usamos o nome do álbum como ID
-      titulo: albumName, // Se preferir, use albumData.titulo
-      descricao: albumData.descricao,
-      imagem: albumData.imagens[0].imagem, // Imagem principal (a primeira do array)
-      categoria: albumData.categoria,
-      subcategoria: albumData.subcategoria,
-      albumName, // guarda o nome do álbum original
-    });
-  });
-
-  return projetosPorCategoria;
-}
+import { getCachedCategorias } from "@/lib/cache";
 
 export const dynamic = "force-dynamic";
 
-// Cliente component for interactivity
-function CategoriaGroup({
-  categoria,
-  projetos,
-}: {
-  categoria: string;
-  projetos: Projeto[];
-}) {
+export default async function AlbunsPage() {
+  const projetosPorCategoria = await getCachedCategorias();
+  const totalCategorias = Object.keys(projetosPorCategoria).length;
+  const totalProjetos = Object.values(projetosPorCategoria).reduce((acc, projetos) => acc + projetos.length, 0);
+
   return (
-    <div className="mb-3 last:mb-0 group relative rounded-lg overflow-hidden">
-      <div className="transition-transform duration-300 ease-in-out h-[400px] md:h-[500px] lg:h-[600px] relative flex items-center justify-center">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <CustomSwiper
-            mode="albuns"
-            photos={projetos}
-            tagName={categoria}
-            hidePagination={false}
-            onSlideClick={() => {
-              window.location.href = `/albuns/categoria/${encodeURIComponent(categoria)}`;
-            }}
-          />
-        </div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none bg-gradient-to-t from-black/50 to-transparent">
-          <TituloResponsivo className="text-white text-3xl md:text-5xl lg:text-6xl font-semibold px-4 py-2 rounded-md opacity-100 transition-all duration-300 group-hover:opacity-0 group-hover:transform group-hover:translate-y-4">
-            {categoria}
-          </TituloResponsivo>
+    <div className="min-h-screen">
+      {/* Hero section */}
+      <div className="text-center py-16 px-4">
+        <TituloResponsivo className="text-4xl md:text-6xl lg:text-7xl mb-6">
+          Álbuns
+        </TituloResponsivo>
+        <div className="flex justify-center space-x-8 text-lg" style={{ color: 'var(--text-secondary)' }}>
+          <div className="flex items-center space-x-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+            </svg>
+            <span>{totalCategorias} categorias</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
+            </svg>
+            <span>{totalProjetos} projetos</span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
 
-export default async function AlbunsPage() {
-  const projetosData = await getProjetosData();
-  const projetosPorCategoria = agruparProjetosPorCategoria(projetosData);
-
-  return (
-    <div className="space-y-0 md:space-y-8 py-4">
-      {Object.entries(projetosPorCategoria)
-        .filter(([, projetos]) => projetos.length > 0)
-        .map(([categoria, projetos]) => (
-          <CategoriaGroup key={categoria} categoria={categoria} projetos={projetos} />
-        ))}
+      {/* Categories grid */}
+      <div className="pb-20 px-4 md:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          {Object.entries(projetosPorCategoria)
+            .filter(([, projetos]) => projetos.length > 0)
+            .map(([categoria, projetos]) => (
+              <CategoriaGroup key={categoria} categoria={categoria} projetos={projetos} />
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

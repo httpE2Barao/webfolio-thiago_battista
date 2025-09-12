@@ -1,13 +1,14 @@
 import { notFound } from "next/navigation";
-import { projetos } from "@/data/projetos";
-import type { Projetos, Album, PageProps } from "@/types/types";
+import { getCachedProjetos } from "@/lib/cache";
+import type { Album, PageProps } from "@/types/types";
 import { AlbumCompletoClient } from "./AlbumCompleto";
 import { Metadata } from "next";
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const albumName = decodeURIComponent(resolvedParams.id);
-  const albumData = (projetos as unknown as Projetos)[albumName];
+  const projetos = await getCachedProjetos();
+  const albumData = projetos[albumName];
 
   if (!albumData) {
     return {
@@ -24,7 +25,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function AlbumCompleto({ params }: PageProps) {
   const resolvedParams = await params;
   const albumName = decodeURIComponent(resolvedParams.id);
-  const album = (projetos as unknown as Projetos)[albumName] as Album | undefined;
+  const projetos = await getCachedProjetos();
+  const album = projetos[albumName] as Album | undefined;
 
   if (!album) {
     notFound();

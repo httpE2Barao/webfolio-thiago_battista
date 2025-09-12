@@ -104,9 +104,10 @@
   width: 100% !important;
   height: 100% !important;
   position: relative;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   isolation: isolate;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .swiper-container-albuns .swiper-slide {
@@ -119,10 +120,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #000;
 }
 
 .swiper-container-albuns .swiper-slide:hover {
-  transform: scale(1.03);
+  transform: scale(1.02);
 }
 
 .swiper-container-albuns .swiper-slide img {
@@ -130,6 +132,11 @@
   height: 100%;
   object-fit: cover !important;
   max-height: none;
+  transition: transform 0.3s ease;
+}
+
+.swiper-container-albuns .swiper-slide:hover img {
+  transform: scale(1.05);
 }
 
 .swiper-container-albuns:not(.modal) .swiper-slide-active {
@@ -141,49 +148,130 @@
   position: absolute;
   inset: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 20;
   pointer-events: none;
   background: none !important;
+  gap: 1rem;
+  padding: 2rem;
+  box-sizing: border-box;
 }
 
 .swiper-container-albuns .titulo-overlay * {
   background: none !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  color: white !important;
+  mix-blend-mode: difference !important;
+  -webkit-mix-blend-mode: difference !important;
+}
+
+.swiper-container-albuns .titulo-overlay h1 {
+  font-size: clamp(2.5rem, 6vw, 5rem) !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.swiper-container-albuns .titulo-overlay p {
+  font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  opacity: 0.9 !important;
 }
 
 /* Navegação e paginação */
 .swiper-button-next,
 .swiper-button-prev {
   color: white !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  opacity: 1 !important;
+  transition: all 0.3s ease;
+  z-index: 1000 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(4px) !important;
+  margin: 0 20px !important;
 }
 
-.swiper-container:hover .swiper-button-next,
-.swiper-container:hover .swiper-button-prev {
-  opacity: 1;
+/* Garantir que as setas estejam sempre visíveis e centralizadas */
+.swiper-container .swiper-button-next,
+.swiper-container .swiper-button-prev {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.5) !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 20px !important;
+  font-weight: bold !important;
+}
+
+/* Paginação melhorada */
+.swiper-pagination {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 1000 !important;
+  display: flex !important;
+  gap: 8px !important;
+  padding: 10px 20px !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(4px) !important;
+  border-radius: 25px !important;
 }
 
 .swiper-pagination-bullet {
   background: white !important;
-  opacity: 0.7;
+  opacity: 0.7 !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.swiper-pagination-bullet:hover {
+  opacity: 1 !important;
+  transform: scale(1.2) !important;
 }
 
 .swiper-pagination-bullet-active {
-  opacity: 1;
+  opacity: 1 !important;
+  background: white !important;
+  transform: scale(1.3) !important;
 }
 
 /* Estilos específicos para o Swiper na página de álbum individual */
 .swiper-container.swiper-fullsize {
   position: relative !important;
-  max-height: 600px !important;
+  height: 80vh !important;
+  max-height: 800px !important;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 2rem auto;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
 }
 
 .swiper-container.swiper-fullsize .swiper-wrapper {
@@ -193,10 +281,10 @@
 }
 
 .swiper-container.swiper-fullsize:not(.modal) {
-  height: 100% !important;
-  max-width: 1400px;
-  margin: 0 auto;
-  background: rgba(0, 0, 0, 0.02);
+  width: 90vw !important;
+  max-width: 1200px !important;
+  background: rgba(0, 0, 0, 0.05);
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
 }
 
 .swiper-container.swiper-fullsize:not(.modal) .swiper-slide {
@@ -204,7 +292,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: 2rem;
+  background: #000;
 }
 
 .swiper-container.swiper-fullsize:not(.modal) .swiper-slide img {
@@ -215,6 +304,7 @@
   position: relative !important;
   object-fit: contain !important;
   border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 /* Modal styles */
@@ -257,19 +347,37 @@
   z-index: 1;
 }
 
-/* Estilos específicos para o título no Swiper da home */
-.swiper-container-albuns .titulo-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 20;
-  pointer-events: none;
-  background: none !important;
+/* Container para evitar sobreposição com navegação */
+.swiper-container-albuns {
+  position: relative !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
 }
 
-.swiper-container-albuns .titulo-overlay * {
-  background: none !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+/* Garantir que os elementos tenham o z-index correto */
+.swiper-container-albuns .swiper-wrapper {
+  z-index: 1;
+}
+
+.swiper-container-albuns .swiper-slide {
+  z-index: 2;
+}
+
+.swiper-container-albuns .swiper-button-next,
+.swiper-container-albuns .swiper-button-prev {
+  z-index: 1000;
+}
+
+.swiper-container-albuns .swiper-pagination {
+  z-index: 1000;
+}
+
+.swiper-container-albuns .titulo-overlay {
+  z-index: 50;
+}
+
+/* Remover duplicatas e garantir consistência */
+.container-texto-invertido {
+  display: none;
 }

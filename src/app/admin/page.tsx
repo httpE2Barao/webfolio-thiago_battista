@@ -92,10 +92,12 @@ export default function ConteudistaPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="border p-2 mt-1 text-black"
+              className="border p-2 mt-1"
+              style={{ color: 'var(--foreground)', backgroundColor: 'var(--background)' }}
             />
           </label>
-          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Entrar</button>
+          <button type="submit" className="py-2 px-4 rounded text-white"
+                  style={{ backgroundColor: 'var(--button-primary)' }}>Entrar</button>
         </form>
       </div>
     );
@@ -111,7 +113,8 @@ export default function ConteudistaPage() {
             type="text"
             value={albumName}
             onChange={(e) => setAlbumName(e.target.value)}
-            className="border p-2 mt-1 text-black"
+            className="border p-2 mt-1"
+              style={{ color: 'var(--foreground)', backgroundColor: 'var(--background)' }}
             required
           />
         </label>
@@ -120,7 +123,8 @@ export default function ConteudistaPage() {
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="border p-2 mt-1 text-black"
+            className="border p-2 mt-1"
+              style={{ color: 'var(--foreground)', backgroundColor: 'var(--background)' }}
             rows={4}
             required
           />
@@ -151,7 +155,8 @@ export default function ConteudistaPage() {
             required
           />
         </label>
-        <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded">Enviar Álbum</button>
+        <button type="submit" className="py-2 px-4 rounded text-white"
+                style={{ backgroundColor: 'var(--button-success)' }}>Enviar Álbum</button>
       </form>
     </div>
   );
