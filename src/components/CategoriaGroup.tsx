@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import CustomSwiper from "@/components/CustomSwiper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { Projeto } from "@/types/types";
+import { useImageCacheManager } from "@/hooks/useImageCache";
 
 export default function CategoriaGroup({
   categoria,
@@ -11,6 +13,12 @@ export default function CategoriaGroup({
   categoria: string;
   projetos: Projeto[];
 }) {
+  const { preloadImages } = useImageCacheManager();
+  
+  // Preload images for better performance
+  const imageUrls = projetos.map(projeto => projeto.imagem);
+  preloadImages(imageUrls);
+
   const handleSlideClick = () => {
     window.location.href = `/albuns/categoria/${encodeURIComponent(categoria)}`;
   };

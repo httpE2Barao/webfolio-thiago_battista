@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 import React from "react";
 import { Header } from "../components/Header";
 import { ThemeProvider } from "../contexts/ThemeContext";
+import { ImageCacheProvider } from "../components/ImageCacheProvider";
+import { ImageCacheStatus } from "../components/ImageCacheStatus";
 import "./css/header.css";
 import "./css/swiper-custom.css";
 import "swiper/css";
@@ -65,13 +67,16 @@ export default function RootLayout({
         }}
       >
         <ThemeProvider>
-          <a href="#main-content" className="skip-link">
-            Pular para o conteúdo principal
-          </a>
-          <Header />
-          <main id="main-content" className="flex-1 p-4 md:pl-48 md:mt-0">
-            {children}
-          </main>
+          <ImageCacheProvider>
+            <a href="#main-content" className="skip-link">
+              Pular para o conteúdo principal
+            </a>
+            <Header />
+            <main id="main-content" className="flex-1 p-4 md:pl-48 md:mt-0">
+              {children}
+            </main>
+            {process.env.NODE_ENV === 'development' && <ImageCacheStatus />}
+          </ImageCacheProvider>
         </ThemeProvider>
       </body>
     </html>

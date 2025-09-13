@@ -12,6 +12,8 @@ import { useRouter, usePathname } from "next/navigation";
 import dynamic from "next/dynamic";
 import { projetos as data, loadProjetosFromDB } from "@/data/projetos-db";
 import { shuffleArray } from "@/lib/shuffleArray";
+import { OptimizedImage, useImagePreloader, preloadCriticalImages } from "@/components/OptimizedImage";
+import { useImageCacheManager } from "@/hooks/useImageCache";
 
 // Importação dinâmica do componente TituloResponsivo
 const TituloResponsivo = dynamic(() => import("./TituloResponsivo"), {
@@ -53,6 +55,7 @@ const SwiperImage = React.memo(
     fullSize,
     priority,
     index,
+    mode,
   }: {
     src: string;
     alt: string;
@@ -60,23 +63,21 @@ const SwiperImage = React.memo(
     fullSize?: boolean;
     priority?: boolean;
     index: number;
+    mode?: "albuns" | "fotos" | "tags";
   }) => (
-    <Image
+    <OptimizedImage
       src={src}
       alt={alt}
-      fill
+      width={modal ? 1200 : 800}
+      height={modal ? 1200 : mode === "fotos" ? 800 : 600}
+      className={`${modal || fullSize ? "object-contain !p-4" : "object-cover"}`}
+      priority={priority && index === 0}
+      quality={modal ? 100 : 80}
       sizes={
         modal
           ? "80vw"
           : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       }
-      className={`${modal || fullSize ? "object-contain !p-4" : "object-cover"}`}
-      style={{
-        aspectRatio: modal || fullSize ? 'auto' : '4/3',
-      }}
-      priority={priority && index === 0}
-      quality={modal ? 100 : 80}
-      loading={index < 3 ? "eager" : "lazy"}
     />
   )
 );
@@ -102,6 +103,7 @@ export default function CustomSwiper({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentTitle, setCurrentTitle] = useState("");
   const isHomePage = pathname === "/";
+  const { preloadImages } = useImageCacheManager();
 
   // Atualizado para trabalhar com a nova estrutura de Projetos (álbuns com "imagens")
   const loadSlides = useCallback(() => {
@@ -192,6 +194,26 @@ export default function CustomSwiper({
       setCurrentTitle("");
     };
   }, [loadSlides]);
+
+  // Pré-carregar imagens críticas
+  useEffect(() => {
+    if (!isLoading && slides.length > 0) {
+      const criticalImages = slides.slice(0, 3).map(slide => 
+        isRandomizedTag(slide) ? slide.foto.imagem : slide.imagem
+      );
+      preloadCriticalImages(criticalImages);
+    }
+  }, [isLoading, slides]);
+
+  // Pré-carregar todas as imagens do swiper
+  useEffect(() => {
+    if (!isLoading && slides.length > 0) {
+      const imageUrls = slides.map(slide => 
+        isRandomizedTag(slide) ? slide.foto.imagem : slide.imagem
+      );
+      preloadImages(imageUrls);
+    }
+  }, [isLoading, slides, preloadImages]);
 
   // Adicionar evento de tecla ESC para fechar modal
   useEffect(() => {
@@ -334,7 +356,9 @@ export default function CustomSwiper({
                       ? "relative w-full h-full flex items-center justify-center"
                       : fullSize
                         ? "relative w-full h-full flex items-center justify-center"
-                        : "relative w-full h-full overflow-hidden rounded-md"
+                        : mode === "fotos"
+                          ? "relative w-full aspect-square overflow-hidden rounded-md"
+                          : "relative w-full h-full overflow-hidden rounded-md"
                   }
                 >
                   <SwiperImage
@@ -352,6 +376,7 @@ export default function CustomSwiper({
                     fullSize={fullSize}
                     priority={priority}
                     index={index}
+                    mode={mode}
                   />
                 </div>
               </div>

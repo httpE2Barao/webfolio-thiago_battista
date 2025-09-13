@@ -1,9 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Projeto } from "@/types/types";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import CustomSwiper from "@/components/CustomSwiper";
+import { useImageCacheManager } from "@/hooks/useImageCache";
 
 interface AlbumCategoryClientProps {
   albums: Projeto[];
@@ -13,6 +15,11 @@ interface AlbumCategoryClientProps {
 export function AlbumCategoryClient({ albums, categoria }: AlbumCategoryClientProps) {
   const router = useRouter();
   const formattedCategoria = categoria.charAt(0).toUpperCase() + categoria.slice(1).toLowerCase();
+  const { preloadImages } = useImageCacheManager();
+
+  // Preload images for better performance
+  const imageUrls = albums.map(album => album.imagem);
+  preloadImages(imageUrls);
 
   // Group albums by title to show one section per album
   const albumsByTitle = albums.reduce((acc: { [key: string]: Projeto[] }, album) => {

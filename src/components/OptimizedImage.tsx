@@ -12,7 +12,14 @@ interface OptimizedImageProps {
   priority?: boolean;
   onLoad?: () => void;
   onError?: () => void;
+  sizes?: string;
+  quality?: number;
+  placeholder?: 'blur' | 'empty';
+  blurDataURL?: string;
 }
+
+// Cache para imagens já carregadas
+const imageCache = new Map<string, boolean>();
 
 export function OptimizedImage({
   src,
@@ -22,14 +29,26 @@ export function OptimizedImage({
   className = "",
   priority = false,
   onLoad,
-  onError
+  onError,
+  sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
+  quality = 80,
+  placeholder = 'empty',
+  blurDataURL
 }: OptimizedImageProps) {
   const [imgSrc, setImgSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
   const [retryCount, setRetryCount] = useState(0);
 
-  console.log('🖼️ OptimizedImage: Loading', src);
+  // Verificar se a imagem já está no cache
+  const isCached = imageCache.has(src);
+
+  useEffect(() => {
+    // Se a imagem já está no cache, não precisa mostrar o estado de carregamento
+    if (isCached) {
+      setIsLoading(false);
+    }
+  }, [isCached]);
 
   // Auto-reload functionality
   useEffect(() => {
@@ -50,6 +69,10 @@ export function OptimizedImage({
     console.log('✅ OptimizedImage: Loaded successfully', src);
     setIsLoading(false);
     setHasError(false);
+    
+    // Adicionar ao cache quando carregada com sucesso
+    imageCache.set(src, true);
+    
     onLoad?.();
   };
 
@@ -60,9 +83,12 @@ export function OptimizedImage({
     onError?.();
   };
 
+  // Se o placeholder é 'blur' mas não temos blurDataURL, mudar para 'empty'
+  const effectivePlaceholder = placeholder === 'blur' && !blurDataURL ? 'empty' : placeholder;
+
   return (
     <div className={`relative ${className}`}>
-      {isLoading && (
+      {isLoading && !isCached && (
         <div className="absolute inset-0 bg-gray-800 animate-pulse flex items-center justify-center">
           <div className="text-gray-200">Carregando...</div>
         </div>
@@ -81,33 +107,42 @@ export function OptimizedImage({
           alt={alt}
           width={width}
           height={height}
-          className={`${className} transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+          className={`${className} transition-opacity duration-300 ${isLoading && !isCached ? 'opacity-0' : 'opacity-100'}`}
           priority={priority}
           onLoad={handleLoad}
           onError={handleError}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes={sizes}
+          quality={quality}
+          placeholder={effectivePlaceholder}
+          blurDataURL={blurDataURL}
         />
       )}
     </div>
   );
 }
 
-// Hook for preloading images
+// Hook para pré-carregamento de imagens com cache
 export function useImagePreloader(images: string[]) {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const preloadImages = async () => {
       console.log('🔄 ImagePreloader: Starting preload for', images.length, 'images');
-      const promises = images.map(src => {
+      
+      // Filtrar apenas imagens que ainda não estão no cache
+      const imagesToLoad = images.filter(src => !imageCache.has(src));
+      
+      if (imagesToLoad.length === 0) {
+        console.log('✅ ImagePreloader: All images already cached');
+        return;
+      }
+      
+      const promises = imagesToLoad.map(src => {
         return new Promise<void>((resolve, reject) => {
-          if (loadedImages.has(src)) {
-            resolve();
-            return;
-          }
-
           const img = document.createElement('img');
           img.onload = () => {
+            // Adicionar ao cache quando pré-carregada com sucesso
+            imageCache.set(src, true);
             setLoadedImages(prev => new Set(prev).add(src));
             resolve();
           };
@@ -118,7 +153,7 @@ export function useImagePreloader(images: string[]) {
 
       try {
         await Promise.all(promises);
-        console.log('✅ ImagePreloader: Successfully preloaded', images.length, 'images');
+        console.log('✅ ImagePreloader: Successfully preloaded', imagesToLoad.length, 'images');
       } catch (error) {
         console.log('❌ ImagePreloader: Some images failed to preload:', error);
       }
@@ -127,7 +162,24 @@ export function useImagePreloader(images: string[]) {
     if (images.length > 0) {
       preloadImages();
     }
-  }, [images, loadedImages]);
+  }, [images]);
 
   return loadedImages;
+}
+
+// Função para limpar o cache de imagens (útil para liberar memória)
+export function clearImageCache() {
+  imageCache.clear();
+  console.log('🗑️ Image cache cleared');
+}
+
+// Função para pré-carregar imagens críticas com alta prioridade
+export function preloadCriticalImages(images: string[]) {
+  images.forEach(src => {
+    if (!imageCache.has(src)) {
+      const img = document.createElement('img');
+      img.onload = () => imageCache.set(src, true);
+      img.src = src;
+    }
+  });
 }

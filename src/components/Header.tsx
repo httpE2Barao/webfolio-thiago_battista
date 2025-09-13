@@ -91,7 +91,7 @@ export function Header() {
           </div>
 
           {/* Botão Menu */}
-          <div className="mx-5 flex flex-col gap-5 items-center justify-center focus:outline-none md:ml-12 md:mt-auto md:mb-11">
+          <div className="mx-5 flex flex-row md:flex-col gap-5 items-center justify-center focus:outline-none md:ml-12 md:mt-auto md:mb-11">
             {/* Botão de voltar */}
             {showBackButton && (
               <Link
@@ -100,7 +100,7 @@ export function Header() {
                 style={{ color: 'var(--foreground)' }}
                 aria-label="Voltar"
               >
-                <FiArrowLeft size={50} />
+                <FiArrowLeft size={40} />
               </Link>
             )}
             {/* Botão de tema */}
@@ -113,7 +113,7 @@ export function Header() {
               aria-label="Toggle navigation menu"
               aria-expanded={isNavOpen}
             >
-              {isNavOpen ? <FiX size={50} /> : <FiMenu size={50} />}
+              {isNavOpen ? <FiX size={40} /> : <FiMenu size={40} />}
             </button>
           </div>
         </div>

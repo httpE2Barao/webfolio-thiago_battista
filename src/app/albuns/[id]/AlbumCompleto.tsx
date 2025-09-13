@@ -3,7 +3,8 @@ import { useState } from "react";
 import CustomSwiper from "@/components/CustomSwiper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { Album } from "@/types/types";
-import { OptimizedImage, useImagePreloader } from "@/components/OptimizedImage";
+import { ProgressiveImageGallery } from "@/components/ProgressiveImageGallery";
+import { useImageCacheManager } from "@/hooks/useImageCache";
 
 export function AlbumCompletoClient({
   album,
@@ -14,10 +15,21 @@ export function AlbumCompletoClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [initialIndex, setInitialIndex] = useState(0);
+  const { preloadImages } = useImageCacheManager();
   
   // Preload images for better performance
   const imageUrls = album.imagens.map(img => img.imagem);
-  useImagePreloader(imageUrls);
+  preloadImages(imageUrls);
+
+  // Preparar dados para a galeria
+  const galleryImages = album.imagens.map((imagem, index) => ({
+    id: imagem.id,
+    src: imagem.imagem,
+    alt: album.titulo,
+    width: 400,
+    height: 400,
+    onClick: () => handlePhotoClick(index),
+  }));
 
   const handlePhotoClick = (index: number) => {
     setInitialIndex(index);
@@ -36,21 +48,15 @@ export function AlbumCompletoClient({
         </p>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 mt-2 flex-none">
-        {album.imagens.map((imagem, index) => (
-          <div
-            key={imagem.id}
-            className="relative w-full h-64 xl:h-80 cursor-pointer group overflow-hidden"
-            onClick={() => handlePhotoClick(index)}
-          >
-            <OptimizedImage
-              src={imagem.imagem}
-              alt={album.titulo}
-              className="object-cover object-center rounded-lg transition-transform duration-300 group-hover:scale-105 w-full h-full"
-              priority={index < 4} // Priority for first 4 images
-            />
-          </div>
-        ))}
+      <div className="flex-1 overflow-auto">
+        <ProgressiveImageGallery
+          images={galleryImages}
+          itemsPerLoad={12}
+          initialLoadCount={12}
+          className="pb-4"
+          imageClassName="aspect-square"
+          columns={4}
+        />
       </div>
 
       {modalOpen && (
