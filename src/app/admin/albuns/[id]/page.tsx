@@ -28,7 +28,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     const fetchAlbum = useCallback(async () => {
         setIsLoading(true);
         try {
-            const res = await fetch(`/api/loja/album/${id}?password=${process.env.NEXT_PUBLIC_VALID_PASSWORD || ''}`);
+            const res = await fetch(`/api/loja/album/${id}`);
             // Reuse public API ? No, creating a specific admin one is better or just reuse the public one if it returns everything.
             // The public one might hide fields or require password if private.
             // Actually I should verify if I made a GET for admin. I didn't. 

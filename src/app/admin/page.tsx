@@ -17,8 +17,7 @@ import {
   FiX
 } from 'react-icons/fi';
 
-// Config
-const VALID_PASSWORD = process.env.NEXT_PUBLIC_VALID_PASSWORD;
+// Config - No longer using client-side password validation for security and production reliability
 
 interface AlbumSalesConfig {
   id: string;
@@ -129,12 +128,25 @@ export default function AdminDashboard() {
     }
   }
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (authPassword === VALID_PASSWORD) {
-      setIsAuthenticated(true);
-    } else {
-      alert('Senha incorreta');
+    setIsLoading(true);
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: authPassword })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsAuthenticated(true);
+      } else {
+        alert(data.error || 'Senha incorreta');
+      }
+    } catch (error) {
+      alert('Erro ao validar senha. Verifique sua conexão.');
+    } finally {
+      setIsLoading(false);
     }
   };
 

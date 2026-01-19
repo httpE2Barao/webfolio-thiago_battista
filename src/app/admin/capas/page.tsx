@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-const VALID_PASSWORD = process.env.NEXT_PUBLIC_VALID_PASSWORD;
+// VALID_PASSWORD constant removed for security - using server-side validation
 
 interface ImageData {
     id: string;
@@ -27,13 +27,26 @@ export default function AdminCapasPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (password === VALID_PASSWORD) {
-            setIsAuthenticated(true);
-            fetchAlbums();
-        } else {
-            alert('Senha incorreta');
+        setIsLoading(true);
+        try {
+            const res = await fetch('/api/admin/auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                setIsAuthenticated(true);
+                fetchAlbums();
+            } else {
+                alert(data.error || 'Senha incorreta');
+            }
+        } catch (error) {
+            alert('Erro ao validar senha');
+        } finally {
+            setIsLoading(false);
         }
     };
 
