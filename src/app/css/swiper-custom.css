@@ -11,8 +11,13 @@
 }
 
 @keyframes rotation {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Swiper fullscreen styles */
@@ -128,7 +133,7 @@
 .swiper-container-albuns .swiper-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover !important;
+  object-fit: cover;
   max-height: none;
 }
 

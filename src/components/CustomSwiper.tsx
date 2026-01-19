@@ -58,7 +58,7 @@ const SwiperImage = React.memo(
           alt={alt}
           fill
           sizes={modal ? "100vw" : "(max-width: 768px) 100vw, (max-width: 1920px) 100vw, 1920px"}
-          className={modal ? "object-contain" : "object-cover"}
+          className={modal || fullSize ? "!object-contain" : "!object-cover"}
           priority={priority && index < 2}
           quality={90}
           loading={index < 2 ? "eager" : "lazy"}

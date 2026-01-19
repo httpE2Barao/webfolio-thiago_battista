@@ -41,14 +41,22 @@ export function optimizeCloudinaryUrl(
     // Simplified to the absolute minimum to avoid 400/404 errors
     const transformation = `w_${width},q_80,f_auto`;
 
-    // Handle URLs that already have transformations or base URLs
-    if (finalUrl.includes('/upload/')) {
-        // Encodamos a URL ANTES do replace para garantir consistência
-        const encoded = encodeURI(finalUrl.replace(/%20/g, ' '));
-        return encoded.replace('/upload/', `/upload/${transformation}/`);
+    // Normalizamos a URL para evitar double encoding (ex: %20 -> %2520)
+    // decodeURI limpa o que já está encodado, encodeURI garante que tudo fique seguro
+    let normalizedUrl = finalUrl;
+    try {
+        normalizedUrl = encodeURI(decodeURI(finalUrl));
+    } catch (e) {
+        // Fallback p/ o original se houver erro no decode
+        normalizedUrl = finalUrl.replace(/ /g, '%20');
     }
 
-    return encodeURI(finalUrl.replace(/%20/g, ' '));
+    // Handle URLs that already have transformations or base URLs
+    if (normalizedUrl.includes('/upload/')) {
+        return normalizedUrl.replace('/upload/', `/upload/${transformation}/`);
+    }
+
+    return normalizedUrl;
 }
 
 /**
