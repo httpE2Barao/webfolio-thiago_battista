@@ -1,5 +1,5 @@
-import { NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/lib/prisma';
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
@@ -29,6 +29,8 @@ export async function GET() {
         descricao: album.descricao || `${album.categoria} ${album.titulo}`,
         categoria: album.categoria,
         subcategoria: album.subcategoria,
+        coverImageMobile: album.coverImageMobile,
+        coverImageDesktop: album.coverImageDesktop,
         imagens: album.Image.map(image => ({
           id: `${albumKey}-${image.id}`, // Create composite ID
           imagem: image.path

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
     try {
-        const { albumId, coverImagePath } = await request.json();
+        const { albumId, coverImagePath, type } = await request.json();
 
         if (!albumId || !coverImagePath) {
             return NextResponse.json(
@@ -12,13 +12,25 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Determine which field to update
+        const data: any = {
+            updatedAt: new Date()
+        };
+
+        if (type === 'desktop') {
+            data.coverImageDesktop = coverImagePath;
+            data.coverImage = coverImagePath; // Also update main cover for compatibility
+        } else if (type === 'mobile') {
+            data.coverImageMobile = coverImagePath;
+        } else {
+            // Default behavior if type is not specified
+            data.coverImage = coverImagePath;
+        }
+
         // Update the album with the new cover image
         const updatedAlbum = await prisma.album.update({
             where: { id: albumId },
-            data: {
-                coverImage: coverImagePath,
-                updatedAt: new Date()
-            },
+            data,
         });
 
         return NextResponse.json({

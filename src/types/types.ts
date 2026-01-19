@@ -6,6 +6,8 @@ export interface Projeto {
   categoria?: string;
   subcategoria?: string;
   albumName?: string; // Usado para navegação
+  coverImageMobile?: string;
+  coverImageDesktop?: string;
 }
 
 // Ajuste aqui: se você quiser objetos com { id, imagem } em cada item do array
@@ -98,5 +100,7 @@ export interface StoreAlbum {
   categoria?: string;
   subcategoria?: string;
   tags?: string[];
+  coverImageMobile?: string | null;
+  coverImageDesktop?: string | null;
   Image: Image[];
 }

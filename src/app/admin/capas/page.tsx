@@ -16,6 +16,8 @@ interface AlbumData {
     id: string;
     titulo: string;
     coverImage: string | null;
+    coverImageMobile: string | null;
+    coverImageDesktop: string | null;
     Image: ImageData[];
 }
 
@@ -26,6 +28,7 @@ export default function AdminCapasPage() {
     const [selectedAlbum, setSelectedAlbum] = useState<AlbumData | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [statusMessage, setStatusMessage] = useState({ type: '', text: '' });
+    const [coverType, setCoverType] = useState<'desktop' | 'mobile'>('desktop');
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -72,17 +75,32 @@ export default function AdminCapasPage() {
             const res = await fetch('/api/album-cover', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ albumId, coverImagePath: imagePath }),
+                body: JSON.stringify({ albumId, coverImagePath: imagePath, type: coverType }),
             });
 
             if (res.ok) {
-                setStatusMessage({ type: 'success', text: 'Capa atualizada com sucesso!' });
+                const data = await res.json();
+                const updatedAlbumData = data.album;
+
+                setStatusMessage({ type: 'success', text: `Capa ${coverType} atualizada com sucesso!` });
+
                 // Update local state
                 setAlbums(prev => prev.map(album =>
-                    album.id === albumId ? { ...album, coverImage: imagePath } : album
+                    album.id === albumId ? {
+                        ...album,
+                        coverImage: updatedAlbumData.coverImage,
+                        coverImageMobile: updatedAlbumData.coverImageMobile,
+                        coverImageDesktop: updatedAlbumData.coverImageDesktop
+                    } : album
                 ));
+
                 if (selectedAlbum?.id === albumId) {
-                    setSelectedAlbum({ ...selectedAlbum, coverImage: imagePath });
+                    setSelectedAlbum({
+                        ...selectedAlbum,
+                        coverImage: updatedAlbumData.coverImage,
+                        coverImageMobile: updatedAlbumData.coverImageMobile,
+                        coverImageDesktop: updatedAlbumData.coverImageDesktop
+                    });
                 }
             } else {
                 setStatusMessage({ type: 'error', text: 'Erro ao atualizar capa' });
@@ -145,21 +163,40 @@ export default function AdminCapasPage() {
                     </button>
 
                     <h2 className="text-2xl mb-4">{selectedAlbum.titulo}</h2>
+
+                    <div className="bg-gray-800 p-4 rounded-lg mb-6 flex flex-col md:flex-row gap-4 items-center">
+                        <span className="font-bold">Definir como:</span>
+                        <div className="flex bg-gray-700 p-1 rounded-lg">
+                            <button
+                                onClick={() => setCoverType('desktop')}
+                                className={`px-4 py-2 rounded-md transition-all ${coverType === 'desktop' ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-300 hover:text-white'}`}
+                            >
+                                Capa Desktop (Principal)
+                            </button>
+                            <button
+                                onClick={() => setCoverType('mobile')}
+                                className={`px-4 py-2 rounded-md transition-all ${coverType === 'mobile' ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-300 hover:text-white'}`}
+                            >
+                                Capa Mobile
+                            </button>
+                        </div>
+                    </div>
+
                     <p className="mb-4 text-gray-400">
-                        Clique em uma imagem para defini-la como capa do álbum.
-                        {selectedAlbum.coverImage && (
-                            <span className="ml-2 text-green-400">Capa atual marcada com ✓</span>
-                        )}
+                        Clique em uma imagem para defini-la como <strong>capa {coverType}</strong>.
                     </p>
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                         {selectedAlbum.Image.map((img) => {
-                            const isCover = selectedAlbum.coverImage === img.path;
+                            const isDesktopCover = selectedAlbum.coverImageDesktop === img.path || (!selectedAlbum.coverImageDesktop && selectedAlbum.coverImage === img.path);
+                            const isMobileCover = selectedAlbum.coverImageMobile === img.path;
+                            const isSelectedTypeCover = coverType === 'desktop' ? isDesktopCover : isMobileCover;
+
                             return (
                                 <div
                                     key={img.id}
                                     onClick={() => handleSetCover(selectedAlbum.id, img.path)}
-                                    className={`relative aspect-square cursor-pointer rounded-lg overflow-hidden border-4 transition-all ${isCover ? 'border-green-500 ring-2 ring-green-400' : 'border-transparent hover:border-blue-500'
+                                    className={`relative aspect-square cursor-pointer rounded-lg overflow-hidden border-4 transition-all ${isSelectedTypeCover ? 'border-blue-500 ring-2 ring-blue-400' : 'border-transparent hover:border-gray-500'
                                         }`}
                                 >
                                     <Image
@@ -169,8 +206,12 @@ export default function AdminCapasPage() {
                                         className="object-cover"
                                         sizes="(max-width: 768px) 50vw, 20vw"
                                     />
-                                    {isCover && (
-                                        <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg">
+                                    <div className="absolute bottom-0 left-0 right-0 bg-black/60 p-1 flex justify-center gap-1">
+                                        {isDesktopCover && <span className="text-[10px] bg-blue-600 px-1 rounded" title="Desktop">D</span>}
+                                        {isMobileCover && <span className="text-[10px] bg-green-600 px-1 rounded" title="Mobile">M</span>}
+                                    </div>
+                                    {isSelectedTypeCover && (
+                                        <div className="absolute top-2 right-2 bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center text-lg shadow-lg">
                                             ✓
                                         </div>
                                     )}

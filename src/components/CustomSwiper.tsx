@@ -40,16 +40,36 @@ interface SwiperImageProps {
   priority?: boolean;
   index: number;
   withWatermark?: boolean;
+  coverImageMobile?: string;
+  coverImageDesktop?: string;
 }
 
 const SwiperImage = React.memo(
-  ({ src, alt, modal, fullSize, priority, index, withWatermark }: SwiperImageProps) => {
+  ({ src, alt, modal, fullSize, priority, index, withWatermark, coverImageMobile, coverImageDesktop }: SwiperImageProps) => {
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+      const checkMobile = () => setIsMobile(window.innerWidth < 768);
+      checkMobile();
+      window.addEventListener("resize", checkMobile);
+      return () => window.removeEventListener("resize", checkMobile);
+    }, []);
+
+    // Selection logic:
+    // 1. If mobile and coverImageMobile exists, use it.
+    // 2. If desktop and coverImageDesktop exists, use it.
+    // 3. Fallback to default src.
+    let finalSrc = src;
+    if (isMobile && coverImageMobile) {
+      finalSrc = coverImageMobile;
+    } else if (!isMobile && coverImageDesktop) {
+      finalSrc = coverImageDesktop;
+    }
+
     // Use optimized URL based on context:
-    // - Modal/fullSize: high quality for viewing
-    // - Regular swiper: medium quality for browsing
     const optimizedSrc = modal || fullSize
-      ? getFullscreenUrl(src, withWatermark)
-      : getSwiperUrl(src, withWatermark);
+      ? getFullscreenUrl(finalSrc, withWatermark)
+      : getSwiperUrl(finalSrc, withWatermark);
 
     return (
       <div className="swiper-zoom-container w-full h-full relative">
@@ -205,6 +225,8 @@ export default function CustomSwiper({
                   priority={priority}
                   index={index}
                   withWatermark={mode === 'fotos'} // Protege fotos individuais
+                  coverImageMobile={slide.coverImageMobile}
+                  coverImageDesktop={slide.coverImageDesktop}
                 />
               </div>
             </SwiperSlide>

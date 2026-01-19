@@ -30,6 +30,8 @@ model Album {
   subcategoria    String?
   tags            Json?
   coverImage      String?
+  coverImageMobile  String?
+  coverImageDesktop String?
   published       Boolean   @default(true)
   featured        Boolean   @default(false)
   ordem           Int       @default(0)
