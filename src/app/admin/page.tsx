@@ -163,42 +163,77 @@ export default function AdminDashboard() {
       return;
     }
     setIsLoading(true);
-    setStatusMessage({ type: 'info', text: 'Enviando...' });
-
-    const formData = new FormData();
-    formData.append('albumName', albumName);
-    formData.append('description', description);
-    formData.append('categoria', selectedCategoria);
-    formData.append('subcategoria', albumName);
-    formData.append('isPrivate', String(isPrivateUpload));
-    formData.append('accessPassword', accessPasswordUpload);
-    formData.append('basePrice', String(basePriceUpload));
-    formData.append('basePhotoLimit', String(baseLimitUpload));
-    formData.append('extraPhotoPrice', String(extraPriceUpload));
-
-    selectedTags.forEach(tag => formData.append('tags', tag));
-    Array.from(files).forEach(file => formData.append('files', file));
+    setStatusMessage({ type: 'info', text: 'Criando álbum...' });
 
     try {
-      const res = await fetch('/api/album-upload', {
+      // 1. Criar Álbum (Metadados)
+      const albumData = new FormData();
+      albumData.append('albumName', albumName);
+      albumData.append('description', description);
+      albumData.append('categoria', selectedCategoria);
+      albumData.append('subcategoria', albumName); // Legacy support
+      albumData.append('isPrivate', String(isPrivateUpload));
+      albumData.append('accessPassword', accessPasswordUpload);
+      albumData.append('basePrice', String(basePriceUpload));
+      albumData.append('basePhotoLimit', String(baseLimitUpload));
+      albumData.append('extraPhotoPrice', String(extraPriceUpload));
+      selectedTags.forEach(tag => albumData.append('tags', tag));
+
+      const createRes = await fetch('/api/admin/albuns/create', {
         method: 'POST',
-        body: formData,
+        body: albumData,
       });
-      const result = await res.json();
-      if (res.ok) {
-        setStatusMessage({ type: 'success', text: 'Enviado com sucesso!' });
-        setAlbumName('');
-        setDescription('');
-        setSelectedCategoria('');
-        setSelectedTags([]);
-        if (typeof document !== 'undefined') {
-          (document.getElementById('file-input') as HTMLInputElement).value = '';
-        }
-      } else {
-        setStatusMessage({ type: 'error', text: `Erro: ${result.error}` });
+
+      const createResult = await createRes.json();
+
+      if (!createRes.ok) {
+        throw new Error(createResult.error || 'Erro ao criar álbum');
       }
-    } catch (error) {
-      setStatusMessage({ type: 'error', text: 'Erro de conexão.' });
+
+      const albumId = createResult.albumId;
+
+      // 2. Upload das Imagens (Sequencial para evitar 413)
+      const fileArray = Array.from(files);
+      let successCount = 0;
+
+      for (let i = 0; i < fileArray.length; i++) {
+        const file = fileArray[i];
+        setStatusMessage({ type: 'info', text: `Enviando imagem ${i + 1} de ${fileArray.length}...` });
+
+        const uploadData = new FormData();
+        uploadData.append('albumId', albumId);
+        uploadData.append('file', file);
+        uploadData.append('order', String(i));
+
+        const uploadRes = await fetch('/api/admin/albuns/upload', {
+          method: 'POST',
+          body: uploadData,
+        });
+
+        if (!uploadRes.ok) {
+          console.error(`Falha no upload da imagem ${i + 1}:`, await uploadRes.json());
+          // Não paramos o loop, tentamos as próximas, mas idealmente avisaríamos o usuário
+        } else {
+          successCount++;
+        }
+      }
+
+      setStatusMessage({ type: 'success', text: `Álbum criado! ${successCount}/${fileArray.length} imagens enviadas.` });
+
+      // Limpar form
+      setAlbumName('');
+      setDescription('');
+      setSelectedCategoria('');
+      setSelectedTags([]);
+      setFiles(null);
+      if (typeof document !== 'undefined') {
+        const fileInput = document.getElementById('file-input') as HTMLInputElement;
+        if (fileInput) fileInput.value = '';
+      }
+
+    } catch (error: any) {
+      console.error(error);
+      setStatusMessage({ type: 'error', text: `Erro: ${error.message || 'Erro desconhecido'}` });
     } finally {
       setIsLoading(false);
     }
