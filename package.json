@@ -1,0 +1,40 @@
+{
+  "name": "portifolio",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npx prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:seed": "node src/lib/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.2",
+    "@tanstack/react-virtual": "^3.13.0",
+    "@vercel/postgres": "^0.10.0",
+    "build": "^0.1.4",
+    "cloudinary": "^2.7.0",
+    "dotenv": "^16.6.1",
+    "mercadopago": "^2.12.0",
+    "next": "^15.3.4",
+    "npm": "^11.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.3.0",
+    "run": "^1.5.0",
+    "swiper": "^11.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.12",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.2",
+    "postcss": "^8",
+    "prisma": "^6.19.2",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}

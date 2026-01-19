@@ -1,0 +1,35 @@
+# Dockerfile para Produção
+
+# --- Estágio 1: Builder ---
+# Aqui nós instalamos tudo e construímos o projeto
+FROM node:20-alpine AS builder
+WORKDIR /app
+
+# Copia os arquivos de dependência e instala TUDO (incluindo devDependencies)
+COPY package*.json ./
+RUN npm install
+
+# Copia o resto do código
+COPY . .
+
+# Roda o comando de build para otimizar o projeto
+RUN npm run build
+
+# --- Estágio 2: Runner ---
+# Aqui nós pegamos SÓ o necessário para rodar o site
+FROM node:20-alpine AS runner
+WORKDIR /app
+
+# Copia apenas as dependências de produção
+COPY package*.json ./
+RUN npm install --omit=dev
+
+# Copia os arquivos otimizados do estágio 'builder'
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+
+# Expõe a porta
+EXPOSE 3000
+
+# O comando para iniciar o servidor de produção
+CMD ["npm", "run", "start"]

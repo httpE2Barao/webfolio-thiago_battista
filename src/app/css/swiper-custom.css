@@ -1,0 +1,275 @@
+/* Custom loader animation */
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 3px solid #FFF;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Swiper fullscreen styles */
+.swiper-fullsize {
+  width: 100% !important;
+  height: calc(100vh - 35px) !important;
+}
+
+.swiper-fullsize.modal {
+  width: 100vw !important;
+  height: 100vh !important;
+  min-height: 100vh !important;
+}
+
+.swiper-fullsize .swiper-slide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-fullsize .swiper-slide img {
+  object-fit: contain !important;
+  max-height: calc(100vh - 35px);
+  width: auto;
+}
+
+.swiper-fullsize.modal .swiper-slide img {
+  max-width: 100vw;
+  max-height: 100vh;
+  padding: 2rem;
+  object-fit: contain !important;
+}
+
+@media (max-width: 768px) {
+  .swiper-fullsize {
+    height: calc(100vh - 35px) !important;
+  }
+
+  .swiper-fullsize .swiper-slide img {
+    max-height: calc(100vh - 35px);
+    width: 100%;
+    height: 100%;
+    object-fit: contain !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .swiper-fullsize {
+    height: calc(100vh - 35px) !important;
+  }
+
+  .swiper-fullsize .swiper-slide img {
+    max-height: calc(100vh - 35px);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain !important;
+  }
+}
+
+/* Fix z-index for navigation buttons in modal */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  z-index: 10000;
+}
+
+/* Improve pagination visibility */
+.swiper-pagination-bullet {
+  background: white !important;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+/* Modal close button hover effect */
+.modal-close-button {
+  transition: all 0.3s ease;
+}
+
+.modal-close-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+/* Estilos do Swiper para álbuns */
+.swiper-container-albuns {
+  width: 100% !important;
+  height: 100% !important;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.swiper-container-albuns .swiper-slide {
+  transform: scale(1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-container-albuns .swiper-slide:hover {
+  transform: scale(1.03);
+}
+
+.swiper-container-albuns .swiper-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover !important;
+  max-height: none;
+}
+
+.swiper-container-albuns:not(.modal) .swiper-slide-active {
+  z-index: 1;
+}
+
+/* Estilos específicos para o título no Swiper da home */
+.swiper-container-albuns .titulo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+  background: none !important;
+}
+
+.swiper-container-albuns .titulo-overlay * {
+  background: none !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Navegação e paginação */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.swiper-container:hover .swiper-button-next,
+.swiper-container:hover .swiper-button-prev {
+  opacity: 1;
+}
+
+.swiper-pagination-bullet {
+  background: white !important;
+  opacity: 0.7;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+/* Estilos específicos para o Swiper na página de álbum individual */
+.swiper-container.swiper-fullsize {
+  position: relative !important;
+  max-height: 600px !important;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-container.swiper-fullsize .swiper-wrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.swiper-container.swiper-fullsize:not(.modal) {
+  height: 100% !important;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.swiper-container.swiper-fullsize:not(.modal) .swiper-slide {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.swiper-container.swiper-fullsize:not(.modal) .swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto !important;
+  height: auto !important;
+  position: relative !important;
+  object-fit: contain !important;
+  border-radius: 8px;
+}
+
+/* Modal styles */
+.swiper-container.modal {
+  position: fixed !important;
+  z-index: 9999;
+  height: 100vh !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Navigation controls for fullsize swiper */
+.swiper-container.swiper-fullsize .swiper-button-next,
+.swiper-container.swiper-fullsize .swiper-button-prev {
+  z-index: 10;
+}
+
+/* Ensure proper stacking context */
+.swiper-container {
+  z-index: 1;
+}
+
+.swiper-container.modal {
+  z-index: 9999;
+}
+
+/* Estilos específicos para o Swiper na home */
+.swiper-container.swiper-container-albuns .swiper-wrapper {
+  height: 100%;
+}
+
+.swiper-container.swiper-container-albuns .swiper-slide {
+  height: 100%;
+}
+
+/* Ajuste do título para evitar duplicação */
+.swiper-container-albuns:not(.modal) .swiper-slide-active {
+  z-index: 1;
+}
+
+/* Estilos específicos para o título no Swiper da home */
+.swiper-container-albuns .titulo-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  pointer-events: none;
+  background: none !important;
+}
+
+.swiper-container-albuns .titulo-overlay * {
+  background: none !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

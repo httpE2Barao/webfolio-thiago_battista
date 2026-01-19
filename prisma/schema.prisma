@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  color       String?
+  icon        String?
+  parent      String?
+  created_at  DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Album       Album[]
+
+  @@index([slug])
+}
+
+model Album {
+  id              String    @id
+  titulo          String
+  descricao       String?
+  categoria       String
+  subcategoria    String?
+  tags            Json?
+  coverImage      String?
+  published       Boolean   @default(true)
+  featured        Boolean   @default(false)
+  ordem           Int       @default(0)
+  created_at      DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  authorId        String?
+  categoryId      String?
+  
+  // Vendas
+  isForSale       Boolean   @default(false)
+  isPrivate       Boolean   @default(false)
+  accessPassword  String?
+  basePrice       Float     @default(200)
+  basePhotoLimit  Int       @default(10)
+  extraPhotoPrice Float     @default(50)
+
+  User            User?     @relation(fields: [authorId], references: [id])
+  Category        Category? @relation(fields: [categoryId], references: [id])
+  Image           Image[]
+  Order           Order[]
+
+  @@index([categoria])
+  @@index([created_at])
+  @@index([subcategoria])
+}
+
+model Image {
+  id         String   @id
+  filename   String
+  path       String
+  titulo     String?
+  descricao  String?
+  ordem      Int      @default(0)
+  featured   Boolean  @default(false)
+  altText    String?
+  metadata   Json?
+  created_at DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  albumId    String
+  Album      Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  OrderItem  OrderItem[]
+
+  @@index([albumId])
+  @@index([ordem])
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  albumId       String
+  totalPhotos   Int
+  totalPrice    Float
+  status        String      @default("pending") // pending, paid, delivered
+  paymentId     String?     // ID do pagamento no Mercado Pago
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  
+  Album         Album       @relation(fields: [albumId], references: [id])
+  items         OrderItem[]
+  
+  @@index([status])
+  @@index([albumId])
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  imageId   String
+  
+  Order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  Image     Image    @relation(fields: [imageId], references: [id])
+  
+  @@unique([orderId, imageId])
+}
+
+model User {
+  id        String   @id
+  email     String   @unique
+  name      String?
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Album     Album[]
+}
