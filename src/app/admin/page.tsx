@@ -18,7 +18,7 @@ import {
 } from 'react-icons/fi';
 
 // Config
-const VALID_PASSWORD = process.env.VALID_PASSWORD;
+const VALID_PASSWORD = process.env.NEXT_PUBLIC_VALID_PASSWORD;
 
 interface AlbumSalesConfig {
   id: string;

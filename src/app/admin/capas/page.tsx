@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-const VALID_PASSWORD = process.env.VALID_PASSWORD;
+const VALID_PASSWORD = process.env.NEXT_PUBLIC_VALID_PASSWORD;
 
 interface ImageData {
     id: string;
