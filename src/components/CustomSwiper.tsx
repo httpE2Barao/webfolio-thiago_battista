@@ -57,10 +57,10 @@ const SwiperImage = React.memo(
           src={optimizedSrc}
           alt={alt}
           fill
-          sizes={modal ? "100vw" : "(max-width: 768px) 100vw, 80vw"}
+          sizes={modal ? "100vw" : "(max-width: 768px) 100vw, (max-width: 1920px) 100vw, 1920px"}
           className={modal ? "object-contain" : "object-cover"}
           priority={priority && index < 2}
-          quality={modal ? 90 : 75}
+          quality={90}
           loading={index < 2 ? "eager" : "lazy"}
         />
       </div>
@@ -158,9 +158,11 @@ export default function CustomSwiper({
   );
 
   if (slides.length === 0) {
+    console.warn(`Swiper [${tagName}] não possui slides para exibir.`);
     return (
-      <div className="relative w-full h-full flex items-center justify-center bg-gray-900">
-        <div className="text-xl text-white">Carregando projetos...</div>
+      <div className="relative w-full h-full flex flex-col items-center justify-center bg-black/50 backdrop-blur-sm rounded-2xl border border-white/5 min-h-[300px]">
+        <div className="text-white/30 text-sm font-medium uppercase tracking-widest">Nenhuma foto encontrada</div>
+        {tagName && <div className="text-white/10 text-[10px] mt-2">Tag: {tagName}</div>}
       </div>
     );
   }

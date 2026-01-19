@@ -99,25 +99,66 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files?.length) return;
         setUploading(true);
-        const data = new FormData();
-        Array.from(e.target.files).forEach(f => data.append('files', f));
+        setStatusMsg(null);
+
+        const files = Array.from(e.target.files);
+        const uploadedData = [];
+        const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dx9whz8ee';
 
         try {
+            for (const file of files) {
+                // 1. Get Signature
+                const timestamp = Math.round(new Date().getTime() / 1000);
+                const folder = `albums/${id}`;
+                const paramsToSign = {
+                    timestamp,
+                    folder,
+                };
+
+                const signRes = await fetch('/api/admin/cloudinary/sign', {
+                    method: 'POST',
+                    body: JSON.stringify({ paramsToSign })
+                });
+                const { signature } = await signRes.json();
+
+                // 2. Upload to Cloudinary
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '');
+                formData.append('timestamp', timestamp.toString());
+                formData.append('signature', signature);
+                formData.append('folder', folder);
+
+                const cloudinaryRes = await fetch(
+                    `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+                    { method: 'POST', body: formData }
+                );
+
+                if (!cloudinaryRes.ok) throw new Error('Falha no upload para Cloudinary');
+                const result = await cloudinaryRes.json();
+                uploadedData.push(result);
+            }
+
+            // 3. Save to DB
             const res = await fetch(`/api/admin/albuns/${id}/photos`, {
                 method: 'POST',
-                body: data
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ images: uploadedData })
             });
+
             if (res.ok) {
-                const result = await res.json();
-                // Refresh full album or just append images?
-                // Append is faster visually but complex if order matters. 
-                // Let's refetch to be safe.
+                setStatusMsg({ type: 'success', text: `${uploadedData.length} fotos adicionadas!` });
                 fetchAlbum();
+            } else {
+                throw new Error('Erro ao salvar no banco de dados');
             }
-        } catch (error) {
-            alert('Erro no upload');
+        } catch (error: any) {
+            console.error('Erro no upload:', error);
+            setStatusMsg({ type: 'error', text: error.message || 'Erro no upload' });
         } finally {
             setUploading(false);
+            // Clear input
+            e.target.value = '';
         }
     };
 

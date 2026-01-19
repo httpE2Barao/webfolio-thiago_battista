@@ -9,10 +9,11 @@ interface ProtectedImageProps extends Omit<ImageProps, 'onContextMenu' | 'onDrag
 
 export function ProtectedImage({ showOverlay = true, className, ...props }: ProtectedImageProps) {
     const [isHovered, setIsHovered] = useState(false);
+    const isFill = (props as any).fill;
 
     return (
         <div
-            className={`relative overflow-hidden ${className || ''}`}
+            className={`relative overflow-hidden ${isFill ? 'h-full w-full' : ''} ${className || ''}`}
             onContextMenu={(e) => e.preventDefault()}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -20,7 +21,7 @@ export function ProtectedImage({ showOverlay = true, className, ...props }: Prot
             <Image
                 {...(props as any)}
                 onDragStart={(e: any) => e.preventDefault()}
-                className={`pointer-events-none select-none ${className || ''}`}
+                className={`pointer-events-none select-none ${isFill ? 'object-cover' : ''} ${className || ''}`}
             />
 
             {/* Transparent Protective Overlay */}

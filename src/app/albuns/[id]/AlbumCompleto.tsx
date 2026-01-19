@@ -82,8 +82,8 @@ export function AlbumCompletoClient({
     setModalOpen(true);
   }, []);
 
-  // Filter valid images
-  const imagensValidas = album?.imagens?.filter(img => img && img.imagem) || [];
+  // Filter valid images - be resilient with property names
+  const imagensValidas = album?.imagens?.filter(img => img && (img.imagem || (img as any).path)) || [];
 
   // Calculate rows for virtualization
   const rowCount = Math.ceil(imagensValidas.length / columns);
@@ -91,7 +91,7 @@ export function AlbumCompletoClient({
   // Virtualizer for rows - using window scroll to avoid double scrollbars
   const virtualizer = useWindowVirtualizer({
     count: rowCount,
-    estimateSize: () => (window.innerWidth < 1280 ? 256 + 8 : 320 + 8), // height + gap-2
+    estimateSize: () => (typeof window !== 'undefined' && window.innerWidth < 1280 ? 256 + 8 : 320 + 8), // height + gap-2
     overscan: 5,
     scrollMargin: containerRef.current?.offsetTop || 0,
   });

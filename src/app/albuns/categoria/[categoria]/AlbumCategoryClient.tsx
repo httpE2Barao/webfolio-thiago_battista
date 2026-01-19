@@ -3,7 +3,6 @@
 "use client";
 
 import CustomSwiper from "@/components/CustomSwiper";
-import LazySwiperWrapper from "@/components/LazySwiperWrapper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { Projeto } from "@/types/types";
 import { useRouter } from "next/navigation";
@@ -50,16 +49,8 @@ const AlbumGroup = memo(({
     </div>
   );
 
-  // First album loads immediately, others are lazy loaded
-  if (isFirst) {
-    return swiperContent;
-  }
-
-  return (
-    <LazySwiperWrapper height="600px" rootMargin="400px">
-      {swiperContent}
-    </LazySwiperWrapper>
-  );
+  // Simplificado: Removemos o LazySwiperWrapper para garantir renderização imediata
+  return swiperContent;
 });
 
 AlbumGroup.displayName = 'AlbumGroup';

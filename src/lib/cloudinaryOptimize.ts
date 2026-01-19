@@ -38,33 +38,31 @@ export function optimizeCloudinaryUrl(
     if (!finalUrl.includes('cloudinary.com')) return finalUrl;
 
     // Cloudinary transformation: width, quality, auto format
-    let transformation = `w_${width},q_${quality},f_auto`;
-
-    // Add watermark if requested
-    if (withWatermark) {
-        transformation += ',l_text:Inter_60_bold:THIAGO%20BATTISTA,o_20,g_center,co_rgb:FFFFFF';
-    }
+    // Simplified to the absolute minimum to avoid 400/404 errors
+    const transformation = `w_${width},q_80,f_auto`;
 
     // Handle URLs that already have transformations or base URLs
     if (finalUrl.includes('/upload/')) {
-        return finalUrl.replace('/upload/', `/upload/${transformation}/`);
+        // Encodamos a URL ANTES do replace para garantir consistência
+        const encoded = encodeURI(finalUrl.replace(/%20/g, ' '));
+        return encoded.replace('/upload/', `/upload/${transformation}/`);
     }
 
-    return finalUrl;
+    return encodeURI(finalUrl.replace(/%20/g, ' '));
 }
 
 /**
  * Get optimized URL for thumbnail/card display (smaller)
  */
 export function getThumbUrl(url: string | undefined | null, withWatermark = false): string {
-    return optimizeCloudinaryUrl(url, 640, 60, withWatermark);
+    return optimizeCloudinaryUrl(url, 800, 80, withWatermark);
 }
 
 /**
- * Get optimized URL for swiper/carousel display (medium)
+ * Get optimized URL for swiper/carousel display (medium/large)
  */
 export function getSwiperUrl(url: string | undefined | null, withWatermark = false): string {
-    return optimizeCloudinaryUrl(url, 1200, 75, withWatermark);
+    return optimizeCloudinaryUrl(url, 1920, 75, withWatermark); // 75 with q_auto:best is very high quality
 }
 
 /**

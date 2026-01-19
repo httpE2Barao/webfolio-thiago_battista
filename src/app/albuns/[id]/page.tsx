@@ -7,21 +7,32 @@ import { notFound } from "next/navigation";
 import { AlbumCompletoClient } from "./AlbumCompleto";
 
 async function getAlbumById(identifier: string): Promise<Album | null> {
-  const albumData = await prisma.album.findFirst({
+  const normalizedSearch = identifier.replace(/-/g, ' ').trim();
+
+  // 1. Tenta busca exata por ID ou Título
+  let albumData = await prisma.album.findFirst({
     where: {
       OR: [
         { id: identifier },
-        { titulo: { equals: identifier, mode: 'insensitive' } }
+        { titulo: { equals: normalizedSearch, mode: 'insensitive' } }
       ]
     },
-    include: {
-      Image: {
-        orderBy: {
-          ordem: 'asc'
-        }
-      }
-    }
+    include: { Image: { orderBy: { ordem: 'asc' } } }
   });
+
+  // 2. Se não achou, tenta busca por "contém" (flexível para "mas" vs "mais")
+  if (!albumData) {
+    // Pega as primeiras palavras significativas
+    const searchTerms = normalizedSearch.split(' ').filter(t => t.length > 3);
+    if (searchTerms.length > 0) {
+      albumData = await prisma.album.findFirst({
+        where: {
+          titulo: { contains: searchTerms[0], mode: 'insensitive' }
+        },
+        include: { Image: { orderBy: { ordem: 'asc' } } }
+      });
+    }
+  }
 
   if (!albumData) {
     return null;

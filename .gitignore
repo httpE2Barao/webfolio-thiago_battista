@@ -46,3 +46,28 @@ next-env.d.ts
 # Cloudinary Migration
 /public/images
 /public/comparar
+
+# Scripts directory
+/scripts/*.log
+/scripts/*.json
+
+# Prisma
+/prisma/*.db
+/prisma/*.db-journal
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

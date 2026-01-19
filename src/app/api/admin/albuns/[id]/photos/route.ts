@@ -1,4 +1,3 @@
-import { uploadImage } from '@/lib/cloudinary';
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -10,11 +9,11 @@ export async function POST(
     const { id: albumId } = params;
 
     try {
-        const formData = await req.formData();
-        const files = formData.getAll('files') as File[];
+        const body = await req.json();
+        const { images: imagesToSave } = body;
 
-        if (!files || files.length === 0) {
-            return NextResponse.json({ error: 'Nenhum arquivo enviado.' }, { status: 400 });
+        if (!imagesToSave || !Array.isArray(imagesToSave)) {
+            return NextResponse.json({ error: 'Nenhuma imagem fornecida.' }, { status: 400 });
         }
 
         // Buscar última ordem para adicionar ao final
@@ -22,35 +21,37 @@ export async function POST(
             where: { albumId },
             orderBy: { ordem: 'desc' },
         });
-        let initialOrder = (lastImage?.ordem ?? -1) + 1;
 
-        const uploadedImages = [];
+        let currentOrder = (lastImage?.ordem ?? -1) + 1;
+        const createdImages = [];
 
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            const result = await uploadImage(file, `albums/${albumId}`);
-
+        for (const imgData of imagesToSave) {
             const image = await prisma.image.create({
                 data: {
-                    id: result.public_id,
-                    filename: file.name,
-                    path: result.secure_url,
+                    id: imgData.public_id,
+                    filename: imgData.original_filename || 'image',
+                    path: imgData.secure_url,
                     albumId: albumId,
-                    ordem: initialOrder + i,
+                    ordem: currentOrder++,
                     metadata: {
-                        width: result.width,
-                        height: result.height,
-                        format: result.format,
-                        bytes: result.bytes
+                        width: imgData.width,
+                        height: imgData.height,
+                        format: imgData.format,
+                        bytes: imgData.bytes,
+                        resource_type: imgData.resource_type
                     }
                 }
             });
-            uploadedImages.push(image);
+            createdImages.push(image);
         }
 
-        return NextResponse.json({ success: true, count: uploadedImages.length, images: uploadedImages });
+        return NextResponse.json({
+            success: true,
+            count: createdImages.length,
+            images: createdImages
+        });
     } catch (error: any) {
-        console.error('Erro ao adicionar fotos:', error);
+        console.error('Erro ao salvar fotos no banco:', error);
         return NextResponse.json({ error: error.message || 'Erro interno' }, { status: 500 });
     }
 }
