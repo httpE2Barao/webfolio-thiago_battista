@@ -28,7 +28,7 @@ export async function POST(
 
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
-            const result = await uploadImage(file, `webfolio/${albumId}`);
+            const result = await uploadImage(file, `albums/${albumId}`);
 
             const image = await prisma.image.create({
                 data: {
