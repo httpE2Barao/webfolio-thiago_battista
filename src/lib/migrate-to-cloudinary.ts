@@ -33,15 +33,29 @@ function getCategory(folderName: string) {
 }
 
 async function uploadToCloudinary(filePath: string, folderName: string) {
+    const fileName = path.parse(filePath).name;
+    const publicId = `albums/${folderName}/${fileName}`;
+
+    // Tenta primeiro encontrar se já existe
+    try {
+        const existing = await cloudinary.api.resource(publicId);
+        if (existing) {
+            console.log(`  Já existe: ${publicId}`);
+            return existing;
+        }
+    } catch (e) {
+        // Se der 404, prossegue para o upload
+    }
+
     const fileBuffer = fs.readFileSync(filePath);
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload_stream(
             {
-                folder: `webfolio/${folderName}`,
+                folder: `albums/${folderName}`,
                 resource_type: 'auto',
                 use_filename: true,
                 unique_filename: false,
-                overwrite: false // Se já existir no Cloudinary, não reenvia (rápido)
+                overwrite: false
             },
             (error, result) => {
                 if (error) reject(error);
