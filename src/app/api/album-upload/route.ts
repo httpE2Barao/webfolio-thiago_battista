@@ -21,15 +21,32 @@ export async function POST(req: Request) {
     }
 
     // 1. Lidar com a Categoria
-    let categoryObj = await prisma.category.findUnique({
-      where: { name: categoria }
+    const categoriaNome = (formData.get('categoria') as string || '').trim();
+    if (!categoriaNome) {
+      return NextResponse.json({ error: 'Categoria é obrigatória.' }, { status: 400 });
+    }
+
+    const slug = categoriaNome.toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/[^\w-]/g, '')
+      .replace(/-+/g, '-'); // Remove hífens duplicados
+
+    // Busca por nome exato ou pelo slug gerado para evitar duplicatas
+    let categoryObj = await prisma.category.findFirst({
+      where: {
+        OR: [
+          { name: { equals: categoriaNome, mode: 'insensitive' } },
+          { slug: slug }
+        ]
+      }
     });
 
     if (!categoryObj) {
-      const slug = categoria.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^\w-]/g, '');
       categoryObj = await prisma.category.create({
         data: {
-          name: categoria,
+          name: categoriaNome,
           slug: slug
         }
       });
@@ -43,7 +60,7 @@ export async function POST(req: Request) {
         id: albumId,
         titulo: albumName,
         descricao: description,
-        categoria: categoria,
+        categoria: categoryObj.name, // Usamos o nome oficial do objeto encontrado/criado
         subcategoria: albumName,
         tags: tags,
         categoryId: categoryObj.id,
