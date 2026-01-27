@@ -24,7 +24,18 @@ export async function POST(req: Request) {
         });
 
         if (!categoryObj) {
-            const slug = categoria.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+            let slug = categoria.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+            
+            // Verificar se o slug já existe para evitar erro de restrição única
+            const existingSlug = await prisma.category.findUnique({
+                where: { slug: slug }
+            });
+
+            if (existingSlug) {
+                // Se o slug existe mas o nome é diferente, adicionamos um sufixo aleatório
+                slug = `${slug}-${Math.random().toString(36).substring(2, 6)}`;
+            }
+
             categoryObj = await prisma.category.create({
                 data: {
                     name: categoria,

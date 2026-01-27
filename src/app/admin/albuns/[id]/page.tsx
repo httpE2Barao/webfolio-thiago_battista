@@ -6,7 +6,7 @@ import { getThumbUrl } from '@/lib/cloudinaryOptimize';
 import { Image as AlbumImage, StoreAlbum } from '@/types/types';
 import Link from 'next/link';
 import { use, useCallback, useEffect, useRef, useState } from 'react';
-import { FiArrowLeft, FiCheck, FiLoader, FiMove, FiSave, FiTrash2, FiUpload } from 'react-icons/fi';
+import { FiArrowLeft, FiCheck, FiHeart, FiLoader, FiMove, FiSave, FiTrash2, FiUpload } from 'react-icons/fi';
 
 export default function EditAlbumPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -14,7 +14,8 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     const [isLoading, setIsLoading] = useState(true);
     const [isSaving, setIsSaving] = useState(false);
     const [uploading, setUploading] = useState(false);
-    const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error' | 'info', text: string } | null>(null);
 
     // Form States
     const [formData, setFormData] = useState<Partial<StoreAlbum>>({});
@@ -99,6 +100,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files?.length) return;
         setUploading(true);
+        setUploadProgress(0);
         setStatusMsg(null);
 
         const files = Array.from(e.target.files);
@@ -106,7 +108,12 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
         const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || 'dx9whz8ee';
 
         try {
-            for (const file of files) {
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const progress = Math.round((i / files.length) * 100);
+                setUploadProgress(progress);
+                setStatusMsg({ type: 'info', text: `Enviando ${i + 1} de ${files.length}...` });
+
                 // 1. Get Signature
                 const timestamp = Math.round(new Date().getTime() / 1000);
                 const folder = `albums/${id}`;
@@ -139,6 +146,9 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                 uploadedData.push(result);
             }
 
+            setUploadProgress(100);
+            setStatusMsg({ type: 'info', text: 'Salvando no banco de dados...' });
+
             // 3. Save to DB
             const res = await fetch(`/api/admin/albuns/${id}/photos`, {
                 method: 'POST',
@@ -147,7 +157,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
             });
 
             if (res.ok) {
-                setStatusMsg({ type: 'success', text: `${uploadedData.length} fotos adicionadas!` });
+                setStatusMsg({ type: 'success', text: `${uploadedData.length} fotos adicionadas com sucesso!` });
                 fetchAlbum();
             } else {
                 throw new Error('Erro ao salvar no banco de dados');
@@ -157,7 +167,6 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
             setStatusMsg({ type: 'error', text: error.message || 'Erro no upload' });
         } finally {
             setUploading(false);
-            // Clear input
             e.target.value = '';
         }
     };
@@ -169,6 +178,40 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
             setImages(prev => prev.filter(img => img.id !== photoId));
         } catch (error) {
             alert('Erro ao excluir');
+        }
+    };
+
+    const handleSetCover = async (imagePath: string) => {
+        setFormData(prev => ({ ...prev, coverImage: imagePath }));
+        setStatusMsg({ type: 'info', text: 'Definindo foto de capa...' });
+        try {
+            const res = await fetch(`/api/admin/albuns/${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ coverImage: imagePath }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            if (!res.ok) throw new Error();
+            setStatusMsg({ type: 'success', text: 'Capa atualizada!' });
+            // Update local album state to reflect cover change
+            setAlbum(prev => prev ? { ...prev, coverImage: imagePath } : null);
+        } catch (err) {
+            setStatusMsg({ type: 'error', text: 'Erro ao definir capa.' });
+        }
+    };
+
+    const handleDeleteAlbum = async () => {
+        if (!confirm('ATENÇÃO: Isso excluirá o álbum e TODAS as fotos permanentemente. Continuar?')) return;
+        setIsSaving(true);
+        try {
+            const res = await fetch(`/api/admin/albuns/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                window.location.href = '/admin';
+            } else {
+                throw new Error();
+            }
+        } catch (err) {
+            alert('Erro ao excluir álbum');
+            setIsSaving(false);
         }
     };
 
@@ -214,7 +257,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
         <main className="min-h-screen bg-[#050505] text-white p-6 pb-32">
             <div className="max-w-7xl mx-auto space-y-8">
                 {/* Header */}
-                <div className="flex items-center justify-between sticky top-0 z-50 bg-[#050505]/80 backdrop-blur-md py-4 border-b border-white/10">
+                <div className="flex flex-col md:flex-row md:items-center justify-between sticky top-0 z-30 bg-[#050505]/80 backdrop-blur-md py-4 border-b border-white/10 gap-4">
                     <div className="flex items-center gap-4">
                         <Link href="/admin" className="p-2 hover:bg-white/10 rounded-full transition-colors">
                             <FiArrowLeft size={24} />
@@ -224,11 +267,18 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                             <p className="text-xs text-gray-500">{album.titulo}</p>
                         </div>
                     </div>
-                    <div className="flex gap-4">
+                    <div className="flex flex-wrap gap-2 sm:gap-4">
+                        <button
+                            onClick={handleDeleteAlbum}
+                            disabled={isSaving}
+                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-red-600/10 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/20 px-4 py-2 rounded-xl text-xs font-bold transition-all disabled:opacity-50"
+                        >
+                            <FiTrash2 /> Excluir Álbum
+                        </button>
                         <button
                             onClick={handleUpdate}
                             disabled={isSaving}
-                            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-xl font-bold transition-all disabled:opacity-50"
+                            className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-xl font-bold transition-all disabled:opacity-50"
                         >
                             {isSaving ? <FiLoader className="animate-spin" /> : <FiSave />} Salvar Detalhes
                         </button>
@@ -236,8 +286,26 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                 </div>
 
                 {statusMsg && (
-                    <div className={`p-4 rounded-xl border ${statusMsg.type === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-500' : 'bg-red-500/10 border-red-500/20 text-red-500'}`}>
-                        {statusMsg.text}
+                    <div className={`p-4 rounded-xl border flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-4 duration-300 ${statusMsg.type === 'success' ? 'bg-green-500/10 border-green-500/20 text-green-500' :
+                        statusMsg.type === 'info' ? 'bg-blue-500/10 border-blue-500/20 text-blue-500' :
+                            'bg-red-500/10 border-red-500/20 text-red-500'
+                        }`}>
+                        <div className="flex items-center gap-3">
+                            {statusMsg.type === 'info' && <FiLoader className="animate-spin" />}
+                            {statusMsg.type === 'success' && <FiCheck size={18} />}
+                            <span className="text-sm font-bold">{statusMsg.text}</span>
+                        </div>
+                        {statusMsg.type === 'info' && uploading && (
+                            <div className="flex items-center gap-3">
+                                <span className="text-xs font-mono">{uploadProgress}%</span>
+                                <div className="w-32 h-1.5 bg-white/5 rounded-full overflow-hidden border border-white/5">
+                                    <div className="h-full bg-blue-500 transition-all duration-300" style={{ width: `${uploadProgress}%` }} />
+                                </div>
+                            </div>
+                        )}
+                        <button onClick={() => setStatusMsg(null)} className="text-gray-500 hover:text-white transition-colors">
+                            <FiTrash2 size={14} />
+                        </button>
                     </div>
                 )}
 
@@ -350,7 +418,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                                 {images.map((img, index) => (
                                     <div
                                         key={img.id}
-                                        className="relative group aspect-[3/4] bg-white/5 rounded-xl overflow-hidden border border-white/5 hover:border-white/30 transition-all cursor-move"
+                                        className={`relative group aspect-[3/4] bg-white/5 rounded-xl overflow-hidden border-2 transition-all cursor-move ${formData.coverImage === img.path ? 'border-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)]' : 'border-white/5 hover:border-white/30'}`}
                                         draggable
                                         onDragStart={(e) => {
                                             dragItem.current = index;
@@ -381,12 +449,27 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                                             #{index + 1}
                                         </div>
 
-                                        <button
-                                            onClick={() => handleDeletePhoto(img.id)}
-                                            className="absolute top-2 right-2 z-20 bg-red-500/80 hover:bg-red-500 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
-                                        >
-                                            <FiTrash2 size={14} />
-                                        </button>
+                                        {formData.coverImage === img.path && (
+                                            <div className="absolute top-2 left-1/2 -translate-x-1/2 z-10 bg-blue-500 text-white px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter">
+                                                Capa Atual
+                                            </div>
+                                        )}
+
+                                        <div className="absolute top-2 right-2 z-20 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); handleDeletePhoto(img.id); }}
+                                                className="bg-red-500/80 hover:bg-red-500 text-white p-2 rounded-lg transition-colors"
+                                            >
+                                                <FiTrash2 size={14} />
+                                            </button>
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); handleSetCover(img.path); }}
+                                                className={`p-2 rounded-lg transition-colors ${formData.coverImage === img.path ? 'bg-blue-500 text-white' : 'bg-white/20 hover:bg-white/40 text-white'}`}
+                                                title="Definir como Capa"
+                                            >
+                                                <FiHeart size={14} className={formData.coverImage === img.path ? 'fill-current' : ''} />
+                                            </button>
+                                        </div>
 
                                         <div className="absolute inset-x-0 bottom-0 p-2 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                                             <FiMove className="mx-auto text-white/50" />

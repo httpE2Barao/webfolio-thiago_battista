@@ -12,6 +12,7 @@ import type { Projeto } from "@/types/types";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FiZoomIn, FiZoomOut } from "react-icons/fi";
 
 const TituloResponsivo = dynamic(() => import("./TituloResponsivo"), {
   ssr: false,
@@ -259,7 +260,7 @@ export default function CustomSwiper({
               className="absolute top-4 right-16 bg-white/10 hover:bg-white/20 text-white rounded-full w-10 h-10 flex items-center justify-center text-lg z-[10000] transition-colors"
               aria-label={isZoomed ? "Reduzir zoom" : "Aumentar zoom"}
             >
-              {isZoomed ? "−" : "+"}
+              {isZoomed ? <FiZoomOut /> : <FiZoomIn />}
             </button>
 
             {/* Zoom indicator */}

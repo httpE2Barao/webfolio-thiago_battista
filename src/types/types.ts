@@ -99,6 +99,7 @@ export interface StoreAlbum {
   accessPassword?: string | null;
   categoria?: string;
   subcategoria?: string;
+  coverImage?: string | null;
   tags?: string[];
   coverImageMobile?: string | null;
   coverImageDesktop?: string | null;

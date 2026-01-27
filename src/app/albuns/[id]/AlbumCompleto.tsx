@@ -1,6 +1,7 @@
 "use client";
 
 import CustomSwiper from "@/components/CustomSwiper";
+import { GridSkeleton, ImageLoader } from "@/components/LoadingStates";
 import { ProtectedImage } from "@/components/ProtectedImage";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { getThumbUrl } from "@/lib/cloudinaryOptimize";
@@ -20,23 +21,24 @@ const ImageCard = ({
   index: number;
   onClick: () => void;
 }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
   const optimizedSrc = getThumbUrl(imagem.imagem);
 
   return (
     <div
-      className="relative w-full h-64 xl:h-80 cursor-pointer group overflow-hidden rounded-lg"
+      className="relative w-full h-64 xl:h-80 cursor-pointer group overflow-hidden rounded-lg bg-gray-900"
       onClick={onClick}
     >
+      {!isLoaded && <ImageLoader />}
       <ProtectedImage
         src={optimizedSrc}
         alt={`${albumTitle} - foto ${index + 1}`}
         fill
         quality={60}
         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
-        className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+        className={`object-cover rounded-lg transition-all duration-500 group-hover:scale-105 ${isLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
         loading={index < 8 ? "eager" : "lazy"}
-        placeholder="blur"
-        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMCwsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAAUH/8QAIhAAAgEDBAMBAAAAAAAAAAAAAQIDAAQREiExQQUTYXH/xAAVAQEBAAAAAAAAAAAAAAAAAAADBP/EABkRAAMBAQEAAAAAAAAAAAAAAAABEQISIf/aAAwDAQACEQMRAD8Ao+K8nNZWMMtxZRXDRxAF2VQWIHJIBwSTk/BVP+RKVfD9y//Z"
+        onLoad={() => setIsLoaded(true)}
       />
       {/* Light hover indicator */}
       <div className="absolute inset-0 z-20 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 flex items-center justify-center pointer-events-none">
@@ -61,9 +63,11 @@ export function AlbumCompletoClient({
   const [initialIndex, setInitialIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const [columns, setColumns] = useState(4);
+  const [isMounted, setIsMounted] = useState(false);
 
   // Responsive column count
   useEffect(() => {
+    setIsMounted(true);
     const updateColumns = () => {
       const width = window.innerWidth;
       if (width < 640) setColumns(1);
@@ -118,42 +122,46 @@ export function AlbumCompletoClient({
         ref={containerRef}
         className="flex-grow w-full max-w-7xl mx-auto px-4"
       >
-        <div
-          className="relative w-full"
-          style={{ height: `${virtualizer.getTotalSize()}px` }}
-        >
-          {virtualizer.getVirtualItems().map((virtualRow) => {
-            const startIndex = virtualRow.index * columns;
-            const rowImages = imagensValidas.slice(startIndex, startIndex + columns);
+        {!isMounted ? (
+          <GridSkeleton />
+        ) : (
+          <div
+            className="relative w-full"
+            style={{ height: `${virtualizer.getTotalSize()}px` }}
+          >
+            {virtualizer.getVirtualItems().map((virtualRow) => {
+              const startIndex = virtualRow.index * columns;
+              const rowImages = imagensValidas.slice(startIndex, startIndex + columns);
 
-            return (
-              <div
-                key={virtualRow.key}
-                data-index={virtualRow.index}
-                ref={virtualizer.measureElement}
-                className="absolute top-0 left-0 w-full grid gap-2"
-                style={{
-                  transform: `translateY(${virtualRow.start - virtualizer.options.scrollMargin}px)`,
-                  gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-                  paddingBottom: '8px', // Equivalent to gap-2 in Y
-                }}
-              >
-                {rowImages.map((imagem, colIndex) => {
-                  const actualIndex = startIndex + colIndex;
-                  return (
-                    <ImageCard
-                      key={imagem.id}
-                      imagem={imagem}
-                      albumTitle={album.titulo}
-                      index={actualIndex}
-                      onClick={() => handlePhotoClick(actualIndex)}
-                    />
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
+              return (
+                <div
+                  key={virtualRow.key}
+                  data-index={virtualRow.index}
+                  ref={virtualizer.measureElement}
+                  className="absolute top-0 left-0 w-full grid gap-2"
+                  style={{
+                    transform: `translateY(${virtualRow.start - virtualizer.options.scrollMargin}px)`,
+                    gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+                    paddingBottom: '8px', // Equivalent to gap-2 in Y
+                  }}
+                >
+                  {rowImages.map((imagem, colIndex) => {
+                    const actualIndex = startIndex + colIndex;
+                    return (
+                      <ImageCard
+                        key={imagem.id}
+                        imagem={imagem}
+                        albumTitle={album.titulo}
+                        index={actualIndex}
+                        onClick={() => handlePhotoClick(actualIndex)}
+                      />
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* Fullscreen modal with swiper */}
@@ -179,3 +187,4 @@ export function AlbumCompletoClient({
 }
 
 export default AlbumCompletoClient;
+

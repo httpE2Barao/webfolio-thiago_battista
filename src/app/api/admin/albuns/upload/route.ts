@@ -59,6 +59,11 @@ export async function POST(req: Request) {
 
     } catch (error: any) {
         console.error('Erro no upload de imagem:', error);
-        return NextResponse.json({ error: error.message || 'Erro interno no servidor.' }, { status: 500 });
+        // Retornar detalhes do erro se for do Cloudinary
+        const errorMessage = error.message || (typeof error === 'object' ? JSON.stringify(error) : String(error));
+        return NextResponse.json({
+            error: 'Erro no servidor durante o upload.',
+            details: errorMessage
+        }, { status: 500 });
     }
 }

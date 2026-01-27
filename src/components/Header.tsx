@@ -74,7 +74,7 @@ export function Header() {
     <>
       <header
         ref={headerRef}
-        className="sticky top-0 md:fixed md:top-0 md:left-0 md:h-full md:w-44 z-50 bg-backgroundHeader"
+        className="sticky top-0 md:fixed md:top-0 md:left-0 md:h-full md:w-44 z-[70] bg-backgroundHeader"
       >
         <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
           {/* Nome e descrição */}
@@ -114,7 +114,7 @@ export function Header() {
       {isNavOpen && (
         <nav
           ref={navRef}
-          className="fixed top-0 left-0 h-screen z-40 w-full bg-backgroundHeader md:h-40 md:left-40 md:bottom-0 md:top-auto md:w-[calc(100vw-10rem)] p-4 flex items-center shadow-lg"
+          className="fixed top-0 left-0 h-screen z-[60] w-full bg-backgroundHeader md:h-40 md:left-40 md:bottom-0 md:top-auto md:w-[calc(100vw-10rem)] p-4 flex items-center shadow-lg"
         >
           <ul className="flex flex-col md:flex-row w-full md:justify-evenly gap-16 md:gap-10 items-center max-md:mt-32">
             {navItems.map(({ label, path }) => {

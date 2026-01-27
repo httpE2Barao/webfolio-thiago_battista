@@ -1,24 +1,19 @@
-// src/app/albuns/[id]/loading.tsx
+import { GridSkeleton } from "@/components/LoadingStates";
 
-export default function AlbumLoadingSkeleton() {
+export default function Loading() {
   return (
-    <div className="p-4 md:p-8 animate-pulse">
-      {/* Skeleton para o Título e Descrição */}
-      <div className="max-w-3xl mx-auto text-center mb-6">
-        <div className="h-10 w-3/4 bg-gray-700 rounded-md mx-auto mb-4"></div>
-        <div className="h-4 w-full bg-gray-700 rounded-md mx-auto"></div>
+    <div className="lg:p-4 relative flex flex-col min-h-screen">
+      {/* Skeleton for Title */}
+      <div className="w-full max-w-xl mx-auto mb-2 flex flex-col items-center">
+        <div className="h-10 w-64 bg-gray-900/50 animate-pulse rounded-full mb-2" />
+        {/* Skeleton for Description */}
+        <div className="h-4 w-96 bg-gray-900/30 animate-pulse rounded-full mb-2" />
+        {/* Skeleton for count */}
+        <div className="h-3 w-20 bg-gray-900/20 animate-pulse rounded-full mb-6" />
       </div>
 
-      {/* Skeleton para a Grade de Fotos */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 mt-2">
-        {/* Gera 12 caixas de placeholder para simular o carregamento das imagens */}
-        {Array.from({ length: 12 }).map((_, index) => (
-          <div
-            key={index}
-            className="relative w-full h-64 xl:h-80 bg-gray-800 rounded-lg"
-          ></div>
-        ))}
-      </div>
+      {/* Skeleton for Grid */}
+      <GridSkeleton />
     </div>
   );
 }

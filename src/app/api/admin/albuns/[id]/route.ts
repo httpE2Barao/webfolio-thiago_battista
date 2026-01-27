@@ -44,6 +44,7 @@ export async function PATCH(
                 // For now, I will add the fields directly, but optimally we should handle the Category relation.
 
                 // Sales Config
+                coverImage: body.coverImage,
                 isForSale: body.isForSale,
                 isPrivate: body.isPrivate,
                 accessPassword: body.accessPassword,
@@ -57,5 +58,41 @@ export async function PATCH(
     } catch (error) {
         console.error('Erro ao atualizar álbum:', error);
         return NextResponse.json({ error: 'Erro ao atualizar álbum' }, { status: 500 });
+    }
+}
+
+export async function DELETE(
+    request: NextRequest,
+    props: { params: Promise<{ id: string }> }
+) {
+    const params = await props.params;
+    const { id } = params;
+
+    try {
+        // 1. Buscar imagens para deletar do Cloudinary
+        const images = await prisma.image.findMany({
+            where: { albumId: id },
+            select: { id: true }
+        });
+
+        // 2. Deletar do Cloudinary
+        const { deleteImage } = await import('@/lib/cloudinary');
+        for (const img of images) {
+            try {
+                await deleteImage(img.id);
+            } catch (err) {
+                console.error(`Erro ao deletar imagem ${img.id} do Cloudinary:`, err);
+            }
+        }
+
+        // 3. Deletar do Banco (Cascade delete cuidará das imagens no DB)
+        await prisma.album.delete({
+            where: { id }
+        });
+
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error('Erro ao deletar álbum:', error);
+        return NextResponse.json({ error: 'Erro ao deletar álbum' }, { status: 500 });
     }
 }
