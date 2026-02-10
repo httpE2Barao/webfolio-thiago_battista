@@ -282,7 +282,22 @@ export default function AdminDashboard() {
         });
 
         if (!uploadRes.ok) {
-          console.error(`Falha no upload da imagem ${i + 1}:`, await uploadRes.json());
+          let errorDetail = 'Erro desconhecido';
+          
+          if (uploadRes.status === 413) {
+            errorDetail = 'Arquivo muito grande. O limite é de aproximadamente 4.5MB por imagem.';
+          } else {
+            const contentType = uploadRes.headers.get('content-type');
+            if (contentType && contentType.includes('application/json')) {
+              const errorData = await uploadRes.json();
+              errorDetail = errorData.error || errorData.details || errorDetail;
+            } else {
+              errorDetail = `Erro no servidor (Status ${uploadRes.status})`;
+            }
+          }
+          
+          console.error(`Falha no upload da imagem ${i + 1}:`, errorDetail);
+          throw new Error(`Imagem ${i + 1}: ${errorDetail}`);
         } else {
           successCount++;
         }
