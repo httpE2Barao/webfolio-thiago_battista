@@ -32,6 +32,8 @@ model Album {
   coverImage      String?
   coverImageMobile  String?
   coverImageDesktop String?
+  coverImageMobilePosition  String? @default("center")
+  coverImageDesktopPosition String? @default("center")
   published       Boolean   @default(true)
   featured        Boolean   @default(false)
   ordem           Int       @default(0)

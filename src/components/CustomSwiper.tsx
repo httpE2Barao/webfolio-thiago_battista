@@ -4,7 +4,7 @@ import React, { Suspense, useCallback, useEffect, useMemo, useRef, useState } fr
 import type { Swiper as SwiperType } from "swiper";
 import "swiper/css/bundle";
 import "swiper/css/zoom";
-import { Autoplay, Keyboard, Navigation, Zoom } from "swiper/modules";
+import { Autoplay, EffectCards, Keyboard, Navigation, Zoom } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { getFullscreenUrl, getSwiperUrl } from "@/lib/cloudinaryOptimize";
@@ -31,6 +31,7 @@ type CustomSwiperProps = {
   fullSize?: boolean;
   priority?: boolean;
   onSlideChange?: (projeto: Projeto) => void;
+  effect?: "slide" | "fade" | "cards";
 };
 
 interface SwiperImageProps {
@@ -43,10 +44,12 @@ interface SwiperImageProps {
   withWatermark?: boolean;
   coverImageMobile?: string;
   coverImageDesktop?: string;
+  coverImageMobilePosition?: string;
+  coverImageDesktopPosition?: string;
 }
 
 const SwiperImage = React.memo(
-  ({ src, alt, modal, fullSize, priority, index, withWatermark, coverImageMobile, coverImageDesktop }: SwiperImageProps) => {
+  ({ src, alt, modal, fullSize, priority, index, withWatermark, coverImageMobile, coverImageDesktop, coverImageMobilePosition, coverImageDesktopPosition }: SwiperImageProps) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -80,6 +83,11 @@ const SwiperImage = React.memo(
           fill
           sizes={modal ? "100vw" : "(max-width: 768px) 100vw, (max-width: 1920px) 100vw, 1920px"}
           className={modal || fullSize ? "!object-contain" : "!object-cover"}
+          style={{
+            objectPosition: isMobile
+              ? (coverImageMobilePosition || "center")
+              : (coverImageDesktopPosition || "center")
+          }}
           priority={priority && index < 2}
           quality={90}
           loading={index < 2 ? "eager" : "lazy"}
@@ -102,9 +110,11 @@ export default function CustomSwiper({
   fullSize = false,
   priority = false,
   onSlideChange,
+  effect = "slide",
 }: CustomSwiperProps) {
   const router = useRouter();
   const [currentTitle, setCurrentTitle] = useState("");
+  const [currentCategory, setCurrentCategory] = useState("");
   const [activeIndex, setActiveIndex] = useState(initialSlide);
   const [isZoomed, setIsZoomed] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
@@ -115,6 +125,7 @@ export default function CustomSwiper({
     if (slides.length > 0) {
       const initialProject = slides[initialSlide];
       setCurrentTitle(initialProject?.titulo || initialProject?.albumName || "");
+      setCurrentCategory(initialProject?.categoria || "");
     }
   }, [slides, initialSlide]);
 
@@ -139,6 +150,7 @@ export default function CustomSwiper({
 
       setActiveIndex(swiper.realIndex);
       setCurrentTitle(activeSlide.titulo || activeSlide.albumName || "");
+      setCurrentCategory(activeSlide.categoria || "");
       if (onSlideChange) {
         onSlideChange(activeSlide);
       }
@@ -188,10 +200,12 @@ export default function CustomSwiper({
     );
   }
 
-  // Determine which modules to use - add Zoom only for modal mode
-  const swiperModules = modal
-    ? [Navigation, Keyboard, Zoom]
-    : [Navigation, Keyboard, Autoplay];
+  // Determine which modules to use
+  const swiperModules = [Navigation, Keyboard];
+  if (modal) swiperModules.push(Zoom);
+  else swiperModules.push(Autoplay);
+
+  if (effect === 'cards') swiperModules.push(EffectCards);
 
   return (
     <div id={`swiper-container-${tagName}`} className={containerClasses}>
@@ -204,9 +218,18 @@ export default function CustomSwiper({
           loop={slides.length > 1}
           initialSlide={initialSlide}
           keyboard={{ enabled: true }}
-          autoplay={mode === 'albuns' && !modal ? { delay: 6000, disableOnInteraction: false } : false}
+          autoplay={mode === 'albuns' && !modal && effect !== 'cards' ? { delay: 6000, disableOnInteraction: false } : false}
           zoom={modal ? { maxRatio: 3, minRatio: 1 } : false}
-          className={`w-full h-full ${mode === 'albuns' ? 'swiper-homepage' : ''}`}
+          effect={effect}
+          grabCursor={effect === 'cards'}
+          watchSlidesProgress={true} // Calculando progresso para todos para podermos ver mais camadas
+          cardsEffect={{
+            slideShadows: true, // Ativado para realçar as camadas
+            rotate: true,
+            perSlideRotate: 15, // Rotação um pouco mais suave
+            perSlideOffset: 50, // Offset mais compacto
+          }}
+          className={`w-full h-full swiper-modern-nav ${mode === 'albuns' ? 'swiper-homepage' : ''} ${effect === 'cards' ? 'swiper-cards-mode' : ''}`}
           onSlideChange={handleSlideChange}
           onZoomChange={handleZoomChange}
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
@@ -214,10 +237,23 @@ export default function CustomSwiper({
           {slides.map((slide, index) => (
             <SwiperSlide
               key={slide.id || `${slide.titulo}-${index}`}
-              onClick={() => !isZoomed && handleClick(slide, index)}
               className={`relative ${!modal && "cursor-pointer"}`}
             >
-              <div className="relative w-full h-full">
+              {/* Área central clicável para entrar no álbum (apenas no modo fotos e sem zoom) */}
+              {mode === 'fotos' && !modal && !isZoomed && (
+                <div
+                  className="absolute inset-x-[20%] inset-y-0 z-30"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleClick(slide, index);
+                  }}
+                  title="Ver álbum completo"
+                />
+              )}
+              <div
+                className="relative w-full h-full"
+                onClick={() => modal && !isZoomed && handleClick(slide, index)} // Mantém clique global apenas no modal
+              >
                 <SwiperImage
                   src={slide.imagem}
                   alt={slide.titulo}
@@ -228,6 +264,8 @@ export default function CustomSwiper({
                   withWatermark={mode === 'fotos'} // Protege fotos individuais
                   coverImageMobile={slide.coverImageMobile}
                   coverImageDesktop={slide.coverImageDesktop}
+                  coverImageMobilePosition={slide.coverImageMobilePosition}
+                  coverImageDesktopPosition={slide.coverImageDesktopPosition}
                 />
               </div>
             </SwiperSlide>
@@ -235,10 +273,27 @@ export default function CustomSwiper({
         </Swiper>
 
         {mode === 'albuns' && currentTitle && !modal && (
-          <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none bg-black bg-opacity-20">
-            <TituloResponsivo className="text-white text-shadow-lg">
-              {currentTitle.replace(/-/g, ' ')}
-            </TituloResponsivo>
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none bg-black/10">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <TituloResponsivo className="text-white text-shadow-lg !mb-0">
+                {currentTitle.replace(/-/g, ' ')}
+              </TituloResponsivo>
+
+              {currentCategory && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/albuns/categoria/${encodeURIComponent(currentCategory)}`);
+                  }}
+                  className="pointer-events-auto group flex flex-col items-center"
+                >
+                  <span className="text-white/60 text-sm md:text-lg uppercase tracking-[0.3em] font-black group-hover:text-white transition-colors duration-300">
+                    {currentCategory}
+                  </span>
+                  <div className="h-[1px] w-0 bg-white group-hover:w-full transition-all duration-500" />
+                </button>
+              )}
+            </div>
           </div>
         )}
 

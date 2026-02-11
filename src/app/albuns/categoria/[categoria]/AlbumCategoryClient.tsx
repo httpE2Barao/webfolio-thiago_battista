@@ -26,24 +26,31 @@ const AlbumGroup = memo(({
   const router = useRouter();
 
   const swiperContent = (
-    <div className="mb-24 last:mb-12 group relative rounded-lg overflow-hidden">
-      <div className="transition-transform duration-300 ease-in-out h-[400px] md:h-[500px] lg:h-[600px] relative flex items-center justify-center">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <CustomSwiper
-            mode="fotos"
-            photos={albumPhotos}
-            tagName={titulo}
-            priority={isFirst}
-            hidePagination={false}
-            onSlideClick={() => router.push(`/albuns/${encodeURIComponent(titulo)}`)}
-          />
-        </div>
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none">
-          <div className="transform transition-all duration-500">
-            <TituloResponsivo className="text-white text-3xl md:text-5xl lg:text-6xl font-semibold px-4 py-2 rounded-md bg-black/30">
-              {titulo.replace(/-/g, ' ')}
-            </TituloResponsivo>
-          </div>
+    <div className="group flex flex-col gap-6">
+      <div className="relative h-[400px] md:h-[600px] lg:h-[700px] w-full overflow-visible px-10">
+        {/* Pilha de Fotos Interativa - Permitindo navegar por todo o álbum */}
+        <CustomSwiper
+          mode="fotos"
+          photos={albumPhotos}
+          tagName={titulo}
+          priority={isFirst}
+          effect="cards"
+          onSlideClick={() => router.push(`/albuns/${encodeURIComponent(titulo)}?cat=${encodeURIComponent(albumPhotos[0]?.categoria || '')}`)}
+        />
+      </div>
+
+      {/* Legenda/Info em baixo da pilha */}
+      <div
+        className="flex flex-col items-center gap-1 cursor-pointer transition-transform duration-300 group-hover:-translate-y-1"
+        onClick={() => router.push(`/albuns/${encodeURIComponent(titulo)}?cat=${encodeURIComponent(albumPhotos[0]?.categoria || '')}`)}
+      >
+        <h3 className="text-white text-xl md:text-2xl font-black uppercase tracking-tighter text-center">
+          {titulo.replace(/-/g, ' ')}
+        </h3>
+        <div className="flex items-center gap-2 text-white/40 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
+          <span>{albumPhotos[0]?.categoria}</span>
+          <span>•</span>
+          <span>{albumPhotos.length} fotos</span>
         </div>
       </div>
     </div>
@@ -91,18 +98,21 @@ export default function AlbumCategoryClient({ albums, categoria }: AlbumCategory
   const albumEntries = Object.entries(albumsByTitle).filter(([_, photos]) => photos.length > 0);
 
   return (
-    <div className="space-y-12 py-12 px-4 md:px-8">
-      <TituloResponsivo className="text-center mb-16">
+    <div className="space-y-20 py-12 px-4 md:px-12 max-w-[1400px] mx-auto">
+      <TituloResponsivo className="text-center mb-24">
         {formattedCategoria}
       </TituloResponsivo>
-      {albumEntries.map(([titulo, albumPhotos], index) => (
-        <AlbumGroup
-          key={titulo}
-          titulo={titulo}
-          albumPhotos={albumPhotos}
-          isFirst={index === 0}
-        />
-      ))}
+
+      <div className="grid grid-cols-1 gap-y-32">
+        {albumEntries.map(([titulo, albumPhotos], index) => (
+          <AlbumGroup
+            key={titulo}
+            titulo={titulo}
+            albumPhotos={albumPhotos}
+            isFirst={index === 0}
+          />
+        ))}
+      </div>
     </div>
   );
 }

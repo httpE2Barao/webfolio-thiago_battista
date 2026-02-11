@@ -10,6 +10,11 @@ div#__next>div {
   height: 100%;
 }
 
+html {
+  overflow-x: hidden;
+  /* Garantia extra contra scrolls horizontais */
+}
+
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
@@ -32,6 +37,8 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: 'Disalina', Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  /* Evita que rotações criem scroll horizontal na página */
 }
 
 /* Regras adicionais para personalização */
@@ -149,20 +156,51 @@ body {
   height: 100vh !important;
 }
 
-/* NOVA REGRA: Torna os botões de navegação sempre visíveis 
-  no carrossel da página inicial que tem a classe '.swiper-homepage'
-*/
-.swiper-homepage .swiper-button-next,
-.swiper-homepage .swiper-button-prev {
-  opacity: 0.7 !important;
+/* Estilos para navegação lateral completa (Modelo Moderno) */
+.swiper-modern-nav .swiper-button-next,
+.swiper-modern-nav .swiper-button-prev {
+  top: 0 !important;
+  height: 100% !important;
+  margin-top: 0 !important;
+  width: 20% !important;
+  /* Reduzido para aproximar dos cantos e focar a navegação nas bordas */
+  opacity: 0 !important;
+  /* Escondido por padrão */
+  transition: all 0.5s ease !important;
+  z-index: 50 !important;
 }
 
-.swiper-homepage .swiper-button-next:hover,
-.swiper-homepage .swiper-button-prev:hover {
+.swiper-modern-nav .swiper-button-prev {
+  left: 0 !important;
+  background: transparent !important;
+  /* Removido o gradiente/sombra */
+  justify-content: flex-start !important;
+  padding-left: 20px !important;
+}
+
+.swiper-modern-nav .swiper-button-next {
+  right: 0 !important;
+  background: transparent !important;
+  /* Removido o gradiente/sombra */
+  justify-content: flex-end !important;
+  padding-right: 20px !important;
+}
+
+.swiper-modern-nav:hover .swiper-button-next,
+.swiper-modern-nav:hover .swiper-button-prev {
   opacity: 1 !important;
 }
 
-/* Adiciona uma sombra sutil ao título para melhor legibilidade */
+/* Ajuste do ícone da seta no Swiper (::after) */
+.swiper-modern-nav .swiper-button-next::after,
+.swiper-modern-nav .swiper-button-prev::after {
+  font-size: 24px !important;
+  font-weight: bold !important;
+  text-shadow: none !important;
+  /* Removida a sombra do ícone */
+}
+
+/* Adiciona uma transição suave para o efeito de zoom na imagem */
 .text-shadow-lg {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
@@ -177,6 +215,26 @@ body {
   transform: scale(1.05);
 }
 
+/* 3. Modo Cards (Camadas de Foto) */
+.swiper-cards-mode {
+  padding: 0 60px !important;
+  overflow: visible !important;
+}
+
+@media (min-width: 768px) {
+  .swiper-cards-mode {
+    padding: 0 140px !important;
+    /* Espaço para ver até 6 camadas no desktop */
+  }
+}
+
+.swiper-cards-mode .swiper-slide {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  background: #000;
+  transform-origin: center center !important;
+}
+
 /* --- LÓGICA DOS TÍTULOS (permanece a mesma) --- */
 
 /* Esconde o título da categoria quando o mouse está sobre o card */
@@ -187,6 +245,7 @@ body {
 /* Mostra o título do álbum quando o mouse está sobre o card */
 .album-card:hover .title-container-album {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* =========================================

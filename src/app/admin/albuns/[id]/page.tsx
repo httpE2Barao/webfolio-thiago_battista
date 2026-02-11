@@ -6,7 +6,7 @@ import { getThumbUrl } from '@/lib/cloudinaryOptimize';
 import { Image as AlbumImage, StoreAlbum } from '@/types/types';
 import Link from 'next/link';
 import { use, useCallback, useEffect, useRef, useState } from 'react';
-import { FiArrowLeft, FiCheck, FiHeart, FiLoader, FiMove, FiSave, FiTrash2, FiUpload } from 'react-icons/fi';
+import { FiActivity, FiArrowLeft, FiCheck, FiImage, FiLoader, FiMove, FiSave, FiTrash2, FiUpload, FiX } from 'react-icons/fi';
 
 export default function EditAlbumPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -17,7 +17,8 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     const [uploadProgress, setUploadProgress] = useState(0);
     const [statusMsg, setStatusMsg] = useState<{ type: 'success' | 'error' | 'info', text: string } | null>(null);
 
-    // Form States
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true);
     const [formData, setFormData] = useState<Partial<StoreAlbum>>({});
     const [tagsInput, setTagsInput] = useState('');
 
@@ -74,8 +75,37 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     }, [id]);
 
     useEffect(() => {
-        fetchAlbum();
-    }, [fetchAlbum]);
+        const savedPassword = localStorage.getItem('admin_password');
+        if (savedPassword) {
+            validatePassword(savedPassword);
+        } else {
+            setIsCheckingAuth(false);
+        }
+    }, []);
+
+    async function validatePassword(password: string) {
+        try {
+            const res = await fetch('/api/admin/auth', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                setIsAuthenticated(true);
+            }
+        } catch (error) {
+            console.error('Erro ao validar acesso:', error);
+        } finally {
+            setIsCheckingAuth(false);
+        }
+    }
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            fetchAlbum();
+        }
+    }, [fetchAlbum, isAuthenticated]);
 
     // --- Actions ---
 
@@ -181,19 +211,55 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
         }
     };
 
-    const handleSetCover = async (imagePath: string) => {
-        setFormData(prev => ({ ...prev, coverImage: imagePath }));
-        setStatusMsg({ type: 'info', text: 'Definindo foto de capa...' });
+    const [selectedAlbumForCover, setSelectedAlbumForCover] = useState<{
+        id: string,
+        titulo: string,
+        coverImageDesktop?: string | null,
+        coverImageMobile?: string | null,
+        coverImageDesktopPosition?: string | null,
+        coverImageMobilePosition?: string | null
+    } | null>(null);
+    const [coverType, setCoverType] = useState<'desktop' | 'mobile'>('desktop');
+
+    const handleSetCover = async (imagePath: string, position?: string) => {
+        setStatusMsg({ type: 'info', text: `Definindo capa ${coverType}...` });
         try {
-            const res = await fetch(`/api/admin/albuns/${id}`, {
-                method: 'PATCH',
-                body: JSON.stringify({ coverImage: imagePath }),
-                headers: { 'Content-Type': 'application/json' }
+            const res = await fetch('/api/album-cover', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    albumId: id,
+                    coverImagePath: imagePath,
+                    type: coverType,
+                    position: position || (coverType === 'desktop' ? formData.coverImageDesktopPosition : formData.coverImageMobilePosition) || 'center'
+                }),
             });
+
             if (!res.ok) throw new Error();
-            setStatusMsg({ type: 'success', text: 'Capa atualizada!' });
-            // Update local album state to reflect cover change
-            setAlbum(prev => prev ? { ...prev, coverImage: imagePath } : null);
+            const data = await res.json();
+
+            // Atualiza o estado local do formulário
+            setFormData(prev => ({
+                ...prev,
+                coverImage: data.album.coverImage,
+                coverImageDesktop: data.album.coverImageDesktop,
+                coverImageMobile: data.album.coverImageMobile,
+                coverImageDesktopPosition: data.album.coverImageDesktopPosition,
+                coverImageMobilePosition: data.album.coverImageMobilePosition
+            }));
+
+            // Atualiza o estado para o modal se ele estiver aberto
+            if (selectedAlbumForCover) {
+                setSelectedAlbumForCover({
+                    ...selectedAlbumForCover,
+                    coverImageDesktop: data.album.coverImageDesktop,
+                    coverImageMobile: data.album.coverImageMobile,
+                    coverImageDesktopPosition: data.album.coverImageDesktopPosition,
+                    coverImageMobilePosition: data.album.coverImageMobilePosition
+                } as any);
+            }
+
+            setStatusMsg({ type: 'success', text: `Capa ${coverType} atualizada!` });
         } catch (err) {
             setStatusMsg({ type: 'error', text: 'Erro ao definir capa.' });
         }
@@ -248,13 +314,20 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
 
     // --- Render Helpers ---
 
+    if (isCheckingAuth) return <div className="min-h-screen bg-[#050505] flex flex-col items-center justify-center text-white gap-4"><FiActivity className="animate-pulse text-blue-500 text-3xl" /><p className="animate-pulse font-black uppercase text-xs">Validando Acesso...</p></div>;
+
+    if (!isAuthenticated) {
+        if (typeof window !== 'undefined') window.location.href = '/admin';
+        return null;
+    }
+
     if (isLoading) return <div className="min-h-screen bg-[#050505] flex items-center justify-center text-white"><FiLoader className="animate-spin text-3xl" /></div>;
     if (!album) return <div className="p-10 text-white">Álbum não encontrado</div>;
 
     const allCategories = Object.keys(categories); // Simplified, ideally fetch from DB too
 
     return (
-        <main className="min-h-screen bg-[#050505] text-white p-6 pb-32">
+        <div className="p-6 pb-32 selection:bg-white selection:text-black">
             <div className="max-w-7xl mx-auto space-y-8">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between sticky top-0 z-30 bg-[#050505]/80 backdrop-blur-md py-4 border-b border-white/10 gap-4">
@@ -463,11 +536,14 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                                                 <FiTrash2 size={14} />
                                             </button>
                                             <button
-                                                onClick={(e) => { e.stopPropagation(); handleSetCover(img.path); }}
-                                                className={`p-2 rounded-lg transition-colors ${formData.coverImage === img.path ? 'bg-blue-500 text-white' : 'bg-white/20 hover:bg-white/40 text-white'}`}
-                                                title="Definir como Capa"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setSelectedAlbumForCover(album as any);
+                                                }}
+                                                className={`p-2 rounded-lg transition-colors ${formData.coverImageDesktop === img.path || formData.coverImageMobile === img.path ? 'bg-blue-500 text-white' : 'bg-white/20 hover:bg-white/40 text-white'}`}
+                                                title="Gerenciar Capas"
                                             >
-                                                <FiHeart size={14} className={formData.coverImage === img.path ? 'fill-current' : ''} />
+                                                <FiImage size={14} />
                                             </button>
                                         </div>
 
@@ -481,6 +557,86 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                     </div>
                 </div>
             </div>
-        </main>
+            {/* Modal de Capas Integrado */}
+            {selectedAlbumForCover && (
+                <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-8 animate-in fade-in duration-300">
+                    <div className="bg-[#0a0a0a] border border-white/10 w-full max-w-6xl max-h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
+                        <div className="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                            <div className="flex-1">
+                                <h2 className="text-xl font-bold">Gerenciar Capas: {selectedAlbumForCover.titulo}</h2>
+                                <div className="flex flex-wrap gap-4 mt-3">
+                                    <div className="flex gap-2 bg-white/5 p-1 rounded-full border border-white/10">
+                                        <button onClick={() => setCoverType('desktop')} className={`text-[10px] font-black uppercase px-4 py-1.5 rounded-full transition-all ${coverType === 'desktop' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}>Desktop</button>
+                                        <button onClick={() => setCoverType('mobile')} className={`text-[10px] font-black uppercase px-4 py-1.5 rounded-full transition-all ${coverType === 'mobile' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}>Mobile</button>
+                                    </div>
+
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[8px] uppercase font-black text-gray-500">Alinhamento:</span>
+                                        <div className="flex gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+                                            {['top', 'center', 'bottom'].map((pos) => {
+                                                const currentPos = coverType === 'desktop' ? formData.coverImageDesktopPosition : formData.coverImageMobilePosition;
+                                                const active = (currentPos || 'center') === pos;
+                                                const label = pos === 'top' ? 'Topo' : pos === 'center' ? 'Centro' : 'Base';
+
+                                                return (
+                                                    <button
+                                                        key={pos}
+                                                        onClick={() => {
+                                                            const currentPath = coverType === 'desktop' ? formData.coverImageDesktop : formData.coverImageMobile;
+                                                            if (currentPath) handleSetCover(currentPath, pos);
+                                                        }}
+                                                        className={`text-[9px] font-bold px-3 py-1 rounded-lg transition-all ${active ? 'bg-blue-500 text-white' : 'text-gray-500 hover:bg-white/5'}`}
+                                                    >
+                                                        {label}
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button onClick={() => setSelectedAlbumForCover(null)} className="p-2 hover:bg-white/5 rounded-full transition-all self-start md:self-auto">
+                                <FiX size={24} />
+                            </button>
+                        </div>
+                        <div className="flex-1 overflow-y-auto p-8">
+                            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                                {images.map((photo) => {
+                                    const isCurrentCover = coverType === 'desktop'
+                                        ? formData.coverImageDesktop === photo.path
+                                        : formData.coverImageMobile === photo.path;
+                                    return (
+                                        <div
+                                            key={photo.id}
+                                            onClick={() => handleSetCover(photo.path)}
+                                            className={`relative aspect-square cursor-pointer rounded-xl overflow-hidden group border-2 transition-all ${isCurrentCover ? 'border-white' : 'border-transparent hover:border-white/30'}`}
+                                        >
+                                            <img
+                                                src={getThumbUrl(photo.path, true)}
+                                                alt=""
+                                                className="w-full h-full object-cover"
+                                                style={{ objectPosition: isCurrentCover ? (coverType === 'desktop' ? formData.coverImageDesktopPosition : formData.coverImageMobilePosition) || 'center' : 'center' }}
+                                                loading="lazy"
+                                            />
+                                            {isCurrentCover && (
+                                                <div className="absolute inset-0 bg-blue-500/20 flex items-center justify-center">
+                                                    <div className="bg-white text-black text-[8px] font-black px-2 py-1 rounded shadow-xl flex flex-col items-center gap-1">
+                                                        <span>ATUAL</span>
+                                                        <span className="text-[6px] opacity-50 uppercase">{(coverType === 'desktop' ? formData.coverImageDesktopPosition : formData.coverImageMobilePosition) || 'center'}</span>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all">
+                                                <span className="text-[10px] font-black uppercase">{isCurrentCover ? 'Trocar Alinhamento' : 'Definir'}</span>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }

@@ -45,6 +45,10 @@ export async function PATCH(
 
                 // Sales Config
                 coverImage: body.coverImage,
+                coverImageMobile: body.coverImageMobile,
+                coverImageDesktop: body.coverImageDesktop,
+                coverImageMobilePosition: body.coverImageMobilePosition,
+                coverImageDesktopPosition: body.coverImageDesktopPosition,
                 isForSale: body.isForSale,
                 isPrivate: body.isPrivate,
                 accessPassword: body.accessPassword,

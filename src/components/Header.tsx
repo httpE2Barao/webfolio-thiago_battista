@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { FiArrowLeft, FiMenu, FiX } from "react-icons/fi";
 
@@ -12,6 +12,7 @@ export function Header() {
   const navRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const toggleNav = () => setIsNavOpen(!isNavOpen);
 
@@ -64,6 +65,12 @@ export function Header() {
   ];
 
   const getBackLink = () => {
+    const category = searchParams.get('cat');
+
+    if (category && pathname.startsWith("/albuns/")) {
+      return `/albuns/categoria/${encodeURIComponent(category)}`;
+    }
+
     if (pathname.startsWith("/albuns/")) {
       return "/albuns"; // Voltar para a lista geral de álbuns
     }

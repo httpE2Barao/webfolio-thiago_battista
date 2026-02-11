@@ -8,6 +8,8 @@ export interface Projeto {
   albumName?: string; // Usado para navegação
   coverImageMobile?: string;
   coverImageDesktop?: string;
+  coverImageMobilePosition?: string;
+  coverImageDesktopPosition?: string;
 }
 
 // Ajuste aqui: se você quiser objetos com { id, imagem } em cada item do array
@@ -103,5 +105,7 @@ export interface StoreAlbum {
   tags?: string[];
   coverImageMobile?: string | null;
   coverImageDesktop?: string | null;
+  coverImageMobilePosition?: string | null;
+  coverImageDesktopPosition?: string | null;
   Image: Image[];
 }

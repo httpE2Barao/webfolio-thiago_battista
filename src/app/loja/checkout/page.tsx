@@ -1,6 +1,5 @@
 "use client";
 
-import { Header } from '@/components/Header';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FiArrowLeft, FiLock, FiMail, FiPhone, FiShoppingCart, FiUser } from 'react-icons/fi';
@@ -60,8 +59,7 @@ export default function CheckoutPage() {
     }
 
     return (
-        <main className="min-h-screen bg-[#050505] text-white">
-            <Header />
+        <div className="">
 
             <div className="pt-32 pb-20 px-4 max-w-4xl mx-auto">
                 <div className="flex items-center gap-4 mb-12">
@@ -179,6 +177,6 @@ export default function CheckoutPage() {
                     </aside>
                 </div>
             </div>
-        </main>
+        </div>
     );
 }

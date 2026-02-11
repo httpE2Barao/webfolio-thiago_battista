@@ -23,6 +23,10 @@ function agruparAlbunsPorCategoria(albuns: any[]): Record<string, Projeto[]> {
       descricao: album.descricao || '',
       // Use coverImage if set, otherwise fall back to first image
       imagem: album.coverImage || album.Image[0]?.path || '/placeholder.jpg',
+      coverImageMobile: album.coverImageMobile || undefined,
+      coverImageDesktop: album.coverImageDesktop || undefined,
+      coverImageMobilePosition: album.coverImageMobilePosition || undefined,
+      coverImageDesktopPosition: album.coverImageDesktopPosition || undefined,
       categoria: album.categoria,
       subcategoria: album.subcategoria || '',
       albumName: album.titulo,

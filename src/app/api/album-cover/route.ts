@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
     try {
-        const { albumId, coverImagePath, type } = await request.json();
+        const { albumId, coverImagePath, type, position } = await request.json();
 
         if (!albumId || !coverImagePath) {
             return NextResponse.json(
@@ -20,8 +20,10 @@ export async function POST(request: NextRequest) {
         if (type === 'desktop') {
             data.coverImageDesktop = coverImagePath;
             data.coverImage = coverImagePath; // Also update main cover for compatibility
+            if (position) data.coverImageDesktopPosition = position;
         } else if (type === 'mobile') {
             data.coverImageMobile = coverImagePath;
+            if (position) data.coverImageMobilePosition = position;
         } else {
             // Default behavior if type is not specified
             data.coverImage = coverImagePath;

@@ -1,6 +1,5 @@
 "use client";
 
-import { Header } from '@/components/Header';
 import { ProtectedImage } from '@/components/ProtectedImage';
 import { getThumbUrl } from '@/lib/cloudinaryOptimize';
 import { StoreAlbum } from '@/types/types';
@@ -130,8 +129,7 @@ export default function AlbumLojaPage({ params }: { params: Promise<{ albumId: s
     }
 
     return (
-        <main className="min-h-screen bg-[#050505] text-white selection:bg-white selection:text-black">
-            <Header />
+        <div className="selection:bg-white selection:text-black">
 
             {/* Sticky Top Bar for Progress */}
             <div className="fixed top-0 left-0 w-full z-40 bg-black/80 backdrop-blur-xl border-b border-white/10 mt-20">
@@ -234,6 +232,6 @@ export default function AlbumLojaPage({ params }: { params: Promise<{ albumId: s
                     ))}
                 </div>
             </div>
-        </main>
+        </div>
     );
 }

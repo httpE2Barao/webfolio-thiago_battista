@@ -1,7 +1,7 @@
 "use client";
 
-import { Header } from '@/components/Header';
 import categories from '@/config/categories';
+import { getThumbUrl } from '@/lib/cloudinaryOptimize';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import {
@@ -31,6 +31,10 @@ interface AlbumSalesConfig {
   basePrice: number;
   basePhotoLimit: number;
   extraPhotoPrice: number;
+  coverImageDesktop?: string;
+  coverImageMobile?: string;
+  coverImageDesktopPosition?: string;
+  coverImageMobilePosition?: string;
   _count?: { Image: number };
 }
 
@@ -67,6 +71,7 @@ export default function AdminDashboard() {
 
   // Estados - Geral
   const [isLoading, setIsLoading] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
   // Estados - Upload
   const [albumName, setAlbumName] = useState('');
@@ -157,6 +162,38 @@ export default function AdminDashboard() {
     }
   }, [selectedAlbumForCover]);
 
+  // Efeito - Persistência de Autenticação
+  useEffect(() => {
+    const savedPassword = localStorage.getItem('admin_password');
+    if (savedPassword) {
+      setAuthPassword(savedPassword);
+      validatePassword(savedPassword);
+    } else {
+      setIsCheckingAuth(false);
+    }
+  }, []);
+
+  async function validatePassword(password: string) {
+    // Não usamos o isLoading global aqui para não travar a UI se for auto-login
+    try {
+      const res = await fetch('/api/admin/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password })
+      });
+      const data = await res.json();
+      if (data.success) {
+        setIsAuthenticated(true);
+      } else {
+        localStorage.removeItem('admin_password');
+      }
+    } catch (error) {
+      console.error('Erro ao validar login persistente:', error);
+    } finally {
+      setIsCheckingAuth(false);
+    }
+  }
+
   // Efeito - Carregar Dados quando mudar de aba
   useEffect(() => {
     if (isAuthenticated) {
@@ -201,6 +238,7 @@ export default function AdminDashboard() {
       const data = await res.json();
       if (data.success) {
         setIsAuthenticated(true);
+        localStorage.setItem('admin_password', authPassword);
       } else {
         alert(data.error || 'Senha incorreta');
       }
@@ -209,6 +247,12 @@ export default function AdminDashboard() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setAuthPassword('');
+    localStorage.removeItem('admin_password');
   };
 
   const handleTagChange = (tag: string) => {
@@ -283,7 +327,7 @@ export default function AdminDashboard() {
 
         if (!uploadRes.ok) {
           let errorDetail = 'Erro desconhecido';
-          
+
           if (uploadRes.status === 413) {
             errorDetail = 'Arquivo muito grande. O limite é de aproximadamente 4.5MB por imagem.';
           } else {
@@ -295,7 +339,7 @@ export default function AdminDashboard() {
               errorDetail = `Erro no servidor (Status ${uploadRes.status})`;
             }
           }
-          
+
           console.error(`Falha no upload da imagem ${i + 1}:`, errorDetail);
           throw new Error(`Imagem ${i + 1}: ${errorDetail}`);
         } else {
@@ -372,7 +416,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleSetCover = async (albumId: string, imagePath: string) => {
+  const handleSetCover = async (albumId: string, imagePath: string, position?: string) => {
     setIsLoading(true);
     setStatusMessage({ type: 'info', text: 'Salvando capa...' });
 
@@ -383,7 +427,8 @@ export default function AdminDashboard() {
         body: JSON.stringify({
           albumId,
           coverImagePath: imagePath,
-          type: coverType
+          type: coverType,
+          position: position || (coverType === 'desktop' ? selectedAlbumForCover?.coverImageDesktopPosition : selectedAlbumForCover?.coverImageMobilePosition) || 'center'
         }),
       });
 
@@ -396,7 +441,9 @@ export default function AdminDashboard() {
             ...a,
             coverImage: updatedAlbum.coverImage,
             coverImageMobile: updatedAlbum.coverImageMobile,
-            coverImageDesktop: updatedAlbum.coverImageDesktop
+            coverImageDesktop: updatedAlbum.coverImageDesktop,
+            coverImageMobilePosition: updatedAlbum.coverImageMobilePosition,
+            coverImageDesktopPosition: updatedAlbum.coverImageDesktopPosition
           } : a
         ));
 
@@ -405,7 +452,9 @@ export default function AdminDashboard() {
             ...selectedAlbumForCover,
             coverImage: updatedAlbum.coverImage,
             coverImageMobile: updatedAlbum.coverImageMobile,
-            coverImageDesktop: updatedAlbum.coverImageDesktop
+            coverImageDesktop: updatedAlbum.coverImageDesktop,
+            coverImageMobilePosition: updatedAlbum.coverImageMobilePosition,
+            coverImageDesktopPosition: updatedAlbum.coverImageDesktopPosition
           });
         }
 
@@ -421,6 +470,15 @@ export default function AdminDashboard() {
       setTimeout(() => setStatusMessage({ type: '', text: '' }), 3000);
     }
   };
+
+  if (isCheckingAuth) {
+    return (
+      <div className="font-mono min-h-screen flex flex-col items-center justify-center p-4 bg-black text-white">
+        <FiActivity size={40} className="text-blue-500 animate-pulse mb-4" />
+        <h1 className="text-xl font-black tracking-tighter uppercase animate-pulse">Validando Acesso...</h1>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -446,8 +504,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <main className="min-h-screen bg-[#050505] text-white flex flex-col">
-      <Header />
+    <div className="text-white flex flex-col pt-12">
 
       <div className="flex flex-1 md:pl-44">
         {/* SIDEBAR - Agora adaptada para conviver com o Header da discografia */}
@@ -462,7 +519,7 @@ export default function AdminDashboard() {
             <SidebarItem icon={FiShoppingCart} label="Pedidos" active={activeTab === 'pedidos'} onClick={() => setActiveTab('pedidos')} />
           </nav>
 
-          <div className="p-6 border-t border-white/5">
+          <div className="p-6 border-t border-white/5 space-y-4">
             <div className="bg-white/5 rounded-2xl p-4">
               <p className="text-[10px] text-gray-500 uppercase font-black mb-1">Status do Sistema</p>
               <div className="flex items-center gap-2">
@@ -470,6 +527,14 @@ export default function AdminDashboard() {
                 <span className="text-xs font-bold">Operacional</span>
               </div>
             </div>
+
+            <button
+              onClick={handleLogout}
+              className="w-full flex items-center gap-3 px-4 py-2 text-[10px] font-black uppercase text-red-500 hover:bg-red-500/10 rounded-xl transition-all"
+            >
+              <FiLock size={14} />
+              Sair do Sistema
+            </button>
           </div>
         </aside>
 
@@ -768,15 +833,41 @@ export default function AdminDashboard() {
                 {selectedAlbumForCover && (
                   <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-8 animate-in fade-in duration-300">
                     <div className="bg-[#0a0a0a] border border-white/10 w-full max-w-6xl max-h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
-                      <div className="p-6 border-b border-white/5 flex justify-between items-center">
-                        <div>
+                      <div className="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div className="flex-1">
                           <h2 className="text-xl font-bold">Gerenciar Capas: {selectedAlbumForCover.titulo}</h2>
-                          <div className="flex gap-4 mt-2">
-                            <button onClick={() => setCoverType('desktop')} className={`text-[10px] font-black uppercase px-3 py-1 rounded-full border transition-all ${coverType === 'desktop' ? 'bg-white text-black border-white' : 'text-gray-500 border-white/5 hover:border-white/20'}`}>Desktop</button>
-                            <button onClick={() => setCoverType('mobile')} className={`text-[10px] font-black uppercase px-3 py-1 rounded-full border transition-all ${coverType === 'mobile' ? 'bg-white text-black border-white' : 'text-gray-500 border-white/5 hover:border-white/20'}`}>Mobile</button>
+                          <div className="flex flex-wrap gap-4 mt-3">
+                            <div className="flex gap-2 bg-white/5 p-1 rounded-full border border-white/10">
+                              <button onClick={() => setCoverType('desktop')} className={`text-[10px] font-black uppercase px-4 py-1.5 rounded-full transition-all ${coverType === 'desktop' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}>Desktop</button>
+                              <button onClick={() => setCoverType('mobile')} className={`text-[10px] font-black uppercase px-4 py-1.5 rounded-full transition-all ${coverType === 'mobile' ? 'bg-white text-black' : 'text-gray-500 hover:text-gray-300'}`}>Mobile</button>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                              <span className="text-[8px] uppercase font-black text-gray-500">Alinhamento:</span>
+                              <div className="flex gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
+                                {['top', 'center', 'bottom'].map((pos) => {
+                                  const currentPos = coverType === 'desktop' ? selectedAlbumForCover?.coverImageDesktopPosition : selectedAlbumForCover?.coverImageMobilePosition;
+                                  const active = (currentPos || 'center') === pos;
+                                  const label = pos === 'top' ? 'Topo' : pos === 'center' ? 'Centro' : 'Base';
+
+                                  return (
+                                    <button
+                                      key={pos}
+                                      onClick={() => {
+                                        const currentPath = coverType === 'desktop' ? selectedAlbumForCover?.coverImageDesktop : selectedAlbumForCover?.coverImageMobile;
+                                        if (currentPath) handleSetCover(selectedAlbumForCover.id, currentPath, pos);
+                                      }}
+                                      className={`text-[9px] font-bold px-3 py-1 rounded-lg transition-all ${active ? 'bg-blue-500 text-white' : 'text-gray-500 hover:bg-white/5'}`}
+                                    >
+                                      {label}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <button onClick={() => setSelectedAlbumForCover(null)} className="p-2 hover:bg-white/5 rounded-full transition-all"><FiX size={24} /></button>
+                        <button onClick={() => setSelectedAlbumForCover(null)} className="p-2 hover:bg-white/5 rounded-full transition-all self-start md:self-auto"><FiX size={24} /></button>
                       </div>
                       <div className="flex-1 overflow-y-auto p-8">
                         <p className="text-xs text-gray-500 mb-6 uppercase tracking-widest font-bold">Selecione uma imagem para ser a capa {coverType}</p>
@@ -792,20 +883,32 @@ export default function AdminDashboard() {
                               const isCurrentCover = coverType === 'desktop'
                                 ? selectedAlbumForCover?.coverImageDesktop === photo.path
                                 : selectedAlbumForCover?.coverImageMobile === photo.path;
+
+                              const currentPos = coverType === 'desktop' ? selectedAlbumForCover?.coverImageDesktopPosition : selectedAlbumForCover?.coverImageMobilePosition;
+
                               return (
                                 <div
                                   key={photo.id}
                                   onClick={() => handleSetCover(selectedAlbumForCover!.id, photo.path)}
                                   className={`relative aspect-square cursor-pointer rounded-xl overflow-hidden group border-2 transition-all ${isCurrentCover ? 'border-white' : 'border-transparent hover:border-white/30'}`}
                                 >
-                                  <img src={photo.path} alt="" className="w-full h-full object-cover" />
+                                  <img
+                                    src={getThumbUrl(photo.path, true)}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                    style={{ objectPosition: isCurrentCover ? currentPos || 'center' : 'center' }}
+                                    loading="lazy"
+                                  />
                                   {isCurrentCover && (
-                                    <div className="absolute inset-0 bg-white/20 flex items-center justify-center">
-                                      <span className="bg-white text-black text-[8px] font-black px-2 py-1 rounded">ATUAL</span>
+                                    <div className="absolute inset-0 bg-blue-500/20 flex items-center justify-center">
+                                      <div className="bg-white text-black text-[8px] font-black px-2 py-1 rounded shadow-xl flex flex-col items-center gap-1">
+                                        <span>ATUAL</span>
+                                        <span className="text-[6px] opacity-50 uppercase">{currentPos || 'center'}</span>
+                                      </div>
                                     </div>
                                   )}
                                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-all">
-                                    <span className="text-[10px] font-black uppercase">Definir</span>
+                                    <span className="text-[10px] font-black uppercase">{isCurrentCover ? 'Trocar Alinhamento' : 'Definir'}</span>
                                   </div>
                                 </div>
                               );
@@ -927,6 +1030,6 @@ export default function AdminDashboard() {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }
