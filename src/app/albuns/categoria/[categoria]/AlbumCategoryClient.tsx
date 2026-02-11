@@ -27,7 +27,7 @@ const AlbumGroup = memo(({
 
   const swiperContent = (
     <div className="group flex flex-col gap-6">
-      <div className="relative h-[400px] md:h-[600px] lg:h-[700px] w-full overflow-visible px-10">
+      <div className="relative h-[350px] sm:h-[400px] md:h-[600px] lg:h-[700px] w-full overflow-visible md:px-10">
         {/* Pilha de Fotos Interativa - Permitindo navegar por todo o álbum */}
         <CustomSwiper
           mode="fotos"

@@ -17,6 +17,9 @@ async function getAlbunsByCategory(categoria: string): Promise<Projeto[]> {
         { subcategoria: { equals: normalizedCategoria, mode: 'insensitive' } }
       ]
     },
+    orderBy: {
+      ordem: 'asc'
+    },
     include: {
       Image: {
         orderBy: {

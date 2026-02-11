@@ -1,6 +1,31 @@
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
+export async function GET(
+    req: NextRequest,
+    props: { params: Promise<{ id: string }> }
+) {
+    const params = await props.params;
+    const { id: albumId } = params;
+
+    try {
+        const photos = await prisma.image.findMany({
+            where: { albumId },
+            orderBy: { ordem: 'asc' },
+            select: {
+                id: true,
+                path: true,
+                ordem: true
+            }
+        });
+
+        return NextResponse.json(photos);
+    } catch (error) {
+        console.error('Erro ao buscar fotos admin:', error);
+        return NextResponse.json({ error: 'Erro interno' }, { status: 500 });
+    }
+}
+
 export async function POST(
     req: NextRequest,
     props: { params: Promise<{ id: string }> }

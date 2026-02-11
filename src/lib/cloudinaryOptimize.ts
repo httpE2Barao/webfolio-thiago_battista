@@ -67,6 +67,13 @@ export function getThumbUrl(url: string | undefined | null, withWatermark = fals
 }
 
 /**
+ * Get highly optimized URL for admin grids (very small)
+ */
+export function getAdminThumbUrl(url: string | undefined | null): string {
+    return optimizeCloudinaryUrl(url, 400, 70, false);
+}
+
+/**
  * Get optimized URL for swiper/carousel display (medium/large)
  */
 export function getSwiperUrl(url: string | undefined | null, withWatermark = false): string {

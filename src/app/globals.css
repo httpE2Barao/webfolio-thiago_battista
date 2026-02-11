@@ -191,6 +191,15 @@ body {
   opacity: 1 !important;
 }
 
+@media (max-width: 768px) {
+
+  .swiper-modern-nav .swiper-button-next,
+  .swiper-modern-nav .swiper-button-prev {
+    opacity: 0.6 !important;
+    /* Visible but subtle on mobile */
+  }
+}
+
 /* Ajuste do ícone da seta no Swiper (::after) */
 .swiper-modern-nav .swiper-button-next::after,
 .swiper-modern-nav .swiper-button-prev::after {
@@ -217,7 +226,7 @@ body {
 
 /* 3. Modo Cards (Camadas de Foto) */
 .swiper-cards-mode {
-  padding: 0 60px !important;
+  padding: 0 30px !important;
   overflow: visible !important;
 }
 

@@ -113,6 +113,10 @@ export default function CustomSwiper({
   effect = "slide",
 }: CustomSwiperProps) {
   const router = useRouter();
+  const swiperId = useMemo(() =>
+    tagName.replace(/\s+/g, '-').toLowerCase() || Math.random().toString(36).substring(2, 9),
+    [tagName]
+  );
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentCategory, setCurrentCategory] = useState("");
   const [activeIndex, setActiveIndex] = useState(initialSlide);
@@ -164,6 +168,8 @@ export default function CustomSwiper({
 
       if (onSlideClick) {
         onSlideClick(project, index);
+      } else if (project.id) {
+        router.push(`/albuns/${encodeURIComponent(project.id)}`);
       } else if (project.albumName) {
         router.push(`/albuns/${encodeURIComponent(project.albumName)}`);
       }
@@ -190,6 +196,15 @@ export default function CustomSwiper({
     [modal]
   );
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   if (slides.length === 0) {
     console.warn(`Swiper [${tagName}] não possui slides para exibir.`);
     return (
@@ -214,20 +229,23 @@ export default function CustomSwiper({
           modules={swiperModules}
           spaceBetween={0}
           slidesPerView={1}
-          navigation={slides.length > 1 && !isZoomed}
+          navigation={slides.length > 1 && !isZoomed ? {
+            nextEl: `.next-${swiperId}`,
+            prevEl: `.prev-${swiperId}`,
+          } : false}
           loop={slides.length > 1}
           initialSlide={initialSlide}
-          keyboard={{ enabled: true }}
+          keyboard={{ enabled: true, onlyInViewport: true }}
           autoplay={mode === 'albuns' && !modal && effect !== 'cards' ? { delay: 6000, disableOnInteraction: false } : false}
           zoom={modal ? { maxRatio: 3, minRatio: 1 } : false}
           effect={effect}
           grabCursor={effect === 'cards'}
-          watchSlidesProgress={true} // Calculando progresso para todos para podermos ver mais camadas
+          watchSlidesProgress={true}
           cardsEffect={{
-            slideShadows: true, // Ativado para realçar as camadas
+            slideShadows: true,
             rotate: true,
-            perSlideRotate: 15, // Rotação um pouco mais suave
-            perSlideOffset: 50, // Offset mais compacto
+            perSlideRotate: isMobile ? 8 : 15,
+            perSlideOffset: isMobile ? 30 : 50,
           }}
           className={`w-full h-full swiper-modern-nav ${mode === 'albuns' ? 'swiper-homepage' : ''} ${effect === 'cards' ? 'swiper-cards-mode' : ''}`}
           onSlideChange={handleSlideChange}
@@ -239,10 +257,10 @@ export default function CustomSwiper({
               key={slide.id || `${slide.titulo}-${index}`}
               className={`relative ${!modal && "cursor-pointer"}`}
             >
-              {/* Área central clicável para entrar no álbum (apenas no modo fotos e sem zoom) */}
-              {mode === 'fotos' && !modal && !isZoomed && (
+              {/* Área central clicável para entrar no álbum */}
+              {((mode === 'fotos' && !modal) || (mode === 'albuns')) && !isZoomed && (
                 <div
-                  className="absolute inset-x-[20%] inset-y-0 z-30"
+                  className={`absolute z-30 ${mode === 'albuns' ? 'inset-0' : 'inset-x-[20%] inset-y-0'}`}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleClick(slide, index);
@@ -270,6 +288,13 @@ export default function CustomSwiper({
               </div>
             </SwiperSlide>
           ))}
+
+          {slides.length > 1 && !isZoomed && (
+            <>
+              <div className={`swiper-button-prev swiper-button-prev-${swiperId} prev-${swiperId}`}></div>
+              <div className={`swiper-button-next swiper-button-next-${swiperId} next-${swiperId}`}></div>
+            </>
+          )}
         </Swiper>
 
         {mode === 'albuns' && currentTitle && !modal && (

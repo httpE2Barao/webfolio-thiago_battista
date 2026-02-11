@@ -15,11 +15,18 @@ model Category {
   color       String?
   icon        String?
   parent      String?
+  ordem       Int      @default(0)
   created_at  DateTime @default(now())
   updatedAt   DateTime @updatedAt
   Album       Album[]
 
   @@index([slug])
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  ordem Int    @default(0)
 }
 
 model Album {

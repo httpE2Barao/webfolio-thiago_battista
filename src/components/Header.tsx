@@ -86,19 +86,19 @@ export function Header() {
         <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
           {/* Nome e descrição */}
           <div className="flex flex-row gap-7 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
-            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-white dark:text-dark-foreground whitespace-nowrap max-md:text-5xl">
+            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-white dark:text-dark-foreground whitespace-nowrap max-md:text-3xl">
               <Link href="/" onClick={closeNav}>
                 {name}
               </Link>
             </h1>
-            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-not-allowed max-md:text-sm">
+            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-not-allowed max-md:text-[10px]">
               Artista digital &amp; <br /> Produtor cultural
             </p>
           </div>
 
           {/* Botão Menu */}
           <button
-            className="mx-5 text-foreground dark:text-dark-foreground flex flex-col gap-5 items-center justify-center bg-backgroundHeader focus:outline-none md:ml-12 md:mt-auto md:mb-11"
+            className="flex text-foreground dark:text-dark-foreground flex-col gap-5 items-center justify-center bg-backgroundHeader focus:outline-none md:ml-12 md:mt-auto md:mb-11"
             aria-label="Toggle navigation menu"
           >
             {/* Botão de voltar */}
@@ -111,8 +111,18 @@ export function Header() {
                 <FiArrowLeft size={50} />
               </Link>
             )}
-            <div onClick={toggleNav}>
-              {isNavOpen ? <FiX size={50} /> : <FiMenu size={50} />}
+            <div onClick={toggleNav} className="p-2">
+              {isNavOpen ? (
+                <>
+                  <FiX size={32} className="md:hidden" />
+                  <FiX size={50} className="hidden md:block" />
+                </>
+              ) : (
+                <>
+                  <FiMenu size={32} className="md:hidden" />
+                  <FiMenu size={50} className="hidden md:block" />
+                </>
+              )}
             </div>
           </button>
         </div>

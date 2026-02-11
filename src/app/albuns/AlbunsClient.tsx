@@ -37,11 +37,11 @@ const CategoriaGroup = memo(({
     <div className="album-card mb-12 relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] shadow-2xl">
       <div className="swiper-wrapper-for-zoom h-full w-full">
         {projetos.length > 1 ? (
-          <div className="flex w-full h-full overflow-hidden bg-black">
+          <div className="flex flex-col md:flex-row w-full h-full overflow-hidden bg-black">
             {projetos.slice(0, 6).map((projeto, i) => (
               <div
                 key={projeto.id}
-                className="relative h-full flex-1 hover:flex-[4] transition-all duration-700 ease-in-out group/slat overflow-hidden cursor-pointer border-r border-white/5 last:border-r-0"
+                className="relative h-full flex-1 hover:flex-[4] transition-all duration-700 ease-in-out group/slat overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-white/5 last:border-b-0 last:border-r-0"
                 onMouseEnter={() => setCurrentAlbumTitle(projeto.titulo)}
                 onClick={() => router.push(`/albuns/categoria/${encodeURIComponent(categoria)}`)}
               >
@@ -51,10 +51,10 @@ const CategoriaGroup = memo(({
                   alt={projeto.titulo}
                   fill
                   className="object-cover transition-transform duration-700 group-hover/slat:scale-105"
-                  sizes="(max-width: 768px) 50vw, 33vw"
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   priority={isFirst && i === 0}
                   style={{
-                    objectPosition: projeto.coverImageDesktopPosition || 'center'
+                    objectPosition: (projeto.coverImageDesktopPosition || 'center')
                   }}
                 />
               </div>

@@ -50,7 +50,7 @@ export default async function AlbunsPage() {
       }
     },
     orderBy: {
-      titulo: 'asc'
+      ordem: 'asc'
     }
   });
 
