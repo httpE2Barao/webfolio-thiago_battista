@@ -1,4 +1,5 @@
 import categories from '@/config/categories';
+import { compressImage } from '@/lib/image-compression';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export interface AlbumSalesConfig {
@@ -256,11 +257,23 @@ export function useAdminData() {
 
             for (let i = 0; i < fileArray.length; i++) {
                 setUploadProgress(Math.round(((i) / fileArray.length) * 100));
-                setStatusMessage({ type: 'info', text: `Enviando ${i + 1} de ${fileArray.length}...` });
+                setStatusMessage({ type: 'info', text: `Comprimindo e enviando ${i + 1} de ${fileArray.length}...` });
+
+                // Compression Step
+                const originalFile = fileArray[i];
+                let fileToUpload = originalFile;
+
+                try {
+                    if (originalFile.size > 5 * 1024 * 1024) {
+                        fileToUpload = await compressImage(originalFile);
+                    }
+                } catch (err) {
+                    console.error("Compression failed, using original", err);
+                }
 
                 const uploadData = new FormData();
                 uploadData.append('albumId', finalAlbumId);
-                uploadData.append('file', fileArray[i]);
+                uploadData.append('file', fileToUpload);
                 uploadData.append('order', String(i));
 
                 const uploadRes = await fetch('/api/admin/albuns/upload', {

@@ -35,14 +35,20 @@ const AlbumGroup = memo(({
           tagName={titulo}
           priority={isFirst}
           effect="cards"
-          onSlideClick={() => router.push(`/albuns/${encodeURIComponent(titulo)}?cat=${encodeURIComponent(albumPhotos[0]?.categoria || '')}`)}
+          onSlideClick={() => {
+            const id = albumPhotos[0]?.albumId || titulo;
+            router.push(`/albuns/${encodeURIComponent(id)}?cat=${encodeURIComponent(albumPhotos[0]?.categoria || '')}`);
+          }}
         />
       </div>
 
       {/* Legenda/Info em baixo da pilha */}
       <div
         className="flex flex-col items-center gap-1 cursor-pointer transition-transform duration-300 group-hover:-translate-y-1"
-        onClick={() => router.push(`/albuns/${encodeURIComponent(titulo)}?cat=${encodeURIComponent(albumPhotos[0]?.categoria || '')}`)}
+        onClick={() => {
+          const id = albumPhotos[0]?.albumId || titulo;
+          router.push(`/albuns/${encodeURIComponent(id)}?cat=${encodeURIComponent(albumPhotos[0]?.categoria || '')}`);
+        }}
       >
         <h3 className="text-white text-xl md:text-2xl font-black uppercase tracking-tighter text-center">
           {titulo.replace(/-/g, ' ')}

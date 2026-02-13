@@ -68,8 +68,12 @@ const CategoriaGroup = memo(({
             photos={projetos}
             priority={isFirst} // Only prioritize first category
             onSlideChange={(projeto) => setCurrentAlbumTitle(projeto.titulo)}
-            onSlideClick={() => {
-              router.push(`/albuns/categoria/${encodeURIComponent(categoria)}`);
+            onSlideClick={(projeto) => {
+              if (projeto.id) {
+                router.push(`/albuns/${encodeURIComponent(projeto.id)}`);
+              } else {
+                router.push(`/albuns/categoria/${encodeURIComponent(categoria)}`);
+              }
             }}
           />
         )}

@@ -2,6 +2,7 @@
 
 import { ProtectedImage } from '@/components/ProtectedImage';
 import categories from '@/config/categories';
+import { compressImage } from '@/lib/image-compression';
 import { getThumbUrl } from '@/lib/cloudinaryOptimize';
 import { Image as AlbumImage, StoreAlbum } from '@/types/types';
 import Link from 'next/link';
@@ -142,7 +143,19 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                 const file = files[i];
                 const progress = Math.round((i / files.length) * 100);
                 setUploadProgress(progress);
-                setStatusMsg({ type: 'info', text: `Enviando ${i + 1} de ${files.length}...` });
+                setStatusMsg({ type: 'info', text: `Comprimindo e enviando ${i + 1} de ${files.length}...` });
+
+                // Compression Step
+                const originalFile = file;
+                let fileToUpload = originalFile;
+
+                try {
+                    if (originalFile.size > 5 * 1024 * 1024) {
+                        fileToUpload = await compressImage(originalFile);
+                    }
+                } catch (err) {
+                    console.error("Compression failed, using original", err);
+                }
 
                 // 1. Get Signature
                 const timestamp = Math.round(new Date().getTime() / 1000);
@@ -160,7 +173,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
 
                 // 2. Upload to Cloudinary
                 const formData = new FormData();
-                formData.append('file', file);
+                formData.append('file', fileToUpload);
                 formData.append('api_key', process.env.NEXT_PUBLIC_CLOUDINARY_API_KEY || '');
                 formData.append('timestamp', timestamp.toString());
                 formData.append('signature', signature);

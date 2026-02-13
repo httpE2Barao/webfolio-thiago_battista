@@ -6,6 +6,7 @@ export interface Projeto {
   categoria?: string;
   subcategoria?: string;
   albumName?: string; // Usado para navegação
+  albumId?: string; // ID real do álbum no banco
   coverImageMobile?: string;
   coverImageDesktop?: string;
   coverImageMobilePosition?: string;

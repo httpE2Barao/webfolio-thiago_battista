@@ -17,7 +17,7 @@ export const ImageLoader = () => (
 export const HomeSwiperSkeleton = () => (
   <div className="relative w-full h-screen bg-black animate-pulse overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-black to-gray-900" />
-    <div className="absolute inset-x-0 bottom-20 flex flex-col items-center gap-4">
+    <div className="absolute inset-x-0 inset-y-0 flex flex-col items-center justify-center gap-4">
       <div className="h-12 bg-gray-800 rounded-lg w-64 md:w-96" />
       <div className="h-4 bg-gray-800 rounded-lg w-32" />
     </div>

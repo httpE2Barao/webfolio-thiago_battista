@@ -14,20 +14,23 @@ async function getAlbumById(identifier: string): Promise<Album | null> {
     where: {
       OR: [
         { id: identifier },
-        { titulo: { equals: normalizedSearch, mode: 'insensitive' } }
+        { id: identifier.toLowerCase() }, // Fallback for case sensitivity in ID
+        { titulo: { equals: identifier, mode: 'insensitive' } }, // Match raw title (with dashes)
+        { titulo: { equals: normalizedSearch, mode: 'insensitive' } } // Match normalized title
       ]
     },
     include: { Image: { orderBy: { ordem: 'asc' } } }
   });
 
-  // 2. Se não achou, tenta busca por "contém" (flexível para "mas" vs "mais")
+  // 2. Se não achou, tenta busca por "contém" (flexível para "mas" vs "mais"), mas exigindo TODOS os termos
   if (!albumData) {
-    // Pega as primeiras palavras significativas
     const searchTerms = normalizedSearch.split(' ').filter(t => t.length > 3);
     if (searchTerms.length > 0) {
       albumData = await prisma.album.findFirst({
         where: {
-          titulo: { contains: searchTerms[0], mode: 'insensitive' }
+          AND: searchTerms.map(term => ({
+            titulo: { contains: term, mode: 'insensitive' }
+          }))
         },
         include: { Image: { orderBy: { ordem: 'asc' } } }
       });

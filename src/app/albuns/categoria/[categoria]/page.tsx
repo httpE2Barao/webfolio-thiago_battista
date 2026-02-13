@@ -36,6 +36,7 @@ async function getAlbunsByCategory(categoria: string): Promise<Projeto[]> {
   const allPhotos = albums.flatMap((album: any) => {
     return album.Image.map((imagem: any) => ({
       id: imagem.id,
+      albumId: album.id, // Adicionado para navegação precisa
       imagem: imagem.path,
       albumName: album.titulo,
       titulo: album.titulo || album.id,
