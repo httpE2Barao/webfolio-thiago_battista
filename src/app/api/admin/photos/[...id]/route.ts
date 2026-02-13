@@ -4,11 +4,21 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function DELETE(
     request: NextRequest,
-    props: { params: Promise<{ id: string }> }
+    props: { params: Promise<{ id: string[] }> }
 ) {
     const params = await props.params;
     const url = new URL(request.url);
-    const id = url.searchParams.get('id') || params.id;
+
+    // Prioritize ID from query param, then from path (catch-all)
+    let id = url.searchParams.get('id');
+
+    if (!id && params.id) {
+        id = decodeURIComponent(params.id.join('/'));
+    }
+
+    if (!id) {
+        return NextResponse.json({ error: 'ID não fornecido' }, { status: 400 });
+    }
 
     try {
         // 1. Buscar a imagem para pegar o ID do Cloudinary (que é o próprio ID aqui)

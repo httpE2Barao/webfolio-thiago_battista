@@ -16,16 +16,18 @@ interface TabCreateAlbumProps {
     setAccessPasswordUpload: (v: string) => void;
     basePriceUpload: number;
     setBasePriceUpload: (v: number) => void;
-    baseLimitUpload: number;
-    setBaseLimitUpload: (v: number) => void;
+    minPhotosUpload: number;
+    setMinPhotosUpload: (v: number) => void;
     extraPriceUpload: number;
     setExtraPriceUpload: (v: number) => void;
-    files: FileList | null;
-    setFiles: (v: FileList | null) => void;
+    files: File[];
+    setFiles: (v: File[]) => void;
     dragActive: boolean;
     setDragActive: (v: boolean) => void;
     isLoading: boolean;
     handleUpload: (e: React.FormEvent) => void;
+    appendFiles: (v: FileList | null) => void;
+    clearFiles: () => void;
 }
 
 export const TabCreateAlbum = ({
@@ -36,12 +38,14 @@ export const TabCreateAlbum = ({
     isPrivateUpload, setIsPrivateUpload,
     accessPasswordUpload, setAccessPasswordUpload,
     basePriceUpload, setBasePriceUpload,
-    baseLimitUpload, setBaseLimitUpload,
+    minPhotosUpload, setMinPhotosUpload,
     extraPriceUpload, setExtraPriceUpload,
     files, setFiles,
     dragActive, setDragActive,
     isLoading,
-    handleUpload
+    handleUpload,
+    appendFiles,
+    clearFiles
 }: TabCreateAlbumProps) => {
 
     const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +53,21 @@ export const TabCreateAlbum = ({
     };
 
     const isNewCategory = selectedCategoria && !allCategoriesList.includes(selectedCategoria);
+
+    const handleFiles = (e: React.ChangeEvent<HTMLInputElement>) => {
+        appendFiles(e.target.files);
+        // Reset input so same file can be added again if needed
+        e.target.value = '';
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            appendFiles(e.dataTransfer.files);
+        }
+    };
 
     return (
         <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
@@ -128,8 +147,8 @@ export const TabCreateAlbum = ({
                                 <input type="number" value={basePriceUpload} onChange={(e) => setBasePriceUpload(parseFloat(e.target.value))} className="bg-black border border-white/10 rounded-xl p-3 text-sm text-white" />
                             </label>
                             <label className="flex flex-col gap-2">
-                                <span className="text-[10px] text-gray-500 uppercase font-black ml-1">Qtd Base</span>
-                                <input type="number" value={baseLimitUpload} onChange={(e) => setBaseLimitUpload(parseInt(e.target.value))} className="bg-black border border-white/10 rounded-xl p-3 text-sm text-white" />
+                                <span className="text-[10px] text-gray-500 uppercase font-black ml-1">Mínimo de Fotos</span>
+                                <input type="number" value={minPhotosUpload} onChange={(e) => setMinPhotosUpload(parseInt(e.target.value))} className="bg-black border border-white/10 rounded-xl p-3 text-sm text-white" />
                             </label>
                             <label className="flex flex-col gap-2">
                                 <span className="text-[10px] text-gray-500 uppercase font-black ml-1">Extra R$</span>
@@ -148,17 +167,24 @@ export const TabCreateAlbum = ({
                         <div
                             onDragOver={(e) => { e.preventDefault(); setDragActive(true); }}
                             onDragLeave={() => setDragActive(false)}
-                            onDrop={(e) => {
-                                e.preventDefault();
-                                setDragActive(false);
-                                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) setFiles(e.dataTransfer.files);
-                            }}
+                            onDrop={handleDrop}
                             onClick={() => document.getElementById('file-input-new')?.click()}
                             className={`relative group cursor-pointer border-2 border-dashed rounded-3xl p-12 transition-all flex flex-col items-center justify-center gap-4 ${dragActive ? 'border-white bg-white/10' : 'border-white/10 bg-white/5 hover:border-white/30'}`}
                         >
-                            <input id="file-input-new" type="file" multiple onChange={(e) => setFiles(e.target.files)} className="hidden" accept="image/*" />
+                            <input id="file-input-new" type="file" multiple onChange={handleFiles} className="hidden" accept="image/*" />
                             <FiUpload size={24} className="text-gray-500 group-hover:text-white group-hover:scale-110 transition-all" />
-                            <p className="text-sm font-bold">{files ? `${files.length} arquivos` : 'Arraste ou clique para enviar'}</p>
+                            <div className="flex flex-col items-center gap-2">
+                                <p className="text-sm font-bold">{files && files.length > 0 ? `${files.length} arquivos` : 'Arraste ou clique para enviar'}</p>
+                                {files && files.length > 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={(e) => { e.preventDefault(); e.stopPropagation(); clearFiles(); }}
+                                        className="text-xs text-red-500 hover:text-red-400 font-bold uppercase hover:underline z-10"
+                                    >
+                                        Limpar
+                                    </button>
+                                )}
+                            </div>
                         </div>
                     </div>
 

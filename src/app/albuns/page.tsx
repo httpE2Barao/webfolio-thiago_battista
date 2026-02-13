@@ -12,12 +12,12 @@ function agruparAlbunsPorCategoria(albuns: any[]): Record<string, Projeto[]> {
       return;
     }
 
-    const mainCategory = (album.categoria || "outros").trim().toLowerCase();
-    if (!projetosPorCategoria[mainCategory]) {
-      projetosPorCategoria[mainCategory] = [];
+    const normalizedCat = (album.categoria || "outros").trim().toLowerCase();
+    if (!projetosPorCategoria[normalizedCat]) {
+      projetosPorCategoria[normalizedCat] = [];
     }
 
-    projetosPorCategoria[mainCategory].push({
+    projetosPorCategoria[normalizedCat].push({
       id: album.id,
       titulo: album.titulo,
       descricao: album.descricao || '',
@@ -79,7 +79,7 @@ export default async function AlbunsPage() {
 
     if (key && projetosPorCategoria[key] && !usedCategories.has(key)) {
       sortedCategories.push({
-        name: key, // Use the key from the grouping (which comes from album data)
+        name: key,
         projetos: projetosPorCategoria[key]
       });
       usedCategories.add(key);

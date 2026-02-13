@@ -35,7 +35,7 @@ export default function AdminDashboard() {
     isPrivateUpload, setIsPrivateUpload,
     accessPasswordUpload, setAccessPasswordUpload,
     basePriceUpload, setBasePriceUpload,
-    baseLimitUpload, setBaseLimitUpload,
+    minPhotosUpload, setMinPhotosUpload,
     extraPriceUpload, setExtraPriceUpload,
     statusMessage, setStatusMessage,
     dragActive, setDragActive,
@@ -57,8 +57,9 @@ export default function AdminDashboard() {
     handleDeleteAlbum, startEdit, handleSaveVenda,
     handleMoveAlbum, handleSetCover, handleDeletePhoto, handleSortPhotos,
     handleReorderCategories, handleReorderTags,
-    refreshAlbumPhotos,
-    handleAddCategory, handleDeleteCategory, handleAddTag, handleDeleteTag
+    fetchAdminData, refreshAlbumPhotos,
+    handleAddCategory, handleDeleteCategory, handleAddTag, handleDeleteTag,
+    appendFiles, clearFiles
   } = useAdminData();
 
   const menuItems: { id: TabType; label: string; icon: any }[] = [
@@ -160,12 +161,14 @@ export default function AdminDashboard() {
                     isPrivateUpload={isPrivateUpload} setIsPrivateUpload={setIsPrivateUpload}
                     accessPasswordUpload={accessPasswordUpload} setAccessPasswordUpload={setAccessPasswordUpload}
                     basePriceUpload={basePriceUpload} setBasePriceUpload={setBasePriceUpload}
-                    baseLimitUpload={baseLimitUpload} setBaseLimitUpload={setBaseLimitUpload}
+                    minPhotosUpload={minPhotosUpload} setMinPhotosUpload={setMinPhotosUpload}
                     extraPriceUpload={extraPriceUpload} setExtraPriceUpload={setExtraPriceUpload}
                     files={files} setFiles={setFiles}
                     dragActive={dragActive} setDragActive={setDragActive}
                     isLoading={isLoading}
                     handleUpload={handleUpload}
+                    appendFiles={appendFiles}
+                    clearFiles={clearFiles}
                   />
                 )}
 

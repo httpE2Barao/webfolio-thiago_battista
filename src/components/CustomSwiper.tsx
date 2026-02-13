@@ -113,10 +113,13 @@ export default function CustomSwiper({
   effect = "slide",
 }: CustomSwiperProps) {
   const router = useRouter();
-  const swiperId = useMemo(() =>
-    tagName.replace(/\s+/g, '-').toLowerCase() || Math.random().toString(36).substring(2, 9),
-    [tagName]
-  );
+  const reactId = React.useId();
+  const swiperId = useMemo(() => {
+    const cleanTagName = (tagName || '').replace(/\s+/g, '-').toLowerCase();
+    if (cleanTagName) return cleanTagName;
+    // useId in React 18+ returns strings like ":r1:", we sanitize for CSS classes
+    return reactId.replace(/:/g, '');
+  }, [tagName, reactId]);
   const [currentTitle, setCurrentTitle] = useState("");
   const [currentCategory, setCurrentCategory] = useState("");
   const [activeIndex, setActiveIndex] = useState(initialSlide);
@@ -223,7 +226,7 @@ export default function CustomSwiper({
   if (effect === 'cards') swiperModules.push(EffectCards);
 
   return (
-    <div id={`swiper-container-${tagName}`} className={containerClasses}>
+    <div id={`swiper-container-${swiperId}`} className={containerClasses}>
       <Suspense fallback={<div className="loader" />}>
         <Swiper
           modules={swiperModules}

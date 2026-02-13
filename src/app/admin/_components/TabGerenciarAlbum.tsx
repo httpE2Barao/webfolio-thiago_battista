@@ -17,7 +17,7 @@ interface TabGerenciarAlbumProps {
     handleDeleteAlbum: (albumId: string) => void;
     handleDeletePhoto: (photoId: string) => void;
     handleSortPhotos: (albumId: string, images: any[]) => void;
-    handleUpload: (e: React.FormEvent, albumId?: string) => void;
+    handleUpload: (e: React.FormEvent | React.ChangeEvent<any>, albumId?: string, files?: FileList | null) => void;
     setSelectedAlbumForCover: (album: any) => void;
     statusMessage: { type: string, text: string } | null;
     uploadProgress: number;
@@ -255,8 +255,8 @@ export const TabGerenciarAlbum = ({
                                         <input type="number" value={managedAlbum.basePrice} onChange={e => setManagedAlbum({ ...managedAlbum, basePrice: parseFloat(e.target.value) })} className="w-full bg-white/5 border border-white/10 p-3 rounded-xl text-sm font-bold" />
                                     </div>
                                     <div className="space-y-1">
-                                        <label className="text-[9px] uppercase font-black text-gray-600 italic">Limite Fotos</label>
-                                        <input type="number" value={managedAlbum.basePhotoLimit} onChange={e => setManagedAlbum({ ...managedAlbum, basePhotoLimit: parseInt(e.target.value) })} className="w-full bg-white/5 border border-white/10 p-3 rounded-xl text-sm font-bold" />
+                                        <label className="text-[9px] uppercase font-black text-gray-600 italic">Mínimo Fotos</label>
+                                        <input type="number" value={managedAlbum.minPhotos} onChange={e => setManagedAlbum({ ...managedAlbum, minPhotos: parseInt(e.target.value) })} className="w-full bg-white/5 border border-white/10 p-3 rounded-xl text-sm font-bold" />
                                     </div>
                                 </div>
                                 <div className="space-y-1">
@@ -295,7 +295,7 @@ export const TabGerenciarAlbum = ({
                                 </button>
                                 <label className="cursor-pointer bg-white text-black px-6 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 hover:bg-gray-200 transition-all shadow-xl shadow-white/5">
                                     <FiUpload /> Adicionar
-                                    <input type="file" multiple accept="image/*" onChange={(e) => handleUpload(e, managedAlbum.id)} className="hidden" />
+                                    <input type="file" multiple accept="image/*" onChange={(e) => handleUpload(e, managedAlbum.id, e.target.files)} className="hidden" />
                                 </label>
                             </div>
                         </div>
@@ -366,7 +366,7 @@ export const TabGerenciarAlbum = ({
                                     <FiPlus className="text-gray-600" size={24} />
                                 </div>
                                 <span className="text-[10px] font-black uppercase text-gray-600 italic">Add Fotos</span>
-                                <input type="file" multiple accept="image/*" onChange={(e) => handleUpload(e, managedAlbum.id)} className="hidden" />
+                                <input type="file" multiple accept="image/*" onChange={(e) => handleUpload(e, managedAlbum.id, e.target.files)} className="hidden" />
                             </label>
                         </div>
                     </div>

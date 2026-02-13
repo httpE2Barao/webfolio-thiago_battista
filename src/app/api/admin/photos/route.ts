@@ -2,13 +2,13 @@ import { deleteImage } from '@/lib/cloudinary';
 import { prisma } from '@/lib/prisma';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function DELETE(
-    request: NextRequest,
-    props: { params: Promise<{ id: string }> }
-) {
-    const params = await props.params;
+export async function DELETE(request: NextRequest) {
     const url = new URL(request.url);
-    const id = url.searchParams.get('id') || params.id;
+    const id = url.searchParams.get('id');
+
+    if (!id) {
+        return NextResponse.json({ error: 'ID não fornecido' }, { status: 400 });
+    }
 
     try {
         // 1. Buscar a imagem para pegar o ID do Cloudinary (que é o próprio ID aqui)

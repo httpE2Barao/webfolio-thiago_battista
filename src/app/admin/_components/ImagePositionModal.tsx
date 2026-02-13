@@ -78,8 +78,8 @@ export const ImagePositionModal = ({
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
-            <div className="bg-[#0f0f0f] border border-white/10 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl">
-                <div className="p-6 border-b border-white/5 flex items-center justify-between">
+            <div className="bg-[#0f0f0f] border border-white/10 rounded-3xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-2xl relative">
+                <div className="p-6 border-b border-white/5 flex items-center justify-between pr-24">
                     <h3 className="text-xl font-bold text-white flex items-center gap-3">
                         Ajustar Recorte / Foco
                         <div className="flex bg-white/5 rounded-lg p-1 gap-1">
@@ -99,10 +99,14 @@ export const ImagePositionModal = ({
                             </button>
                         </div>
                     </h3>
-                    <button onClick={onClose} className="text-gray-400 hover:text-white p-2 rounded-full hover:bg-white/10 transition-colors">
-                        <FiX size={24} />
-                    </button>
                 </div>
+                <button
+                    onClick={onClose}
+                    className="absolute top-6 right-6 text-gray-400 hover:text-white p-2 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 transition-all z-20"
+                    title="Fechar"
+                >
+                    <FiX size={24} />
+                </button>
 
                 <div className="flex-1 overflow-auto bg-[#050505] p-8 flex items-center justify-center relative">
                     <div className="flex flex-col items-center gap-4">

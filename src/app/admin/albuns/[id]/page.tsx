@@ -217,7 +217,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
     const handleDeletePhoto = async (photoId: string) => {
         if (!confirm('Excluir esta foto?')) return;
         try {
-            await fetch(`/api/admin/photos/${photoId}`, { method: 'DELETE' });
+            await fetch(`/api/admin/photos?id=${encodeURIComponent(photoId)}`, { method: 'DELETE' });
             setImages(prev => prev.filter(img => img.id !== photoId));
         } catch (error) {
             alert('Erro ao excluir');
@@ -463,7 +463,7 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                                         <input type="number" value={formData.basePrice} onChange={e => setFormData({ ...formData, basePrice: parseFloat(e.target.value) })} className="w-full bg-white/5 border border-white/10 p-2 rounded-lg text-sm" />
                                     </div>
                                     <div className="space-y-1">
-                                        <label className="text-[10px] uppercase font-bold text-gray-500">Limite Fotos</label>
+                                        <label className="text-[10px] uppercase font-bold text-gray-500">Mínimo Fotos</label>
                                         <input type="number" value={formData.basePhotoLimit} onChange={e => setFormData({ ...formData, basePhotoLimit: parseInt(e.target.value) })} className="w-full bg-white/5 border border-white/10 p-2 rounded-lg text-sm" />
                                     </div>
                                     <div className="space-y-1">
@@ -572,9 +572,9 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
             </div>
             {/* Modal de Capas Integrado */}
             {selectedAlbumForCover && (
-                <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[100] flex items-center justify-center p-8 animate-in fade-in duration-300">
-                    <div className="bg-[#0a0a0a] border border-white/10 w-full max-w-6xl max-h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl">
-                        <div className="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[9999] flex items-center justify-center p-8 animate-in fade-in duration-300">
+                    <div className="bg-[#0a0a0a] border border-white/10 w-full max-w-6xl max-h-[90vh] rounded-3xl overflow-hidden flex flex-col shadow-2xl relative">
+                        <div className="p-6 border-b border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pr-16 md:pr-16">
                             <div className="flex-1">
                                 <h2 className="text-xl font-bold">Gerenciar Capas: {selectedAlbumForCover.titulo}</h2>
                                 <div className="flex flex-wrap gap-4 mt-3">
@@ -608,10 +608,14 @@ export default function EditAlbumPage({ params }: { params: Promise<{ id: string
                                     </div>
                                 </div>
                             </div>
-                            <button onClick={() => setSelectedAlbumForCover(null)} className="p-2 hover:bg-white/5 rounded-full transition-all self-start md:self-auto">
-                                <FiX size={24} />
-                            </button>
                         </div>
+                        <button
+                            onClick={() => setSelectedAlbumForCover(null)}
+                            className="absolute top-6 right-6 p-2 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white rounded-full transition-all z-20 border border-white/10"
+                            title="Fechar"
+                        >
+                            <FiX size={24} />
+                        </button>
                         <div className="flex-1 overflow-y-auto p-8">
                             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                                 {images.map((photo) => {

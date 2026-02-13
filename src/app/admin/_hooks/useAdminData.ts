@@ -9,7 +9,7 @@ export interface AlbumSalesConfig {
     isPrivate: boolean;
     accessPassword?: string;
     basePrice: number;
-    basePhotoLimit: number;
+    minPhotos: number;
     extraPhotoPrice: number;
     coverImage?: string;
     coverImageDesktop?: string;
@@ -47,15 +47,29 @@ export function useAdminData() {
     const [description, setDescription] = useState('');
     const [selectedCategoria, setSelectedCategoria] = useState<string>('');
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
-    const [files, setFiles] = useState<FileList | null>(null);
+    const [files, setFiles] = useState<File[]>([]); // Changed to File[]
     const [isPrivateUpload, setIsPrivateUpload] = useState(false);
     const [accessPasswordUpload, setAccessPasswordUpload] = useState('');
     const [basePriceUpload, setBasePriceUpload] = useState(200);
-    const [baseLimitUpload, setBaseLimitUpload] = useState(10);
+    const [minPhotosUpload, setMinPhotosUpload] = useState(10);
     const [extraPriceUpload, setExtraPriceUpload] = useState(50);
     const [statusMessage, setStatusMessage] = useState<{ type: string; text: string } | null>(null);
     const [dragActive, setDragActive] = useState(false);
     const [uploadProgress, setUploadProgress] = useState(0);
+
+    const appendFiles = useCallback((newFiles: FileList | null) => {
+        if (!newFiles) return;
+        setFiles(prev => {
+            const newArray = Array.from(newFiles);
+            // Optional: Filter duplicates based on name/size if necessary?
+            // For now, just append.
+            return [...prev, ...newArray];
+        });
+    }, []);
+
+    const clearFiles = useCallback(() => {
+        setFiles([]);
+    }, []);
 
     // Estados - Vendas & Pedidos
     const [albuns, setAlbuns] = useState<AlbumSalesConfig[]>([]);
@@ -140,7 +154,7 @@ export function useAdminData() {
             const catsData = await catsRes.json();
             const tagsData = await tagsRes.json();
 
-            setAlbuns(Array.isArray(albunsData) ? albunsData : []);
+            setAlbuns(Array.isArray(albunsData) ? albunsData.map((a: any) => ({ ...a, minPhotos: a.basePhotoLimit })) : []);
             setOrders(Array.isArray(ordersData) ? ordersData : []);
             setDbCategories(Array.isArray(catsData) ? catsData : []);
             setDbTags(Array.isArray(tagsData) ? tagsData : []);
@@ -213,14 +227,28 @@ export function useAdminData() {
         });
     };
 
-    const handleUpload = async (e: React.FormEvent, albumIdTarget?: string) => {
+    const handleUpload = async (e: React.FormEvent | React.ChangeEvent<any>, albumIdTarget?: string, manualFiles?: FileList | null) => {
         e.preventDefault();
         const targetId = albumIdTarget || '';
         const isNewAlbum = !targetId;
 
-        if (!files || files.length === 0 || (isNewAlbum && !albumName)) {
-            alert('Preencha os campos e selecione imagens.');
-            return;
+        // Determine files to upload: manual override OR current state
+        let filesToUpload: File[] = [];
+        if (manualFiles) {
+            filesToUpload = Array.from(manualFiles);
+            // Clear the shared state to avoid accidentally uploading them again in next batch creation
+            setFiles([]);
+        } else if (files.length > 0) {
+            filesToUpload = files;
+        }
+
+        if (filesToUpload.length === 0 || (isNewAlbum && !albumName)) {
+            // Only alert if we really have NO files and we needed some (or if creating album without name)
+            // If existing album and no files, maybe just returning is safer, but alert is ok.
+            if (isNewAlbum || filesToUpload.length === 0) {
+                alert('Preencha os campos e selecione imagens.');
+                return;
+            }
         }
         setIsLoading(true);
         setStatusMessage({ type: 'info', text: isNewAlbum ? 'Criando álbum...' : 'Enviando fotos...' });
@@ -237,7 +265,7 @@ export function useAdminData() {
                 albumData.append('isPrivate', String(isPrivateUpload));
                 albumData.append('accessPassword', accessPasswordUpload);
                 albumData.append('basePrice', String(basePriceUpload));
-                albumData.append('basePhotoLimit', String(baseLimitUpload));
+                albumData.append('minPhotos', String(minPhotosUpload));
                 albumData.append('extraPhotoPrice', String(extraPriceUpload));
                 selectedTags.forEach(tag => albumData.append('tags', tag));
 
@@ -251,7 +279,7 @@ export function useAdminData() {
                 finalAlbumId = createResult.albumId;
             }
 
-            const fileArray = Array.from(files);
+            const fileArray = filesToUpload;
             let successCount = 0;
             setUploadProgress(0);
 
@@ -297,7 +325,7 @@ export function useAdminData() {
                 setSelectedCategoria('');
                 setSelectedTags([]);
             }
-            setFiles(null);
+            setFiles([]);
             fetchAdminData();
             if (managedAlbum?.id === finalAlbumId) refreshAlbumPhotos(finalAlbumId);
         } catch (error: any) {
@@ -323,7 +351,10 @@ export function useAdminData() {
             const res = await fetch(`/api/admin/albuns/${targetId}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(targetData),
+                body: JSON.stringify({
+                    ...targetData,
+                    basePhotoLimit: (targetData as any).minPhotos
+                }),
             });
             if (res.ok) {
                 if (!albumIdArg) setEditingId(null);
@@ -379,7 +410,7 @@ export function useAdminData() {
     const handleDeletePhoto = async (photoId: string) => {
         if (!confirm('Excluir esta foto?')) return;
         try {
-            const res = await fetch(`/api/admin/photos/${photoId}`, { method: 'DELETE' });
+            const res = await fetch(`/api/admin/photos?id=${encodeURIComponent(photoId)}`, { method: 'DELETE' });
             if (res.ok) {
                 setManagedImages(prev => prev.filter(img => img.id !== photoId));
                 setAlbumPhotos(prev => prev.filter(img => img.id !== photoId));
@@ -599,7 +630,7 @@ export function useAdminData() {
         isPrivateUpload, setIsPrivateUpload,
         accessPasswordUpload, setAccessPasswordUpload,
         basePriceUpload, setBasePriceUpload,
-        baseLimitUpload, setBaseLimitUpload,
+        minPhotosUpload, setMinPhotosUpload,
         extraPriceUpload, setExtraPriceUpload,
         statusMessage, setStatusMessage,
         dragActive, setDragActive,
@@ -622,6 +653,7 @@ export function useAdminData() {
         handleMoveAlbum, handleSetCover, handleDeletePhoto, handleSortPhotos,
         handleReorderCategories, handleReorderTags,
         fetchAdminData, refreshAlbumPhotos,
-        handleAddCategory, handleDeleteCategory, handleAddTag, handleDeleteTag
+        handleAddCategory, handleDeleteCategory, handleAddTag, handleDeleteTag,
+        appendFiles, clearFiles // Export new functions
     };
 }

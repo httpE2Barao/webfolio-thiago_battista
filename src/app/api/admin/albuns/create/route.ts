@@ -10,7 +10,7 @@ export async function POST(req: Request) {
         const isPrivate = formData.get('isPrivate') === 'true';
         const accessPassword = formData.get('accessPassword') as string;
         const basePrice = parseFloat(formData.get('basePrice') as string || '200');
-        const basePhotoLimit = parseInt(formData.get('basePhotoLimit') as string || '10');
+        const minPhotos = parseInt(formData.get('minPhotos') as string || '10');
         const extraPhotoPrice = parseFloat(formData.get('extraPhotoPrice') as string || '50');
         const tags = formData.getAll('tags') as string[];
 
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
 
         if (!categoryObj) {
             let slug = categoria.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '-').replace(/[^\w-]/g, '');
-            
+
             // Verificar se o slug já existe para evitar erro de restrição única
             const existingSlug = await prisma.category.findUnique({
                 where: { slug: slug }
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
                 isForSale: isPrivate, // Se for privado, forçamos venda
                 accessPassword: isPrivate ? accessPassword : null,
                 basePrice,
-                basePhotoLimit,
+                basePhotoLimit: minPhotos,
                 extraPhotoPrice,
                 published: true
             }

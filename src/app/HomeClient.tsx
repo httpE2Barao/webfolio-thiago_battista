@@ -17,7 +17,7 @@ export default function HomeClient({ swiperPhotos }: HomeClientProps) {
 
   return (
     <div className="h-[calc(100vh-5rem)] md:h-screen relative overflow-hidden">
-      <CustomSwiper 
+      <CustomSwiper
         mode="albuns"
         // Passamos os dados recebidos do servidor para a prop 'photos'
         photos={swiperPhotos}

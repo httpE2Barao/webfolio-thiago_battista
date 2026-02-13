@@ -65,21 +65,41 @@ export function AlbumCompletoClient({
   const [columns, setColumns] = useState(4);
   const [isMounted, setIsMounted] = useState(false);
 
-  // Responsive column count
+  const [offsetTop, setOffsetTop] = useState(0);
+
+  // Responsive column count and offset measurement
   useEffect(() => {
     setIsMounted(true);
-    const updateColumns = () => {
+    const updateLayout = () => {
       const width = window.innerWidth;
       if (width < 640) setColumns(1);
       else if (width < 768) setColumns(2);
       else if (width < 1280) setColumns(3);
       else setColumns(4);
+
+      if (containerRef.current) {
+        setOffsetTop(containerRef.current.offsetTop);
+      }
     };
 
-    updateColumns();
-    window.addEventListener("resize", updateColumns);
-    return () => window.removeEventListener("resize", updateColumns);
+    updateLayout();
+    // Use resize observer or just window resize.
+    window.addEventListener("resize", updateLayout);
+    // Also update after a small delay to ensure layout is stable
+    const timeout = setTimeout(updateLayout, 100);
+
+    return () => {
+      window.removeEventListener("resize", updateLayout);
+      clearTimeout(timeout);
+    };
   }, []);
+
+  // Recalculate offset when content loads/changes
+  useEffect(() => {
+    if (containerRef.current) {
+      setOffsetTop(containerRef.current.offsetTop);
+    }
+  }, [album, albumName]);
 
   const handlePhotoClick = useCallback((index: number) => {
     setInitialIndex(index);
@@ -96,12 +116,12 @@ export function AlbumCompletoClient({
   const virtualizer = useWindowVirtualizer({
     count: rowCount,
     estimateSize: () => (typeof window !== 'undefined' && window.innerWidth < 1280 ? 256 + 8 : 320 + 8), // height + gap-2
-    overscan: 5,
-    scrollMargin: containerRef.current?.offsetTop || 0,
+    overscan: 20, // Increased for mobile stability
+    scrollMargin: offsetTop,
   });
 
   return (
-    <div className="lg:p-4 relative flex flex-col min-h-screen">
+    <div className="lg:p-4 relative flex flex-col min-h-screen mt-5">
       <TituloResponsivo className="mb-2 text-center flex-none">
         {album.titulo}
       </TituloResponsivo>

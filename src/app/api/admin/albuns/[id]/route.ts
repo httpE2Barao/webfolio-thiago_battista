@@ -17,7 +17,11 @@ export async function GET(
             },
         });
         if (!album) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-        return NextResponse.json(album);
+        const mappedAlbum = {
+            ...album,
+            minPhotos: album.basePhotoLimit
+        };
+        return NextResponse.json(mappedAlbum);
     } catch (error) {
         return NextResponse.json({ error: 'Error' }, { status: 500 });
     }

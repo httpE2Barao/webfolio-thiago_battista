@@ -39,7 +39,7 @@ export const CoverManagerModal = ({
         <div className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[100] flex items-center justify-center p-4 md:p-8 animate-in fade-in duration-300">
             <div className="bg-[#050505] border border-white/10 w-full max-w-7xl max-h-[95vh] rounded-[2.5rem] overflow-hidden flex flex-col shadow-2xl relative">
                 {/* Top Header */}
-                <div className="px-8 py-6 border-b border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 bg-black/40">
+                <div className="px-8 py-6 border-b border-white/5 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 bg-black/40 pr-24 relative">
                     <div className="flex-1 space-y-1">
                         <h2 className="text-2xl font-black uppercase tracking-tighter">Ajuste de Capa</h2>
                         <p className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">{selectedAlbumForCover.titulo}</p>
@@ -110,8 +110,8 @@ export const CoverManagerModal = ({
                         )}
                     </div>
 
-                    <button onClick={() => setSelectedAlbumForCover(null)} className="absolute top-6 right-8 p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all">
-                        <FiX size={20} />
+                    <button onClick={() => setSelectedAlbumForCover(null)} className="absolute top-6 right-8 p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all z-50 shadow-xl">
+                        <FiX size={24} />
                     </button>
                 </div>
 
