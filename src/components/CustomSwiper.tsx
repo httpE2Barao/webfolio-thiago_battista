@@ -254,6 +254,34 @@ export default function CustomSwiper({
           onSlideChange={handleSlideChange}
           onZoomChange={handleZoomChange}
           onSwiper={(swiper) => { swiperRef.current = swiper; }}
+          onClick={(swiper, event) => {
+            if (!isMobile || isZoomed) return;
+
+            // Get click position relative to swiper
+            const rect = swiper.el.getBoundingClientRect();
+
+            // Suporte para mouse e touch events
+            const clientX = (event as any).clientX !== undefined
+              ? (event as any).clientX
+              : ((event as any).changedTouches && (event as any).changedTouches[0]?.clientX);
+
+            if (clientX === undefined) return;
+
+            const clickX = clientX - rect.left;
+            const threshold = rect.width * 0.25;
+
+            if (clickX < threshold) {
+              swiper.slidePrev();
+            } else if (clickX > rect.width - threshold) {
+              swiper.slideNext();
+            } else if (!modal) {
+              // Click in the middle (50%) - Open album/photo
+              const activeSlide = slides[swiper.realIndex];
+              if (activeSlide) {
+                handleClick(activeSlide, swiper.realIndex);
+              }
+            }
+          }}
         >
           {slides.map((slide, index) => (
             <SwiperSlide
@@ -261,7 +289,7 @@ export default function CustomSwiper({
               className={`relative ${!modal && "cursor-pointer"}`}
             >
               {/* Área central clicável para entrar no álbum */}
-              {((mode === 'fotos' && !modal) || (mode === 'albuns')) && !isZoomed && (
+              {((mode === 'fotos' && !modal) || (mode === 'albuns')) && !isZoomed && !isMobile && (
                 <div
                   className={`absolute z-30 ${mode === 'albuns' ? 'inset-0' : 'inset-x-[20%] inset-y-0'}`}
                   onClick={(e) => {
@@ -302,8 +330,8 @@ export default function CustomSwiper({
 
         {mode === 'albuns' && currentTitle && !modal && (
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none bg-black/10">
-            <div className="flex flex-col items-center justify-center gap-2">
-              <TituloResponsivo className="text-white text-shadow-lg !mb-0">
+            <div className="flex flex-col items-center justify-center gap-2 w-full max-w-[95%] px-6 text-center">
+              <TituloResponsivo className="text-white text-shadow-lg !mb-0 text-center break-words w-full">
                 {currentTitle.replace(/-/g, ' ')}
               </TituloResponsivo>
 
@@ -313,9 +341,9 @@ export default function CustomSwiper({
                     e.stopPropagation();
                     router.push(`/albuns/categoria/${encodeURIComponent(currentCategory)}`);
                   }}
-                  className="pointer-events-auto group flex flex-col items-center"
+                  className="pointer-events-auto group flex flex-col items-center max-w-full px-4"
                 >
-                  <span className="text-white/60 text-sm md:text-lg uppercase tracking-[0.3em] font-black group-hover:text-white transition-colors duration-300">
+                  <span className="text-white/60 text-sm md:text-lg uppercase tracking-[0.3em] font-black group-hover:text-white transition-colors duration-300 text-center">
                     {currentCategory}
                   </span>
                   <div className="h-[1px] w-0 bg-white group-hover:w-full transition-all duration-500" />
