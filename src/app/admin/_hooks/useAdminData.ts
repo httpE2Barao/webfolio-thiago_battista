@@ -30,7 +30,7 @@ export interface Order {
     Album?: { titulo: string };
 }
 
-export type TabType = 'overview' | 'albuns' | 'taxonomia' | 'pedidos' | 'gerenciar_album';
+export type TabType = 'overview' | 'albuns' | 'create_album' | 'list_albuns' | 'taxonomia' | 'pedidos' | 'gerenciar_album';
 
 export function useAdminData() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -392,13 +392,17 @@ export function useAdminData() {
         }
     };
 
-    const refreshAlbumPhotos = useCallback(async (albumId: string) => {
+    const refreshAlbumPhotos = useCallback(async (albumId: string, forceUpdateManaged: boolean = false) => {
         setIsPhotoLoading(true);
         try {
             const res = await fetch(`/api/admin/albuns/${albumId}/photos`);
             const data = await res.json();
             setAlbumPhotos(data);
-            if (managedAlbum?.id === albumId) setManagedImages(data);
+
+            // Fix: Allow checking against explicit ID match OR force update which handles the race condition
+            if (forceUpdateManaged || managedAlbum?.id === albumId) {
+                setManagedImages(data);
+            }
         } catch (err) {
             console.error(err);
         } finally {
@@ -488,6 +492,86 @@ export function useAdminData() {
         if (isAuthenticated) fetchAdminData();
     }, [activeTab, isAuthenticated, fetchAdminData]);
 
+    const handleAddCategory = async (name: string) => {
+        try {
+            const res = await fetch('/api/admin/categories', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            if (res.ok) {
+                setStatusMessage({ type: 'success', text: 'Categoria criada!' });
+                fetchAdminData();
+            } else {
+                const data = await res.json();
+                setStatusMessage({ type: 'error', text: data.error || 'Erro ao criar categoria' });
+            }
+        } catch (error) {
+            console.error(error);
+            setStatusMessage({ type: 'error', text: 'Erro ao criar categoria' });
+        } finally {
+            setTimeout(() => setStatusMessage(null), 3000);
+        }
+    };
+
+    const handleDeleteCategory = async (id: string) => {
+        if (!confirm('Excluir categoria? Isso pode afetar álbuns vinculados.')) return;
+        try {
+            const res = await fetch(`/api/admin/categories/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                setStatusMessage({ type: 'success', text: 'Categoria excluída!' });
+                fetchAdminData();
+            } else {
+                setStatusMessage({ type: 'error', text: 'Erro ao excluir categoria' });
+            }
+        } catch (error) {
+            console.error(error);
+            setStatusMessage({ type: 'error', text: 'Erro ao excluir categoria' });
+        } finally {
+            setTimeout(() => setStatusMessage(null), 3000);
+        }
+    };
+
+    const handleAddTag = async (name: string) => {
+        try {
+            const res = await fetch('/api/admin/tags', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            });
+            if (res.ok) {
+                setStatusMessage({ type: 'success', text: 'Tag criada!' });
+                fetchAdminData();
+            } else {
+                const data = await res.json();
+                setStatusMessage({ type: 'error', text: data.error || 'Erro ao criar tag' });
+            }
+        } catch (error) {
+            console.error(error);
+            setStatusMessage({ type: 'error', text: 'Erro ao criar tag' });
+        } finally {
+            setTimeout(() => setStatusMessage(null), 3000);
+        }
+    };
+
+    const handleDeleteTag = async (id: string) => {
+        if (!confirm('Excluir tag permanentemente?')) return;
+        try {
+            const res = await fetch(`/api/admin/tags/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                setStatusMessage({ type: 'success', text: 'Tag excluída!' });
+                fetchAdminData();
+            } else {
+                setStatusMessage({ type: 'error', text: 'Erro ao excluir tag' });
+            }
+        } catch (error) {
+            console.error(error);
+            setStatusMessage({ type: 'error', text: 'Erro ao excluir tag' });
+        } finally {
+            setTimeout(() => setStatusMessage(null), 3000);
+        }
+    };
+
     return {
         isAuthenticated, setIsAuthenticated,
         authPassword, setAuthPassword,
@@ -524,6 +608,7 @@ export function useAdminData() {
         startEdit, handleSaveVenda, handleDeleteAlbum,
         handleMoveAlbum, handleSetCover, handleDeletePhoto, handleSortPhotos,
         handleReorderCategories, handleReorderTags,
-        fetchAdminData, refreshAlbumPhotos
+        fetchAdminData, refreshAlbumPhotos,
+        handleAddCategory, handleDeleteCategory, handleAddTag, handleDeleteTag
     };
 }

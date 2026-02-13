@@ -28,21 +28,6 @@ export const CoverManagerModal = ({
     isPhotoLoading,
     handleSetCover
 }: CoverManagerModalProps) => {
-    const [localAlignment, setLocalAlignment] = useState(50);
-
-    useEffect(() => {
-        if (selectedAlbumForCover) {
-            const posStr = coverType === 'desktop'
-                ? selectedAlbumForCover?.coverImageDesktopPosition
-                : selectedAlbumForCover?.coverImageMobilePosition;
-
-            if (posStr && posStr.includes('%')) {
-                setLocalAlignment(parseInt(posStr));
-            } else {
-                setLocalAlignment(posStr === 'top' ? 0 : posStr === 'bottom' ? 100 : 50);
-            }
-        }
-    }, [selectedAlbumForCover, coverType]);
 
     if (!selectedAlbumForCover) return null;
 
@@ -60,7 +45,7 @@ export const CoverManagerModal = ({
                         <p className="text-[10px] text-gray-500 font-mono uppercase tracking-widest">{selectedAlbumForCover.titulo}</p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 w-full lg:w-auto">
+                    <div className="flex flex-col gap-4 w-full lg:w-auto items-center lg:items-end">
                         <div className="flex bg-white/5 p-1 rounded-2xl border border-white/10">
                             <button
                                 onClick={() => setCoverType('desktop')}
@@ -76,20 +61,53 @@ export const CoverManagerModal = ({
                             </button>
                         </div>
 
-                        <div className="flex-1 lg:flex-none flex flex-col gap-1 min-w-[200px]">
-                            <div className="flex justify-between items-center mb-1">
-                                <span className="text-[8px] uppercase font-black text-blue-500 tracking-widest">Alinhamento Vertical: {localAlignment}%</span>
+                        {/* Interactive Preview for Positioning */}
+                        {currentPath && (
+                            <div className="relative group border border-white/10 rounded-lg overflow-hidden shadow-2xl select-none">
+                                <p className="absolute top-2 left-2 z-20 text-[8px] font-black text-white/50 bg-black/50 px-2 py-1 rounded backdrop-blur-md pointer-events-none">
+                                    CLIQUE PARA DEFINIR O FOCO
+                                </p>
+
+                                <div
+                                    className="relative cursor-crosshair"
+                                    onClick={(e) => {
+                                        const rect = e.currentTarget.getBoundingClientRect();
+                                        const x = ((e.clientX - rect.left) / rect.width) * 100;
+                                        const y = ((e.clientY - rect.top) / rect.height) * 100;
+                                        const newPos = `${x.toFixed(0)}% ${y.toFixed(0)}%`;
+
+                                        // Update local state is not strictly needed if we update via handleSetCover which updates parent, 
+                                        // but for smoothness we might strictly rely on parent props or local state if we want to defer save.
+                                        // The current architecture seems to save immediately via handleSetCover.
+                                        handleSetCover(selectedAlbumForCover.id, currentPath, newPos);
+                                    }}
+                                    style={{
+                                        width: coverType === 'desktop' ? '320px' : '180px', // Scaled down preview
+                                        aspectRatio: coverType === 'desktop' ? '16/9' : '9/16', // Adjust to match typical use
+                                    }}
+                                >
+                                    <img
+                                        src={getAdminThumbUrl(currentPath)}
+                                        alt="Preview"
+                                        className="w-full h-full object-cover pointer-events-none"
+                                        style={{
+                                            objectPosition: coverType === 'desktop'
+                                                ? (selectedAlbumForCover.coverImageDesktopPosition || '50% 50%')
+                                                : (selectedAlbumForCover.coverImageMobilePosition || '50% 50%')
+                                        }}
+                                    />
+
+                                    {/* Crosshair/Dot */}
+                                    <div
+                                        className="absolute w-3 h-3 bg-red-500 rounded-full border border-white shadow-lg transform -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-75"
+                                        style={{
+                                            left: (coverType === 'desktop' ? selectedAlbumForCover.coverImageDesktopPosition : selectedAlbumForCover.coverImageMobilePosition)?.split(' ')[0] || '50%',
+                                            top: (coverType === 'desktop' ? selectedAlbumForCover.coverImageDesktopPosition : selectedAlbumForCover.coverImageMobilePosition)?.split(' ')[1] || '50%',
+                                        }}
+                                    />
+                                </div>
                             </div>
-                            <input
-                                type="range" min="0" max="100" value={localAlignment}
-                                onChange={(e) => {
-                                    const val = parseInt(e.target.value);
-                                    setLocalAlignment(val);
-                                    if (currentPath) handleSetCover(selectedAlbumForCover.id, currentPath, `${val}%`);
-                                }}
-                                className="w-full h-1.5 bg-white/10 rounded-lg appearance-none cursor-pointer accent-blue-500"
-                            />
-                        </div>
+                        )}
                     </div>
 
                     <button onClick={() => setSelectedAlbumForCover(null)} className="absolute top-6 right-8 p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all">
@@ -118,7 +136,13 @@ export const CoverManagerModal = ({
                                 return (
                                     <div
                                         key={photo.id}
-                                        onClick={() => handleSetCover(selectedAlbumForCover!.id, photo.path, `${localAlignment}%`)}
+                                        onClick={() => {
+                                            // Keep existing position if possible, otherwise default to 50% 50%
+                                            const currentPos = coverType === 'desktop'
+                                                ? (selectedAlbumForCover.coverImageDesktopPosition || '50% 50%')
+                                                : (selectedAlbumForCover.coverImageMobilePosition || '50% 50%');
+                                            handleSetCover(selectedAlbumForCover!.id, photo.path, currentPos);
+                                        }}
                                         className={`relative aspect-square cursor-pointer rounded-2xl overflow-hidden group border-4 transition-all ${isCurrentCover ? 'border-blue-500 shadow-2xl scale-95' : 'border-transparent hover:border-white/20'}`}
                                     >
                                         <img

@@ -2,9 +2,9 @@
 
 import { ProtectedImage } from '@/components/ProtectedImage';
 import { getAdminThumbUrl } from '@/lib/cloudinaryOptimize';
-import React, { useRef } from 'react';
-import { FiArrowLeft, FiCheck, FiDollarSign, FiImage, FiLayout, FiLoader, FiMove, FiPlus, FiSave, FiTrash2, FiUpload } from 'react-icons/fi';
-
+import React, { useRef, useState } from 'react';
+import { FiArrowLeft, FiCheck, FiDollarSign, FiImage, FiLayout, FiLoader, FiMove, FiPlus, FiSave, FiTrash2, FiUpload, FiX } from 'react-icons/fi';
+import { ImagePositionModal } from './ImagePositionModal';
 import { Toggle } from './Toggle';
 
 interface TabGerenciarAlbumProps {
@@ -21,6 +21,8 @@ interface TabGerenciarAlbumProps {
     setSelectedAlbumForCover: (album: any) => void;
     statusMessage: { type: string, text: string } | null;
     uploadProgress: number;
+    categories: { id: string, name: string }[];
+    tags: string[];
 }
 
 export const TabGerenciarAlbum = ({
@@ -36,12 +38,36 @@ export const TabGerenciarAlbum = ({
     handleUpload,
     setSelectedAlbumForCover,
     statusMessage,
-    uploadProgress
+    uploadProgress,
+    categories,
+    tags
 }: TabGerenciarAlbumProps) => {
     const dragItem = useRef<number | null>(null);
     const dragOverItem = useRef<number | null>(null);
+    const [isPositionModalOpen, setIsPositionModalOpen] = useState(false);
+
+    // Tag handling logic
+    const [tagInput, setTagInput] = useState('');
+
+    const handleAddTag = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            const val = tagInput.trim();
+            if (val && !managedAlbum.tags?.includes(val)) {
+                const currentTags = managedAlbum.tags || [];
+                setManagedAlbum({ ...managedAlbum, tags: [...currentTags, val] });
+            }
+            setTagInput('');
+        }
+    };
+
+    const removeTag = (tagToRemove: string) => {
+        const currentTags = managedAlbum.tags || [];
+        setManagedAlbum({ ...managedAlbum, tags: currentTags.filter((t: string) => t !== tagToRemove) });
+    };
 
     const handleSort = () => {
+        // ... (keep sort logic)
         if (dragItem.current === null || dragOverItem.current === null) return;
         const _images = [...managedImages];
         const draggedItemContent = _images[dragItem.current];
@@ -50,6 +76,31 @@ export const TabGerenciarAlbum = ({
         dragItem.current = dragOverItem.current;
         dragOverItem.current = null;
         setManagedImages(_images);
+    };
+
+    const handleSavePosition = async (posDesktop: string, posMobile: string) => {
+        try {
+            const res = await fetch(`/api/admin/albuns/${managedAlbum.id}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    coverImageDesktopPosition: posDesktop,
+                    coverImageMobilePosition: posMobile
+                })
+            });
+
+            if (res.ok) {
+                setManagedAlbum({
+                    ...managedAlbum,
+                    coverImageDesktopPosition: posDesktop,
+                    coverImageMobilePosition: posMobile
+                });
+            } else {
+                console.error("Failed to save positions");
+            }
+        } catch (error) {
+            console.error("Error saving positions", error);
+        }
     };
 
     if (!managedAlbum) return null;
@@ -73,6 +124,13 @@ export const TabGerenciarAlbum = ({
 
                 <div className="flex gap-2">
                     <button
+                        onClick={() => setIsPositionModalOpen(true)}
+                        className="px-6 py-3 bg-purple-600/10 hover:bg-purple-600 text-purple-500 hover:text-white border border-purple-500/20 rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2"
+                        title="Ajustar foco da imagem de capa"
+                    >
+                        <FiMove /> Ajustar Recorte
+                    </button>
+                    <button
                         onClick={() => handleDeleteAlbum(managedAlbum.id)}
                         className="px-6 py-3 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/20 rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2"
                     >
@@ -87,7 +145,18 @@ export const TabGerenciarAlbum = ({
                 </div>
             </div>
 
+            <ImagePositionModal
+                isOpen={isPositionModalOpen}
+                onClose={() => setIsPositionModalOpen(false)}
+                imageUrlDesktop={getAdminThumbUrl(managedAlbum.coverImageDesktop || managedAlbum.coverImage || '')}
+                imageUrlMobile={getAdminThumbUrl(managedAlbum.coverImageMobile || managedAlbum.coverImage || '')}
+                initialPositionDesktop={managedAlbum.coverImageDesktopPosition}
+                initialPositionMobile={managedAlbum.coverImageMobilePosition}
+                onSave={handleSavePosition}
+            />
+
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* ... (rest of the content remains the same) */}
                 {/* Lateral: Detalhes */}
                 <div className="space-y-6">
                     <div className="bg-[#0a0a0a] border border-white/5 rounded-[2rem] p-8 space-y-6">
@@ -103,6 +172,45 @@ export const TabGerenciarAlbum = ({
                                 className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm focus:border-blue-500 outline-none transition-all font-bold"
                                 placeholder="Título do álbum"
                             />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase font-black text-gray-600 px-1">Categoria</label>
+                            <select
+                                value={managedAlbum.categoria || ''}
+                                onChange={e => setManagedAlbum({ ...managedAlbum, categoria: e.target.value })}
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm focus:border-blue-500 outline-none transition-all font-bold appearance-none text-gray-300"
+                            >
+                                <option value="" disabled>Selecione uma categoria...</option>
+                                {categories.map(cat => (
+                                    <option key={cat.id} value={cat.name}>{cat.name}</option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase font-black text-gray-600 px-1">Tags (Enter para adicionar)</label>
+                            <div className="flex flex-wrap gap-2 mb-2">
+                                {managedAlbum.tags?.map((tag: string) => (
+                                    <span key={tag} className="bg-purple-500/10 text-purple-400 text-xs px-2 py-1 rounded-lg flex items-center gap-1 border border-purple-500/20">
+                                        {tag}
+                                        <button onClick={() => removeTag(tag)} className="hover:text-white"><FiX /></button>
+                                    </span>
+                                ))}
+                            </div>
+                            <input
+                                value={tagInput}
+                                onChange={e => setTagInput(e.target.value)}
+                                onKeyDown={handleAddTag}
+                                className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm focus:border-purple-500 outline-none transition-all font-bold"
+                                placeholder="Adicionar tags..."
+                                list="tags-suggestions"
+                            />
+                            <datalist id="tags-suggestions">
+                                {tags.map(tag => (
+                                    <option key={tag} value={tag} />
+                                ))}
+                            </datalist>
                         </div>
 
                         <div className="space-y-2">

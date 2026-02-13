@@ -14,7 +14,8 @@ import {
 import { AdminDashboardSkeleton } from '@/components/LoadingStates';
 import { AdminSidebar } from './_components/AdminSidebar';
 import { CoverManagerModal } from './_components/CoverManagerModal';
-import { TabAlbuns } from './_components/TabAlbuns';
+import { TabAlbumList } from './_components/TabAlbumList';
+import { TabCreateAlbum } from './_components/TabCreateAlbum';
 import { TabGerenciarAlbum } from './_components/TabGerenciarAlbum';
 import { TabOverview } from './_components/TabOverview';
 import { TabPedidos } from './_components/TabPedidos';
@@ -56,12 +57,14 @@ export default function AdminDashboard() {
     handleDeleteAlbum, startEdit, handleSaveVenda,
     handleMoveAlbum, handleSetCover, handleDeletePhoto, handleSortPhotos,
     handleReorderCategories, handleReorderTags,
-    refreshAlbumPhotos
+    refreshAlbumPhotos,
+    handleAddCategory, handleDeleteCategory, handleAddTag, handleDeleteTag
   } = useAdminData();
 
   const menuItems: { id: TabType; label: string; icon: any }[] = [
     { id: 'overview', label: 'Visão Geral', icon: FiActivity },
-    { id: 'albuns', label: 'Álbuns & Upload', icon: FiGrid },
+    { id: 'list_albuns', label: 'Meus Álbuns', icon: FiGrid },
+    { id: 'create_album', label: 'Criar Álbum', icon: FiPlus },
     { id: 'pedidos', label: 'Vendas & Pedidos', icon: FiShoppingCart },
     { id: 'taxonomia', label: 'Tags & Categorias', icon: FiTag },
   ];
@@ -115,7 +118,7 @@ export default function AdminDashboard() {
             <div className="mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <h2 className="text-4xl font-black tracking-tighter uppercase">
-                  {menuItems.find(i => i.id === activeTab)?.label}
+                  {activeTab === 'list_albuns' ? 'Meus Álbuns' : activeTab === 'create_album' ? 'Criar Álbum' : menuItems.find(i => i.id === activeTab)?.label}
                 </h2>
                 <div className="flex items-center gap-2 mt-2">
                   <div className="size-2 rounded-full bg-green-500 animate-pulse" />
@@ -148,8 +151,8 @@ export default function AdminDashboard() {
                   />
                 )}
 
-                {activeTab === 'albuns' && (
-                  <TabAlbuns
+                {activeTab === 'create_album' && (
+                  <TabCreateAlbum
                     albumName={albumName} setAlbumName={setAlbumName}
                     description={description} setDescription={setDescription}
                     selectedCategoria={selectedCategoria} setSelectedCategoria={setSelectedCategoria}
@@ -163,6 +166,11 @@ export default function AdminDashboard() {
                     dragActive={dragActive} setDragActive={setDragActive}
                     isLoading={isLoading}
                     handleUpload={handleUpload}
+                  />
+                )}
+
+                {activeTab === 'list_albuns' && (
+                  <TabAlbumList
                     albuns={albuns}
                     handleMoveAlbum={handleMoveAlbum}
                     handleDeleteAlbum={handleDeleteAlbum}
@@ -188,6 +196,8 @@ export default function AdminDashboard() {
                     setSelectedAlbumForCover={setSelectedAlbumForCover}
                     statusMessage={statusMessage}
                     uploadProgress={uploadProgress}
+                    categories={dbCategories}
+                    tags={allTagsList}
                   />
                 )}
 
@@ -202,6 +212,10 @@ export default function AdminDashboard() {
                     handleTagChange={handleTagChange}
                     handleReorderCategories={handleReorderCategories}
                     handleReorderTags={handleReorderTags}
+                    handleAddCategory={handleAddCategory}
+                    handleDeleteCategory={handleDeleteCategory}
+                    handleAddTag={handleAddTag}
+                    handleDeleteTag={handleDeleteTag}
                   />
                 )}
               </>

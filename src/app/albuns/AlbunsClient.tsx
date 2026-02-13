@@ -11,7 +11,7 @@ import { memo, useEffect, useState } from "react";
 import { FiArrowRight } from "react-icons/fi";
 
 interface AlbunsClientProps {
-  projetosPorCategoria: Record<string, Projeto[]>;
+  sortedCategories: { name: string, projetos: Projeto[] }[];
 }
 
 // Memoized component for a single category group
@@ -25,13 +25,15 @@ const CategoriaGroup = memo(({
   isFirst: boolean;
 }) => {
   const router = useRouter();
-  const [currentAlbumTitle, setCurrentAlbumTitle] = useState('');
+  const [currentAlbumTitle, setCurrentAlbumTitle] = useState(projetos[0]?.titulo || '');
 
   useEffect(() => {
     if (projetos.length > 0 && projetos[0]) {
       setCurrentAlbumTitle(projetos[0].titulo);
     }
   }, [projetos]);
+
+  const displayTitle = currentAlbumTitle || (projetos[0]?.titulo || '');
 
   const swiperContent = (
     <div className="album-card mb-12 relative rounded-2xl overflow-hidden h-[400px] md:h-[500px] shadow-2xl">
@@ -84,7 +86,7 @@ const CategoriaGroup = memo(({
         {/* Album title (visible on hover) */}
         <div className="title-container-album absolute transition-all duration-500 opacity-0 translate-y-4 flex flex-col items-center gap-3">
           <h3 className="text-white text-3xl md:text-5xl font-black text-center uppercase tracking-tighter text-shadow-lg">
-            {currentAlbumTitle.replace(/-/g, ' ')}
+            {displayTitle.replace(/-/g, ' ')}
           </h3>
           <div className="flex items-center gap-3 bg-black/40 px-4 py-2 rounded-full border border-white/10 transition-colors">
             <span className="text-white/80 text-xs md:text-sm font-bold uppercase tracking-[0.2em]">
@@ -112,17 +114,14 @@ const CategoriaGroup = memo(({
 CategoriaGroup.displayName = 'CategoriaGroup';
 
 // Main component that renders all category groups
-export default function AlbunsClient({ projetosPorCategoria }: AlbunsClientProps) {
-  const categorias = Object.entries(projetosPorCategoria)
-    .filter(([_, projetos]) => projetos.length > 0);
-
+export default function AlbunsClient({ sortedCategories }: AlbunsClientProps) {
   return (
     <div className="w-full">
-      {categorias.map(([categoria, projetos], index) => (
+      {sortedCategories.map((item, index) => (
         <CategoriaGroup
-          key={categoria}
-          categoria={categoria}
-          projetos={projetos}
+          key={item.name}
+          categoria={item.name}
+          projetos={item.projetos}
           isFirst={index === 0}
         />
       ))}

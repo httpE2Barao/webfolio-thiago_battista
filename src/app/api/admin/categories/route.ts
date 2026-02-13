@@ -83,3 +83,25 @@ export async function GET() {
         }, { status: 500 });
     }
 }
+
+export async function POST(req: Request) {
+    try {
+        const { name } = await req.json();
+        if (!name) return NextResponse.json({ error: 'Nome obrigatório' }, { status: 400 });
+
+        const slug = name.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '');
+
+        const category = await prisma.category.create({
+            data: {
+                name,
+                slug,
+                ordem: 99
+            }
+        });
+
+        return NextResponse.json(category);
+    } catch (error: any) {
+        console.error('Erro ao criar categoria:', error);
+        return NextResponse.json({ error: error.message || 'Erro interno' }, { status: 500 });
+    }
+}
