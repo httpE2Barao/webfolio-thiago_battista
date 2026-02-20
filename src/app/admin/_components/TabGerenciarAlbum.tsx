@@ -13,7 +13,7 @@ interface TabGerenciarAlbumProps {
     setManagedAlbum: (album: any) => void;
     setManagedImages: (images: any[]) => void;
     setActiveTab: (tab: any) => void;
-    handleSaveVenda: (albumId: string, data: any) => void;
+    handleSaveVenda: (albumId: string, data: any, images?: any[]) => void;
     handleDeleteAlbum: (albumId: string) => void;
     handleDeletePhoto: (photoId: string) => void;
     handleSortPhotos: (albumId: string, images: any[]) => void;
@@ -44,6 +44,8 @@ export const TabGerenciarAlbum = ({
 }: TabGerenciarAlbumProps) => {
     const dragItem = useRef<number | null>(null);
     const dragOverItem = useRef<number | null>(null);
+    const scrollInterval = useRef<NodeJS.Timeout | null>(null);
+    const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [isPositionModalOpen, setIsPositionModalOpen] = useState(false);
 
     // Tag handling logic
@@ -67,15 +69,68 @@ export const TabGerenciarAlbum = ({
     };
 
     const handleSort = () => {
-        // ... (keep sort logic)
         if (dragItem.current === null || dragOverItem.current === null) return;
+        if (dragItem.current === dragOverItem.current) return;
+
         const _images = [...managedImages];
-        const draggedItemContent = _images[dragItem.current];
-        _images.splice(dragItem.current, 1);
-        _images.splice(dragOverItem.current, 0, draggedItemContent);
-        dragItem.current = dragOverItem.current;
-        dragOverItem.current = null;
-        setManagedImages(_images);
+        const targetIndex = dragOverItem.current;
+
+        // If the dragged item is part of a selection, move all selected items
+        const draggedItem = _images[dragItem.current];
+        const itemsToMove = selectedIds.includes(draggedItem.id)
+            ? _images.filter(img => selectedIds.includes(img.id))
+            : [draggedItem];
+
+        // Create new list without moving items
+        const remainingImages = _images.filter(img => !itemsToMove.includes(img));
+
+        // Find new insertion point
+        // We need to find where the dragOverItem is in the remainingImages list
+        // Or simpler: just splice them back in
+        const newImages = [...remainingImages];
+        const insertAt = targetIndex > dragItem.current
+            ? Math.max(0, targetIndex - itemsToMove.length + 1)
+            : targetIndex;
+
+        newImages.splice(insertAt, 0, ...itemsToMove);
+
+        setManagedImages(newImages);
+
+        // Update dragItem to the new position of the primary dragged item (optional but helps)
+        dragItem.current = newImages.indexOf(draggedItem);
+    };
+
+    const handleAutoScroll = (e: React.DragEvent) => {
+        const threshold = 250;
+        const { clientY } = e;
+        const { innerHeight } = window;
+
+        if (scrollInterval.current) {
+            clearInterval(scrollInterval.current);
+            scrollInterval.current = null;
+        }
+
+        if (clientY < threshold) {
+            const speed = Math.max(5, 30 * (1 - clientY / threshold));
+            scrollInterval.current = setInterval(() => {
+                document.documentElement.scrollTop -= speed;
+                document.body.scrollTop -= speed;
+            }, 10);
+        } else if (clientY > innerHeight - threshold) {
+            const distanceToBottom = innerHeight - clientY;
+            const speed = Math.max(5, 30 * (1 - distanceToBottom / threshold));
+            scrollInterval.current = setInterval(() => {
+                document.documentElement.scrollTop += speed;
+                document.body.scrollTop += speed;
+            }, 10);
+        }
+    };
+
+    const toggleSelection = (id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        setSelectedIds(prev =>
+            prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+        );
     };
 
     const handleSavePosition = async (posDesktop: string, posMobile: string) => {
@@ -103,10 +158,11 @@ export const TabGerenciarAlbum = ({
         }
     };
 
-    if (!managedAlbum) return null;
-
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20">
+        <div
+            className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20"
+            onDragOver={handleAutoScroll}
+        >
             {/* Header Sticky */}
             <div className="flex flex-col md:flex-row md:items-center justify-between sticky top-0 z-30 bg-[#050505]/80 backdrop-blur-md py-4 border-b border-white/10 gap-4 mb-4">
                 <div className="flex items-center gap-4">
@@ -137,7 +193,7 @@ export const TabGerenciarAlbum = ({
                         <FiTrash2 /> Excluir Álbum
                     </button>
                     <button
-                        onClick={() => handleSaveVenda(managedAlbum.id, managedAlbum)}
+                        onClick={() => handleSaveVenda(managedAlbum.id, managedAlbum, managedImages)}
                         className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2 shadow-xl shadow-blue-900/20"
                     >
                         <FiSave /> Salvar Alterações
@@ -156,7 +212,6 @@ export const TabGerenciarAlbum = ({
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* ... (rest of the content remains the same) */}
                 {/* Lateral: Detalhes */}
                 <div className="space-y-6">
                     <div className="bg-[#0a0a0a] border border-white/5 rounded-[2rem] p-8 space-y-6">
@@ -287,12 +342,14 @@ export const TabGerenciarAlbum = ({
                             </div>
 
                             <div className="flex gap-2">
-                                <button
-                                    onClick={() => handleSortPhotos(managedAlbum.id, managedImages)}
-                                    className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 transition-all"
-                                >
-                                    <FiCheck /> Salvar Ordem
-                                </button>
+                                {selectedIds.length > 0 && (
+                                    <button
+                                        onClick={() => setSelectedIds([])}
+                                        className="px-4 py-2 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/20 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 transition-all"
+                                    >
+                                        <FiX /> Limpar ({selectedIds.length})
+                                    </button>
+                                )}
                                 <label className="cursor-pointer bg-white text-black px-6 py-2 rounded-xl text-[10px] font-black uppercase flex items-center gap-2 hover:bg-gray-200 transition-all shadow-xl shadow-white/5">
                                     <FiUpload /> Adicionar
                                     <input type="file" multiple accept="image/*" onChange={(e) => handleUpload(e, managedAlbum.id, e.target.files)} className="hidden" />
@@ -300,25 +357,47 @@ export const TabGerenciarAlbum = ({
                             </div>
                         </div>
 
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                        <div
+                            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+                            onDragOver={(e) => {
+                                e.preventDefault();
+                                handleAutoScroll(e);
+                            }}
+                        >
                             {managedImages.map((img, index) => (
                                 <div
                                     key={img.id}
-                                    className={`relative group aspect-[3/4] bg-white/5 rounded-[1.25rem] overflow-hidden border-2 transition-all cursor-move ${managedAlbum.coverImageDesktop === img.path || managedAlbum.coverImageMobile === img.path ? 'border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.2)]' : 'border-white/5 hover:border-white/20'}`}
+                                    className={`relative group aspect-[3/4] bg-white/5 rounded-[1.25rem] overflow-hidden border-2 transition-all cursor-move 
+                                            ${selectedIds.includes(img.id) ? 'border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.3)]' :
+                                            (managedAlbum.coverImageDesktop === img.path || managedAlbum.coverImageMobile === img.path) ? 'border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.2)]' : 'border-white/5 hover:border-white/20'}`}
                                     draggable
+                                    onClick={(e) => toggleSelection(img.id, e)}
                                     onDragStart={(e) => {
                                         dragItem.current = index;
                                         e.dataTransfer.effectAllowed = "move";
+                                        // Set a drag image or custom style
                                         (e.target as HTMLDivElement).style.opacity = '0.4';
                                     }}
-                                    onDragEnter={() => dragOverItem.current = index}
+                                    onDragEnter={() => {
+                                        if (dragItem.current !== index) {
+                                            dragOverItem.current = index;
+                                            handleSort();
+                                        }
+                                    }}
                                     onDragEnd={(e) => {
                                         (e.target as HTMLDivElement).style.opacity = '1';
-                                        handleSort();
                                         dragItem.current = null;
                                         dragOverItem.current = null;
+                                        setSelectedIds([]);
+                                        if (scrollInterval.current) {
+                                            clearInterval(scrollInterval.current);
+                                            scrollInterval.current = null;
+                                        }
                                     }}
-                                    onDragOver={(e) => e.preventDefault()}
+                                    onDragOver={(e) => {
+                                        e.preventDefault();
+                                        handleAutoScroll(e);
+                                    }}
                                 >
                                     <ProtectedImage
                                         src={getAdminThumbUrl(img.path)}
@@ -327,8 +406,8 @@ export const TabGerenciarAlbum = ({
                                         className="object-cover pointer-events-none"
                                     />
 
-                                    <div className="absolute top-3 left-3 z-10 bg-black/60 backdrop-blur px-2 py-0.5 rounded-lg text-[8px] font-mono border border-white/10 text-gray-300">
-                                        #{index + 1}
+                                    <div className={`absolute top-3 left-3 z-10 backdrop-blur px-2 py-0.5 rounded-lg text-[8px] font-mono border border-white/10 transition-colors ${selectedIds.includes(img.id) ? 'bg-purple-600 text-white' : 'bg-black/60 text-gray-300'}`}>
+                                        {selectedIds.includes(img.id) ? <FiCheck className="inline mr-1" /> : `#${index + 1}`}
                                     </div>
 
                                     {(managedAlbum.coverImageDesktop === img.path || managedAlbum.coverImageMobile === img.path) && (

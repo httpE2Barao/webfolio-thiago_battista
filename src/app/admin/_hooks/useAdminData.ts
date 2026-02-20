@@ -342,12 +342,13 @@ export function useAdminData() {
         setEditForm({ ...album });
     };
 
-    const handleSaveVenda = async (albumIdArg?: string, dataArg?: any) => {
+    const handleSaveVenda = async (albumIdArg?: string, dataArg?: any, imagesArg?: any[]) => {
         const targetId = albumIdArg || editingId;
         const targetData = dataArg || editForm;
 
         if (!targetId) return;
         try {
+            // Save album data
             const res = await fetch(`/api/admin/albuns/${targetId}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
@@ -356,16 +357,26 @@ export function useAdminData() {
                     basePhotoLimit: (targetData as any).minPhotos
                 }),
             });
-            if (res.ok) {
-                if (!albumIdArg) setEditingId(null);
-                setStatusMessage({ type: 'success', text: 'Alterações salvas!' });
-                fetchAdminData();
-            } else {
-                setStatusMessage({ type: 'error', text: 'Erro ao salvar alterações.' });
+
+            if (!res.ok) throw new Error('Erro ao salvar álbum');
+
+            // Save photos order if provided
+            if (imagesArg && imagesArg.length > 0) {
+                const orderMap = imagesArg.map((img, idx) => ({ id: img.id, ordem: idx }));
+                const reorderRes = await fetch('/api/admin/photos/reorder', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ items: orderMap })
+                });
+                if (!reorderRes.ok) throw new Error('Erro ao salvar ordem das fotos');
             }
-        } catch (error) {
+
+            if (!albumIdArg) setEditingId(null);
+            setStatusMessage({ type: 'success', text: 'Alterações salvas!' });
+            fetchAdminData();
+        } catch (error: any) {
             console.error(error);
-            setStatusMessage({ type: 'error', text: 'Erro ao salvar.' });
+            setStatusMessage({ type: 'error', text: error.message || 'Erro ao salvar.' });
         } finally {
             setTimeout(() => setStatusMessage(null), 3000);
         }
@@ -445,7 +456,13 @@ export function useAdminData() {
 
             // Fix: Allow checking against explicit ID match OR force update which handles the race condition
             if (forceUpdateManaged || managedAlbum?.id === albumId) {
-                setManagedImages(data);
+                // Default sort by filename if it seems like a new fetch or requested
+                const sortedData = [...data].sort((a, b) => {
+                    const nameA = a.filename || '';
+                    const nameB = b.filename || '';
+                    return nameA.localeCompare(nameB, undefined, { numeric: true, sensitivity: 'base' });
+                });
+                setManagedImages(sortedData);
             }
         } catch (err) {
             console.error(err);
