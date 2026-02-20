@@ -67,6 +67,9 @@ export function AlbumCompletoClient({
 
   const [offsetTop, setOffsetTop] = useState(0);
 
+  // Filter valid images - be resilient with property names
+  const imagensValidas = album?.imagens?.filter(img => img && (img.imagem || (img as any).path)) || [];
+
   // Responsive column count and offset measurement
   useEffect(() => {
     setIsMounted(true);
@@ -101,13 +104,28 @@ export function AlbumCompletoClient({
     }
   }, [album, albumName]);
 
+  // Handle deep-linking to specific photo via URL param
+  useEffect(() => {
+    if (!isMounted || !imagensValidas.length) return;
+
+    const params = new URLSearchParams(window.location.search);
+    const photoId = params.get('img');
+
+    if (photoId) {
+      const index = imagensValidas.findIndex(img =>
+        img.id === photoId || img.id.endsWith(`/${photoId}`)
+      );
+      if (index !== -1) {
+        setInitialIndex(index);
+        setModalOpen(true);
+      }
+    }
+  }, [isMounted, imagensValidas]);
+
   const handlePhotoClick = useCallback((index: number) => {
     setInitialIndex(index);
     setModalOpen(true);
   }, []);
-
-  // Filter valid images - be resilient with property names
-  const imagensValidas = album?.imagens?.filter(img => img && (img.imagem || (img as any).path)) || [];
 
   // Calculate rows for virtualization
   const rowCount = Math.ceil(imagensValidas.length / columns);

@@ -55,16 +55,21 @@ export const TabGerenciarAlbum = ({
         if (e.key === 'Enter' || e.key === ',') {
             e.preventDefault();
             const val = tagInput.trim();
-            if (val && !managedAlbum.tags?.includes(val)) {
-                const currentTags = managedAlbum.tags || [];
-                setManagedAlbum({ ...managedAlbum, tags: [...currentTags, val] });
+            if (val) {
+                const currentTags = Array.isArray(managedAlbum.tags) ? managedAlbum.tags :
+                    (typeof managedAlbum.tags === 'string' ? managedAlbum.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : []);
+
+                if (!currentTags.includes(val)) {
+                    setManagedAlbum({ ...managedAlbum, tags: [...currentTags, val] });
+                }
             }
             setTagInput('');
         }
     };
 
     const removeTag = (tagToRemove: string) => {
-        const currentTags = managedAlbum.tags || [];
+        const currentTags = Array.isArray(managedAlbum.tags) ? managedAlbum.tags :
+            (typeof managedAlbum.tags === 'string' ? managedAlbum.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : []);
         setManagedAlbum({ ...managedAlbum, tags: currentTags.filter((t: string) => t !== tagToRemove) });
     };
 
@@ -85,8 +90,6 @@ export const TabGerenciarAlbum = ({
         const remainingImages = _images.filter(img => !itemsToMove.includes(img));
 
         // Find new insertion point
-        // We need to find where the dragOverItem is in the remainingImages list
-        // Or simpler: just splice them back in
         const newImages = [...remainingImages];
         const insertAt = targetIndex > dragItem.current
             ? Math.max(0, targetIndex - itemsToMove.length + 1)
@@ -157,6 +160,8 @@ export const TabGerenciarAlbum = ({
             console.error("Error saving positions", error);
         }
     };
+
+    if (!managedAlbum) return null;
 
     return (
         <div
@@ -237,7 +242,7 @@ export const TabGerenciarAlbum = ({
                                 className="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-sm focus:border-blue-500 outline-none transition-all font-bold appearance-none text-gray-300"
                             >
                                 <option value="" disabled>Selecione uma categoria...</option>
-                                {categories.map(cat => (
+                                {(Array.isArray(categories) ? categories : []).map(cat => (
                                     <option key={cat.id} value={cat.name}>{cat.name}</option>
                                 ))}
                             </select>
@@ -246,7 +251,9 @@ export const TabGerenciarAlbum = ({
                         <div className="space-y-2">
                             <label className="text-[10px] uppercase font-black text-gray-600 px-1">Tags (Enter para adicionar)</label>
                             <div className="flex flex-wrap gap-2 mb-2">
-                                {managedAlbum.tags?.map((tag: string) => (
+                                {(Array.isArray(managedAlbum.tags) ? managedAlbum.tags :
+                                    (typeof managedAlbum.tags === 'string' ? managedAlbum.tags.split(',').map((t: string) => t.trim()).filter(Boolean) : [])
+                                ).map((tag: string) => (
                                     <span key={tag} className="bg-purple-500/10 text-purple-400 text-xs px-2 py-1 rounded-lg flex items-center gap-1 border border-purple-500/20">
                                         {tag}
                                         <button onClick={() => removeTag(tag)} className="hover:text-white"><FiX /></button>
@@ -262,7 +269,7 @@ export const TabGerenciarAlbum = ({
                                 list="tags-suggestions"
                             />
                             <datalist id="tags-suggestions">
-                                {tags.map(tag => (
+                                {(Array.isArray(tags) ? tags : []).map(tag => (
                                     <option key={tag} value={tag} />
                                 ))}
                             </datalist>
@@ -364,7 +371,7 @@ export const TabGerenciarAlbum = ({
                                 handleAutoScroll(e);
                             }}
                         >
-                            {managedImages.map((img, index) => (
+                            {(Array.isArray(managedImages) ? managedImages : []).map((img, index) => (
                                 <div
                                     key={img.id}
                                     className={`relative group aspect-[3/4] bg-white/5 rounded-[1.25rem] overflow-hidden border-2 transition-all cursor-move 

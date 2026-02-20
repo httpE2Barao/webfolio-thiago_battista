@@ -79,9 +79,41 @@ model Image {
   albumId    String
   Album      Album       @relation(fields: [albumId], references: [id], onDelete: Cascade)
   OrderItem  OrderItem[]
+  reactions  Reaction[]
+  comments   Comment[]
 
   @@index([albumId])
   @@index([ordem])
+}
+
+model Reaction {
+  id        String   @id @default(cuid())
+  type      String   // LIKE, LOVE, HAHA, WOW, SAD
+  imageId   String
+  userId    String?  // Optional if we want to track who reacted
+  createdAt DateTime @default(now())
+  Image     Image    @relation(fields: [imageId], references: [id], onDelete: Cascade)
+
+  @@index([imageId])
+}
+
+model Comment {
+  id          String    @id @default(cuid())
+  content     String
+  imageId     String
+  parentId    String?
+  authorName  String?
+  authorToken String?
+  likes       Int       @default(0)
+  isAdmin     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Image       Image     @relation(fields: [imageId], references: [id], onDelete: Cascade)
+  parent      Comment?  @relation("CommentReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies     Comment[] @relation("CommentReplies")
+
+  @@index([imageId])
+  @@index([parentId])
 }
 
 model Order {

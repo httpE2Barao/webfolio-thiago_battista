@@ -41,25 +41,15 @@ body {
   /* Evita que rotações criem scroll horizontal na página */
 }
 
+input,
+textarea,
+button,
+select {
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
 /* Regras adicionais para personalização */
-.swiper-button-next,
-.swiper-button-prev {
-  /* Força a visibilidade */
-  opacity: 0.7 !important;
-
-  /* Garante que fiquem acima de qualquer sobreposição */
-  z-index: 20 !important;
-
-  color: white !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  opacity: 1 !important;
-  color: #dddddd !important;
-}
+/* Swiper navigation buttons removed in favor of dots/swipe */
 
 .swiper-container-albuns {
   width: 100% !important;
@@ -156,92 +146,7 @@ body {
   height: 100vh !important;
 }
 
-/* Estilos para navegação lateral completa (Modelo Moderno) */
-.swiper-modern-nav .swiper-button-next,
-.swiper-modern-nav .swiper-button-prev {
-  top: 0 !important;
-  height: 100% !important;
-  margin-top: 0 !important;
-  width: 20% !important;
-  /* Reduzido para aproximar dos cantos e focar a navegação nas bordas */
-  opacity: 0 !important;
-  /* Escondido por padrão */
-  transition: all 0.5s ease !important;
-  z-index: 50 !important;
-}
-
-.swiper-modern-nav .swiper-button-prev {
-  left: 0 !important;
-  background: transparent !important;
-  /* Removido o gradiente/sombra */
-  justify-content: flex-start !important;
-  padding-left: 20px !important;
-}
-
-.swiper-modern-nav .swiper-button-next {
-  right: 0 !important;
-  background: transparent !important;
-  /* Removido o gradiente/sombra */
-  justify-content: flex-end !important;
-  padding-right: 20px !important;
-}
-
-.swiper-modern-nav:hover .swiper-button-next,
-.swiper-modern-nav:hover .swiper-button-prev {
-  opacity: 1 !important;
-}
-
-@media (max-width: 768px) {
-
-  .swiper-modern-nav .swiper-button-next,
-  .swiper-modern-nav .swiper-button-prev {
-    opacity: 1 !important;
-    height: 100% !important;
-    /* Touch area covers full height */
-    width: 25% !important;
-    /* Wider touch area on the sides */
-    top: 0 !important;
-    bottom: 0 !important;
-    background: transparent !important;
-    margin: 0 !important;
-    display: flex !important;
-    align-items: flex-end !important;
-    /* Move icon container to bottom area */
-    padding-bottom: 25% !important;
-    /* Position icon below the title area */
-    z-index: 50 !important;
-    pointer-events: none !important;
-    /* Permite que o comando de "arrastar" (slide) passe através do botão */
-  }
-
-  .swiper-modern-nav .swiper-button-prev {
-    left: 0 !important;
-    justify-content: flex-start !important;
-    padding-left: 15px !important;
-  }
-
-  .swiper-modern-nav .swiper-button-next {
-    right: 0 !important;
-    justify-content: flex-end !important;
-    padding-right: 15px !important;
-  }
-
-  .swiper-modern-nav .swiper-button-next::after,
-  .swiper-modern-nav .swiper-button-prev::after {
-    font-size: 14px !important;
-    opacity: 0.5;
-    /* Keeping icons subtle */
-  }
-}
-
-/* Ajuste do ícone da seta no Swiper (::after) */
-.swiper-modern-nav .swiper-button-next::after,
-.swiper-modern-nav .swiper-button-prev::after {
-  font-size: 24px !important;
-  font-weight: bold !important;
-  text-shadow: none !important;
-  /* Removida a sombra do ícone */
-}
+/* Navigation styles removed */
 
 /* Adiciona uma transição suave para o efeito de zoom na imagem */
 .text-shadow-lg {
@@ -299,8 +204,8 @@ body {
 .swiper,
 .swiper-wrapper,
 .swiper-slide {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
 }
 
 .swiper-slide {
@@ -317,10 +222,10 @@ body {
 
 /* Ensure Next.js Image fills the container completely */
 .swiper-zoom-container img {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 

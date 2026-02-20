@@ -91,8 +91,10 @@ export function Header() {
                 {name}
               </Link>
             </h1>
-            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-not-allowed max-md:text-[10px]">
-              Artista digital &amp; <br /> Produtor cultural
+            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-pointer max-md:text-[10px]">
+              <Link href="/sobre" onClick={closeNav}>
+                Artista digital &amp; <br /> Produtor cultural
+              </Link>
             </p>
           </div>
 
