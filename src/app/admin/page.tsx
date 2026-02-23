@@ -2,6 +2,7 @@
 
 import {
   FiActivity,
+  FiFileText,
   FiGrid,
   FiPlus,
   FiShoppingCart,
@@ -15,6 +16,8 @@ import { AdminDashboardSkeleton } from '@/components/LoadingStates';
 import { AdminSidebar } from './_components/AdminSidebar';
 import { CoverManagerModal } from './_components/CoverManagerModal';
 import { TabAlbumList } from './_components/TabAlbumList';
+import { TabBio } from './_components/TabBio';
+import { TabCV } from './_components/TabCV';
 import { TabCreateAlbum } from './_components/TabCreateAlbum';
 import { TabGerenciarAlbum } from './_components/TabGerenciarAlbum';
 import { TabOverview } from './_components/TabOverview';
@@ -68,6 +71,8 @@ export default function AdminDashboard() {
     { id: 'create_album', label: 'Criar Álbum', icon: FiPlus },
     { id: 'pedidos', label: 'Vendas & Pedidos', icon: FiShoppingCart },
     { id: 'taxonomia', label: 'Tags & Categorias', icon: FiTag },
+    { id: 'bio', label: 'Sobre Mim', icon: FiUser },
+    { id: 'cv', label: 'Meu Currículo', icon: FiFileText },
   ];
 
   if (isCheckingAuth) {
@@ -204,8 +209,6 @@ export default function AdminDashboard() {
                   />
                 )}
 
-                {activeTab === 'pedidos' && <TabPedidos orders={orders} />}
-
                 {activeTab === 'taxonomia' && (
                   <TabTaxonomia
                     allTagsList={allTagsList}
@@ -221,6 +224,9 @@ export default function AdminDashboard() {
                     handleDeleteTag={handleDeleteTag}
                   />
                 )}
+
+                {activeTab === 'bio' && <TabBio />}
+                {activeTab === 'cv' && <TabCV />}
               </>
             )}
           </div>

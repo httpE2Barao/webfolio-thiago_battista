@@ -2,11 +2,11 @@
 
 "use client";
 
+import React, { memo } from "react";
+import { useRouter } from "next/navigation";
 import CustomSwiper from "@/components/CustomSwiper";
 import TituloResponsivo from "@/components/TituloResponsivo";
 import { Projeto } from "@/types/types";
-import { useRouter } from "next/navigation";
-import { memo } from "react";
 
 interface AlbumCategoryClientProps {
   albums: Projeto[];
@@ -72,16 +72,6 @@ export default function AlbumCategoryClient({ albums, categoria }: AlbumCategory
   const router = useRouter();
   const formattedCategoria = categoria.charAt(0).toUpperCase() + categoria.slice(1).toLowerCase();
 
-  // Group albums by title
-  const albumsByTitle = albums.reduce((acc: { [key: string]: Projeto[] }, album) => {
-    const titulo = album.titulo || "Sem Título";
-    if (!acc[titulo]) {
-      acc[titulo] = [];
-    }
-    acc[titulo].push(album);
-    return acc;
-  }, {});
-
   if (!albums || albums.length === 0) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
@@ -101,7 +91,17 @@ export default function AlbumCategoryClient({ albums, categoria }: AlbumCategory
     );
   }
 
-  const albumEntries = Object.entries(albumsByTitle).filter(([_, photos]) => photos.length > 0);
+  // Group albums by ID to handle duplicate titles correctly
+  const albumsById = albums.reduce((acc: { [key: string]: Projeto[] }, photo) => {
+    const albumId = photo.albumId || photo.titulo || "Sem ID";
+    if (!acc[albumId]) {
+      acc[albumId] = [];
+    }
+    acc[albumId].push(photo);
+    return acc;
+  }, {});
+
+  const albumEntries = Object.entries(albumsById).filter(([_, photos]) => photos.length > 0);
 
   return (
     <div className="space-y-20 py-12 px-4 md:px-12 max-w-[1400px] mx-auto">
@@ -110,10 +110,10 @@ export default function AlbumCategoryClient({ albums, categoria }: AlbumCategory
       </TituloResponsivo>
 
       <div className="grid grid-cols-1 gap-y-32">
-        {albumEntries.map(([titulo, albumPhotos], index) => (
+        {albumEntries.map(([id, albumPhotos], index) => (
           <AlbumGroup
-            key={titulo}
-            titulo={titulo}
+            key={id}
+            titulo={albumPhotos[0]?.titulo || "Sem Título"}
             albumPhotos={albumPhotos}
             isFirst={index === 0}
           />

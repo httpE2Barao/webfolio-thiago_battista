@@ -1,43 +1,266 @@
 "use client";
 
-import ResponsiveText from "@/components/ResponsiveText";
-import TituloResponsivo from "@/components/TituloResponsivo";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { FiMail, FiPhone, FiInstagram, FiGlobe, FiBriefcase, FiAward, FiBookOpen, FiUser, FiDownload } from "react-icons/fi";
 
-const Highlight = ({ children }: { children: React.ReactNode }) => {
-  return <span className="text-red-500">{children}</span>;
+interface CVSection {
+  id: string;
+  title: string;
+  content: string;
+  category: string;
+  sidebar: boolean;
+  ordem: number;
+}
+
+const CategoryIcon = ({ category }: { category: string }) => {
+  switch (category) {
+    case 'experience': return <FiBriefcase className="text-red-500" />;
+    case 'education': return <FiBookOpen className="text-red-500" />;
+    case 'skills': return <FiAward className="text-red-500" />;
+    case 'contact': return <FiGlobe className="text-red-500" />;
+    default: return <FiUser className="text-red-500" />;
+  }
 };
 
-export const dynamic = "force-dynamic";
+const Highlight = ({ children }: { children: React.ReactNode }) => (
+  <strong className="text-white font-black">{children}</strong>
+);
 
-export default function ContatosPage() {
+export default function SobrePage() {
+  const [sections, setSections] = useState<CVSection[]>([]);
+  const [cvUrl, setCvUrl] = useState("/Curriculo.pdf");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch CV sections
+    const fetchCV = fetch("/api/admin/cv").then(res => res.json());
+    // Fetch CV URL from Bio (where it's stored)
+    const fetchBio = fetch("/api/admin/bio").then(res => res.json());
+
+    Promise.all([fetchCV, fetchBio])
+      .then(([cvData, bioData]) => {
+        if (Array.isArray(cvData)) setSections(cvData);
+        if (bioData?.cvUrl) setCvUrl(bioData.cvUrl);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching data:", err);
+        setIsLoading(false);
+      });
+  }, []);
+
+  const renderFormattedText = (text: string) => {
+    return text.split("\n\n").map((para, i) => (
+      <div key={i} className="mb-4">
+        {para.split(/(\*\*.*?\*\*)/).map((part, j) => {
+          if (part.startsWith("**") && part.endsWith("**")) {
+            return <Highlight key={j}>{part.slice(2, -2)}</Highlight>;
+          }
+          if (part.includes("@") || part.includes("https://") || part.includes(".com")) {
+            return <span key={j} className="text-red-400 underline underline-offset-4 decoration-red-400/30">{part}</span>;
+          }
+          return part;
+        })}
+      </div>
+    ));
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center font-mono">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-xs uppercase tracking-[0.3em] text-gray-500"
+        >
+          Renderizando Experiência...
+        </motion.div>
+      </div>
+    );
+  }
+
+  const summarySection = sections.find(s => s.category === 'summary');
+  const skillsSection = sections.find(s => s.category === 'skills');
+  const experienceSections = sections.filter(s => s.category === 'experience').sort((a, b) => a.ordem - b.ordem);
+  const educationSections = sections.filter(s => s.category === 'education').sort((a, b) => a.ordem - b.ordem);
+  const contactSections = sections.filter(s => s.category === 'contact');
+  const noteSection = sections.find(s => s.title.toLowerCase().includes('nota'));
+
   return (
-    <div className="p-4">
-      <TituloResponsivo>Quem sou eu</TituloResponsivo>
-      <div className="md:p-6 font-mono">
-        <ResponsiveText>
-          Nascido na energia dos <Highlight>anos 90</Highlight>, minha jornada no universo visual começou com uma <Highlight>câmera analógica</Highlight> na mão e um rolinho de 36 cliques. Lembro-me das viagens com meus pais, passando pelo aconchegante <Highlight>Purunã</Highlight> – com aquele clima sereno e o cheirinho de café fresco do interior – até os cenários urbanos. Foi nessas aventuras que aprendi a mágica de um simples clique, desenvolvendo uma visão do mundo repleta de sensibilidade e curiosidade.
-        </ResponsiveText>
-        <ResponsiveText>
-          Inspirado pelo olhar marcante de mestres como <Highlight>Platon</Highlight> e <Highlight>Annie Leibovitz</Highlight>, logo percebi que a fotografia seria minha forma de explorar diversas expressões culturais. Ao longo dos anos, tive a oportunidade de participar de projetos incríveis: desde a campanha anual do <Highlight>Shopping Palladim</Highlight>, onde atuei na assistência de fotografia, até o trabalho no estúdio do fotógrafo <Highlight>Nuno Papp</Highlight>, onde criei campanhas para marcas renomadas como o <Highlight>Grupo O Boticário</Highlight>.
-        </ResponsiveText>
-        <ResponsiveText>
-          Meu olhar versátil também encontrou espaço em editoriais descolados para revistas como a <Highlight>Top View</Highlight> e em grandes palcos – já estive por trás das câmeras em shows de artistas como <Highlight>Janine Matias</Highlight>, <Highlight>Emicida</Highlight>, <Highlight>Mc Livinho</Highlight>, <Highlight>Leci Brandão</Highlight> e <Highlight>Dow Raiz</Highlight>. Minha paixão pelo registro de performances começou no teatro, quando ainda estudava e fotografava as peças dos amigos. Com o tempo, tive o privilégio de capturar espetáculos marcantes, como <Highlight>Bonitinha Mais Hordinária</Highlight>, e festivais incríveis, como o <Highlight>Festival de Teatro de Curitiba</Highlight> – onde pude registrar a energia de produções como <Highlight>Duelo Amazônico</Highlight>, <Highlight>Duetos</Highlight> e <Highlight>Agora É Que São Elas</Highlight>.
-        </ResponsiveText>
-        <ResponsiveText>
-          Entre a nostalgia dos cliques analógicos e a inovação das novas tecnologias, meu trabalho celebra a fusão entre <Highlight>arte</Highlight>, <Highlight>cultura</Highlight> e <Highlight>tecnologia</Highlight>, transformando histórias únicas em imagens que ficam na memória e inspiram o olhar contemporâneo.
-        </ResponsiveText>
-        <ResponsiveText>
-          Atualmente, meu foco também se volta para projetos que unem <Highlight>inovação</Highlight>, <Highlight>digitalização</Highlight> e <Highlight>cultura</Highlight>. Desenvolvi e sou o gestor cultural do projeto de <Highlight>Aceleração Digital do Museu Municipal Cristoforo Colombo</Highlight>, onde transformamos um museu “zero digital” em um espaço 100% digital – com um repositório acessível que reúne todo o acervo, completamente digitalizado utilizando as melhores ferramentas e tecnologias. Essa iniciativa não apenas preserva nossa história, mas também democratiza o acesso à cultura, aproximando o público do passado por meio da tecnologia.
-        </ResponsiveText>
-        <ResponsiveText>
-          Paralelamente, desenvolvi e sou coordenador cultural da <Highlight>HUB Cultural</Highlight>, uma plataforma digital inovadora que vai muito além da educação a distância tradicional. Criada para ser um verdadeiro núcleo de formação e conexão para talentos na área cultural, a HUB Cultural integra cursos, workshops, mentorias e espaços de networking. Lá, profissionais consagrados e aspirantes a produtores e artistas se encontram num <Highlight>ambiente colaborativo</Highlight> que incentiva a troca de experiências e o surgimento de novas ideias, conectando arte, cultura e tecnologia de forma transformadora. Ao democratizar o acesso à <Highlight>educação de alta qualidade</Highlight>, a plataforma permite que pessoas de diferentes regiões e contextos aprimorem suas habilidades criativas e técnicas, impulsionando o <Highlight>empreendedorismo cultural</Highlight>, <Highlight>revitalizando comunidades</Highlight> e promovendo diversidade e inclusão.
-        </ResponsiveText>
-        <ResponsiveText>
-          Para trabalhar com tamanha qualidade, conto com ferramentas e softwares de ponta que me ajudam nessa jornada. Utilizo o <Highlight>Notion</Highlight> para organização, mantendo tudo em dia. Minha câmera de referência é a top de linha <Highlight>Fijfilmx-t5</Highlight>, consagrada no mercado pela qualidade excepcional e pela fidelidade na reprodução de cores. No campo digital, recorro ao <Highlight>Lightroom Classic</Highlight> e ao <Highlight>Photoshop</Highlight>, sempre aliado às novas possibilidades da <Highlight>inteligência artificial generativa</Highlight>. Atualmente, também estou expandindo meus horizontes através do estudo de escaneamento e <Highlight>modelagem 3D</Highlight>, além de explorar tecnologias voltadas para a preservação do patrimônio e a educação.
-        </ResponsiveText>
-        <ResponsiveText>
-          Esses trabalhos reafirmam meu compromisso em unir <Highlight>tecnologia</Highlight> e <Highlight>cultura</Highlight>, criando pontes que transformam a maneira como vivenciamos e preservamos nossa história e nossa arte.
-        </ResponsiveText>
+    <div className="min-h-screen bg-[#050505] text-[#d1d1d1] selection:bg-red-500/30 pb-32">
+      <div className="max-w-[1100px] mx-auto px-6 lg:px-12 pt-12">
+        {/* Header */}
+        <motion.header
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-24 flex flex-col md:flex-row justify-between items-end gap-8 border-b border-white/5 pb-16"
+        >
+          <div className="flex-1">
+            <h1 className="text-7xl font-black uppercase tracking-tighter text-white leading-[0.8]">
+              Thiago<br />Battista
+            </h1>
+            <p className="text-red-500 mt-6 font-mono text-sm uppercase tracking-[0.2em] font-bold">
+              Fotógrafo & Gestor Cultural
+            </p>
+          </div>
+
+          <div className="flex flex-col items-end gap-4">
+            <a
+              href={cvUrl}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-red-600 hover:bg-red-700 text-white rounded-2xl px-8 py-4 text-xs font-black uppercase tracking-widest transition-all flex items-center gap-3 group shadow-2xl shadow-red-900/20 active:scale-95"
+            >
+              <FiDownload className="group-hover:translate-y-0.5 transition-transform" />
+              Download PDF CV
+            </a>
+          </div>
+        </motion.header>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+          {/* Left Column (Main Info) */}
+          <div className="lg:col-span-8 space-y-24">
+            {/* Summary */}
+            {summarySection && (
+              <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="space-y-6"
+              >
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Resumo Profissional</h2>
+                <div className="text-xl font-medium leading-relaxed text-gray-300">
+                  {summarySection.content}
+                </div>
+              </motion.section>
+            )}
+
+            {/* Experience */}
+            <section className="space-y-12">
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Histórico de Trabalho</h2>
+              <div className="space-y-20">
+                {experienceSections.map((section, idx) => {
+                  const parts = section.title.split('\n');
+                  const cargo = parts[0];
+                  const empresa = parts[1] || 'Experiência';
+
+                  return (
+                    <motion.div
+                      key={section.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="group"
+                    >
+                      <div className="font-mono text-xs text-red-500/80 mb-4 uppercase tracking-[0.2em] font-bold">
+                        {cargo}
+                      </div>
+                      <h3 className="text-4xl font-black uppercase tracking-tighter text-white group-hover:text-red-500 transition-colors duration-500">
+                        {empresa}
+                      </h3>
+                      <div className="mt-8 text-gray-400 font-mono text-sm leading-relaxed max-w-2xl">
+                        {renderFormattedText(section.content)}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </section>
+
+            {/* Note Section */}
+            {noteSection && (
+              <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="bg-white/[0.02] p-10 rounded-[2.5rem] border border-white/5"
+              >
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 mb-8">{noteSection.title}</h2>
+                <div className="text-gray-400 font-mono text-sm leading-relaxed uppercase">
+                  {noteSection.content}
+                </div>
+              </motion.section>
+            )}
+          </div>
+
+          {/* Right Column (Sidebar) */}
+          <aside className="lg:col-span-4 space-y-20">
+            {/* Contacts */}
+            <section className="space-y-8">
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Contato</h2>
+              <div className="space-y-6">
+                {contactSections.map((s) => (
+                  <div key={s.id} className="space-y-4">
+                    {s.content.split('\n').map((line, i) => {
+                      const isEmail = line.includes('@');
+                      const isPhone = line.includes('(41)');
+                      const isLink = line.includes('.app') || line.includes('instagram') || line.includes('http');
+
+                      let href = '';
+                      if (isEmail) href = `mailto:${line.split(': ')[1] || line}`;
+                      if (isPhone) href = `tel:${(line.split(': ')[1] || line).replace(/\D/g, '')}`;
+                      if (isLink) href = line.includes('http') ? line.split(': ')[1]?.trim() || line : `https://${line.split(': ')[1] || line}`;
+
+                      return (
+                        <div key={i} className="flex items-start gap-4">
+                          <div className="pt-1 text-red-500/50">
+                            {isEmail && <FiMail />}
+                            {isPhone && <FiPhone />}
+                            {isLink && <FiGlobe />}
+                          </div>
+                          <a
+                            href={href || '#'}
+                            target={isLink ? "_blank" : undefined}
+                            className="text-sm font-mono text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-red-500/30 pb-1"
+                          >
+                            {line}
+                          </a>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Skills */}
+            {skillsSection && (
+              <section className="space-y-8">
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Competências</h2>
+                <ul className="space-y-3 font-mono text-xs text-gray-500">
+                  {skillsSection.content.split('\n').map((skill, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <span className="w-1 h-1 bg-red-500/30 rounded-full"></span>
+                      {skill.replace('• ', '')}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* Education */}
+            <section className="space-y-8">
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Formação</h2>
+              <div className="space-y-12">
+                {educationSections.map((section, idx) => (
+                  <motion.div
+                    key={section.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 + (idx * 0.1) }}
+                  >
+                    <h4 className="text-xs font-black uppercase tracking-widest text-white mb-3">
+                      {section.title}
+                    </h4>
+                    <div className="text-[10px] font-mono text-gray-500 leading-relaxed uppercase tracking-widest">
+                      {renderFormattedText(section.content)}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </section>
+          </aside>
+        </div>
       </div>
     </div>
   );

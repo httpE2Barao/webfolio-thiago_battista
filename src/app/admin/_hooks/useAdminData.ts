@@ -31,7 +31,7 @@ export interface Order {
     Album?: { titulo: string };
 }
 
-export type TabType = 'overview' | 'albuns' | 'create_album' | 'list_albuns' | 'taxonomia' | 'pedidos' | 'gerenciar_album';
+export type TabType = 'overview' | 'albuns' | 'create_album' | 'list_albuns' | 'taxonomia' | 'pedidos' | 'gerenciar_album' | 'bio' | 'cv';
 
 export function useAdminData() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -228,7 +228,10 @@ export function useAdminData() {
     };
 
     const handleUpload = async (e: React.FormEvent | React.ChangeEvent<any>, albumIdTarget?: string, manualFiles?: FileList | null) => {
-        e.preventDefault();
+        if (e && typeof e.preventDefault === 'function') {
+            e.preventDefault();
+        }
+
         const targetId = albumIdTarget || '';
         const isNewAlbum = !targetId;
 
@@ -244,7 +247,6 @@ export function useAdminData() {
 
         if (filesToUpload.length === 0 || (isNewAlbum && !albumName)) {
             // Only alert if we really have NO files and we needed some (or if creating album without name)
-            // If existing album and no files, maybe just returning is safer, but alert is ok.
             if (isNewAlbum || filesToUpload.length === 0) {
                 alert('Preencha os campos e selecione imagens.');
                 return;
@@ -281,43 +283,63 @@ export function useAdminData() {
 
             const fileArray = filesToUpload;
             let successCount = 0;
+            const failures: { name: string; error: string }[] = [];
             setUploadProgress(0);
 
+            // Calculate base order based on existing photos if adding to an album
+            const baseOrder = !isNewAlbum ? albumPhotos.length : 0;
+
             for (let i = 0; i < fileArray.length; i++) {
-                setUploadProgress(Math.round(((i) / fileArray.length) * 100));
-                setStatusMessage({ type: 'info', text: `Comprimindo e enviando ${i + 1} de ${fileArray.length}...` });
-
-                // Compression Step
                 const originalFile = fileArray[i];
-                let fileToUpload = originalFile;
-
                 try {
-                    if (originalFile.size > 5 * 1024 * 1024) {
-                        fileToUpload = await compressImage(originalFile);
+                    setUploadProgress(Math.round(((i) / fileArray.length) * 100));
+                    setStatusMessage({ type: 'info', text: `Comprimindo e enviando ${i + 1} de ${fileArray.length}...` });
+
+                    // Compression Step
+                    let fileToUpload = originalFile;
+
+                    try {
+                        if (originalFile.size > 5 * 1024 * 1024) {
+                            fileToUpload = await compressImage(originalFile);
+                        }
+                    } catch (err) {
+                        console.error("Compression failed, using original", err);
                     }
-                } catch (err) {
-                    console.error("Compression failed, using original", err);
-                }
 
-                const uploadData = new FormData();
-                uploadData.append('albumId', finalAlbumId);
-                uploadData.append('file', fileToUpload);
-                uploadData.append('order', String(i));
+                    const uploadData = new FormData();
+                    uploadData.append('albumId', finalAlbumId);
+                    uploadData.append('file', fileToUpload);
+                    // Ensure photos are appended to the end correctly
+                    uploadData.append('order', String(baseOrder + i));
 
-                const uploadRes = await fetch('/api/admin/albuns/upload', {
-                    method: 'POST',
-                    body: uploadData,
-                });
+                    const uploadRes = await fetch('/api/admin/albuns/upload', {
+                        method: 'POST',
+                        body: uploadData,
+                    });
 
-                if (!uploadRes.ok) {
-                    throw new Error(`Imagem ${i + 1}: Erro no envio`);
-                } else {
-                    successCount++;
+                    if (!uploadRes.ok) {
+                        const errData = await uploadRes.json().catch(() => ({}));
+                        throw new Error(errData.error || `Erro no envio (${uploadRes.status})`);
+                    } else {
+                        successCount++;
+                    }
+                } catch (error: any) {
+                    console.error(`Falha no upload de ${originalFile.name}:`, error);
+                    failures.push({ name: originalFile.name, error: error.message || 'Erro desconhecido' });
                 }
             }
 
             setUploadProgress(100);
-            setStatusMessage({ type: 'success', text: `${isNewAlbum ? 'Álbum criado' : 'Fotos adicionadas'} com sucesso! ${successCount} imagens enviadas.` });
+
+            if (failures.length === 0) {
+                setStatusMessage({ type: 'success', text: `${isNewAlbum ? 'Álbum criado' : 'Fotos adicionadas'} com sucesso! ${successCount} imagens enviadas.` });
+            } else {
+                const failureSummary = failures.map(f => `${f.name}: ${f.error}`).join(' | ');
+                setStatusMessage({
+                    type: successCount > 0 ? 'info' : 'error',
+                    text: `${successCount} enviadas, ${failures.length} falhas: ${failureSummary}`
+                });
+            }
 
             if (isNewAlbum) {
                 setAlbumName('');
@@ -327,7 +349,10 @@ export function useAdminData() {
             }
             setFiles([]);
             fetchAdminData();
-            if (managedAlbum?.id === finalAlbumId) refreshAlbumPhotos(finalAlbumId);
+            // Pass true to force update managed images grid
+            if (managedAlbum?.id === finalAlbumId || finalAlbumId) {
+                refreshAlbumPhotos(finalAlbumId, true);
+            }
         } catch (error: any) {
             console.error(error);
             setStatusMessage({ type: 'error', text: `Erro: ${error.message || 'Erro desconhecido'}` });

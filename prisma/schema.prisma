@@ -154,3 +154,20 @@ model User {
   updatedAt DateTime @updatedAt
   Album     Album[]
 }
+
+model Bio {
+  id        String   @id @default(cuid())
+  content   String   @db.Text
+  cvUrl     String?
+  updatedAt DateTime @updatedAt
+}
+
+model CVSection {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.Text
+  category  String   // e.g., experience, education, skills, contact, summary
+  sidebar   Boolean  @default(false)
+  ordem     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
