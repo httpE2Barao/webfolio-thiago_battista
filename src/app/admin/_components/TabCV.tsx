@@ -134,6 +134,23 @@ export function TabCV() {
         return result;
     };
 
+    const moveSection = (index: number, direction: 'up' | 'down') => {
+        const newSections = [...sections];
+        if (direction === 'up' && index > 0) {
+            const temp = newSections[index];
+            newSections[index] = newSections[index - 1];
+            newSections[index - 1] = temp;
+        } else if (direction === 'down' && index < newSections.length - 1) {
+            const temp = newSections[index];
+            newSections[index] = newSections[index + 1];
+            newSections[index + 1] = temp;
+        }
+
+        // Update ordem for all sections to reflect their new array index
+        const updatedSections = newSections.map((s, i) => ({ ...s, ordem: i }));
+        setSections(updatedSections);
+    };
+
     const handleSaveAll = async () => {
         setIsSaving(true);
         try {
@@ -320,6 +337,24 @@ export function TabCV() {
                                 >
                                     <FiTrash2 />
                                 </button>
+                                <div className="flex flex-col gap-1">
+                                    <button
+                                        onClick={() => moveSection(index, 'up')}
+                                        disabled={index === 0}
+                                        className="p-1.5 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white rounded-lg transition-all disabled:opacity-30"
+                                        title="Mover para Cima"
+                                    >
+                                        <FiArrowUp size={14} />
+                                    </button>
+                                    <button
+                                        onClick={() => moveSection(index, 'down')}
+                                        disabled={index === sections.length - 1}
+                                        className="p-1.5 bg-white/5 hover:bg-white/10 text-gray-400 hover:text-white rounded-lg transition-all disabled:opacity-30"
+                                        title="Mover para Baixo"
+                                    >
+                                        <FiArrowDown size={14} />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

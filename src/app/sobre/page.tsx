@@ -29,6 +29,7 @@ const Highlight = ({ children }: { children: React.ReactNode }) => (
 
 export default function SobrePage() {
   const [sections, setSections] = useState<CVSection[]>([]);
+  const [bioContent, setBioContent] = useState("");
   const [cvUrl, setCvUrl] = useState("/Curriculo.pdf");
   const [isLoading, setIsLoading] = useState(true);
 
@@ -40,8 +41,13 @@ export default function SobrePage() {
 
     Promise.all([fetchCV, fetchBio])
       .then(([cvData, bioData]) => {
-        if (Array.isArray(cvData)) setSections(cvData);
+        if (Array.isArray(cvData)) {
+          // Global sort by order
+          const sorted = [...cvData].sort((a, b) => (a.ordem || 0) - (b.ordem || 0));
+          setSections(sorted);
+        }
         if (bioData?.cvUrl) setCvUrl(bioData.cvUrl);
+        if (bioData?.content) setBioContent(bioData.content);
         setIsLoading(false);
       })
       .catch(err => {
@@ -80,12 +86,118 @@ export default function SobrePage() {
     );
   }
 
-  const summarySection = sections.find(s => s.category === 'summary');
-  const skillsSection = sections.find(s => s.category === 'skills');
-  const experienceSections = sections.filter(s => s.category === 'experience').sort((a, b) => a.ordem - b.ordem);
-  const educationSections = sections.filter(s => s.category === 'education').sort((a, b) => a.ordem - b.ordem);
-  const contactSections = sections.filter(s => s.category === 'contact');
-  const noteSection = sections.find(s => s.title.toLowerCase().includes('nota'));
+  const renderSection = (section: CVSection, idx: number) => {
+    if (section.category === 'experience') {
+      const parts = section.title.split('\n');
+      const cargo = parts[0];
+      const empresa = parts[1] || 'Experiência';
+
+      return (
+        <motion.div
+          key={section.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: idx * 0.05 }}
+          className="group"
+        >
+          <div className="font-mono text-xs text-red-500/80 mb-4 uppercase tracking-[0.2em] font-bold">
+            {empresa}
+          </div>
+          <h3 className="text-4xl font-black uppercase tracking-tighter text-white group-hover:text-red-500 transition-colors duration-500">
+            {cargo}
+          </h3>
+          <div className="mt-8 text-gray-400 font-mono text-sm leading-relaxed max-w-2xl">
+            {renderFormattedText(section.content)}
+          </div>
+        </motion.div>
+      );
+    }
+
+    if (section.category === 'contact') {
+      return (
+        <section key={section.id} className="space-y-8">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">{section.title || 'Contato'}</h2>
+          <div className="space-y-6">
+            {section.content.split('\n').map((line, i) => {
+              const isEmail = line.includes('@');
+              const isPhone = line.includes('(41)');
+              const isLink = line.includes('.app') || line.includes('instagram') || line.includes('http');
+
+              let href = '';
+              if (isEmail) href = `mailto:${line.split(': ')[1] || line}`;
+              if (isPhone) href = `tel:${(line.split(': ')[1] || line).replace(/\D/g, '')}`;
+              if (isLink) href = line.includes('http') ? line.split(': ')[1]?.trim() || line : `https://${line.split(': ')[1] || line}`;
+
+              return (
+                <div key={i} className="flex items-start gap-4">
+                  <div className="pt-1 text-red-500/50">
+                    {isEmail && <FiMail />}
+                    {isPhone && <FiPhone />}
+                    {isLink && <FiGlobe />}
+                  </div>
+                  <a
+                    href={href || '#'}
+                    target={isLink ? "_blank" : undefined}
+                    className="text-sm font-mono text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-red-500/30 pb-1"
+                  >
+                    {line}
+                  </a>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      );
+    }
+
+    if (section.category === 'skills') {
+      return (
+        <section key={section.id} className="space-y-8">
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">{section.title}</h2>
+          <ul className="space-y-3 font-mono text-xs text-gray-500">
+            {section.content.split('\n').filter(s => s.trim()).map((skill, i) => (
+              <li key={i} className="flex items-center gap-3">
+                <span className="w-1 h-1 bg-red-500/30 rounded-full"></span>
+                {skill.replace('• ', '')}
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    }
+
+    if (section.category === 'education') {
+      return (
+        <motion.div
+          key={section.id}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.1 * idx }}
+          className="space-y-6"
+        >
+          <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">
+            {section.title}
+          </h2>
+          <div className="text-[10px] font-mono text-gray-500 leading-relaxed uppercase tracking-widest">
+            {renderFormattedText(section.content)}
+          </div>
+        </motion.div>
+      );
+    }
+
+    // Default Section Rendering
+    return (
+      <section key={section.id} className="space-y-6">
+        <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">{section.title}</h2>
+        <div className={`leading-relaxed text-gray-300 ${section.sidebar ? 'text-xs font-mono uppercase' : 'text-xl font-medium'}`}>
+          {renderFormattedText(section.content)}
+        </div>
+      </section>
+    );
+  };
+
+  const mainSections = sections.filter(s => !s.sidebar);
+  const sidebarSections = sections.filter(s => s.sidebar);
 
   return (
     <div className="min-h-screen bg-[#050505] text-[#d1d1d1] selection:bg-red-500/30 pb-32">
@@ -122,146 +234,32 @@ export default function SobrePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
           {/* Left Column (Main Info) */}
           <div className="lg:col-span-8 space-y-24">
-            {/* Summary */}
-            {summarySection && (
+            {/* Bio Content from Admin Bio Table (TabBio) */}
+            {bioContent && (
               <motion.section
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="space-y-6"
               >
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Resumo Profissional</h2>
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Sobre Mim</h2>
                 <div className="text-xl font-medium leading-relaxed text-gray-300">
-                  {summarySection.content}
+                  {renderFormattedText(bioContent)}
                 </div>
               </motion.section>
             )}
 
-            {/* Experience */}
-            <section className="space-y-12">
-              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Histórico de Trabalho</h2>
-              <div className="space-y-20">
-                {experienceSections.map((section, idx) => {
-                  const parts = section.title.split('\n');
-                  const cargo = parts[0];
-                  const empresa = parts[1] || 'Experiência';
-
-                  return (
-                    <motion.div
-                      key={section.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="group"
-                    >
-                      <div className="font-mono text-xs text-red-500/80 mb-4 uppercase tracking-[0.2em] font-bold">
-                        {cargo}
-                      </div>
-                      <h3 className="text-4xl font-black uppercase tracking-tighter text-white group-hover:text-red-500 transition-colors duration-500">
-                        {empresa}
-                      </h3>
-                      <div className="mt-8 text-gray-400 font-mono text-sm leading-relaxed max-w-2xl">
-                        {renderFormattedText(section.content)}
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </section>
-
-            {/* Note Section */}
-            {noteSection && (
-              <motion.section
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="bg-white/[0.02] p-10 rounded-[2.5rem] border border-white/5"
-              >
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 mb-8">{noteSection.title}</h2>
-                <div className="text-gray-400 font-mono text-sm leading-relaxed uppercase">
-                  {noteSection.content}
-                </div>
-              </motion.section>
-            )}
+            {/* Dynamic Main Sections */}
+            {mainSections.map((section, idx) => renderSection(section, idx))}
           </div>
 
           {/* Right Column (Sidebar) */}
           <aside className="lg:col-span-4 space-y-20">
-            {/* Contacts */}
-            <section className="space-y-8">
-              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Contato</h2>
-              <div className="space-y-6">
-                {contactSections.map((s) => (
-                  <div key={s.id} className="space-y-4">
-                    {s.content.split('\n').map((line, i) => {
-                      const isEmail = line.includes('@');
-                      const isPhone = line.includes('(41)');
-                      const isLink = line.includes('.app') || line.includes('instagram') || line.includes('http');
-
-                      let href = '';
-                      if (isEmail) href = `mailto:${line.split(': ')[1] || line}`;
-                      if (isPhone) href = `tel:${(line.split(': ')[1] || line).replace(/\D/g, '')}`;
-                      if (isLink) href = line.includes('http') ? line.split(': ')[1]?.trim() || line : `https://${line.split(': ')[1] || line}`;
-
-                      return (
-                        <div key={i} className="flex items-start gap-4">
-                          <div className="pt-1 text-red-500/50">
-                            {isEmail && <FiMail />}
-                            {isPhone && <FiPhone />}
-                            {isLink && <FiGlobe />}
-                          </div>
-                          <a
-                            href={href || '#'}
-                            target={isLink ? "_blank" : undefined}
-                            className="text-sm font-mono text-gray-400 hover:text-white transition-colors border-b border-transparent hover:border-red-500/30 pb-1"
-                          >
-                            {line}
-                          </a>
-                        </div>
-                      );
-                    })}
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Skills */}
-            {skillsSection && (
-              <section className="space-y-8">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Competências</h2>
-                <ul className="space-y-3 font-mono text-xs text-gray-500">
-                  {skillsSection.content.split('\n').map((skill, i) => (
-                    <li key={i} className="flex items-center gap-3">
-                      <span className="w-1 h-1 bg-red-500/30 rounded-full"></span>
-                      {skill.replace('• ', '')}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {/* Education */}
-            <section className="space-y-8">
-              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-red-500/70 border-b border-white/5 pb-4">Formação</h2>
-              <div className="space-y-12">
-                {educationSections.map((section, idx) => (
-                  <motion.div
-                    key={section.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.5 + (idx * 0.1) }}
-                  >
-                    <h4 className="text-xs font-black uppercase tracking-widest text-white mb-3">
-                      {section.title}
-                    </h4>
-                    <div className="text-[10px] font-mono text-gray-500 leading-relaxed uppercase tracking-widest">
-                      {renderFormattedText(section.content)}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-            </section>
+            {/* Dynamic Sidebar Sections */}
+            {sidebarSections.map((section, idx) => renderSection(section, idx))}
           </aside>
         </div>
       </div>
     </div>
   );
 }
+

@@ -108,7 +108,7 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="text-white flex flex-col pt-12">
+    <div className="text-white flex flex-col pt-4 md:pt-12">
       <div className="max-w-[1600px] mx-auto w-full px-4 md:px-8">
         <section className="flex flex-col lg:flex-row gap-8 min-h-[85vh] mb-20">
           <AdminSidebar

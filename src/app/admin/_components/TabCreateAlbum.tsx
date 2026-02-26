@@ -141,7 +141,7 @@ export const TabCreateAlbum = ({
                     </div>
 
                     {isPrivateUpload && (
-                        <div className="grid grid-cols-3 gap-4 bg-white/5 p-6 rounded-3xl border border-white/5 animate-in slide-in-from-top-2 duration-300">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-white/5 p-6 rounded-3xl border border-white/5 animate-in slide-in-from-top-2 duration-300">
                             <label className="flex flex-col gap-2">
                                 <span className="text-[10px] text-gray-500 uppercase font-black ml-1">Base R$</span>
                                 <input type="number" value={basePriceUpload} onChange={(e) => setBasePriceUpload(parseFloat(e.target.value))} className="bg-black border border-white/10 rounded-xl p-3 text-sm text-white" />

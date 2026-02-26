@@ -183,23 +183,23 @@ export const TabGerenciarAlbum = ({
                     </div>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2 w-full md:w-auto">
                     <button
                         onClick={() => setIsPositionModalOpen(true)}
-                        className="px-6 py-3 bg-purple-600/10 hover:bg-purple-600 text-purple-500 hover:text-white border border-purple-500/20 rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2"
+                        className="flex-1 md:flex-none justify-center px-4 md:px-6 py-3 bg-purple-600/10 hover:bg-purple-600 text-purple-500 hover:text-white border border-purple-500/20 rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2"
                         title="Ajustar foco da imagem de capa"
                     >
-                        <FiMove /> Ajustar Recorte
+                        <FiMove /> Recorte
                     </button>
                     <button
                         onClick={() => handleDeleteAlbum(managedAlbum.id)}
-                        className="px-6 py-3 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/20 rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2"
+                        className="flex-1 md:flex-none justify-center px-4 md:px-6 py-3 bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/20 rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2"
                     >
-                        <FiTrash2 /> Excluir Álbum
+                        <FiTrash2 /> Excluir
                     </button>
                     <button
                         onClick={() => handleSaveVenda(managedAlbum.id, managedAlbum, managedImages)}
-                        className="px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2 shadow-xl shadow-blue-900/20"
+                        className="w-full md:w-auto justify-center px-4 md:px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl text-[10px] font-black uppercase transition-all flex items-center gap-2 shadow-xl shadow-blue-900/20"
                     >
                         <FiSave /> Salvar Alterações
                     </button>
