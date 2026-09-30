@@ -85,13 +85,13 @@ export function Header() {
       >
         <div className="flex flex-row items-start md:flex-col p-4 md:h-full">
           {/* Nome e descrição */}
-          <div className="flex flex-row gap-7 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-10 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[200px] md:translate-x-12">
-            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-white dark:text-dark-foreground whitespace-nowrap max-md:text-3xl">
+          <div className="flex flex-row gap-5 items-center w-full max-md:justify-center md:flex-row-reverse md:gap-6 md:items-center md:transform md:-rotate-90 md:origin-top-left md:mt-[12vh] lg:mt-[15vh] xl:mt-[18vh] md:translate-x-10">
+            <h1 className="font-disalina text-3xl font-bold tracking-widest cursor-pointer text-white dark:text-dark-foreground whitespace-nowrap max-md:text-3xl md:!text-[11px] lg:!text-xl xl:!text-2xl">
               <Link href="/" onClick={closeNav}>
                 {name}
               </Link>
             </h1>
-            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-pointer max-md:text-[10px]">
+            <p className="uppercase text-white dark:text-dark-foreground whitespace-nowrap cursor-pointer max-md:text-[10px] md:!text-[8px] lg:!text-[10px] xl:!text-[11px]">
               <Link href="/sobre" onClick={closeNav}>
                 Artista digital &amp; <br /> Produtor cultural
               </Link>
